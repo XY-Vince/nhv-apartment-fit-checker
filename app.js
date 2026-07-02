@@ -372,7 +372,7 @@ const APARTMENTS = [
     ],
     tradeoffs: [
       "页面使用 Estimated Monthly Cost，但 full fee breakdown 还没完整捕捉",
-      "RedNote 上有 garage / neighbor / safety-concern wording，只能作为 route/access verification trigger",
+      "学生社群里出现过 garage / neighbor / access-related concerns，只能作为 route/access verification trigger",
       "到 Med School 或 downtown south side 的路线需要按真实作息看"
     ],
     verify: [
@@ -990,7 +990,7 @@ function renderOutOfScope(answers) {
         <div class="reason-box">
           <h4>后续可单独做</h4>
           <ul>
-            <li>房间/转租 workflow、室友匹配、RedNote 二手帖和独立房东核验。</li>
+            <li>房间/转租 workflow、室友匹配、二手/转租帖和独立房东核验。</li>
             <li>Yale Graduate Housing 可在下一轮申请季作为单独 baseline 回归。</li>
           </ul>
         </div>
