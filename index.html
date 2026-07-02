@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="New Haven / Yale 公寓匹配器：根据预算、主要 Yale destination、utilities、amenities、家具/setup、申请摩擦和日常便利度，找出 2-3 个适合你需求的选项。">
+    <title>New Haven 公寓匹配器 | 先问需求，再看公寓</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="intro" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">New Haven / Yale housing decision support</p>
+          <h1 id="page-title">先问需求，再看公寓。</h1>
+          <p class="intro-copy">
+            回答几个关键问题，系统会从 mainstream apartment seed pool 里找出 2-3 个相对匹配的选项，并说明匹配理由、trade-offs 和申请前要核实的事项。
+          </p>
+        </div>
+        <div class="notice">
+          <strong>不是 listing，不是中介推荐。</strong>
+            当前数据是 prototype seed profiles，价格、availability、concessions、fees、furnished status 和政策申请前都要向 property 确认。
+          <div class="market-context">
+            <strong>Market snapshot</strong>
+            <span>2026-07-01 checked detail pages: 20/25 show explicit move-in specials or concessions; 8/30 visible cards use Plus Fees / base-rent mode.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Apartment fit questionnaire and results">
+        <form id="fit-form" class="panel form-panel">
+          <div class="panel-heading">
+            <h2>你的真实需求</h2>
+            <p>少问一点，但每一题都影响推荐。</p>
+          </div>
+
+          <fieldset>
+            <legend>1. 你的 comfortable true monthly budget 是多少？</legend>
+            <div class="segmented budget-grid">
+              <label><input type="radio" name="budget" value="1400"><span>&lt; $1,600 · 当前版本暂不覆盖</span></label>
+              <label><input type="radio" name="budget" value="1900"><span>$1,600-$1,900</span></label>
+              <label><input type="radio" name="budget" value="2300" checked><span>$1,900-$2,300</span></label>
+              <label><input type="radio" name="budget" value="3000"><span>$2,300-$3,000</span></label>
+              <label><input type="radio" name="budget" value="4000"><span>$3,000+</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>2. 你的主要 Yale destination / campus 是哪里？</legend>
+            <div class="option-grid">
+              <label><input type="radio" name="campus" value="central_campus" checked><span>Central Campus / Law / Art / Humanities</span></label>
+              <label><input type="radio" name="campus" value="med_school"><span>Med School / YNHH / School of Public Health</span></label>
+              <label><input type="radio" name="campus" value="som_prospect"><span>SOM / Divinity / Prospect Hill</span></label>
+              <label><input type="radio" name="campus" value="seas_science"><span>SEAS / Science Hill / Engineering</span></label>
+              <label><input type="radio" name="campus" value="downtown_station"><span>Downtown / Union Station / daily errands</span></label>
+              <label><input type="radio" name="campus" value="balanced"><span>还不确定，先要 balanced access</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>3. 你对 utilities / hidden cost 的容忍度？</legend>
+            <div class="option-grid">
+              <label><input type="radio" name="utilities" value="predictable" checked><span>越 predictable 越好</span></label>
+              <label><input type="radio" name="utilities" value="some_variable"><span>能接受部分 variable costs</span></label>
+              <label><input type="radio" name="utilities" value="amenity_tradeoff"><span>愿意为 amenities 承担更高 true cost</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>4. Unit setup 里你最在意什么？最多选 2 个。</legend>
+            <div class="option-grid">
+              <label><input type="checkbox" name="setup" value="furniture_ready" checked><span>有家具方案（如 CORT）/ 少折腾</span></label>
+              <label><input type="checkbox" name="setup" value="wood_floor"><span>wood-style floor / 尽量不 carpet</span></label>
+              <label><input type="checkbox" name="setup" value="laundry"><span>in-unit laundry</span></label>
+              <label><input type="checkbox" name="setup" value="private_space"><span>private kitchen/bath 更重要</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>5. Building amenities 里最重要的是？</legend>
+            <div class="option-grid">
+              <label><input type="radio" name="amenity" value="basic" checked><span>够用就行，别为了 amenities 多花太多</span></label>
+              <label><input type="radio" name="amenity" value="package"><span>package / front desk / maintenance</span></label>
+              <label><input type="radio" name="amenity" value="gym_pool"><span>gym / pool / lounge</span></label>
+              <label><input type="radio" name="amenity" value="parking"><span>parking / EV / car-friendly</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>6. 你现在最大的 worry 是什么？最多选 2 个。</legend>
+            <div class="option-grid">
+              <label><input type="checkbox" name="worry" value="application" checked><span>application friction</span></label>
+              <label><input type="checkbox" name="worry" value="true_cost" checked><span>true monthly cost / move-in cash</span></label>
+              <label><input type="checkbox" name="worry" value="trust"><span>building trust / verification</span></label>
+              <label><input type="checkbox" name="worry" value="roommate"><span>apartment roommate / split cost</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>7. 你平时的生活便利和日常安心感，更看重哪个方面？</legend>
+            <div class="option-grid">
+              <label><input type="radio" name="daily" value="building_access" checked><span>门禁、收快递、报修方便</span></label>
+              <label><input type="radio" name="daily" value="late_route"><span>晚上回家的路线和交通</span></label>
+              <label><input type="radio" name="daily" value="food_store"><span>吃饭、买菜、药店方便</span></label>
+              <label><input type="radio" name="daily" value="quiet_routine"><span>住得安静，不受 nightlife 打扰</span></label>
+            </div>
+          </fieldset>
+
+          <button type="submit" class="primary-action">Find my best fits</button>
+        </form>
+
+        <section class="panel results-panel" aria-live="polite">
+          <div class="panel-heading results-heading">
+            <div>
+              <h2>Top fits</h2>
+              <p id="result-summary">基于默认需求，先看这 3 个。</p>
+            </div>
+            <button type="button" id="reset-button" class="secondary-action">Reset</button>
+          </div>
+          <div id="results" class="results-list"></div>
+        </section>
+      </section>
+
+      <section class="launch-actions" aria-label="Beta feedback">
+        <div class="panel action-panel">
+          <div class="panel-heading">
+            <h2>Beta feedback</h2>
+            <p>生成一段结构化反馈，复制后发给我。不会上传或保存任何内容。</p>
+          </div>
+          <div class="field-stack">
+            <div>
+              <label class="field-label" for="feedback-accuracy">Top 3 感觉准吗？</label>
+              <select id="feedback-accuracy">
+                <option value="大方向准确">大方向准确</option>
+                <option value="有一个明显不对">有一个明显不对</option>
+                <option value="不太符合我的需求">不太符合我的需求</option>
+              </select>
+            </div>
+            <div>
+              <label class="field-label" for="feedback-missing">少了哪栋楼？</label>
+              <input id="feedback-missing" type="text" placeholder="例如 The Union / Corsair / 其他">
+            </div>
+            <div>
+              <label class="field-label" for="feedback-note">一句话告诉我们哪里要改</label>
+              <textarea id="feedback-note" rows="3" placeholder="例如：我是 SOM，结果太偏 downtown；我更关心 parking；预算档位不够细。"></textarea>
+            </div>
+            <button type="button" id="copy-feedback" class="primary-action">复制反馈文本</button>
+            <p id="feedback-status" class="action-status" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="method-note">
+        <h2>匹配维度</h2>
+        <div class="criteria-grid">
+          <span>Campus / commute fit</span>
+          <span>True monthly cost</span>
+          <span>Utilities predictability</span>
+          <span>Application friction</span>
+          <span>Furnishing / setup</span>
+          <span>Flooring / laundry</span>
+          <span>Building amenities</span>
+          <span>Lease timing</span>
+          <span>Roommate suitability</span>
+          <span>Safety checks</span>
+          <span>Local services</span>
+          <span>Source confidence</span>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
