@@ -3,32 +3,32 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="纽黑文 / 耶鲁公寓匹配器：根据预算、主要校区、费用可预期性、楼内配套、家具配置、申请难度和日常便利度，找出 2-3 个更适合你需求的选项。">
+    <meta name="description" content="纽黑文 / Yale 公寓匹配器：根据预算、常去区域、水电网、楼内配套、家具、申请难度和日常便利度，找出 2-3 个更适合你的选项。">
     <title>纽黑文公寓匹配器 | 先问需求，再看公寓</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20260703-card-cn-1">
+    <link rel="stylesheet" href="styles.css?v=20260703-natural-cn-2">
   </head>
   <body>
     <main class="app-shell">
       <section class="intro" aria-labelledby="page-title">
         <div>
           <div class="top-line">
-            <p class="eyebrow">纽黑文 / 耶鲁公寓决策工具</p>
+            <p class="eyebrow">纽黑文 / Yale 租房决策工具</p>
             <nav class="language-switch" aria-label="Language">
               <span>中文</span>
-              <a href="en.html?v=20260703-card-cn-1">English</a>
+              <a href="en.html?v=20260703-natural-cn-2">English</a>
             </nav>
           </div>
           <h1 id="page-title">先问需求，再看公寓。</h1>
           <p class="intro-copy">
-            回答几个关键问题，系统会从主流公寓备选池里找出 2-3 个相对匹配的选项，并说明匹配理由、取舍点和申请前要核实的事项。
+            回答几个关键问题，会从目前整理过的主流公寓里挑出 2-3 个更可能适合你的选项，并说明为什么、哪里需要取舍、申请前要问清楚什么。
           </p>
         </div>
         <div class="notice">
-          当前数据是原型种子资料；价格、空房、优惠、费用、是否带家具和申请政策，都需要在申请前向公寓方确认。
+          这是测试版，信息还在持续整理。租金、availability、优惠、各类费用、是否带家具和申请政策，都要在申请前向公寓方确认。
           <div class="market-context">
             <strong>市场快照</strong>
-            <span>2026-07-01 已检查的详情页中，20/25 明确显示入住优惠；30 个可见卡片里有 8 个使用额外费用或基础租金口径。</span>
+            <span>截至 2026-07-01，抽查过的详情页里 20/25 明确写了入住优惠；30 个可见卡片里有 8 个使用额外费用或基础租金口径。</span>
           </div>
         </div>
       </section>
@@ -41,7 +41,7 @@
           </div>
 
           <fieldset>
-            <legend>1. 你能舒服承担的真实月预算是多少？</legend>
+            <legend>1. 你每月比较舒服的总预算是多少？</legend>
             <div class="segmented budget-grid">
               <label><input type="radio" name="budget" value="1400"><span>&lt; $1,600 · 当前版本暂不覆盖</span></label>
               <label><input type="radio" name="budget" value="1900"><span>$1,600-$1,900</span></label>
@@ -52,7 +52,7 @@
           </fieldset>
 
           <fieldset>
-            <legend>2. 你最常去的耶鲁区域是哪里？</legend>
+            <legend>2. 你最常去的 Yale 区域是哪里？</legend>
             <div class="option-grid">
               <label><input type="radio" name="campus" value="central_campus" checked><span>Central Campus / 法学院 / 艺术学院 / 人文区域</span></label>
               <label><input type="radio" name="campus" value="med_school"><span>Med School / YNHH / 公共卫生学院</span></label>
@@ -64,7 +64,7 @@
           </fieldset>
 
           <fieldset>
-            <legend>3. 你对水电网和隐藏成本的容忍度？</legend>
+            <legend>3. 你能接受多少水电网和隐藏费用的不确定性？</legend>
             <div class="option-grid">
               <label><input type="radio" name="utilities" value="predictable" checked><span>越可预期越好</span></label>
               <label><input type="radio" name="utilities" value="some_variable"><span>能接受部分浮动费用</span></label>
@@ -96,8 +96,8 @@
             <legend>6. 你现在最大的担心是什么？最多选 2 个。</legend>
             <div class="option-grid">
               <label><input type="checkbox" name="worry" value="application" checked><span>申请门槛和材料</span></label>
-              <label><input type="checkbox" name="worry" value="true_cost" checked><span>真实月成本 / 入住前现金</span></label>
-              <label><input type="checkbox" name="worry" value="trust"><span>楼宇信任度 / 信息核实</span></label>
+              <label><input type="checkbox" name="worry" value="true_cost" checked><span>每月总成本 / 入住前现金</span></label>
+              <label><input type="checkbox" name="worry" value="trust"><span>信息靠不靠谱 / 楼本身情况</span></label>
               <label><input type="checkbox" name="worry" value="roommate"><span>合租 / 分摊成本</span></label>
             </div>
           </fieldset>
@@ -148,7 +148,7 @@
             </div>
             <div>
               <label class="field-label" for="feedback-note">一句话告诉我们哪里要改</label>
-              <textarea id="feedback-note" rows="3" placeholder="例如：我是 SOM，结果太偏 downtown；我更关心 parking；预算档位不够细。"></textarea>
+              <textarea id="feedback-note" rows="3" placeholder="例如：我是 SOM，结果太偏 Downtown；我更关心 parking；预算档位不够细。"></textarea>
             </div>
             <button type="button" id="copy-feedback" class="primary-action">复制反馈文本</button>
             <p id="feedback-status" class="action-status" aria-live="polite"></p>
@@ -159,8 +159,8 @@
       <section class="method-note">
         <h2>匹配维度</h2>
         <div class="criteria-grid">
-          <span>校区和通勤匹配</span>
-          <span>真实月成本</span>
+          <span>常去区域和通勤</span>
+          <span>每月总成本</span>
           <span>水电网可预期性</span>
           <span>申请门槛</span>
           <span>家具和入住准备</span>
@@ -175,6 +175,6 @@
       </section>
     </main>
 
-    <script src="app.js?v=20260703-card-cn-1"></script>
+    <script src="app.js?v=20260703-natural-cn-2"></script>
   </body>
 </html>

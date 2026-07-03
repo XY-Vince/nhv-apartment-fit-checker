@@ -122,54 +122,54 @@ const UI_TEXT = {
   zh: {
     defaultSummary: "基于默认需求，先看这 3 个。",
     outOfScopeRank: "当前版本暂不覆盖",
-    outOfScopeTitle: "暂不生成公寓前三名",
-    outOfScopeSubtitle: "当前版本先服务纽黑文主流公寓，不覆盖低预算房间、转租、独立房东或纯室友匹配。",
-    whyFiltered: "为什么过滤",
+    outOfScopeTitle: "这版先不推荐公寓",
+    outOfScopeSubtitle: "这版先帮大家比较纽黑文主流公寓，不覆盖低预算房间、转租、独立房东或纯室友匹配。",
+    whyFiltered: "为什么先不推",
     whyFilteredItems: [
-      "这个预算段通常不是通过公寓租赁办公室解决，而是房间、转租或独立房东。",
-      "当前数据池还没有足够可靠的低预算房源、室友规则、维修和水电网证据。"
+      "这个预算段通常靠房间、转租或独立房东解决，不太像直接找公寓 leasing office。",
+      "目前手里的资料还不足以靠谱比较低预算房源、室友规则、维修和水电网。"
     ],
-    stillCovered: "这一版继续覆盖",
+    stillCovered: "这一版适合比较",
     stillCoveredItems: [
-      "主流公寓里的单间、一居和两居分摊选择。",
-      "按校区、真实成本、水电网、配套、日常便利和申请门槛做匹配排序。"
+      "主流公寓里的 studio、1BR，以及 2BR 分摊选择。",
+      "按常去区域、每月总成本、水电网、楼内配套、日常便利和申请难度排序。"
     ],
-    laterScope: "后续可单独做",
+    laterScope: "之后可以单独做",
     laterScopeItems: [
       "房间、转租、室友匹配和独立房东核实流程。",
-      "耶鲁研究生宿舍可以在下一轮申请季作为单独基准回归。"
+      "Yale Graduate Housing 可以在下一轮申请季作为单独对照加回来。"
     ],
-    noApartmentShown: "不显示公寓推荐",
-    scopeBoundary: "范围边界",
-    baseSummary: (budget, campus, count) => `按你的预算 ${budget} 和 ${campus} 作息，先看这 ${count} 个。`,
-    budgetGapSummary: "当前主流公寓池里没有强预算匹配项；下面只适合作为拉伸预算对照，申请前请先确认真实月成本。",
+    noApartmentShown: "暂不显示推荐",
+    scopeBoundary: "当前范围",
+    baseSummary: (budget, campus, count) => `根据你的预算 ${budget} 和 ${campus} 作息，先看这 ${count} 个。`,
+    budgetGapSummary: "目前没有特别贴合预算的选择；下面这几栋只能当作加预算对照，申请前一定要确认每月总成本。",
     match: "匹配",
     exploreDirection: "探索方向",
     scoreLabel: "匹配分",
     facts: {
-      cost: "成本信号",
-      value: "面积价值信号",
+      cost: "价格线索",
+      value: "面积/价格参考",
       concession: "入住优惠",
       utilities: "水电网",
-      furnishing: "家具状态",
+      furnishing: "家具",
       flooring: "地板",
       daily: "日常生活",
-      source: "来源"
+      source: "信息来源"
     },
     sections: {
       bestFor: "为什么适合",
-      tradeoffs: "取舍点",
+      tradeoffs: "需要注意",
       verify: "申请前核实"
     },
     tags: {
       exploration: "探索方向",
-      concession: "优惠不计入预算分",
+      concession: "优惠未计入预算",
       sponsored: "非赞助排序",
-      rent: "需核实现价"
+      rent: "租金要再确认"
     },
-    confidenceExploration: "这是探索方向，不是具体公寓推荐。请先锁定具体房源，再核实租金、费用、水电网和租约条款。",
-    confidenceStale: "这个选项有公开线索，但数据已经过期。请先刷新官方租金、空房、费用和周边服务。",
-    confidenceLow: "这个选项的数据尚未充分核实，匹配分只供方向参考。申请前请刷新租金、空房、费用和政策。",
+    confidenceExploration: "这是一个方向，不是具体公寓推荐。先锁定具体房源，再确认租金、费用、水电网和 lease 条款。",
+    confidenceStale: "这个选项有公开线索，但信息比较旧。先确认最新租金、availability、费用和周边服务。",
+    confidenceLow: "这个选项的信息还不够扎实，匹配分只能当方向参考。申请前先确认租金、availability、费用和政策。",
     feedbackCopied: "已复制，可以直接粘贴到微信或消息里。",
     feedbackFailed: "复制失败，请手动选中文本。",
     feedbackTitle: "[纽黑文公寓匹配器测试反馈]",
@@ -197,7 +197,7 @@ const CATEGORY_LABELS_BY_LANG = {
   },
   zh: {
     budget: "预算匹配",
-    campus: "校区匹配",
+    campus: "位置匹配",
     utilities: "水电网",
     setup: "入住配置",
     amenity: "楼内配套",
@@ -258,7 +258,7 @@ const ANSWER_VALUE_LABELS = {
     },
     worry: {
       application: "申请门槛和材料",
-      true_cost: "真实月成本 / 入住前现金",
+      true_cost: "每月总成本 / 入住前现金",
       trust: "楼宇信任度 / 信息核实",
       roommate: "合租 / 分摊成本"
     },
@@ -988,22 +988,22 @@ const APARTMENT_TRANSLATIONS = {
   zh: {
     "360-state": {
       area: "市中心高层 · 360 State St",
-      priceLabel: "$2,055 起单间 / $2,254 起一居；真实成本会更高",
-      concession: "官方页面显示部分房源最高可免 2 个月租金，另有 $500 看房签约优惠；不计入预算分。",
-      valueSignal: "平台面积检查：Studio S $2,220-$2,345 / 517 平方英尺，约 $4.29-$4.54/平方英尺。更大的两居可能每平方英尺更低，但总租金和费用更高。",
+      priceLabel: "studio $2,055 起 / 1BR $2,254 起；加上费用后会更高",
+      concession: "官网显示部分房源最高免 2 个月租金，另有 $500 look-and-lease 优惠；这里先不拿优惠抵预算。",
+      valueSignal: "按平台上的租金和面积粗算：Studio S $2,220-$2,345 / 517 sq ft，约 $4.29-$4.54/sq ft。大一点的 2BR 可能每尺更便宜，但总租金和费用会更高。",
       flooring: "需按具体房源确认",
-      furnishing: "基础租约不带家具；有 CORT 家具合作方",
-      confidenceLabel: "部分可信",
-      dailyLabel: "市中心买菜吃饭方便，楼内服务完整",
-      sourceLabel: "官方页面已于 2026-06-29 刷新；完整费用表仍需书面确认",
+      furnishing: "普通 lease 默认不带家具；可看 CORT 家具方案",
+      confidenceLabel: "部分信息已确认",
+      dailyLabel: "Downtown 买菜吃饭方便，楼内服务完整",
+      sourceLabel: "2026-06-29 查过官网；完整 fee sheet 还要书面确认",
       bestFor: [
-        "预算较高、主要活动在市中心或主校区，并想住服务型高层的学生",
+        "预算较高、主要活动在 Downtown 或 Central Campus，并想住服务型高层的学生",
         "看重房内洗衣、收包裹、维修、停车和楼下日常便利的学生",
         "不要求租金内自带家具，但愿意用家具租赁或自己购买家具解决入住准备的学生"
       ],
       tradeoffs: [
         "展示租金之外还要确认水电网、保险、押金、停车、配套费和管理费",
-        "去 Med School、SOM 和 Science Hill 的体感差异很大，不能只看楼名",
+        "去 Med School、SOM 和 Science Hill 的实际通勤感觉差很多，不能只看楼名",
         "家具不是默认包含，家具合作方只能降低准备成本"
       ],
       verify: [
@@ -1014,22 +1014,22 @@ const APARTMENT_TRANSLATIONS = {
       ]
     },
     "olive-wooster": {
-      area: "伍斯特广场 / 市中心边缘 · 87 Union St",
-      priceLabel: "官方页面显示优惠；准确租金需要刷新空房表",
-      concession: "官方页面显示部分公寓最高可免 3 个月租金，部分一居有降价；不计入预算分。",
-      valueSignal: "平台面积检查：A1 一居 $1,880-$2,824 / 631 平方英尺，约 $2.98-$4.48/平方英尺。合租式户型单独展示，必须仔细区分租金口径。",
+      area: "Wooster Square / Downtown 边缘 · 87 Union St",
+      priceLabel: "官网有优惠信息；具体租金要看最新 availability",
+      concession: "官网显示部分公寓最高免 3 个月租金，部分 1BR 有降价；这里先不拿优惠抵预算。",
+      valueSignal: "按平台上的租金和面积粗算：A1 1BR $1,880-$2,824 / 631 sq ft，约 $2.98-$4.48/sq ft。co-living 户型要单独看租金口径。",
       flooring: "需按具体房源确认",
       furnishing: "是否带家具尚未核实",
-      confidenceLabel: "部分可信",
-      dailyLabel: "医学院方向和伍斯特餐饮便利",
-      sourceLabel: "官方页面已于 2026-06-29 刷新；静态页面未显示完整租金表",
+      confidenceLabel: "部分信息已确认",
+      dailyLabel: "Med School 方向和 Wooster Square 餐饮方便",
+      sourceLabel: "2026-06-29 查过官网；页面没有稳定展示完整租金表",
       bestFor: [
-        "主要去医学院、耶鲁纽黑文医院或公共卫生学院，并想住较新楼的学生",
-        "看重房内洗衣、门禁、楼内配套和伍斯特/市中心生活服务的学生",
+        "主要去 Med School、YNHH 或 SPH，并想住较新楼的学生",
+        "看重房内洗衣、门禁、楼内配套和 Wooster / Downtown 生活服务的学生",
         "有室友或预算较高，并愿意核实优惠后再比较真实成本的学生"
       ],
       tradeoffs: [
-        "官方空房页没有在静态文本里列出准确租金，需要人工刷新或询问租赁办公室",
+        "官网页面没有稳定列出准确租金，需要刷新 availability 或直接问 leasing office",
         "是否带家具没有被验证，不能直接当作少折腾选项推荐",
         "去 SOM 或 Science Hill 不一定最顺，需要按课表或实验室路线计算"
       ],
@@ -1041,23 +1041,23 @@ const APARTMENT_TRANSLATIONS = {
       ]
     },
     "the-taft": {
-      area: "主校区 / Chapel-College 走廊 · 265 College St",
-      priceLabel: "$1,865-$2,060 单间；$2,150-$2,440 一居；$2,950-$3,300 两居",
-      concession: "2026-08-01 或之前入住的单间/一居租约可免 2 个月租金；不计入预算分。",
-      valueSignal: "平台面积检查：单间 $1,920-$2,115 / 424-524 平方英尺，约 $3.66-$4.99/平方英尺。Loft 单间的面积价值更强，但仍要看具体房源状态。",
+      area: "Central Campus / Chapel-College 走廊 · 265 College St",
+      priceLabel: "studio $1,865-$2,060；1BR $2,150-$2,440；2BR $2,950-$3,300",
+      concession: "2026-08-01 或之前入住的 studio / 1BR lease 可免 2 个月租金；这里先不拿优惠抵预算。",
+      valueSignal: "按平台上的租金和面积粗算：studio $1,920-$2,115 / 424-524 sq ft，约 $3.66-$4.99/sq ft。studio loft 面积更划算，但还要看具体 unit 状态。",
       flooring: "需按具体房源确认",
-      furnishing: "可见 CORT / 企业家具选项；尚未确认是否适用于普通学生租约",
-      confidenceLabel: "部分可信",
-      dailyLabel: "主校区和市中心日常最方便",
-      sourceLabel: "Paredim 与 RentCafe 已于 2026-06-29 刷新；费用表仍不完整",
+      furnishing: "能看到 CORT / corporate furniture 选项；是否适合普通学生 lease 还要确认",
+      confidenceLabel: "部分信息已确认",
+      dailyLabel: "Central Campus 和 Downtown 日常都方便",
+      sourceLabel: "2026-06-29 查过 Paredim 和 RentCafe；fee sheet 仍不完整",
       bestFor: [
-        "主校区、法学院或市中心活动多，想用位置降低日常摩擦的学生",
-        "预算在单间或一居主流区间，并能赶上 2026-08-01 前入住优惠的学生",
+        "Central Campus、Law School 或 Downtown 活动多，想靠位置省事的学生",
+        "预算在 studio 或 1BR 主流区间，并能赶上 2026-08-01 前入住优惠的学生",
         "需要暖气和热水包含，并愿意核实电费、网络和家具方案的学生"
       ],
       tradeoffs: [
         "优惠条件很具体，不能直接折成净租金来打预算分",
-        "已看到垃圾费和配套费合计 $55/月，但完整费用表、停车和保险仍缺",
+        "已看到 trash + amenity fee 合计 $55/月，但完整 fee sheet、停车和保险仍缺",
         "不是新玻璃楼类型，具体房源状态、洗衣和地板都要看房确认"
       ],
       verify: [
@@ -1068,23 +1068,23 @@ const APARTMENT_TRANSLATIONS = {
       ]
     },
     "the-archive": {
-      area: "市中心 / Ninth Square · Chapel / Orange",
-      priceLabel: "$2,232 起单间；$2,164 起一居；$3,041 起两居；$3,922 起三居总月价",
-      concession: "官方页面显示 24 个月以上租约最高免 3 个月，立即入住最高免 2 个月，另有耶鲁折扣；不计入预算分。",
-      valueSignal: "平台面积检查：Sx1 单间 $1,894-$4,944 / 387 平方英尺，价值区间很宽。多人合租大户型可能降低每平方英尺成本，但室友分摊和租期要单独核实。",
+      area: "Downtown / Ninth Square · Chapel / Orange",
+      priceLabel: "studio $2,232 起；1BR $2,164 起；2BR $3,041 起；3BR $3,922 起，按总月价展示",
+      concession: "官网显示 24 个月以上 lease 最高免 3 个月，immediate move-in 最高免 2 个月，另有 Yale discount；这里先不拿优惠抵预算。",
+      valueSignal: "按平台上的租金和面积粗算：Sx1 studio $1,894-$4,944 / 387 sq ft，区间很宽。多人合租大户型可能每尺更便宜，但室友分摊和 lease term 要单独核实。",
       flooring: "需按具体房源确认",
       furnishing: "是否带家具尚未核实",
-      confidenceLabel: "部分可信",
-      dailyLabel: "Ninth Square / 市中心服务和多人户型选择",
-      sourceLabel: "官方页面与 Entrata 已于 2026-06-29 刷新；全包口径仍需确认",
+      confidenceLabel: "部分信息已确认",
+      dailyLabel: "Ninth Square / Downtown 服务多，也有多人户型",
+      sourceLabel: "2026-06-29 查过官网和 Entrata；all-in 口径还要确认",
       bestFor: [
-        "想住市中心或 Ninth Square，并需要从单间到三居都有选择面的学生",
-        "已有室友或想比较两居/三居分摊成本的学生",
+        "想住 Downtown 或 Ninth Square，并希望从 studio 到 3BR 都有选择的学生",
+        "已有室友，或想比较 2BR / 3BR 分摊成本的学生",
         "对优惠敏感，但愿意逐条确认租期和资格条件的学生"
       ],
       tradeoffs: [
-        "页面使用总月租口径，必须确认到底包含和排除哪些费用",
-        "全包租赁和零额外费用的说法很有价值，但发布前需要书面确认",
+        "页面用 total monthly leasing price，必须问清楚到底包含和排除哪些费用",
+        "all-in leasing / zero extra fees 如果属实很有价值，但需要书面确认",
         "Archive I/II 或多地址口径还要确认，避免把不同楼混成同一体验"
       ],
       verify: [
@@ -1095,19 +1095,19 @@ const APARTMENT_TRANSLATIONS = {
       ]
     },
     "estelle": {
-      area: "市中心 / New Haven Green 边缘 · 19 Elm St",
-      priceLabel: "单间需询价；$2,795 起一居；$3,870 起两居；$4,725 起三居；$5,795 起四居",
-      concession: "开业优惠：12 个月租约免 2 个月，24 个月以上租约免 4 个月；不计入预算分。",
-      valueSignal: "平台面积检查：S1 单间 $2,290 / 469 平方英尺，约 $4.88/平方英尺。更大户型可能改善面积价值，但会提高总月成本。",
+      area: "Downtown / New Haven Green 边缘 · 19 Elm St",
+      priceLabel: "studio 需询价；1BR $2,795 起；2BR $3,870 起；3BR $4,725 起；4BR $5,795 起",
+      concession: "开业优惠：12 个月 lease 免 2 个月，24 个月以上 lease 免 4 个月；这里先不拿优惠抵预算。",
+      valueSignal: "按平台上的租金和面积粗算：S1 studio $2,290 / 469 sq ft，约 $4.88/sq ft。大户型可能每尺更便宜，但总月租会更高。",
       flooring: "需按具体房源确认",
       furnishing: "是否带家具尚未核实",
-      confidenceLabel: "部分可信",
-      dailyLabel: "新开市中心楼，去主校区方便",
-      sourceLabel: "官方页面与 SecureCafe 已于 2026-06-29 刷新；开业和费用仍需确认",
+      confidenceLabel: "部分信息已确认",
+      dailyLabel: "新开 Downtown 楼，去 Central Campus 方便",
+      sourceLabel: "2026-06-29 查过官网和 SecureCafe；开业状态和费用还要确认",
       bestFor: [
-        "想要新楼体验，并主要在主校区或市中心活动的学生",
+        "想要新楼体验，并主要在 Central Campus 或 Downtown 活动的学生",
         "能接受新开楼交付风险，但希望用开业优惠抵消部分成本的学生",
-        "已有室友或预算较高，想比较两居、三居和四居分摊的学生"
+        "已有室友或预算较高，想比较 2BR、3BR、4BR 分摊的学生"
       ],
       tradeoffs: [
         "单间当前只显示需询价，不能把筛选器里的低价当作已确认单间租金",
@@ -1123,23 +1123,23 @@ const APARTMENT_TRANSLATIONS = {
     },
     "axis-201": {
       area: "Science Park / Munson St · 201 Munson St",
-      priceLabel: "$1,852 起单间；$2,282 起一居；$3,084 起两居；$4,425 起三居或联排",
-      concession: "官方页面显示部分房源降价并最高免 3 个月租金；不计入预算分。",
-      valueSignal: "平台面积检查：单间 $1,935-$2,150 / 333-519 平方英尺，约 $3.73-$6.46/平方英尺。两居户型对合租分摊的面积价值更强。",
+      priceLabel: "studio $1,852 起；1BR $2,282 起；2BR $3,084 起；3BR / townhome $4,425 起",
+      concession: "官网显示部分房源降价，并最高免 3 个月租金；这里先不拿优惠抵预算。",
+      valueSignal: "按平台上的租金和面积粗算：studio $1,935-$2,150 / 333-519 sq ft，约 $3.73-$6.46/sq ft。2BR 对合租分摊更值得细看。",
       flooring: "需按具体房源确认",
       furnishing: "是否带家具尚未核实",
-      confidenceLabel: "部分可信",
+      confidenceLabel: "部分信息已确认",
       dailyLabel: "更适合 Science Park / Science Hill 作息",
-      sourceLabel: "官方户型页已于 2026-06-29 刷新；水电网和学生政策仍需确认",
+      sourceLabel: "2026-06-29 查过官方户型页；水电网和学生政策仍需确认",
       bestFor: [
         "主要去 SEAS、Science Hill、SOM 或 Prospect 走廊，想避开市中心核心区的学生",
-        "想用较低单间起租价或室友/联排户型控制成本的学生",
+        "想用较低 studio 起租价，或通过 2BR / townhome 分摊控制成本的学生",
         "日常更看重楼内秩序和安静感，而不是市中心夜生活的学生"
       ],
       tradeoffs: [
-        "去医学院、联合车站或市中心办事的作息不一定顺",
-        "已看到经常性费用约 $83.39/月，但水电网和停车等仍需补齐",
-        "优惠只适用于部分房源，不能替代真实月成本"
+        "去 Med School、Union Station 或 Downtown 办事不一定顺",
+        "已看到 recurring fees 约 $83.39/月，但水电网和停车等仍需补齐",
+        "优惠只适用于部分房源，不能直接当作每月总成本"
       ],
       verify: [
         "水电网、停车、租客保险和宠物/储物费用",
@@ -1150,17 +1150,17 @@ const APARTMENT_TRANSLATIONS = {
     },
     "the-audubon": {
       area: "Audubon / Whitney-Arts 走廊 · 367 Orange St",
-      priceLabel: "$2,250 起单间；$2,671 起一居；$3,691 起两居；$4,180 起三居估算月成本",
-      concession: "官方首页显示部分房源最高免 1.5 个月租金；不计入预算分。",
+      priceLabel: "studio $2,250 起；1BR $2,671 起；2BR $3,691 起；3BR $4,180 起，按估算月成本展示",
+      concession: "官网首页显示部分房源最高免 1.5 个月租金；这里先不拿优惠抵预算。",
       flooring: "需按具体房源确认",
       furnishing: "是否带家具尚未核实",
-      confidenceLabel: "部分可信",
-      dailyLabel: "艺术区、主校区和 Whitney-Audubon 走廊",
-      sourceLabel: "官方页面已于 2026-06-29 刷新；估算月成本需要费用拆分",
+      confidenceLabel: "部分信息已确认",
+      dailyLabel: "Arts、Central Campus 和 Whitney-Audubon 走廊都方便",
+      sourceLabel: "2026-06-29 查过官网；estimated monthly cost 需要拆费用明细",
       bestFor: [
-        "主校区、艺术学院或 Whitney-Audubon 走廊活动多，想要均衡校区通勤的学生",
-        "看重楼宇门禁、收包裹和停车/车库核实的学生",
-        "预算较高，并愿意在申请前核实估算月成本的学生"
+        "Central Campus、Arts 或 Whitney-Audubon 走廊活动多，想要通勤比较均衡的学生",
+        "看重门禁、收包裹和停车 / garage 细节的学生",
+        "预算较高，并愿意在申请前核实 estimated monthly cost 的学生"
       ],
       tradeoffs: [
         "页面使用估算月成本口径，但完整费用拆分还没有捕捉完",
@@ -1175,20 +1175,20 @@ const APARTMENT_TRANSLATIONS = {
       ]
     },
     "new-haven-towers": {
-      area: "市中心 York/Park/High 楼群 · 4 栋楼",
+      area: "Downtown York/Park/High 一带 · 4 栋楼",
       priceLabel: "Madison 单间 $1,695 起；Crown / Crown Court / 18 High 按楼不同",
       flooring: "需按楼栋和具体房源确认",
       furnishing: "是否带家具尚未核实",
-      confidenceLabel: "部分可信",
-      dailyLabel: "靠近校园的市中心楼群；必须按具体楼栋比较",
-      sourceLabel: "官方户型页已于 2026-06-29 刷新；已捕捉楼栋级价格",
+      confidenceLabel: "部分信息已确认",
+      dailyLabel: "离校园近，但一定要按具体楼比较",
+      sourceLabel: "2026-06-29 查过官方户型页；已整理到楼栋级价格",
       bestFor: [
-        "主校区、法学院、艺术学院或医学院附近活动多，想住老牌市中心楼群的学生",
+        "Central Campus、Law School、Art 或 Med School 附近活动多，想住老牌 Downtown 公寓的学生",
         "希望暖气和热水包含，让水电网更可预期的学生",
         "愿意按 Madison、Crown、Crown Court 和 18 High 分楼比较价格和位置的学生"
       ],
       tradeoffs: [
-        "不能把四栋楼压成一种体验；价格、位置和配套都要按楼栋看",
+        "不能把四栋楼当成同一个体验；价格、位置和配套都要按楼栋看",
         "1.5 个月押金和申请费会影响入住前现金",
         "停车约 $90-$170/月，且具体楼栋空位需要确认"
       ],
@@ -1201,16 +1201,16 @@ const APARTMENT_TRANSLATIONS = {
     },
     "pierpont-city-crossing": {
       area: "Downtown Crossing / 车站-医学院边缘",
-      priceLabel: "$2,218 起小单间；$2,486 起一居；$3,613 起两居",
+      priceLabel: "Jr Studio $2,218 起；1BR $2,486 起；2BR $3,613 起",
       flooring: "需按具体房源确认",
-      furnishing: "短租可能包含家具和水电网；普通租约是否带家具尚未核实",
-      confidenceLabel: "部分可信",
-      dailyLabel: "车站、医学院和 Downtown Crossing 作息",
-      sourceLabel: "RMS 官方页面与嵌入 RentCafe 已于 2026-06-29 刷新",
+      furnishing: "短租可能包含家具和水电网；普通 lease 是否带家具还没确认",
+      confidenceLabel: "部分信息已确认",
+      dailyLabel: "Union Station、Med School 和 Downtown Crossing 作息",
+      sourceLabel: "2026-06-29 查过 RMS 官网和嵌入的 RentCafe",
       bestFor: [
-        "主要去医学院、联合车站或市中心南侧，想要 City Crossing 位置的学生",
-        "想比较小单间、一居和两居，并能接受普通租约条款待确认的学生",
-        "可能需要短租或临时落脚，但会把短租条款和普通租约分开核实的学生"
+        "主要去 Med School、Union Station 或 Downtown 南侧，想要 City Crossing 位置的学生",
+        "想比较 Jr Studio、1BR 和 2BR，并能接受普通 lease 条款待确认的学生",
+        "可能需要短租或临时落脚，但会把短租和普通 lease 分开核实的学生"
       ],
       tradeoffs: [
         "学生说的 City Crossing 可能包括其他楼，Pierpont 只是当前锁定的官方身份之一",
@@ -1225,21 +1225,21 @@ const APARTMENT_TRANSLATIONS = {
       ]
     },
     "the-whit": {
-      area: "伍斯特广场 · 630 Chapel St",
-      priceLabel: "官方页面说明价格可能变化；准确租金需要刷新",
+      area: "Wooster Square · 630 Chapel St",
+      priceLabel: "官网说明价格会变化；准确租金要看最新 availability",
       flooring: "列有宽木板地板；仍需按具体房源确认",
-      furnishing: "基础租约不带家具；有 CORT 家具方案合作方",
-      confidenceLabel: "部分可信",
-      dailyLabel: "伍斯特餐饮和收包裹/礼宾便利",
-      sourceLabel: "Scully 官方页面已于 2026-06-29 刷新",
+      furnishing: "普通 lease 默认不带家具；可看 CORT 家具方案",
+      confidenceLabel: "部分信息已确认",
+      dailyLabel: "Wooster Square 餐饮方便，也有收包裹 / concierge",
+      sourceLabel: "2026-06-29 查过 Scully 官网",
       bestFor: [
-        "想住在伍斯特广场或 Chapel 走廊，兼顾主校区和医学院的学生",
-        "明确在意房内洗衣、宽木板地板、收包裹/礼宾和健身房/泳池的学生",
+        "想住在 Wooster Square 或 Chapel 走廊，兼顾 Central Campus 和 Med School 的学生",
+        "明确在意房内洗衣、宽木板地板、收包裹 / concierge 和健身房 / 泳池的学生",
         "需要家具解决方案但可以接受租家具，而不是租金内自带家具的学生"
       ],
       tradeoffs: [
-        "当前页面不提供稳定静态租金表，价格需要刷新空房",
-        "配套多，真实月成本可能被水电网、停车和费用拉高",
+        "官网没有稳定的租金表，价格要看最新 availability",
+        "配套多，每月总成本可能被水电网、停车和各种费用拉高",
         "去 SOM 或 Science Hill 不一定是最顺通勤"
       ],
       verify: [
@@ -1251,17 +1251,17 @@ const APARTMENT_TRANSLATIONS = {
     },
     "anthem-square10": {
       area: "Downtown Crossing / 联合车站一侧 · South Orange / George",
-      priceLabel: "旧新闻基准：单间 $1,900，一居 $2,625，两居 $3,300",
-      valueSignal: "平台面积检查：S1 单间 $1,921-$2,201 / 373 平方英尺，约 $5.15-$5.90/平方英尺。两居 B1 在确认费用前看起来约 $3.06/平方英尺起。",
+      priceLabel: "旧新闻基准：studio $1,900，1BR $2,625，2BR $3,300",
+      valueSignal: "按平台上的租金和面积粗算：S1 studio $1,921-$2,201 / 373 sq ft，约 $5.15-$5.90/sq ft。B1 2BR 在确认费用前看起来约 $3.06/sq ft 起。",
       flooring: "需核实",
       furnishing: "是否带家具尚未核实",
-      confidenceLabel: "旧新闻资料（2024-12）；需要官方刷新",
-      dailyLabel: "车站/医学院方向较好，周边服务仍在变化",
-      sourceLabel: "2024-12 新闻来源；仍需官方实时数据",
+      confidenceLabel: "旧新闻线索（2024-12）；需要再查官网",
+      dailyLabel: "Union Station / Med School 方向较好，周边服务还在变化",
+      sourceLabel: "目前主要是 2024-12 新闻线索；仍需官网实时数据",
       bestFor: [
-        "主要去医学院、联合车站或市中心南侧，并想关注新楼供应的学生",
-        "愿意追踪新楼优惠、市场价/可负担房源组合和后续商业配套变化的学生",
-        "已有室友、预算中高，想比较市中心南侧与伍斯特/核心市中心的学生"
+        "主要去 Med School、Union Station 或 Downtown 南侧，并想关注新楼供应的学生",
+        "愿意追踪新楼优惠、市场价 / affordable units 和后续商业配套变化的学生",
+        "已有室友、预算中高，想比较 Downtown 南侧、Wooster Square 和核心 Downtown 的学生"
       ],
       tradeoffs: [
         "当前不是官方实时租金，不能直接作为申请依据",
