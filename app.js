@@ -21,7 +21,10 @@ const UTILITY_PREDICTABILITY_SCORE = {
   unknown: 44
 };
 
-const VALUE_SIGNAL_CAVEAT = "Approximate $/sqft uses marketplace-listed rent and square footage. The cheapest rent and largest unit may not be the same unit; compare within the same fee mode.";
+const VALUE_SIGNAL_CAVEATS = {
+  en: "Approximate $/sqft uses marketplace-listed rent and square footage. The cheapest rent and largest unit may not be the same unit; compare within the same fee mode.",
+  zh: "每平方英尺价格使用平台展示的租金和面积粗算。最低租金和最大面积不一定来自同一个房源；只应在同一费用口径内比较。"
+};
 
 const MVP_MIN_APARTMENT_BUDGET = 1600;
 
@@ -40,6 +43,232 @@ const CAMPUS_LABELS = {
   seas_science: "SEAS / Science Hill",
   downtown_station: "Downtown / Union Station",
   balanced: "Not sure / balanced"
+};
+
+const CAMPUS_LABELS_ZH = {
+  central_campus: "主校区",
+  med_school: "医学院 / 耶鲁纽黑文医院",
+  som_prospect: "管理学院 / 普罗斯佩克特山",
+  seas_science: "工程学院 / 科学山",
+  downtown_station: "市中心 / 联合车站",
+  balanced: "不确定 / 均衡通勤"
+};
+
+const UI_TEXT = {
+  en: {
+    defaultSummary: "Using the default answers, start with these 3.",
+    outOfScopeRank: "Out of current scope",
+    outOfScopeTitle: "No apartment top 3 yet",
+    outOfScopeSubtitle: "This version focuses on mainstream New Haven apartments. It does not cover low-budget rooms, sublets, independent landlords, or pure roommate matching.",
+    whyFiltered: "Why this is filtered",
+    whyFilteredItems: [
+      "This budget range is usually solved through rooms, sublets, or independent landlords rather than apartment leasing offices.",
+      "The current data pool does not have enough reliable evidence on low-budget rooms, roommate rules, maintenance, and utilities."
+    ],
+    stillCovered: "Still covered here",
+    stillCoveredItems: [
+      "Mainstream studio, 1BR, and 2BR split apartment options.",
+      "Fit ranking by campus, true cost, utilities, amenities, daily life, and application friction."
+    ],
+    laterScope: "Can be separate later",
+    laterScopeItems: [
+      "Room, sublet, roommate, and independent-landlord verification workflows.",
+      "Yale Graduate Housing can return as a separate baseline for the next application cycle."
+    ],
+    noApartmentShown: "No apartment recommendation shown",
+    scopeBoundary: "Scope boundary",
+    baseSummary: (budget, campus, count) => `Given your ${budget} budget and ${campus} routine, start with these ${count}.`,
+    budgetGapSummary: "The current mainstream apartment pool has no strong budget fit; treat these as stretch comparisons and confirm true monthly cost before applying.",
+    match: "match",
+    exploreDirection: "explore direction",
+    scoreLabel: "fit score",
+    facts: {
+      cost: "Cost signal",
+      value: "Value signal",
+      concession: "Concession",
+      utilities: "Utilities",
+      furnishing: "Furnishing",
+      flooring: "Flooring",
+      daily: "Daily life",
+      source: "Source"
+    },
+    sections: {
+      bestFor: "Why this fits",
+      tradeoffs: "Trade-offs",
+      verify: "Verify before applying"
+    },
+    tags: {
+      exploration: "Exploration direction",
+      concession: "Concession not in budget score",
+      sponsored: "No sponsored ranking",
+      rent: "Verify current rent"
+    },
+    confidenceExploration: "This is an exploration direction, not a specific apartment recommendation. First identify a specific unit, then verify rent, fees, utilities, and lease terms.",
+    confidenceStale: "This option has public signals, but the data is stale. Refresh official rent, availability, fees, and local services first.",
+    confidenceLow: "This option has not been verified enough. Treat the fit score as directional only, and refresh rent, availability, fees, and policy before applying.",
+    feedbackCopied: "Copied. You can paste it into WeChat or a message.",
+    feedbackFailed: "Copy failed. Please select and copy the text manually.",
+    feedbackTitle: "[NHV Apartment Fit Checker beta feedback]",
+    feedbackAnswers: "My answers:",
+    feedbackTop: "Top 3 shown:",
+    feedbackAccuracy: "Top 3 accuracy",
+    feedbackMissing: "Missing apartment",
+    feedbackImprove: "What to improve",
+    feedbackNote: "Note: this is beta feedback, not an application request.",
+    notSpecified: "Not specified",
+    none: "None",
+    noTop3: "No apartment top 3 shown"
+  },
+  zh: {
+    defaultSummary: "基于默认需求，先看这 3 个。",
+    outOfScopeRank: "当前版本暂不覆盖",
+    outOfScopeTitle: "暂不生成公寓前三名",
+    outOfScopeSubtitle: "当前版本先服务纽黑文主流公寓，不覆盖低预算房间、转租、独立房东或纯室友匹配。",
+    whyFiltered: "为什么过滤",
+    whyFilteredItems: [
+      "这个预算段通常不是通过公寓租赁办公室解决，而是房间、转租或独立房东。",
+      "当前数据池还没有足够可靠的低预算房源、室友规则、维修和水电网证据。"
+    ],
+    stillCovered: "这一版继续覆盖",
+    stillCoveredItems: [
+      "主流公寓里的单间、一居和两居分摊选择。",
+      "按校区、真实成本、水电网、配套、日常便利和申请门槛做匹配排序。"
+    ],
+    laterScope: "后续可单独做",
+    laterScopeItems: [
+      "房间、转租、室友匹配和独立房东核实流程。",
+      "耶鲁研究生宿舍可以在下一轮申请季作为单独基准回归。"
+    ],
+    noApartmentShown: "不显示公寓推荐",
+    scopeBoundary: "范围边界",
+    baseSummary: (budget, campus, count) => `按你的预算 ${budget} 和 ${campus} 作息，先看这 ${count} 个。`,
+    budgetGapSummary: "当前主流公寓池里没有强预算匹配项；下面只适合作为拉伸预算对照，申请前请先确认真实月成本。",
+    match: "匹配",
+    exploreDirection: "探索方向",
+    scoreLabel: "匹配分",
+    facts: {
+      cost: "成本信号",
+      value: "面积价值信号",
+      concession: "入住优惠",
+      utilities: "水电网",
+      furnishing: "家具状态",
+      flooring: "地板",
+      daily: "日常生活",
+      source: "来源"
+    },
+    sections: {
+      bestFor: "为什么适合",
+      tradeoffs: "取舍点",
+      verify: "申请前核实"
+    },
+    tags: {
+      exploration: "探索方向",
+      concession: "优惠不计入预算分",
+      sponsored: "非赞助排序",
+      rent: "需核实现价"
+    },
+    confidenceExploration: "这是探索方向，不是具体公寓推荐。请先锁定具体房源，再核实租金、费用、水电网和租约条款。",
+    confidenceStale: "这个选项有公开线索，但数据已经过期。请先刷新官方租金、空房、费用和周边服务。",
+    confidenceLow: "这个选项的数据尚未充分核实，匹配分只供方向参考。申请前请刷新租金、空房、费用和政策。",
+    feedbackCopied: "已复制，可以直接粘贴到微信或消息里。",
+    feedbackFailed: "复制失败，请手动选中文本。",
+    feedbackTitle: "[纽黑文公寓匹配器测试反馈]",
+    feedbackAnswers: "我的答案：",
+    feedbackTop: "显示的前三名：",
+    feedbackAccuracy: "前三名准确度",
+    feedbackMissing: "缺少的公寓",
+    feedbackImprove: "需要改进的地方",
+    feedbackNote: "注：这是测试反馈，不是申请请求。",
+    notSpecified: "未填写",
+    none: "无",
+    noTop3: "未显示公寓前三名"
+  }
+};
+
+const CATEGORY_LABELS_BY_LANG = {
+  en: {
+    budget: "Budget fit",
+    campus: "Campus fit",
+    utilities: "Utilities",
+    setup: "Setup",
+    amenity: "Amenities",
+    worry: "Main worry",
+    daily: "Daily life"
+  },
+  zh: {
+    budget: "预算匹配",
+    campus: "校区匹配",
+    utilities: "水电网",
+    setup: "入住配置",
+    amenity: "楼内配套",
+    worry: "主要担忧",
+    daily: "日常生活"
+  }
+};
+
+const ANSWER_VALUE_LABELS = {
+  en: {
+    utilities: {
+      predictable: "As predictable as possible",
+      some_variable: "Some variable costs are fine",
+      amenity_tradeoff: "Pay more true cost for stronger amenities"
+    },
+    setup: {
+      furniture_ready: "Furniture option / less setup work",
+      wood_floor: "Wood-style floor / avoid carpet if possible",
+      laundry: "In-unit laundry",
+      private_space: "Private kitchen or bathroom matters more"
+    },
+    amenity: {
+      basic: "Basic is enough",
+      package: "Package / front desk / maintenance",
+      gym_pool: "Gym / pool / lounge",
+      parking: "Parking / EV / car-friendly"
+    },
+    worry: {
+      application: "Application friction",
+      true_cost: "True monthly cost / move-in cash",
+      trust: "Building trust / verification",
+      roommate: "Roommate or split-cost fit"
+    },
+    daily: {
+      building_access: "Access, package, and repairs",
+      late_route: "Late-night routes and transportation",
+      food_store: "Restaurants, groceries, and pharmacy",
+      quiet_routine: "Quieter routine"
+    }
+  },
+  zh: {
+    utilities: {
+      predictable: "越可预期越好",
+      some_variable: "能接受部分浮动费用",
+      amenity_tradeoff: "愿意为楼内配套承担更高真实成本"
+    },
+    setup: {
+      furniture_ready: "有家具方案 / 少折腾",
+      wood_floor: "木地板风格 / 尽量不铺地毯",
+      laundry: "房内洗衣机和烘干机",
+      private_space: "独立厨房或卫浴更重要"
+    },
+    amenity: {
+      basic: "够用就行",
+      package: "收包裹 / 前台 / 维修",
+      gym_pool: "健身房 / 泳池 / 公共休息区",
+      parking: "停车 / 充电 / 对开车友好"
+    },
+    worry: {
+      application: "申请门槛和材料",
+      true_cost: "真实月成本 / 入住前现金",
+      trust: "楼宇信任度 / 信息核实",
+      roommate: "合租 / 分摊成本"
+    },
+    daily: {
+      building_access: "门禁、收包裹和报修",
+      late_route: "晚间路线和交通",
+      food_store: "餐馆、买菜和药店",
+      quiet_routine: "更安静的日常"
+    }
+  }
 };
 
 let latestAnswers = null;
@@ -755,14 +984,498 @@ const APARTMENTS = [
   }
 ];
 
-const CATEGORY_LABELS = {
-  budget: "Budget fit",
-  campus: "Campus fit",
-  utilities: "Utilities",
-  setup: "Setup",
-  amenity: "Amenities",
-  worry: "Main worry",
-  daily: "Daily life"
+const APARTMENT_TRANSLATIONS = {
+  zh: {
+    "360-state": {
+      area: "市中心高层 · 360 State St",
+      priceLabel: "$2,055 起单间 / $2,254 起一居；真实成本会更高",
+      concession: "官方页面显示部分房源最高可免 2 个月租金，另有 $500 看房签约优惠；不计入预算分。",
+      valueSignal: "平台面积检查：Studio S $2,220-$2,345 / 517 平方英尺，约 $4.29-$4.54/平方英尺。更大的两居可能每平方英尺更低，但总租金和费用更高。",
+      flooring: "需按具体房源确认",
+      furnishing: "基础租约不带家具；有 CORT 家具合作方",
+      confidenceLabel: "部分可信",
+      dailyLabel: "市中心买菜吃饭方便，楼内服务完整",
+      sourceLabel: "官方页面已于 2026-06-29 刷新；完整费用表仍需书面确认",
+      bestFor: [
+        "预算较高、主要活动在市中心或主校区，并想住服务型高层的学生",
+        "看重房内洗衣、收包裹、维修、停车和楼下日常便利的学生",
+        "不要求租金内自带家具，但愿意用家具租赁或自己购买家具解决入住准备的学生"
+      ],
+      tradeoffs: [
+        "展示租金之外还要确认水电网、保险、押金、停车、配套费和管理费",
+        "去医学院、管理学院和科学山的体感差异很大，不能只看楼名",
+        "家具不是默认包含，家具合作方只能降低准备成本"
+      ],
+      verify: [
+        "书面费用表和水电网计费方式",
+        "无美国信用记录学生的担保人或共同签署政策",
+        "具体房源的地板和家具方案",
+        "到你具体耶鲁楼宇的晚间路线"
+      ]
+    },
+    "olive-wooster": {
+      area: "伍斯特广场 / 市中心边缘 · 87 Union St",
+      priceLabel: "官方页面显示优惠；准确租金需要刷新空房表",
+      concession: "官方页面显示部分公寓最高可免 3 个月租金，部分一居有降价；不计入预算分。",
+      valueSignal: "平台面积检查：A1 一居 $1,880-$2,824 / 631 平方英尺，约 $2.98-$4.48/平方英尺。合租式户型单独展示，必须仔细区分租金口径。",
+      flooring: "需按具体房源确认",
+      furnishing: "是否带家具尚未核实",
+      confidenceLabel: "部分可信",
+      dailyLabel: "医学院方向和伍斯特餐饮便利",
+      sourceLabel: "官方页面已于 2026-06-29 刷新；静态页面未显示完整租金表",
+      bestFor: [
+        "主要去医学院、耶鲁纽黑文医院或公共卫生学院，并想住较新楼的学生",
+        "看重房内洗衣、门禁、楼内配套和伍斯特/市中心生活服务的学生",
+        "有室友或预算较高，并愿意核实优惠后再比较真实成本的学生"
+      ],
+      tradeoffs: [
+        "官方空房页没有在静态文本里列出准确租金，需要人工刷新或询问租赁办公室",
+        "是否带家具没有被验证，不能直接当作少折腾选项推荐",
+        "去管理学院或科学山不一定最顺，需要按课表或实验室路线计算"
+      ],
+      verify: [
+        "具体房源租金和优惠条件",
+        "水电网和网络账单实际包含哪些项目",
+        "是否带家具或可租家具",
+        "步行到你具体耶鲁楼宇的路线"
+      ]
+    },
+    "the-taft": {
+      area: "主校区 / Chapel-College 走廊 · 265 College St",
+      priceLabel: "$1,865-$2,060 单间；$2,150-$2,440 一居；$2,950-$3,300 两居",
+      concession: "2026-08-01 或之前入住的单间/一居租约可免 2 个月租金；不计入预算分。",
+      valueSignal: "平台面积检查：单间 $1,920-$2,115 / 424-524 平方英尺，约 $3.66-$4.99/平方英尺。Loft 单间的面积价值更强，但仍要看具体房源状态。",
+      flooring: "需按具体房源确认",
+      furnishing: "可见 CORT / 企业家具选项；尚未确认是否适用于普通学生租约",
+      confidenceLabel: "部分可信",
+      dailyLabel: "主校区和市中心日常最方便",
+      sourceLabel: "Paredim 与 RentCafe 已于 2026-06-29 刷新；费用表仍不完整",
+      bestFor: [
+        "主校区、法学院或市中心活动多，想用位置降低日常摩擦的学生",
+        "预算在单间或一居主流区间，并能赶上 2026-08-01 前入住优惠的学生",
+        "需要暖气和热水包含，并愿意核实电费、网络和家具方案的学生"
+      ],
+      tradeoffs: [
+        "优惠条件很具体，不能直接折成净租金来打预算分",
+        "已看到垃圾费和配套费合计 $55/月，但完整费用表、停车和保险仍缺",
+        "不是新玻璃楼类型，具体房源状态、洗衣和地板都要看房确认"
+      ],
+      verify: [
+        "完整费用表以及免押金方案是否有条件",
+        "电费、网络、洗衣、停车、宠物和租客保险成本",
+        "CORT 或企业家具选项是否适用于普通学生租约",
+        "学生担保人、共同签署和远程申请政策"
+      ]
+    },
+    "the-archive": {
+      area: "市中心 / Ninth Square · Chapel / Orange",
+      priceLabel: "$2,232 起单间；$2,164 起一居；$3,041 起两居；$3,922 起三居总月价",
+      concession: "官方页面显示 24 个月以上租约最高免 3 个月，立即入住最高免 2 个月，另有耶鲁折扣；不计入预算分。",
+      valueSignal: "平台面积检查：Sx1 单间 $1,894-$4,944 / 387 平方英尺，价值区间很宽。多人合租大户型可能降低每平方英尺成本，但室友分摊和租期要单独核实。",
+      flooring: "需按具体房源确认",
+      furnishing: "是否带家具尚未核实",
+      confidenceLabel: "部分可信",
+      dailyLabel: "Ninth Square / 市中心服务和多人户型选择",
+      sourceLabel: "官方页面与 Entrata 已于 2026-06-29 刷新；全包口径仍需确认",
+      bestFor: [
+        "想住市中心或 Ninth Square，并需要从单间到三居都有选择面的学生",
+        "已有室友或想比较两居/三居分摊成本的学生",
+        "对优惠敏感，但愿意逐条确认租期和资格条件的学生"
+      ],
+      tradeoffs: [
+        "页面使用总月租口径，必须确认到底包含和排除哪些费用",
+        "全包租赁和零额外费用的说法很有价值，但发布前需要书面确认",
+        "Archive I/II 或多地址口径还要确认，避免把不同楼混成同一体验"
+      ],
+      verify: [
+        "总月租到底包含哪些项目",
+        "水电网、网络、停车、宠物、保险、申请费和管理费",
+        "24 个月以上租约、立即入住和耶鲁折扣的准确优惠条件",
+        "是否需要按楼栋或地址拆分资料"
+      ]
+    },
+    "estelle": {
+      area: "市中心 / New Haven Green 边缘 · 19 Elm St",
+      priceLabel: "单间需询价；$2,795 起一居；$3,870 起两居；$4,725 起三居；$5,795 起四居",
+      concession: "开业优惠：12 个月租约免 2 个月，24 个月以上租约免 4 个月；不计入预算分。",
+      valueSignal: "平台面积检查：S1 单间 $2,290 / 469 平方英尺，约 $4.88/平方英尺。更大户型可能改善面积价值，但会提高总月成本。",
+      flooring: "需按具体房源确认",
+      furnishing: "是否带家具尚未核实",
+      confidenceLabel: "部分可信",
+      dailyLabel: "新开市中心楼，去主校区方便",
+      sourceLabel: "官方页面与 SecureCafe 已于 2026-06-29 刷新；开业和费用仍需确认",
+      bestFor: [
+        "想要新楼体验，并主要在主校区或市中心活动的学生",
+        "能接受新开楼交付风险，但希望用开业优惠抵消部分成本的学生",
+        "已有室友或预算较高，想比较两居、三居和四居分摊的学生"
+      ],
+      tradeoffs: [
+        "单间当前只显示需询价，不能把筛选器里的低价当作已确认单间租金",
+        "开业优惠很强，但优惠、价格、租期和空房可能每天变化",
+        "费用表、水电网、停车、押金和保险还没有进入真实成本评分"
+      ],
+      verify: [
+        "最终开业和入住准备状态，以及具体可租房源",
+        "费用表、水电网计费、停车、押金、宠物、保险和网络",
+        "12 个月与 24 个月以上租约的优惠限制",
+        "邮编差异和学生申请要求"
+      ]
+    },
+    "axis-201": {
+      area: "Science Park / Munson St · 201 Munson St",
+      priceLabel: "$1,852 起单间；$2,282 起一居；$3,084 起两居；$4,425 起三居或联排",
+      concession: "官方页面显示部分房源降价并最高免 3 个月租金；不计入预算分。",
+      valueSignal: "平台面积检查：单间 $1,935-$2,150 / 333-519 平方英尺，约 $3.73-$6.46/平方英尺。两居户型对合租分摊的面积价值更强。",
+      flooring: "需按具体房源确认",
+      furnishing: "是否带家具尚未核实",
+      confidenceLabel: "部分可信",
+      dailyLabel: "更适合 Science Park / 科学山作息",
+      sourceLabel: "官方户型页已于 2026-06-29 刷新；水电网和学生政策仍需确认",
+      bestFor: [
+        "主要去工程学院、科学山、管理学院或 Prospect 走廊，想避开市中心核心区的学生",
+        "想用较低单间起租价或室友/联排户型控制成本的学生",
+        "日常更看重楼内秩序和安静感，而不是市中心夜生活的学生"
+      ],
+      tradeoffs: [
+        "去医学院、联合车站或市中心办事的作息不一定顺",
+        "已看到经常性费用约 $83.39/月，但水电网和停车等仍需补齐",
+        "优惠只适用于部分房源，不能替代真实月成本"
+      ],
+      verify: [
+        "水电网、停车、租客保险和宠物/储物费用",
+        "租期和优惠资格",
+        "到具体工程学院、管理学院或实验楼的路线，包括晚间方案",
+        "学生担保人或共同签署要求"
+      ]
+    },
+    "the-audubon": {
+      area: "Audubon / Whitney-Arts 走廊 · 367 Orange St",
+      priceLabel: "$2,250 起单间；$2,671 起一居；$3,691 起两居；$4,180 起三居估算月成本",
+      concession: "官方首页显示部分房源最高免 1.5 个月租金；不计入预算分。",
+      flooring: "需按具体房源确认",
+      furnishing: "是否带家具尚未核实",
+      confidenceLabel: "部分可信",
+      dailyLabel: "艺术区、主校区和 Whitney-Audubon 走廊",
+      sourceLabel: "官方页面已于 2026-06-29 刷新；估算月成本需要费用拆分",
+      bestFor: [
+        "主校区、艺术学院或 Whitney-Audubon 走廊活动多，想要均衡校区通勤的学生",
+        "看重楼宇门禁、收包裹和停车/车库核实的学生",
+        "预算较高，并愿意在申请前核实估算月成本的学生"
+      ],
+      tradeoffs: [
+        "页面使用估算月成本口径，但完整费用拆分还没有捕捉完",
+        "学生社群出现过车库、邻居或门禁相关说法，只能作为路线和门禁核实触发点",
+        "去医学院或市中心南侧的路线需要按真实作息看"
+      ],
+      verify: [
+        "费用估算器里的明细和水电网计费",
+        "车库、门禁、收包裹、照明和晚间路线流程",
+        "优惠条款和部分房源资格",
+        "学生担保人、共同签署和远程申请政策"
+      ]
+    },
+    "new-haven-towers": {
+      area: "市中心 York/Park/High 楼群 · 4 栋楼",
+      priceLabel: "Madison 单间 $1,695 起；Crown / Crown Court / 18 High 按楼不同",
+      flooring: "需按楼栋和具体房源确认",
+      furnishing: "是否带家具尚未核实",
+      confidenceLabel: "部分可信",
+      dailyLabel: "靠近校园的市中心楼群；必须按具体楼栋比较",
+      sourceLabel: "官方户型页已于 2026-06-29 刷新；已捕捉楼栋级价格",
+      bestFor: [
+        "主校区、法学院、艺术学院或医学院附近活动多，想住老牌市中心楼群的学生",
+        "希望暖气和热水包含，让水电网更可预期的学生",
+        "愿意按 Madison、Crown、Crown Court 和 18 High 分楼比较价格和位置的学生"
+      ],
+      tradeoffs: [
+        "不能把四栋楼压成一种体验；价格、位置和配套都要按楼栋看",
+        "1.5 个月押金和申请费会影响入住前现金",
+        "停车约 $90-$170/月，且具体楼栋空位需要确认"
+      ],
+      verify: [
+        "你申请的是哪栋楼和哪个具体房源",
+        "停车空位和价格、电费、租客保险、入住前现金",
+        "各楼栋的洗衣、地板、收包裹和维修设置",
+        "学生担保人或共同签署要求"
+      ]
+    },
+    "pierpont-city-crossing": {
+      area: "Downtown Crossing / 车站-医学院边缘",
+      priceLabel: "$2,218 起小单间；$2,486 起一居；$3,613 起两居",
+      flooring: "需按具体房源确认",
+      furnishing: "短租可能包含家具和水电网；普通租约是否带家具尚未核实",
+      confidenceLabel: "部分可信",
+      dailyLabel: "车站、医学院和 Downtown Crossing 作息",
+      sourceLabel: "RMS 官方页面与嵌入 RentCafe 已于 2026-06-29 刷新",
+      bestFor: [
+        "主要去医学院、联合车站或市中心南侧，想要 City Crossing 位置的学生",
+        "想比较小单间、一居和两居，并能接受普通租约条款待确认的学生",
+        "可能需要短租或临时落脚，但会把短租条款和普通租约分开核实的学生"
+      ],
+      tradeoffs: [
+        "学生说的 City Crossing 可能包括其他楼，Pierpont 只是当前锁定的官方身份之一",
+        "短租包含家具、水电网或停车，不能外推到普通租约",
+        "普通租约的费用、水电网、停车和申请政策还要补"
+      ],
+      verify: [
+        "你的目标是 Pierpont 还是另一栋 City Crossing 楼",
+        "普通租约费用表、水电网、停车和租客保险",
+        "如果需要临时住房，短租和普通租约的区别",
+        "学生担保人、共同签署和远程签约政策"
+      ]
+    },
+    "the-whit": {
+      area: "伍斯特广场 · 630 Chapel St",
+      priceLabel: "官方页面说明价格可能变化；准确租金需要刷新",
+      flooring: "列有宽木板地板；仍需按具体房源确认",
+      furnishing: "基础租约不带家具；有 CORT 家具方案合作方",
+      confidenceLabel: "部分可信",
+      dailyLabel: "伍斯特餐饮和收包裹/礼宾便利",
+      sourceLabel: "Scully 官方页面已于 2026-06-29 刷新",
+      bestFor: [
+        "想住在伍斯特广场或 Chapel 走廊，兼顾主校区和医学院的学生",
+        "明确在意房内洗衣、宽木板地板、收包裹/礼宾和健身房/泳池的学生",
+        "需要家具解决方案但可以接受租家具，而不是租金内自带家具的学生"
+      ],
+      tradeoffs: [
+        "当前页面不提供稳定静态租金表，价格需要刷新空房",
+        "配套多，真实月成本可能被水电网、停车和费用拉高",
+        "去管理学院或科学山不一定是最顺通勤"
+      ],
+      verify: [
+        "当前租金和入住时间",
+        "CORT 家具成本和最短租期",
+        "费用指南和水电网计费",
+        "晚间路线和包裹/访客门禁流程"
+      ]
+    },
+    "anthem-square10": {
+      area: "Downtown Crossing / 联合车站一侧 · South Orange / George",
+      priceLabel: "旧新闻基准：单间 $1,900，一居 $2,625，两居 $3,300",
+      valueSignal: "平台面积检查：S1 单间 $1,921-$2,201 / 373 平方英尺，约 $5.15-$5.90/平方英尺。两居 B1 在确认费用前看起来约 $3.06/平方英尺起。",
+      flooring: "需核实",
+      furnishing: "是否带家具尚未核实",
+      confidenceLabel: "旧新闻资料（2024-12）；需要官方刷新",
+      dailyLabel: "车站/医学院方向较好，周边服务仍在变化",
+      sourceLabel: "2024-12 新闻来源；仍需官方实时数据",
+      bestFor: [
+        "主要去医学院、联合车站或市中心南侧，并想关注新楼供应的学生",
+        "愿意追踪新楼优惠、市场价/可负担房源组合和后续商业配套变化的学生",
+        "已有室友、预算中高，想比较市中心南侧与伍斯特/核心市中心的学生"
+      ],
+      tradeoffs: [
+        "当前不是官方实时租金，不能直接作为申请依据",
+        "周边服务仍在变化，不能用旧开业新闻判断现在是否方便",
+        "房内洗衣、地板、水电网和家具都还没有按房源核实"
+      ],
+      verify: [
+        "官方租赁网站和当前户型",
+        "当前租金、优惠、可负担房源资格（如适用）",
+        "水电网组合和入住费用",
+        "Square 10 周边目前的餐饮和买菜状态"
+      ]
+    }
+  },
+  en: {
+    "360-state": {
+      bestFor: [
+        "Higher-budget students based around downtown or Central Campus who want a full-service high-rise.",
+        "Students who value in-unit laundry, package handling, maintenance, parking, and daily convenience in or near the building.",
+        "Students who do not need furniture included in rent, but can use furniture rental or buy furniture for setup."
+      ],
+      tradeoffs: [
+        "Beyond advertised rent, confirm utilities, insurance, deposit, parking, amenity fees, and admin fees.",
+        "The feel of the commute to Med School, SOM, and Science Hill can vary a lot; do not rely on the building name alone.",
+        "Furniture is not included by default; the furniture partner only lowers setup friction."
+      ],
+      verify: [
+        "Written fee sheet and utility billing method.",
+        "Guarantor or co-signer policy for students without U.S. credit history.",
+        "Flooring and furniture option for the exact unit.",
+        "Late-night route to your exact Yale building."
+      ]
+    },
+    "olive-wooster": {
+      bestFor: [
+        "Students mainly going to Med School, YNHH, or School of Public Health who want a newer-building profile.",
+        "Students who value in-unit laundry, fob access, amenities, and Wooster/downtown local services.",
+        "Students with roommates or a higher budget who are willing to verify concessions before comparing true cost."
+      ],
+      tradeoffs: [
+        "The official availability page does not expose a stable rent table in static text; refresh it manually or ask leasing.",
+        "Furnished status is not verified, so it should not be treated as a low-setup option yet.",
+        "Commutes to SOM or Science Hill may not be ideal; check against your actual class or lab routine."
+      ],
+      verify: [
+        "Exact unit rent and concession terms.",
+        "What utilities and internet billing actually include.",
+        "Whether furnished or furniture-rental options are available.",
+        "Walking route to your exact Yale building."
+      ]
+    },
+    "the-taft": {
+      bestFor: [
+        "Students with frequent Central Campus, Law, or downtown routines who want location to reduce daily friction.",
+        "Students in the mainstream studio or 1BR budget range who can use the move-in concession before 2026-08-01.",
+        "Students who need heat and hot water included, and are willing to verify electricity, internet, and furniture options."
+      ],
+      tradeoffs: [
+        "The concession has specific conditions, so it should not be directly converted into net rent for scoring.",
+        "Trash plus amenity charges are visible at $55/month, but the full fee sheet, parking, and insurance are still incomplete.",
+        "This is not a new glass-tower profile; exact unit condition, laundry, and flooring need unit-level confirmation."
+      ],
+      verify: [
+        "Full fee sheet and whether the skip-deposit offer has conditions.",
+        "Electricity, internet, laundry, parking, pet, and renter's insurance costs.",
+        "Whether CORT or corporate furnished options work for ordinary student leases.",
+        "Student guarantor/co-signer and remote application policy."
+      ]
+    },
+    "the-archive": {
+      bestFor: [
+        "Students who want downtown or Ninth Square and need options from studio through 3BR.",
+        "Students with roommates or those comparing 2BR/3BR split cost.",
+        "Students who care about concessions and are willing to verify lease length and eligibility terms one by one."
+      ],
+      tradeoffs: [
+        "The site uses a total monthly leasing price, so confirm exactly what is included and excluded.",
+        "All-in leasing and zero-extra-fee claims could be valuable, but need written confirmation before public use.",
+        "Archive I/II or multi-address wording still needs confirmation so different buildings are not collapsed into one experience."
+      ],
+      verify: [
+        "What the total monthly leasing price includes.",
+        "Utilities, internet, parking, pet fees, insurance, application fees, and admin fees.",
+        "Exact concession terms for 24+ month leases, immediate move-in, and Yale discounts.",
+        "Whether the profile should be split by building or address."
+      ]
+    },
+    "estelle": {
+      bestFor: [
+        "Students who want a newest-building feel and are mainly around Central Campus or downtown.",
+        "Students who can tolerate new-building execution risk but want an opening concession to offset part of the cost.",
+        "Students with roommates or a higher budget who want to compare 2BR, 3BR, and 4BR split options."
+      ],
+      tradeoffs: [
+        "Studio currently shows as inquire-only, so a filter-level low price should not be treated as confirmed studio rent.",
+        "Opening concessions are strong, but specials, pricing, lease terms, and availability may change daily.",
+        "Fee sheet, utilities, parking, deposit, and insurance are not yet part of true-cost scoring."
+      ],
+      verify: [
+        "Final opening and move-in readiness, plus the exact available unit.",
+        "Fee sheet, utility billing, parking, deposit, pet, insurance, and internet.",
+        "Concession restrictions for 12-month versus 24+ month leases.",
+        "Postal code discrepancy and student application requirements."
+      ]
+    },
+    "axis-201": {
+      bestFor: [
+        "Students mainly going to SEAS, Science Hill, SOM, or the Prospect corridor who want to avoid the downtown core.",
+        "Students trying to control cost through a lower studio starting rent or roommate/townhome layouts.",
+        "Students who care more about building routine and quiet than downtown nightlife."
+      ],
+      tradeoffs: [
+        "The routine to Med School, Union Station, or downtown errands may not be smooth.",
+        "A recurring fee of about $83.39/month is visible, but utilities, parking, and other costs still need confirmation.",
+        "The concession applies only to select homes, so it cannot replace true monthly cost."
+      ],
+      verify: [
+        "Utility billing, parking, renter's insurance, and pet/storage fees.",
+        "Lease term and concession eligibility.",
+        "Route to your exact SEAS, SOM, or lab building, including late-night plan.",
+        "Student guarantor/co-signer requirements."
+      ]
+    },
+    "the-audubon": {
+      bestFor: [
+        "Students with frequent Central Campus, Arts, or Whitney-Audubon corridor routines who want balanced campus access.",
+        "Students who value building access, package handling, and parking/garage verification.",
+        "Higher-budget students who will verify the estimated monthly cost before applying."
+      ],
+      tradeoffs: [
+        "The page uses estimated monthly cost, but the full fee breakdown has not been fully captured.",
+        "Student community mentions around garage, neighbor, or access concerns should be used only as route and access verification triggers.",
+        "Routes to Med School or the south side of downtown need to be checked against your actual schedule."
+      ],
+      verify: [
+        "Cost-estimator fee breakdown and utility billing.",
+        "Garage, access, package, lighting, and late-night route process.",
+        "Concession terms and selected-home eligibility.",
+        "Student guarantor/co-signer and remote application policy."
+      ]
+    },
+    "new-haven-towers": {
+      bestFor: [
+        "Students with frequent Central Campus, Law, Art, or Med routines who want an established downtown cluster.",
+        "Students who want heat and hot water included so utilities are more predictable.",
+        "Students willing to compare Madison, Crown, Crown Court, and 18 High separately by price and location."
+      ],
+      tradeoffs: [
+        "The four buildings should not be treated as one experience; price, location, and amenities are tower-specific.",
+        "A 1.5-month security deposit plus application fee affects move-in cash.",
+        "Parking is about $90-$170/month, and exact building availability needs confirmation."
+      ],
+      verify: [
+        "Which tower and exact unit you are applying for.",
+        "Parking availability and cost, electricity, renter's insurance, and move-in cash.",
+        "Laundry, flooring, package, and maintenance setup by building.",
+        "Student guarantor/co-signer requirements."
+      ]
+    },
+    "pierpont-city-crossing": {
+      bestFor: [
+        "Students mainly going to Med School, Union Station, or the south side of downtown who want a City Crossing location.",
+        "Students comparing Jr Studio, 1BR, and 2BR options while accepting that standard lease terms still need confirmation.",
+        "Students who may need a short-term landing option, but will separate short-term terms from normal lease terms."
+      ],
+      tradeoffs: [
+        "What students call City Crossing may include other buildings; Pierpont is only the official identity currently pinned down.",
+        "Short-term furniture, utility, or parking inclusions should not be applied to ordinary leases.",
+        "Standard lease fees, utilities, parking, and application policy still need follow-up."
+      ],
+      verify: [
+        "Whether your target is Pierpont or another City Crossing building.",
+        "Standard lease fee sheet, utilities, parking, and renter's insurance.",
+        "Short-term versus normal lease terms if you need temporary housing.",
+        "Student guarantor/co-signer and remote signing policy."
+      ]
+    },
+    "the-whit": {
+      bestFor: [
+        "Students who want Wooster Square or the Chapel corridor while balancing Central Campus and Med School.",
+        "Students who explicitly care about in-unit washer/dryer, wide plank flooring, package/concierge, and gym/pool.",
+        "Students who need a furniture solution but can accept furniture rental rather than furniture included in rent."
+      ],
+      tradeoffs: [
+        "The current page does not provide a stable static rent table, so pricing needs an availability refresh.",
+        "Amenities are strong, but true monthly cost may rise through utilities, parking, and fees.",
+        "Commute to SOM or Science Hill may not be the smoothest."
+      ],
+      verify: [
+        "Current rent and move-in availability.",
+        "CORT furniture cost and minimum rental term.",
+        "Fee guide and utility billing.",
+        "Late-night route and package/guest access process."
+      ]
+    },
+    "anthem-square10": {
+      bestFor: [
+        "Students mainly going to Med School, Union Station, or the south side of downtown who want to track new-building supply.",
+        "Students willing to track new-property concessions, affordable/market-rate mix, and later retail changes.",
+        "Students with roommates and a mid-to-high budget who want to compare downtown south side with Wooster or the downtown core."
+      ],
+      tradeoffs: [
+        "Current data is not official live rent, so it cannot be used directly for applications.",
+        "Local services are changing, so old opening news should not be used to judge current convenience.",
+        "Unit-level laundry, flooring, utilities, and furniture are not yet verified."
+      ],
+      verify: [
+        "Official leasing site and current floorplans.",
+        "Current rent, concessions, and affordable-unit eligibility if relevant.",
+        "Utility package and move-in fees.",
+        "Current grocery and restaurant status around Square 10."
+      ]
+    }
+  }
 };
 
 // Draft fallback weights, not validated. Budget and campus routine are weighted highest
@@ -776,6 +1489,64 @@ const WEIGHTS = {
   worry: 1.15,
   daily: 0.95
 };
+
+function activeLang() {
+  if (typeof document === "undefined") return "en";
+  return document.documentElement.lang.toLowerCase().startsWith("zh") ? "zh" : "en";
+}
+
+function ui(key, lang = activeLang()) {
+  return UI_TEXT[lang][key] ?? UI_TEXT.en[key] ?? key;
+}
+
+function campusLabel(value, lang = activeLang()) {
+  return (lang === "zh" ? CAMPUS_LABELS_ZH : CAMPUS_LABELS)[value] || value || ui("notSpecified", lang);
+}
+
+function categoryLabel(key, lang = activeLang()) {
+  return (CATEGORY_LABELS_BY_LANG[lang] || CATEGORY_LABELS_BY_LANG.en)[key] || key;
+}
+
+function answerValueLabel(group, value, lang = activeLang()) {
+  const labels = (ANSWER_VALUE_LABELS[lang] || ANSWER_VALUE_LABELS.en)[group] || {};
+  return labels[value] || value || ui("notSpecified", lang);
+}
+
+function utilityLabel(value, lang = activeLang()) {
+  const labels = {
+    en: {
+      predictable: "predictable",
+      mixed: "mixed",
+      variable: "variable",
+      unknown: "unknown"
+    },
+    zh: {
+      predictable: "较可预期",
+      mixed: "部分可预期",
+      variable: "浮动较多",
+      unknown: "尚不清楚"
+    }
+  };
+  return (labels[lang] || labels.en)[value] || value;
+}
+
+function apartmentCopy(apartment, lang = activeLang()) {
+  const translation = APARTMENT_TRANSLATIONS[lang]?.[apartment.id] || {};
+  return {
+    area: translation.area || apartment.area,
+    priceLabel: translation.priceLabel || apartment.price.label,
+    concession: translation.concession || apartment.concession || "",
+    valueSignal: translation.valueSignal || apartment.valueSignal || "",
+    flooring: translation.flooring || apartment.flooring,
+    furnishing: translation.furnishing || apartment.furnishing,
+    confidenceLabel: translation.confidenceLabel || apartment.confidenceLabel,
+    dailyLabel: translation.dailyLabel || apartment.dailyLabel,
+    sourceLabel: translation.sourceLabel || apartment.sourceLabel,
+    bestFor: translation.bestFor || apartment.bestFor,
+    tradeoffs: translation.tradeoffs || apartment.tradeoffs,
+    verify: translation.verify || apartment.verify
+  };
+}
 
 function getSelectedValues(form, name) {
   return [...form.querySelectorAll(`input[name="${name}"]:checked`)].map(input => input.value);
@@ -905,11 +1676,11 @@ function compareResults(a, b) {
   return scoreDiff;
 }
 
-function topReasons(result) {
+function topReasons(result, lang = activeLang()) {
   return Object.entries(result.breakdown)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 2)
-    .map(([key]) => CATEGORY_LABELS[key]);
+    .map(([key]) => categoryLabel(key, lang));
 }
 
 function confidenceClass(confidence) {
@@ -920,11 +1691,12 @@ function confidenceClass(confidence) {
 
 function confidenceBanner(apartment) {
   if (!["low", "stale"].includes(apartment.confidence) && !apartment.isExploration) return "";
+  const lang = activeLang();
   const message = apartment.isExploration
-    ? "这是探索方向，不是具体 apartment 推荐。请先锁定具体房源，再核实 rent、fees、utilities、lease terms。"
+    ? ui("confidenceExploration", lang)
     : apartment.confidence === "stale"
-      ? "这个选项有公开线索，但数据已经 stale。请先刷新 official rent、availability、fees 和 local services。"
-      : "这个选项的数据尚未核实，fit score 仅供方向参考。申请前请刷新 rent、availability、fees 和 policy。";
+      ? ui("confidenceStale", lang)
+      : ui("confidenceLow", lang);
   return `<div class="confidence-banner">${escapeHtml(message)}</div>`;
 }
 
@@ -960,66 +1732,81 @@ function isRankableApartment(apartment) {
 function renderOutOfScope(answers) {
   const list = document.getElementById("results");
   const summary = document.getElementById("result-summary");
-  const campus = CAMPUS_LABELS[answers.campus] || "your Yale destination";
-  summary.textContent = `${budgetLabel(answers.budget)} / ${campus} 这类需求当前不进入推荐池。`;
+  const lang = activeLang();
+  const campus = campusLabel(answers.campus, lang);
+  summary.textContent = lang === "zh"
+    ? `${budgetLabel(answers.budget)} / ${campus} 这类需求当前不进入推荐池。`
+    : `${budgetLabel(answers.budget)} / ${campus} is outside the current recommendation pool.`;
   summary.classList.add("summary-warning");
   list.innerHTML = `
     <article class="result-card scope-card">
       <div class="card-top">
         <div>
-          <div class="rank">Out of current scope</div>
-          <h3>暂不生成 apartment top 3</h3>
-          <p class="subtitle">当前版本先服务 New Haven mainstream apartments，不覆盖低预算房间、二手转租、独立房东或纯 roommate matching。</p>
+          <div class="rank">${escapeHtml(ui("outOfScopeRank", lang))}</div>
+          <h3>${escapeHtml(ui("outOfScopeTitle", lang))}</h3>
+          <p class="subtitle">${escapeHtml(ui("outOfScopeSubtitle", lang))}</p>
         </div>
       </div>
       <div class="reason-grid">
         <div class="reason-box">
-          <h4>为什么过滤</h4>
-          <ul>
-            <li>这个预算段的主要解法通常不是 apartment leasing office，而是 room / sublet / independent landlord。</li>
-            <li>当前数据池没有足够可靠的低预算房源、室友规则、maintenance 和 utility evidence。</li>
-          </ul>
+          <h4>${escapeHtml(ui("whyFiltered", lang))}</h4>
+          <ul>${renderList(ui("whyFilteredItems", lang))}</ul>
         </div>
         <div class="reason-box">
-          <h4>这版继续覆盖</h4>
-          <ul>
-            <li>studio / 1BR / 2BR split 的 mainstream apartment 选择。</li>
-            <li>按 campus、true cost、utilities、amenities、daily life 和申请摩擦做 fit ranking。</li>
-          </ul>
+          <h4>${escapeHtml(ui("stillCovered", lang))}</h4>
+          <ul>${renderList(ui("stillCoveredItems", lang))}</ul>
         </div>
         <div class="reason-box">
-          <h4>后续可单独做</h4>
-          <ul>
-            <li>房间/转租 workflow、室友匹配、二手/转租帖和独立房东核验。</li>
-            <li>Yale Graduate Housing 可在下一轮申请季作为单独 baseline 回归。</li>
-          </ul>
+          <h4>${escapeHtml(ui("laterScope", lang))}</h4>
+          <ul>${renderList(ui("laterScopeItems", lang))}</ul>
         </div>
       </div>
       <div class="tags">
-        <span class="tag warn">No apartment recommendation shown</span>
-        <span class="tag">Scope boundary</span>
+        <span class="tag warn">${escapeHtml(ui("noApartmentShown", lang))}</span>
+        <span class="tag">${escapeHtml(ui("scopeBoundary", lang))}</span>
       </div>
     </article>
   `;
 }
 
-function topResultNames(results) {
-  if (!results.length) return "No apartment top 3 shown";
+function topResultNames(results, lang = activeLang()) {
+  if (!results.length) return ui("noTop3", lang);
   return results.slice(0, 3).map((result, index) => {
     return `${index + 1}. ${result.apartment.name} (${result.score})`;
   }).join("\n");
 }
 
-function formatAnswersForShare(answers) {
-  if (!answers) return "No questionnaire answers captured yet.";
+function formatAnswersForShare(answers, lang = activeLang()) {
+  if (!answers) return lang === "zh" ? "还没有记录问卷答案。" : "No questionnaire answers captured yet.";
+  const setup = answers.setup.map(value => answerValueLabel("setup", value, lang)).join(", ") || ui("none", lang);
+  const worries = answers.worry.map(value => answerValueLabel("worry", value, lang)).join(", ") || ui("none", lang);
+  const labels = lang === "zh"
+    ? {
+      budget: "预算",
+      campus: "校区",
+      utilities: "水电网",
+      setup: "房间配置",
+      amenity: "楼内配套",
+      worries: "主要担忧",
+      daily: "日常生活"
+    }
+    : {
+      budget: "Budget",
+      campus: "Campus",
+      utilities: "Utilities",
+      setup: "Setup",
+      amenity: "Amenities",
+      worries: "Worries",
+      daily: "Daily life"
+    };
   return [
-    `Budget: ${budgetLabel(answers.budget)}`,
-    `Campus: ${valueLabel(answers.campus, CAMPUS_LABELS)}`,
-    `Utilities: ${answers.utilities}`,
-    `Setup: ${answers.setup.join(", ") || "none"}`,
-    `Amenities: ${answers.amenity}`,
-    `Worries: ${answers.worry.join(", ") || "none"}`,
-    `Daily life: ${answers.daily}`
+    `${labels.budget}: ${budgetLabel(answers.budget)}`,
+    `${labels.campus}: ${campusLabel(answers.campus, lang)}`,
+    `${labels.utilities}: ${answerValueLabel("utilities", answers.utilities, lang)}`,
+    `${labels.setup}: ${setup}`,
+    `${labels.amenity}: ${answerValueLabel("amenity", answers.amenity, lang)}`,
+    `${labels.worries}: ${worries}`,
+    `${labels.daily}: ${answerValueLabel("daily", answers.daily, lang)}`
   ].join("\n");
 }
 
@@ -1029,33 +1816,35 @@ function getInputValue(id) {
 }
 
 function feedbackText() {
-  const accuracy = getInputValue("feedback-accuracy") || "Not specified";
-  const missing = getInputValue("feedback-missing") || "None";
-  const note = getInputValue("feedback-note") || "None";
+  const lang = activeLang();
+  const accuracy = getInputValue("feedback-accuracy") || ui("notSpecified", lang);
+  const missing = getInputValue("feedback-missing") || ui("none", lang);
+  const note = getInputValue("feedback-note") || ui("none", lang);
   return [
-    "[NHV Apartment Fit Checker beta feedback]",
+    ui("feedbackTitle", lang),
     "",
-    "My answers:",
-    formatAnswersForShare(latestAnswers),
+    ui("feedbackAnswers", lang),
+    formatAnswersForShare(latestAnswers, lang),
     "",
-    "Top 3 shown:",
-    topResultNames(latestResults),
+    ui("feedbackTop", lang),
+    topResultNames(latestResults, lang),
     "",
-    `Top 3 accuracy: ${accuracy}`,
-    `Missing apartment: ${missing}`,
-    `What to improve: ${note}`,
+    `${ui("feedbackAccuracy", lang)}: ${accuracy}`,
+    `${ui("feedbackMissing", lang)}: ${missing}`,
+    `${ui("feedbackImprove", lang)}: ${note}`,
     "",
-    "Note: this is beta feedback, not an application request."
+    ui("feedbackNote", lang)
   ].join("\n");
 }
 
 function copyText(text, statusId) {
   const status = document.getElementById(statusId);
+  const lang = activeLang();
   const done = () => {
-    if (status) status.textContent = "已复制，可以直接粘贴到微信。";
+    if (status) status.textContent = ui("feedbackCopied", lang);
   };
   const fail = () => {
-    if (status) status.textContent = "复制失败，请手动选中文本。";
+    if (status) status.textContent = ui("feedbackFailed", lang);
   };
 
   if (navigator.clipboard && window.isSecureContext) {
@@ -1084,24 +1873,28 @@ function fallbackCopy(text, done, fail) {
 function renderResults(results, answers) {
   const list = document.getElementById("results");
   const summary = document.getElementById("result-summary");
+  const lang = activeLang();
   const top = results.slice(0, 3);
-  const campus = CAMPUS_LABELS[answers.campus] || "your Yale destination";
+  const campus = campusLabel(answers.campus, lang);
   const hasSpecificBudgetFit = results.some(result => {
     return !result.apartment.isExploration && result.breakdown.budget >= SCORE.HIGH;
   });
   const budgetCoverageGap = !hasSpecificBudgetFit;
-  const baseSummary = `按你的预算 ${budgetLabel(answers.budget)} 和 ${campus} routine，先看这 ${top.length} 个。`;
-  const budgetGapSummary = "当前 mainstream apartment pool 没有高预算匹配项；以下仅作为 stretch comparison，申请前请先确认真实月成本。";
+  const baseSummary = ui("baseSummary", lang)(budgetLabel(answers.budget), campus, top.length);
+  const budgetGapSummary = ui("budgetGapSummary", lang);
   summary.textContent = budgetCoverageGap ? `${baseSummary} ${budgetGapSummary}` : baseSummary;
   summary.classList.toggle("summary-warning", budgetCoverageGap);
 
   list.innerHTML = top.map((result, index) => {
     const apartment = result.apartment;
-    const reasons = topReasons(result).map(escapeHtml);
-    const rankLabel = apartment.isExploration ? `#${index + 1} explore direction` : `#${index + 1} match`;
+    const copy = apartmentCopy(apartment, lang);
+    const reasons = topReasons(result, lang).map(escapeHtml);
+    const rankLabel = apartment.isExploration
+      ? `#${index + 1} ${ui("exploreDirection", lang)}`
+      : `#${index + 1} ${ui("match", lang)}`;
     const bars = Object.entries(result.breakdown).map(([key, value]) => `
       <div class="bar-row">
-        <span>${escapeHtml(CATEGORY_LABELS[key])}</span>
+        <span>${escapeHtml(categoryLabel(key, lang))}</span>
         <div class="bar-track"><div class="bar-fill" style="width: ${Math.round(value)}%"></div></div>
         <strong>${Math.round(value)}</strong>
       </div>
@@ -1114,46 +1907,46 @@ function renderResults(results, answers) {
           <div>
             <div class="rank">${escapeHtml(rankLabel)} · ${reasons.join(" + ")}</div>
             <h3>${escapeHtml(apartment.name)}</h3>
-            <p class="subtitle">${escapeHtml(apartment.area)}</p>
+            <p class="subtitle">${escapeHtml(copy.area)}</p>
           </div>
-          <div class="score-pill">${result.score}<small>fit score</small></div>
+          <div class="score-pill">${result.score}<small>${escapeHtml(ui("scoreLabel", lang))}</small></div>
         </div>
 
         <div class="facts">
-          <div class="fact"><strong>Cost signal</strong><span>${escapeHtml(apartment.price.label)}</span></div>
-          ${apartment.valueSignal ? `<div class="fact value-fact"><strong>Value signal</strong><span>${escapeHtml(apartment.valueSignal)}</span></div>` : ""}
-          ${apartment.concession ? `<div class="fact concession-fact"><strong>Concession</strong><span>${escapeHtml(apartment.concession)}</span></div>` : ""}
-          <div class="fact"><strong>Utilities</strong><span>${escapeHtml(apartment.utilities)}</span></div>
-          <div class="fact"><strong>Furnishing</strong><span>${escapeHtml(apartment.furnishing)}</span></div>
-          <div class="fact"><strong>Flooring</strong><span>${escapeHtml(apartment.flooring)}</span></div>
-          <div class="fact"><strong>Daily life</strong><span>${escapeHtml(apartment.dailyLabel)}</span></div>
-          <div class="fact"><strong>Source</strong><span>${escapeHtml(apartment.sourceLabel)}</span></div>
+          <div class="fact"><strong>${escapeHtml(ui("facts", lang).cost)}</strong><span>${escapeHtml(copy.priceLabel)}</span></div>
+          ${copy.valueSignal ? `<div class="fact value-fact"><strong>${escapeHtml(ui("facts", lang).value)}</strong><span>${escapeHtml(copy.valueSignal)}</span></div>` : ""}
+          ${copy.concession ? `<div class="fact concession-fact"><strong>${escapeHtml(ui("facts", lang).concession)}</strong><span>${escapeHtml(copy.concession)}</span></div>` : ""}
+          <div class="fact"><strong>${escapeHtml(ui("facts", lang).utilities)}</strong><span>${escapeHtml(utilityLabel(apartment.utilities, lang))}</span></div>
+          <div class="fact"><strong>${escapeHtml(ui("facts", lang).furnishing)}</strong><span>${escapeHtml(copy.furnishing)}</span></div>
+          <div class="fact"><strong>${escapeHtml(ui("facts", lang).flooring)}</strong><span>${escapeHtml(copy.flooring)}</span></div>
+          <div class="fact"><strong>${escapeHtml(ui("facts", lang).daily)}</strong><span>${escapeHtml(copy.dailyLabel)}</span></div>
+          <div class="fact"><strong>${escapeHtml(ui("facts", lang).source)}</strong><span>${escapeHtml(copy.sourceLabel)}</span></div>
         </div>
-        ${apartment.valueSignal ? `<div class="value-caveat">${escapeHtml(VALUE_SIGNAL_CAVEAT)}</div>` : ""}
+        ${copy.valueSignal ? `<div class="value-caveat">${escapeHtml(VALUE_SIGNAL_CAVEATS[lang] || VALUE_SIGNAL_CAVEATS.en)}</div>` : ""}
 
         <div class="reason-grid">
           <div class="reason-box">
-            <h4>Why this fits</h4>
-            <ul>${renderList(apartment.bestFor.slice(0, 3))}</ul>
+            <h4>${escapeHtml(ui("sections", lang).bestFor)}</h4>
+            <ul>${renderList(copy.bestFor.slice(0, 3))}</ul>
           </div>
           <div class="reason-box">
-            <h4>Trade-offs</h4>
-            <ul>${renderList(apartment.tradeoffs.slice(0, 3))}</ul>
+            <h4>${escapeHtml(ui("sections", lang).tradeoffs)}</h4>
+            <ul>${renderList(copy.tradeoffs.slice(0, 3))}</ul>
           </div>
           <div class="reason-box">
-            <h4>Verify before applying</h4>
-            <ul>${renderList(apartment.verify.slice(0, 4))}</ul>
+            <h4>${escapeHtml(ui("sections", lang).verify)}</h4>
+            <ul>${renderList(copy.verify.slice(0, 4))}</ul>
           </div>
         </div>
 
         <div class="breakdown">${bars}</div>
 
         <div class="tags">
-          <span class="tag ${confidenceClass(apartment.confidence)}">${escapeHtml(apartment.confidenceLabel)}</span>
-          ${apartment.isExploration ? '<span class="tag low">Exploration direction</span>' : ""}
-          ${apartment.concession ? '<span class="tag warn">Concession not in budget score</span>' : ""}
-          <span class="tag">No sponsored ranking</span>
-          <span class="tag warn">Verify current rent</span>
+          <span class="tag ${confidenceClass(apartment.confidence)}">${escapeHtml(copy.confidenceLabel)}</span>
+          ${apartment.isExploration ? `<span class="tag low">${escapeHtml(ui("tags", lang).exploration)}</span>` : ""}
+          ${copy.concession ? `<span class="tag warn">${escapeHtml(ui("tags", lang).concession)}</span>` : ""}
+          <span class="tag">${escapeHtml(ui("tags", lang).sponsored)}</span>
+          <span class="tag warn">${escapeHtml(ui("tags", lang).rent)}</span>
         </div>
       </article>
     `;
@@ -1249,6 +2042,13 @@ if (typeof module !== "undefined") {
     rankApartments,
     escapeHtml,
     formatAnswersForShare,
-    topResultNames
+    topResultNames,
+    campusLabel,
+    categoryLabel,
+    answerValueLabel,
+    apartmentCopy,
+    utilityLabel,
+    UI_TEXT,
+    APARTMENT_TRANSLATIONS
   };
 }

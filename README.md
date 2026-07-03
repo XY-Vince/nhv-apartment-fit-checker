@@ -2,11 +2,16 @@
 
 Beta static site for matching Yale / New Haven apartment options to a student's actual needs.
 
-This is not a listing site, broker recommendation, or Yale-affiliated project. It is a lightweight decision-support prototype:
+It is a lightweight decision-support prototype:
 
 - answer a few fit questions
 - get 2-3 mainstream apartment options
 - read why they fit, what trade-offs matter, and what to verify before applying
+
+## Language Versions
+
+- Chinese: `index.html`
+- English: `en.html`
 
 ## Current Scope
 
@@ -20,6 +25,8 @@ All apartment data is a beta seed profile. Rent, availability, concessions, fees
 
 The tool avoids universal "best apartment" rankings. Fit depends on campus destination, true monthly budget, setup needs, and trade-offs.
 
+The consolidated research export lives in `data/apartment_research_consolidated_2026-07-02.csv`. `data/csv_source_inventory_2026-07-02.csv` explains which raw CSV snapshots fed that export.
+
 ## Deployment
 
 This repo is intended for GitHub Pages:
@@ -27,4 +34,3 @@ This repo is intended for GitHub Pages:
 - source: deploy from branch
 - branch: `main`
 - folder: `/root`
-

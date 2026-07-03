@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="New Haven / Yale apartment fit checker: answer a few questions about budget, campus routine, utilities, amenities, setup, application friction, and daily convenience to find 2-3 better-fit options.">
+    <title>New Haven Apartment Fit Checker | Needs first, apartments second</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="intro" aria-labelledby="page-title">
+        <div>
+          <div class="top-line">
+            <p class="eyebrow">New Haven / Yale apartment decision support</p>
+            <nav class="language-switch" aria-label="Language">
+              <a href="index.html">中文</a>
+              <span>English</span>
+            </nav>
+          </div>
+          <h1 id="page-title">Start with your needs, then compare apartments.</h1>
+          <p class="intro-copy">
+            Answer a few practical questions. The tool will surface 2-3 better-fit options from a mainstream apartment seed pool, with reasons, trade-offs, and verification steps before you apply.
+          </p>
+        </div>
+        <div class="notice">
+          The current data is a prototype seed profile. Rent, availability, concessions, fees, furnished status, and application policies must be confirmed with the property before applying.
+          <div class="market-context">
+            <strong>Market snapshot</strong>
+            <span>On 2026-07-01, 20/25 checked detail pages showed explicit move-in specials or concessions; 8/30 visible cards used a plus-fees or base-rent mode.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Apartment fit questionnaire and results">
+        <form id="fit-form" class="panel form-panel">
+          <div class="panel-heading">
+            <h2>Your actual needs</h2>
+            <p>Short questionnaire, but every answer affects the recommendation.</p>
+          </div>
+
+          <fieldset>
+            <legend>1. What true monthly budget feels comfortable?</legend>
+            <div class="segmented budget-grid">
+              <label><input type="radio" name="budget" value="1400"><span>&lt; $1,600 · Not covered in this version</span></label>
+              <label><input type="radio" name="budget" value="1900"><span>$1,600-$1,900</span></label>
+              <label><input type="radio" name="budget" value="2300" checked><span>$1,900-$2,300</span></label>
+              <label><input type="radio" name="budget" value="3000"><span>$2,300-$3,000</span></label>
+              <label><input type="radio" name="budget" value="4000"><span>$3,000+</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>2. Which Yale area do you expect to visit most?</legend>
+            <div class="option-grid">
+              <label><input type="radio" name="campus" value="central_campus" checked><span>Central Campus / Law / Art / Humanities</span></label>
+              <label><input type="radio" name="campus" value="med_school"><span>Med School / YNHH / School of Public Health</span></label>
+              <label><input type="radio" name="campus" value="som_prospect"><span>SOM / Divinity / Prospect Hill</span></label>
+              <label><input type="radio" name="campus" value="seas_science"><span>SEAS / Science Hill / Engineering</span></label>
+              <label><input type="radio" name="campus" value="downtown_station"><span>Downtown / Union Station / daily errands</span></label>
+              <label><input type="radio" name="campus" value="balanced"><span>Not sure yet; prefer balanced access</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>3. How much utility and hidden-cost uncertainty can you tolerate?</legend>
+            <div class="option-grid">
+              <label><input type="radio" name="utilities" value="predictable" checked><span>As predictable as possible</span></label>
+              <label><input type="radio" name="utilities" value="some_variable"><span>Some variable costs are fine</span></label>
+              <label><input type="radio" name="utilities" value="amenity_tradeoff"><span>I will pay more true cost for stronger amenities</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>4. Which unit setup details matter most? Choose up to 2.</legend>
+            <div class="option-grid">
+              <label><input type="checkbox" name="setup" value="furniture_ready" checked><span>Furniture option / less setup work</span></label>
+              <label><input type="checkbox" name="setup" value="wood_floor"><span>Wood-style floor / avoid carpet if possible</span></label>
+              <label><input type="checkbox" name="setup" value="laundry"><span>In-unit laundry</span></label>
+              <label><input type="checkbox" name="setup" value="private_space"><span>Private kitchen or bathroom matters more</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>5. Which building amenity matters most?</legend>
+            <div class="option-grid">
+              <label><input type="radio" name="amenity" value="basic" checked><span>Basic is enough; avoid paying too much for amenities</span></label>
+              <label><input type="radio" name="amenity" value="package"><span>Package handling / front desk / maintenance</span></label>
+              <label><input type="radio" name="amenity" value="gym_pool"><span>Gym / pool / lounge</span></label>
+              <label><input type="radio" name="amenity" value="parking"><span>Parking / EV / car-friendly setup</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>6. What is your biggest worry right now? Choose up to 2.</legend>
+            <div class="option-grid">
+              <label><input type="checkbox" name="worry" value="application" checked><span>Application friction</span></label>
+              <label><input type="checkbox" name="worry" value="true_cost" checked><span>True monthly cost / move-in cash</span></label>
+              <label><input type="checkbox" name="worry" value="trust"><span>Building trust / verification</span></label>
+              <label><input type="checkbox" name="worry" value="roommate"><span>Roommate or split-cost fit</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>7. For daily convenience and peace of mind, what matters most?</legend>
+            <div class="option-grid">
+              <label><input type="radio" name="daily" value="building_access" checked><span>Access control, package handling, and repairs</span></label>
+              <label><input type="radio" name="daily" value="late_route"><span>Late-night routes and transportation</span></label>
+              <label><input type="radio" name="daily" value="food_store"><span>Restaurants, groceries, and pharmacy access</span></label>
+              <label><input type="radio" name="daily" value="quiet_routine"><span>Quieter routine away from nightlife</span></label>
+            </div>
+          </fieldset>
+
+          <button type="submit" class="primary-action">Find my best fits</button>
+        </form>
+
+        <section class="panel results-panel" aria-live="polite">
+          <div class="panel-heading results-heading">
+            <div>
+              <h2>Top fits</h2>
+              <p id="result-summary">Using the default answers, start with these 3.</p>
+            </div>
+            <button type="button" id="reset-button" class="secondary-action">Reset</button>
+          </div>
+          <div id="results" class="results-list"></div>
+        </section>
+      </section>
+
+      <section class="launch-actions" aria-label="Beta feedback">
+        <div class="panel action-panel">
+          <div class="panel-heading">
+            <h2>Beta feedback</h2>
+            <p>Generate structured feedback and copy it to send to the maintainer. Nothing is uploaded or saved.</p>
+          </div>
+          <div class="field-stack">
+            <div>
+              <label class="field-label" for="feedback-accuracy">Does the Top 3 feel right?</label>
+              <select id="feedback-accuracy">
+                <option value="Mostly accurate">Mostly accurate</option>
+                <option value="One option is clearly off">One option is clearly off</option>
+                <option value="Not close to my needs">Not close to my needs</option>
+              </select>
+            </div>
+            <div>
+              <label class="field-label" for="feedback-missing">Which apartment is missing?</label>
+              <input id="feedback-missing" type="text" placeholder="Example: The Union / Corsair / other">
+            </div>
+            <div>
+              <label class="field-label" for="feedback-note">One sentence on what should improve</label>
+              <textarea id="feedback-note" rows="3" placeholder="Example: I am at SOM and the results feel too downtown; parking matters more to me; the budget bands need more detail."></textarea>
+            </div>
+            <button type="button" id="copy-feedback" class="primary-action">Copy feedback text</button>
+            <p id="feedback-status" class="action-status" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="method-note">
+        <h2>Matching dimensions</h2>
+        <div class="criteria-grid">
+          <span>Campus and commute fit</span>
+          <span>True monthly cost</span>
+          <span>Utility predictability</span>
+          <span>Application friction</span>
+          <span>Furnishing and setup</span>
+          <span>Flooring and laundry</span>
+          <span>Building amenities</span>
+          <span>Lease timing</span>
+          <span>Roommate fit</span>
+          <span>Daily verification checks</span>
+          <span>Local services</span>
+          <span>Source confidence</span>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

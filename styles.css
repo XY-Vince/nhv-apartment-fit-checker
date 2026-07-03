@@ -55,6 +55,46 @@ textarea {
   text-transform: uppercase;
 }
 
+.top-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.top-line .eyebrow {
+  margin-bottom: 0;
+}
+
+.language-switch {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px;
+  background: #fff;
+  font-size: 0.8rem;
+  font-weight: 760;
+}
+
+.language-switch a,
+.language-switch span {
+  border-radius: 999px;
+  padding: 4px 9px;
+  color: var(--brand-dark);
+  text-decoration: none;
+}
+
+.language-switch span {
+  background: #e9f6f3;
+}
+
+.language-switch a:hover {
+  background: #f1f4f7;
+}
+
 h1,
 h2,
 p {
