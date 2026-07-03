@@ -46,11 +46,11 @@ const CAMPUS_LABELS = {
 };
 
 const CAMPUS_LABELS_ZH = {
-  central_campus: "主校区",
-  med_school: "医学院 / 耶鲁纽黑文医院",
-  som_prospect: "管理学院 / 普罗斯佩克特山",
-  seas_science: "工程学院 / 科学山",
-  downtown_station: "市中心 / 联合车站",
+  central_campus: "Central Campus",
+  med_school: "Med School / YNHH",
+  som_prospect: "SOM / Prospect Hill",
+  seas_science: "SEAS / Science Hill",
+  downtown_station: "Downtown / Union Station",
   balanced: "不确定 / 均衡通勤"
 };
 
@@ -1003,7 +1003,7 @@ const APARTMENT_TRANSLATIONS = {
       ],
       tradeoffs: [
         "展示租金之外还要确认水电网、保险、押金、停车、配套费和管理费",
-        "去医学院、管理学院和科学山的体感差异很大，不能只看楼名",
+        "去 Med School、SOM 和 Science Hill 的体感差异很大，不能只看楼名",
         "家具不是默认包含，家具合作方只能降低准备成本"
       ],
       verify: [
@@ -1031,7 +1031,7 @@ const APARTMENT_TRANSLATIONS = {
       tradeoffs: [
         "官方空房页没有在静态文本里列出准确租金，需要人工刷新或询问租赁办公室",
         "是否带家具没有被验证，不能直接当作少折腾选项推荐",
-        "去管理学院或科学山不一定最顺，需要按课表或实验室路线计算"
+        "去 SOM 或 Science Hill 不一定最顺，需要按课表或实验室路线计算"
       ],
       verify: [
         "具体房源租金和优惠条件",
@@ -1129,10 +1129,10 @@ const APARTMENT_TRANSLATIONS = {
       flooring: "需按具体房源确认",
       furnishing: "是否带家具尚未核实",
       confidenceLabel: "部分可信",
-      dailyLabel: "更适合 Science Park / 科学山作息",
+      dailyLabel: "更适合 Science Park / Science Hill 作息",
       sourceLabel: "官方户型页已于 2026-06-29 刷新；水电网和学生政策仍需确认",
       bestFor: [
-        "主要去工程学院、科学山、管理学院或 Prospect 走廊，想避开市中心核心区的学生",
+        "主要去 SEAS、Science Hill、SOM 或 Prospect 走廊，想避开市中心核心区的学生",
         "想用较低单间起租价或室友/联排户型控制成本的学生",
         "日常更看重楼内秩序和安静感，而不是市中心夜生活的学生"
       ],
@@ -1240,7 +1240,7 @@ const APARTMENT_TRANSLATIONS = {
       tradeoffs: [
         "当前页面不提供稳定静态租金表，价格需要刷新空房",
         "配套多，真实月成本可能被水电网、停车和费用拉高",
-        "去管理学院或科学山不一定是最顺通勤"
+        "去 SOM 或 Science Hill 不一定是最顺通勤"
       ],
       verify: [
         "当前租金和入住时间",
