@@ -150,9 +150,10 @@ h1 {
 
 .workspace {
   display: grid;
-  grid-template-columns: minmax(330px, 440px) minmax(0, 1fr);
   gap: 18px;
   align-items: start;
+  max-width: 1080px;
+  margin: 0 auto;
 }
 
 .panel {
@@ -164,12 +165,21 @@ h1 {
 
 .form-panel {
   padding: 18px;
-  position: sticky;
-  top: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 16px;
+}
+
+.form-panel .panel-heading,
+.form-panel fieldset:first-of-type,
+.form-panel fieldset:nth-of-type(2),
+.form-panel fieldset:nth-of-type(5),
+.form-panel .primary-action {
+  grid-column: 1 / -1;
 }
 
 .results-panel {
-  min-height: 640px;
+  min-height: 0;
   padding: 18px;
 }
 
@@ -226,8 +236,8 @@ legend {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.budget-grid label:last-child {
-  grid-column: 1 / -1;
+.segmented.budget-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .option-grid {
@@ -626,7 +636,15 @@ button:focus-visible {
   }
 
   .form-panel {
-    position: static;
+    grid-template-columns: 1fr;
+  }
+
+  .segmented.budget-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .budget-grid label:last-child {
+    grid-column: 1 / -1;
   }
 
   .criteria-grid {

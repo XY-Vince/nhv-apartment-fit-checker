@@ -10,6 +10,4 @@ fee_sheet_field_tracker_2026-07-01.csv,fee_sheet_field_level,50,Field-level offi
 fee_sheet_field_tracker_marketplace_candidates_2026-07-02.csv,fee_sheet_field_level,49,Field-level official fee tracker for marketplace candidate batch,field-by-field fee evidence summary,yes
 public_info_signals_2026-06-30.csv,public_signals,18,Public records and local-source signals,verification triggers only,yes
 reddit_public_signals_2026-06-30.csv,public_signals,30,"Reddit permalinks, paraphrases, and verification triggers","Tier 3 social signal, not hard fact",yes
-rednote_apartment_mentions_tracker.csv,social_heat,20,Apartment-level RedNote mention aggregation,social heat and themes,yes
-rednote_mentions_raw.csv,social_heat_raw,926,Raw visible RedNote card extraction before aggregation,raw audit trail,yes
 public_info_signal_tracker_template.csv,template,5,Blank tracker template for future public signals,template only,yes

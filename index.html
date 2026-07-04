@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="纽黑文 / Yale 公寓匹配器：根据预算、常去区域、水电网、楼内配套、家具、申请难度和日常便利度，找出 2-3 个更适合你的选项。">
+    <meta name="description" content="纽黑文 / Yale 公寓匹配器：根据预算、常去区域、水电网、家具配置、申请难度和日常便利度，找出 2-3 个更适合你的选项。">
     <title>纽黑文公寓匹配器 | 先问需求，再看公寓</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20260703-natural-cn-2">
+    <link rel="stylesheet" href="styles.css?v=20260703-review-fixes-1">
   </head>
   <body>
     <main class="app-shell">
@@ -16,7 +16,7 @@
             <p class="eyebrow">纽黑文 / Yale 租房决策工具</p>
             <nav class="language-switch" aria-label="Language">
               <span>中文</span>
-              <a href="en.html?v=20260703-natural-cn-2">English</a>
+              <a href="en.html?v=20260703-review-fixes-1">English</a>
             </nav>
           </div>
           <h1 id="page-title">先问需求，再看公寓。</h1>
@@ -37,7 +37,7 @@
         <form id="fit-form" class="panel form-panel">
           <div class="panel-heading">
             <h2>你的真实需求</h2>
-            <p>少问一点，但每一题都影响推荐。</p>
+            <p>5 个核心问题；楼内配套、路线和周边服务合并在最后一题。</p>
           </div>
 
           <fieldset>
@@ -83,32 +83,18 @@
           </fieldset>
 
           <fieldset>
-            <legend>5. 楼内配套里最重要的是？</legend>
+            <legend>5. 除了预算和位置，你还最在意什么？最多选 3 个。</legend>
             <div class="option-grid">
-              <label><input type="radio" name="amenity" value="basic" checked><span>够用就行，不想为配套多花太多</span></label>
-              <label><input type="radio" name="amenity" value="package"><span>收包裹 / 前台 / 维修方便</span></label>
-              <label><input type="radio" name="amenity" value="gym_pool"><span>健身房 / 泳池 / 公共休息区</span></label>
-              <label><input type="radio" name="amenity" value="parking"><span>停车 / 充电 / 对开车友好</span></label>
-            </div>
-          </fieldset>
-
-          <fieldset>
-            <legend>6. 你现在最大的担心是什么？最多选 2 个。</legend>
-            <div class="option-grid">
-              <label><input type="checkbox" name="worry" value="application" checked><span>申请门槛和材料</span></label>
-              <label><input type="checkbox" name="worry" value="true_cost" checked><span>每月总成本 / 入住前现金</span></label>
-              <label><input type="checkbox" name="worry" value="trust"><span>信息靠不靠谱 / 楼本身情况</span></label>
-              <label><input type="checkbox" name="worry" value="roommate"><span>合租 / 分摊成本</span></label>
-            </div>
-          </fieldset>
-
-          <fieldset>
-            <legend>7. 你平时的生活便利和日常安心感，更看重哪个方面？</legend>
-            <div class="option-grid">
-              <label><input type="radio" name="daily" value="building_access" checked><span>门禁、收快递、报修方便</span></label>
-              <label><input type="radio" name="daily" value="late_route"><span>晚上回家的路线和交通</span></label>
-              <label><input type="radio" name="daily" value="food_store"><span>吃饭、买菜、药店方便</span></label>
-              <label><input type="radio" name="daily" value="quiet_routine"><span>住得安静，不受夜生活打扰</span></label>
+              <label><input type="checkbox" name="priority" value="application" checked><span>申请门槛和材料</span></label>
+              <label><input type="checkbox" name="priority" value="true_cost" checked><span>每月总成本 / 入住前现金</span></label>
+              <label><input type="checkbox" name="priority" value="package"><span>门禁、收包裹、维修方便</span></label>
+              <label><input type="checkbox" name="priority" value="gym_pool"><span>健身房 / 泳池 / 公共休息区</span></label>
+              <label><input type="checkbox" name="priority" value="parking"><span>停车 / 充电 / 对开车友好</span></label>
+              <label><input type="checkbox" name="priority" value="late_route"><span>晚上回家的路线和交通</span></label>
+              <label><input type="checkbox" name="priority" value="food_store"><span>吃饭、买菜、药店方便</span></label>
+              <label><input type="checkbox" name="priority" value="quiet_routine"><span>住得安静，不受夜生活打扰</span></label>
+              <label><input type="checkbox" name="priority" value="roommate"><span>合租 / 分摊成本</span></label>
+              <label><input type="checkbox" name="priority" value="trust"><span>信息核实 / 楼本身情况</span></label>
             </div>
           </fieldset>
 
@@ -165,16 +151,15 @@
           <span>申请门槛</span>
           <span>家具和入住准备</span>
           <span>地板和洗衣配置</span>
-          <span>楼内配套</span>
+          <span>楼内配套和日常便利</span>
           <span>租期和入住时间</span>
           <span>合租适配度</span>
-          <span>日常核实点</span>
-          <span>周边生活服务</span>
-          <span>信息可信度</span>
+          <span>晚间路线和周边服务</span>
+          <span>信息可信度单独展示，不参与匹配分</span>
         </div>
       </section>
     </main>
 
-    <script src="app.js?v=20260703-natural-cn-2"></script>
+    <script src="app.js?v=20260703-review-fixes-1"></script>
   </body>
 </html>

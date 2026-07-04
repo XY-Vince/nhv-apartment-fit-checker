@@ -7,19 +7,14 @@ const SCORE = {
   MISS: 18
 };
 
-const CONFIDENCE_SCORE = {
-  high: 100,
-  partial: 72,
-  stale: 50,
-  low: 38
-};
-
 const UTILITY_PREDICTABILITY_SCORE = {
   predictable: 100,
   mixed: 68,
   variable: 38,
   unknown: 44
 };
+
+const SCORABLE_WORRY_VALUES = new Set(["application", "true_cost", "roommate"]);
 
 const VALUE_SIGNAL_CAVEATS = {
   en: "Approximate $/sqft uses marketplace-listed rent and square footage. The cheapest rent and largest unit may not be the same unit; compare within the same fee mode.",
@@ -191,18 +186,14 @@ const CATEGORY_LABELS_BY_LANG = {
     campus: "Campus fit",
     utilities: "Utilities",
     setup: "Setup",
-    amenity: "Amenities",
-    worry: "Main worry",
-    daily: "Daily life"
+    priority: "Priority fit"
   },
   zh: {
     budget: "预算匹配",
     campus: "位置匹配",
     utilities: "水电网",
     setup: "入住配置",
-    amenity: "楼内配套",
-    worry: "主要担忧",
-    daily: "日常生活"
+    priority: "关注点匹配"
   }
 };
 
@@ -236,6 +227,20 @@ const ANSWER_VALUE_LABELS = {
       late_route: "Late-night routes and transportation",
       food_store: "Restaurants, groceries, and pharmacy",
       quiet_routine: "Quieter routine"
+    },
+    priority: {
+      application: "Application friction",
+      true_cost: "True monthly cost / move-in cash",
+      trust: "Building trust / verification",
+      roommate: "Roommate or split-cost fit",
+      basic: "Basic amenities are enough",
+      package: "Package / front desk / maintenance",
+      gym_pool: "Gym / pool / lounge",
+      parking: "Parking / EV / car-friendly",
+      building_access: "Access, package, and repairs",
+      late_route: "Late-night routes and transportation",
+      food_store: "Restaurants, groceries, and pharmacy",
+      quiet_routine: "Quieter routine"
     }
   },
   zh: {
@@ -259,10 +264,24 @@ const ANSWER_VALUE_LABELS = {
     worry: {
       application: "申请门槛和材料",
       true_cost: "每月总成本 / 入住前现金",
-      trust: "楼宇信任度 / 信息核实",
+      trust: "信息核实 / 楼本身情况",
       roommate: "合租 / 分摊成本"
     },
     daily: {
+      building_access: "门禁、收包裹和报修",
+      late_route: "晚间路线和交通",
+      food_store: "餐馆、买菜和药店",
+      quiet_routine: "更安静的日常"
+    },
+    priority: {
+      application: "申请门槛和材料",
+      true_cost: "每月总成本 / 入住前现金",
+      trust: "信息核实 / 楼本身情况",
+      roommate: "合租 / 分摊成本",
+      basic: "配套够用就行",
+      package: "收包裹 / 前台 / 维修",
+      gym_pool: "健身房 / 泳池 / 公共休息区",
+      parking: "停车 / 充电 / 对开车友好",
       building_access: "门禁、收包裹和报修",
       late_route: "晚间路线和交通",
       food_store: "餐馆、买菜和药店",
@@ -798,7 +817,7 @@ const APARTMENTS = [
   },
   {
     id: "the-elm",
-    name: "The Elm / Apartments at Yale",
+    name: "The Elm",
     area: "Central campus edge",
     price: {
       min: 2000,
@@ -824,7 +843,7 @@ const APARTMENTS = [
     confidence: "low",
     confidenceLabel: "Needs source refresh",
     dailyLabel: "Campus-adjacent routine",
-    sourceLabel: "Seed profile only; official source pending",
+    sourceLabel: "Seed profile only; official source pending; no Yale affiliation implied",
     bestFor: [
       "Central Campus / Law / Humanities / Art / Music 附近活动很多，campus proximity 是第一优先级的学生",
       "可以接受 older-building trade-offs，用短 commute 换 daily routine 的学生",
@@ -1485,9 +1504,7 @@ const WEIGHTS = {
   campus: 1.5,
   utilities: 1,
   setup: 0.95,
-  amenity: 0.75,
-  worry: 1.15,
-  daily: 0.95
+  priority: 1.35
 };
 
 function activeLang() {
@@ -1559,9 +1576,7 @@ function getFormValues(form) {
     campus: data.get("campus"),
     utilities: data.get("utilities"),
     setup: getSelectedValues(form, "setup"),
-    amenity: data.get("amenity"),
-    worry: getSelectedValues(form, "worry"),
-    daily: data.get("daily")
+    priority: getSelectedValues(form, "priority")
   };
 }
 
@@ -1617,21 +1632,24 @@ function scoreAmenity(apartment, preference) {
 function scoreTrueCostConcern(apartment) {
   const predictability = UTILITY_PREDICTABILITY_SCORE[apartment.utilities] || SCORE.LOW;
   const price = apartment.price.min < 1200 ? SCORE.FULL : apartment.price.min < 1800 ? SCORE.HIGH : apartment.price.min < 2400 ? SCORE.MID : SCORE.LOW;
-  // Keep this score about cost exposure only; source confidence is shown separately and scored under trust.
+  // Keep this score about cost exposure only; source confidence is shown separately.
   return Math.round((predictability + price) / 2);
 }
 
 function scoreSingleWorry(apartment, preference) {
   if (preference === "application") return Math.max(20, 100 - apartment.applicationFriction * 16);
   if (preference === "roommate") return apartment.roommateFit * 20;
-  if (preference === "trust") return CONFIDENCE_SCORE[apartment.confidence] || SCORE.LOW;
+  if (preference === "trust") return null;
   if (preference === "true_cost") return scoreTrueCostConcern(apartment);
   return SCORE.MID;
 }
 
 function scoreWorry(apartment, preferences) {
   const selected = preferences.length ? preferences : ["application"];
-  const scores = selected.map(preference => scoreSingleWorry(apartment, preference));
+  const scores = selected
+    .map(preference => scoreSingleWorry(apartment, preference))
+    .filter(Number.isFinite);
+  if (!scores.length) return SCORE.MID;
   return Math.round(scores.reduce((sum, score) => sum + score, 0) / scores.length);
 }
 
@@ -1644,15 +1662,30 @@ function scoreDaily(apartment, preference) {
   return SCORE.LOW;
 }
 
+function scoreSinglePriority(apartment, preference) {
+  if (SCORABLE_WORRY_VALUES.has(preference)) return scoreSingleWorry(apartment, preference);
+  if (preference === "trust") return null;
+  if (["basic", "package", "gym_pool", "parking"].includes(preference)) return scoreAmenity(apartment, preference);
+  if (["building_access", "late_route", "food_store", "quiet_routine"].includes(preference)) return scoreDaily(apartment, preference);
+  return SCORE.MID;
+}
+
+function scorePriority(apartment, priorities) {
+  const selected = priorities.length ? priorities : ["application", "true_cost"];
+  const scores = selected
+    .map(preference => scoreSinglePriority(apartment, preference))
+    .filter(Number.isFinite);
+  if (!scores.length) return SCORE.MID;
+  return Math.round(scores.reduce((sum, score) => sum + score, 0) / scores.length);
+}
+
 function scoreApartment(apartment, answers) {
   const breakdown = {
     budget: scoreBudget(apartment, answers.budget),
     campus: scoreCampus(apartment, answers.campus),
     utilities: scoreUtilities(apartment, answers.utilities),
     setup: scoreSetup(apartment, answers.setup),
-    amenity: scoreAmenity(apartment, answers.amenity),
-    worry: scoreWorry(apartment, answers.worry),
-    daily: scoreDaily(apartment, answers.daily)
+    priority: scorePriority(apartment, answers.priority || [])
   };
   const weightedTotal = Object.entries(breakdown).reduce((sum, [key, score]) => {
     return sum + score * WEIGHTS[key];
@@ -1667,13 +1700,14 @@ function scoreApartment(apartment, answers) {
 
 function compareResults(a, b) {
   const scoreDiff = b.score - a.score;
-  // Fit score stays primary. Exact ties use source confidence as a stable
-  // ordering hint without making the displayed scores look out of order.
-  if (scoreDiff === 0) {
-    const confidenceDiff = (CONFIDENCE_SCORE[b.apartment.confidence] || 0) - (CONFIDENCE_SCORE[a.apartment.confidence] || 0);
-    if (confidenceDiff !== 0) return confidenceDiff;
-  }
-  return scoreDiff;
+  if (scoreDiff !== 0) return scoreDiff;
+  const budgetDiff = b.breakdown.budget - a.breakdown.budget;
+  if (budgetDiff !== 0) return budgetDiff;
+  const campusDiff = b.breakdown.campus - a.breakdown.campus;
+  if (campusDiff !== 0) return campusDiff;
+  const priceDiff = a.apartment.price.min - b.apartment.price.min;
+  if (priceDiff !== 0) return priceDiff;
+  return a.apartment.name.localeCompare(b.apartment.name);
 }
 
 function topReasons(result, lang = activeLang()) {
@@ -1779,34 +1813,28 @@ function topResultNames(results, lang = activeLang()) {
 function formatAnswersForShare(answers, lang = activeLang()) {
   if (!answers) return lang === "zh" ? "还没有记录问卷答案。" : "No questionnaire answers captured yet.";
   const setup = answers.setup.map(value => answerValueLabel("setup", value, lang)).join(", ") || ui("none", lang);
-  const worries = answers.worry.map(value => answerValueLabel("worry", value, lang)).join(", ") || ui("none", lang);
+  const priorities = (answers.priority || []).map(value => answerValueLabel("priority", value, lang)).join(", ") || ui("none", lang);
   const labels = lang === "zh"
     ? {
       budget: "预算",
       campus: "校区",
       utilities: "水电网",
       setup: "房间配置",
-      amenity: "楼内配套",
-      worries: "主要担忧",
-      daily: "日常生活"
+      priorities: "其他关注点"
     }
     : {
       budget: "Budget",
       campus: "Campus",
       utilities: "Utilities",
       setup: "Setup",
-      amenity: "Amenities",
-      worries: "Worries",
-      daily: "Daily life"
+      priorities: "Other priorities"
     };
   return [
     `${labels.budget}: ${budgetLabel(answers.budget)}`,
     `${labels.campus}: ${campusLabel(answers.campus, lang)}`,
     `${labels.utilities}: ${answerValueLabel("utilities", answers.utilities, lang)}`,
     `${labels.setup}: ${setup}`,
-    `${labels.amenity}: ${answerValueLabel("amenity", answers.amenity, lang)}`,
-    `${labels.worries}: ${worries}`,
-    `${labels.daily}: ${answerValueLabel("daily", answers.daily, lang)}`
+    `${labels.priorities}: ${priorities}`
   ].join("\n");
 }
 
@@ -2002,13 +2030,13 @@ function init() {
   const reset = document.getElementById("reset-button");
   const copyFeedback = document.getElementById("copy-feedback");
   enforceMaxSelections(form, "setup", 2);
-  enforceMaxSelections(form, "worry", 2);
+  enforceMaxSelections(form, "priority", 3);
   form.addEventListener("submit", event => {
     event.preventDefault();
     runMatch(form);
   });
   form.addEventListener("change", event => {
-    if (event.target.name !== "setup" && event.target.name !== "worry") runMatch(form);
+    if (event.target.name !== "setup" && event.target.name !== "priority") runMatch(form);
   });
   reset.addEventListener("click", () => resetForm(form));
   copyFeedback.addEventListener("click", () => copyText(feedbackText(), "feedback-status"));
@@ -2035,6 +2063,7 @@ if (typeof module !== "undefined") {
     scoreAmenity,
     scoreWorry,
     scoreDaily,
+    scorePriority,
     compareResults,
     budgetLabel,
     isOutOfScope,
