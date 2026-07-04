@@ -31,6 +31,13 @@ const BUDGET_LABELS = {
   4000: "$3,000+"
 };
 
+const BUDGET_BANDS = {
+  1900: { lower: 1600, upper: 1900 },
+  2300: { lower: 1900, upper: 2300 },
+  3000: { lower: 2300, upper: 3000 },
+  4000: { lower: 3000, upper: 4200 }
+};
+
 const CAMPUS_LABELS = {
   central_campus: "Central Campus",
   med_school: "Med School / YNHH",
@@ -95,7 +102,6 @@ const UI_TEXT = {
     tags: {
       exploration: "Exploration direction",
       concession: "Concession not in budget score",
-      sponsored: "No sponsored ranking",
       rent: "Verify current rent"
     },
     confidenceExploration: "This is an exploration direction, not a specific apartment recommendation. First identify a specific unit, then verify rent, fees, utilities, and lease terms.",
@@ -159,7 +165,6 @@ const UI_TEXT = {
     tags: {
       exploration: "探索方向",
       concession: "优惠未计入预算",
-      sponsored: "非赞助排序",
       rent: "租金要再确认"
     },
     confidenceExploration: "这是一个方向，不是具体公寓推荐。先锁定具体房源，再确认租金、费用、水电网和 lease 条款。",
@@ -194,6 +199,35 @@ const CATEGORY_LABELS_BY_LANG = {
     utilities: "水电网",
     setup: "入住配置",
     priority: "关注点匹配"
+  }
+};
+
+const PRIORITY_REASON_LABELS = {
+  en: {
+    application: "Application fit",
+    true_cost: "True-cost fit",
+    roommate: "Roommate fit",
+    basic: "Basic-amenity fit",
+    package: "Building-service fit",
+    gym_pool: "Amenity fit",
+    parking: "Parking fit",
+    building_access: "Building-access fit",
+    late_route: "Route fit",
+    food_store: "Local-service fit",
+    quiet_routine: "Quiet fit"
+  },
+  zh: {
+    application: "申请门槛匹配",
+    true_cost: "真实成本匹配",
+    roommate: "合租匹配",
+    basic: "基础配套匹配",
+    package: "楼内服务匹配",
+    gym_pool: "配套匹配",
+    parking: "停车匹配",
+    building_access: "门禁/报修匹配",
+    late_route: "晚间路线匹配",
+    food_store: "生活便利匹配",
+    quiet_routine: "安静匹配"
   }
 };
 
@@ -240,7 +274,7 @@ const ANSWER_VALUE_LABELS = {
       building_access: "Access, package, and repairs",
       late_route: "Late-night routes and transportation",
       food_store: "Restaurants, groceries, and pharmacy",
-      quiet_routine: "Quieter routine"
+      quiet_routine: "Street noise / quieter routine"
     }
   },
   zh: {
@@ -285,7 +319,7 @@ const ANSWER_VALUE_LABELS = {
       building_access: "门禁、收包裹和报修",
       late_route: "晚间路线和交通",
       food_store: "餐馆、买菜和药店",
-      quiet_routine: "更安静的日常"
+      quiet_routine: "街道噪音 / 安静"
     }
   }
 };
@@ -318,6 +352,7 @@ const APARTMENTS = [
     setupTags: ["furniture_ready", "laundry", "private_space"],
     amenityTags: ["package", "gym_pool", "parking"],
     dailyTags: ["building_access", "food_store", "late_route"],
+    quietScore: 35,
     flooring: "needs exact-unit verification",
     furnishing: "Unfurnished base; CORT furniture partner",
     applicationFriction: 4,
@@ -366,6 +401,7 @@ const APARTMENTS = [
     setupTags: ["laundry", "private_space"],
     amenityTags: ["package", "gym_pool", "parking"],
     dailyTags: ["building_access", "food_store"],
+    quietScore: 62,
     flooring: "needs exact-unit verification",
     furnishing: "Furnished status not verified",
     applicationFriction: 4,
@@ -414,6 +450,7 @@ const APARTMENTS = [
     setupTags: ["furniture_ready", "private_space"],
     amenityTags: ["package", "gym_pool"],
     dailyTags: ["building_access", "food_store", "late_route"],
+    quietScore: 42,
     flooring: "needs exact-unit verification",
     furnishing: "CORT / corporate furnished option visible; not verified as normal furnished-included",
     applicationFriction: 4,
@@ -462,6 +499,7 @@ const APARTMENTS = [
     setupTags: ["private_space"],
     amenityTags: ["package"],
     dailyTags: ["building_access", "food_store", "late_route"],
+    quietScore: 48,
     flooring: "needs exact-unit verification",
     furnishing: "Furnished status not verified",
     applicationFriction: 4,
@@ -510,6 +548,7 @@ const APARTMENTS = [
     setupTags: ["private_space"],
     amenityTags: ["package", "gym_pool"],
     dailyTags: ["building_access", "food_store", "late_route"],
+    quietScore: 50,
     flooring: "needs exact-unit verification",
     furnishing: "Furnished status not verified",
     applicationFriction: 4,
@@ -558,6 +597,7 @@ const APARTMENTS = [
     setupTags: ["private_space"],
     amenityTags: ["package", "gym_pool"],
     dailyTags: ["building_access", "quiet_routine"],
+    quietScore: 85,
     flooring: "needs exact-unit verification",
     furnishing: "Furnished status not verified",
     applicationFriction: 4,
@@ -605,6 +645,7 @@ const APARTMENTS = [
     setupTags: ["private_space"],
     amenityTags: ["package", "parking"],
     dailyTags: ["building_access", "food_store", "late_route"],
+    quietScore: 62,
     flooring: "needs exact-unit verification",
     furnishing: "Furnished status not verified",
     applicationFriction: 4,
@@ -651,6 +692,7 @@ const APARTMENTS = [
     setupTags: ["private_space"],
     amenityTags: ["package", "gym_pool", "parking"],
     dailyTags: ["building_access", "food_store", "late_route"],
+    quietScore: 45,
     flooring: "needs building/exact-unit verification",
     furnishing: "Furnished status not verified",
     applicationFriction: 3,
@@ -697,6 +739,7 @@ const APARTMENTS = [
     setupTags: ["private_space"],
     amenityTags: ["package"],
     dailyTags: ["building_access", "food_store", "late_route"],
+    quietScore: 75,
     flooring: "needs exact-unit verification",
     furnishing: "Short-term stays may include furniture/utilities; normal lease furnishing not verified",
     applicationFriction: 4,
@@ -743,6 +786,7 @@ const APARTMENTS = [
     setupTags: ["furniture_ready", "laundry", "private_space", "wood_floor"],
     amenityTags: ["package", "gym_pool", "parking"],
     dailyTags: ["building_access", "food_store", "late_route"],
+    quietScore: 58,
     flooring: "wide plank flooring listed; verify exact unit",
     furnishing: "Unfurnished base; CORT furnished solutions partner",
     applicationFriction: 4,
@@ -790,6 +834,7 @@ const APARTMENTS = [
     setupTags: ["private_space"],
     amenityTags: ["gym_pool", "parking"],
     dailyTags: ["food_store", "late_route"],
+    quietScore: 65,
     flooring: "needs verification",
     furnishing: "Furnished status not verified",
     applicationFriction: 4,
@@ -836,6 +881,7 @@ const APARTMENTS = [
     setupTags: ["private_space"],
     amenityTags: ["package"],
     dailyTags: ["food_store", "late_route"],
+    quietScore: 48,
     flooring: "needs verification",
     furnishing: "Furnished status not verified",
     applicationFriction: 3,
@@ -882,6 +928,7 @@ const APARTMENTS = [
     setupTags: ["laundry", "private_space"],
     amenityTags: ["package", "gym_pool", "parking"],
     dailyTags: ["building_access", "quiet_routine"],
+    quietScore: 74,
     flooring: "needs verification",
     furnishing: "Furnished status not verified",
     applicationFriction: 4,
@@ -929,6 +976,7 @@ const APARTMENTS = [
     setupTags: ["wood_floor"],
     amenityTags: ["basic"],
     dailyTags: ["quiet_routine"],
+    quietScore: 82,
     flooring: "wood floors more common, verify unit",
     furnishing: "Usually unfurnished unless listing says otherwise",
     applicationFriction: 3,
@@ -976,6 +1024,7 @@ const APARTMENTS = [
     setupTags: ["private_space"],
     amenityTags: ["parking", "basic"],
     dailyTags: ["quiet_routine", "building_access"],
+    quietScore: 78,
     flooring: "needs verification",
     furnishing: "Usually unfurnished unless listing says otherwise",
     applicationFriction: 4,
@@ -1524,6 +1573,11 @@ function categoryLabel(key, lang = activeLang()) {
   return (CATEGORY_LABELS_BY_LANG[lang] || CATEGORY_LABELS_BY_LANG.en)[key] || key;
 }
 
+function priorityReasonLabel(key, lang = activeLang()) {
+  const labels = PRIORITY_REASON_LABELS[lang] || PRIORITY_REASON_LABELS.en;
+  return labels[key] || categoryLabel("priority", lang);
+}
+
 function answerValueLabel(group, value, lang = activeLang()) {
   const labels = (ANSWER_VALUE_LABELS[lang] || ANSWER_VALUE_LABELS.en)[group] || {};
   return labels[value] || value || ui("notSpecified", lang);
@@ -1581,12 +1635,48 @@ function getFormValues(form) {
 }
 
 function scoreBudget(apartment, maxBudget) {
-  // Budget uses advertised/current starting rent only. Concessions are shown
-  // separately because eligibility, lease length, and move-in timing vary.
-  if (apartment.price.min <= maxBudget) return SCORE.FULL;
-  // +250 = stretch budget; +500 = significant overspend but still worth surfacing.
-  if (apartment.price.min <= maxBudget + 250) return SCORE.HIGH;
-  if (apartment.price.min <= maxBudget + 500) return SCORE.LOW;
+  // Budget is a band fit, not just "does the cheapest unit fit".
+  // Concessions stay outside the score because eligibility and lease terms vary.
+  const minRent = apartment.price.min;
+  const band = BUDGET_BANDS[maxBudget];
+  if (!band) {
+    if (minRent <= maxBudget) return SCORE.FULL;
+    if (minRent <= maxBudget + 250) return SCORE.HIGH;
+    if (minRent <= maxBudget + 500) return SCORE.LOW;
+    return SCORE.MISS;
+  }
+
+  if (maxBudget === 1900) {
+    if (minRent <= band.upper) return minRent < band.lower ? SCORE.VERY_HIGH : SCORE.FULL;
+    if (minRent <= band.upper + 250) return SCORE.HIGH;
+    if (minRent <= band.upper + 500) return SCORE.LOW;
+    return SCORE.MISS;
+  }
+
+  if (maxBudget === 2300) {
+    if (minRent >= 1850 && minRent <= band.upper) return SCORE.FULL;
+    if (minRent < 1850 && minRent >= 1600) return SCORE.HIGH;
+    if (minRent <= band.upper + 250) return SCORE.HIGH;
+    if (minRent <= band.upper + 500) return SCORE.LOW;
+    return SCORE.MISS;
+  }
+
+  if (maxBudget === 3000) {
+    if (minRent >= 2000 && minRent <= band.upper) return SCORE.FULL;
+    if (minRent >= 1850 && minRent < 2000) return SCORE.VERY_HIGH;
+    if (minRent >= 1600 && minRent < 1850) return SCORE.MID;
+    if (minRent <= band.upper + 300) return SCORE.HIGH;
+    return SCORE.LOW;
+  }
+
+  if (maxBudget === 4000) {
+    if (minRent >= 2200 && minRent <= band.upper) return SCORE.FULL;
+    if (minRent >= 1850 && minRent < 2200) return SCORE.HIGH;
+    if (minRent >= 1600 && minRent < 1850) return SCORE.MID;
+    if (minRent <= band.upper + 500) return SCORE.HIGH;
+    return SCORE.LOW;
+  }
+
   return SCORE.MISS;
 }
 
@@ -1654,11 +1744,11 @@ function scoreWorry(apartment, preferences) {
 }
 
 function scoreDaily(apartment, preference) {
+  if (preference === "quiet_routine") return apartment.quietScore || SCORE.LOW;
   if (apartment.dailyTags.includes(preference)) return SCORE.FULL;
   if (preference === "building_access" && apartment.amenityTags.includes("package")) return SCORE.HIGH;
   if (preference === "food_store" && apartment.campusScores.downtown_station >= 4) return SCORE.HIGH;
   if (preference === "late_route" && Math.max(apartment.campusScores.central_campus, apartment.campusScores.med_school) >= 4) return SCORE.HIGH;
-  if (preference === "quiet_routine" && apartment.dailyTags.includes("quiet_routine")) return SCORE.VERY_HIGH;
   return SCORE.LOW;
 }
 
@@ -1698,9 +1788,13 @@ function scoreApartment(apartment, answers) {
   };
 }
 
-function compareResults(a, b) {
+function compareResults(a, b, answers = null) {
   const scoreDiff = b.score - a.score;
   if (scoreDiff !== 0) return scoreDiff;
+  if ((answers?.priority || []).length) {
+    const priorityDiff = b.breakdown.priority - a.breakdown.priority;
+    if (priorityDiff !== 0) return priorityDiff;
+  }
   const budgetDiff = b.breakdown.budget - a.breakdown.budget;
   if (budgetDiff !== 0) return budgetDiff;
   const campusDiff = b.breakdown.campus - a.breakdown.campus;
@@ -1710,11 +1804,32 @@ function compareResults(a, b) {
   return a.apartment.name.localeCompare(b.apartment.name);
 }
 
-function topReasons(result, lang = activeLang()) {
-  return Object.entries(result.breakdown)
+function topReasons(result, lang = activeLang(), answers = null) {
+  const reasons = [];
+  const add = label => {
+    if (label && !reasons.includes(label)) reasons.push(label);
+  };
+
+  const selectedPriorities = answers?.priority || [];
+  const priorityScores = selectedPriorities
+    .map(preference => ({
+      preference,
+      score: scoreSinglePriority(result.apartment, preference)
+    }))
+    .filter(item => Number.isFinite(item.score) && item.score >= SCORE.MID)
+    .sort((a, b) => b.score - a.score);
+
+  if (priorityScores.length) add(priorityReasonLabel(priorityScores[0].preference, lang));
+  if (answers?.campus && answers.campus !== "balanced" && result.breakdown.campus >= 80) add(categoryLabel("campus", lang));
+  if (result.breakdown.budget >= SCORE.HIGH) add(categoryLabel("budget", lang));
+  if (answers?.utilities && result.breakdown.utilities >= SCORE.HIGH) add(categoryLabel("utilities", lang));
+  if ((answers?.setup || []).length && result.breakdown.setup >= SCORE.HIGH) add(categoryLabel("setup", lang));
+
+  Object.entries(result.breakdown)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 2)
-    .map(([key]) => categoryLabel(key, lang));
+    .forEach(([key]) => add(categoryLabel(key, lang)));
+
+  return reasons.slice(0, 2);
 }
 
 function confidenceClass(confidence) {
@@ -1916,7 +2031,7 @@ function renderResults(results, answers) {
   list.innerHTML = top.map((result, index) => {
     const apartment = result.apartment;
     const copy = apartmentCopy(apartment, lang);
-    const reasons = topReasons(result, lang).map(escapeHtml);
+    const reasons = topReasons(result, lang, answers).map(escapeHtml);
     const rankLabel = apartment.isExploration
       ? `#${index + 1} ${ui("exploreDirection", lang)}`
       : `#${index + 1} ${ui("match", lang)}`;
@@ -1942,15 +2057,29 @@ function renderResults(results, answers) {
 
         <div class="facts">
           <div class="fact"><strong>${escapeHtml(ui("facts", lang).cost)}</strong><span>${escapeHtml(copy.priceLabel)}</span></div>
-          ${copy.valueSignal ? `<div class="fact value-fact"><strong>${escapeHtml(ui("facts", lang).value)}</strong><span>${escapeHtml(copy.valueSignal)}</span></div>` : ""}
-          ${copy.concession ? `<div class="fact concession-fact"><strong>${escapeHtml(ui("facts", lang).concession)}</strong><span>${escapeHtml(copy.concession)}</span></div>` : ""}
           <div class="fact"><strong>${escapeHtml(ui("facts", lang).utilities)}</strong><span>${escapeHtml(utilityLabel(apartment.utilities, lang))}</span></div>
           <div class="fact"><strong>${escapeHtml(ui("facts", lang).furnishing)}</strong><span>${escapeHtml(copy.furnishing)}</span></div>
           <div class="fact"><strong>${escapeHtml(ui("facts", lang).flooring)}</strong><span>${escapeHtml(copy.flooring)}</span></div>
           <div class="fact"><strong>${escapeHtml(ui("facts", lang).daily)}</strong><span>${escapeHtml(copy.dailyLabel)}</span></div>
           <div class="fact"><strong>${escapeHtml(ui("facts", lang).source)}</strong><span>${escapeHtml(copy.sourceLabel)}</span></div>
         </div>
-        ${copy.valueSignal ? `<div class="value-caveat">${escapeHtml(VALUE_SIGNAL_CAVEATS[lang] || VALUE_SIGNAL_CAVEATS.en)}</div>` : ""}
+        ${copy.valueSignal || copy.concession ? `
+          <div class="card-callouts">
+            ${copy.valueSignal ? `
+              <div class="card-callout value-callout">
+                <strong>${escapeHtml(ui("facts", lang).value)}</strong>
+                <span>${escapeHtml(copy.valueSignal)}</span>
+              </div>
+              <div class="value-caveat">${escapeHtml(VALUE_SIGNAL_CAVEATS[lang] || VALUE_SIGNAL_CAVEATS.en)}</div>
+            ` : ""}
+            ${copy.concession ? `
+              <div class="card-callout concession-callout">
+                <strong>${escapeHtml(ui("facts", lang).concession)}</strong>
+                <span>${escapeHtml(copy.concession)}</span>
+              </div>
+            ` : ""}
+          </div>
+        ` : ""}
 
         <div class="reason-grid">
           <div class="reason-box">
@@ -1973,7 +2102,6 @@ function renderResults(results, answers) {
           <span class="tag ${confidenceClass(apartment.confidence)}">${escapeHtml(copy.confidenceLabel)}</span>
           ${apartment.isExploration ? `<span class="tag low">${escapeHtml(ui("tags", lang).exploration)}</span>` : ""}
           ${copy.concession ? `<span class="tag warn">${escapeHtml(ui("tags", lang).concession)}</span>` : ""}
-          <span class="tag">${escapeHtml(ui("tags", lang).sponsored)}</span>
           <span class="tag warn">${escapeHtml(ui("tags", lang).rent)}</span>
         </div>
       </article>
@@ -2000,7 +2128,7 @@ function rankApartments(answers) {
   return APARTMENTS
     .filter(isRankableApartment)
     .map(apartment => scoreApartment(apartment, answers))
-    .sort(compareResults);
+    .sort((a, b) => compareResults(a, b, answers));
 }
 
 function runMatch(form) {
@@ -2072,6 +2200,7 @@ if (typeof module !== "undefined") {
     escapeHtml,
     formatAnswersForShare,
     topResultNames,
+    topReasons,
     campusLabel,
     categoryLabel,
     answerValueLabel,

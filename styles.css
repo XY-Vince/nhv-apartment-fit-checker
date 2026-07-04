@@ -439,7 +439,7 @@ button:focus-visible {
 }
 
 .value-caveat {
-  margin: -2px 0 12px;
+  margin: 0;
   border: 1px solid #b7d7cb;
   border-left: 4px solid var(--brand);
   border-radius: 8px;
@@ -448,6 +448,48 @@ button:focus-visible {
   color: #31584d;
   font-size: 0.82rem;
   font-weight: 680;
+}
+
+.card-callouts {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.card-callout {
+  border: 1px solid #d8e0e6;
+  border-left: 4px solid var(--brand);
+  border-radius: 8px;
+  padding: 9px 11px;
+  background: #f8fbfb;
+}
+
+.card-callout strong,
+.card-callout span {
+  display: block;
+}
+
+.card-callout strong {
+  margin-bottom: 3px;
+  color: var(--brand-dark);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.card-callout span {
+  color: #3f4856;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.concession-callout {
+  border-color: #f0c36d;
+  border-left-color: var(--warn);
+  background: #fff8e8;
+}
+
+.concession-callout strong {
+  color: #6f450b;
 }
 
 .reason-grid {
