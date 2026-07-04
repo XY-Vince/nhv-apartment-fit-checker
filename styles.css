@@ -226,6 +226,15 @@ legend {
   font-weight: 750;
 }
 
+.legend-note {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
 .segmented,
 .option-grid {
   display: grid;
@@ -802,6 +811,18 @@ button:focus-visible {
   color: var(--brand-dark);
   font-size: 0.86rem;
   font-weight: 740;
+}
+
+.site-footer {
+  width: min(1180px, calc(100% - 32px));
+  margin: -18px auto 28px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
 }
 
 @media (max-width: 980px) {

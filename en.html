@@ -6,7 +6,7 @@
     <meta name="description" content="New Haven / Yale apartment fit checker: answer a few questions about budget, campus routine, utilities, setup, application friction, and daily convenience to find 2-3 better-fit options.">
     <title>New Haven Apartment Fit Checker | Needs first, apartments second</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20260704-true-cost-1">
+    <link rel="stylesheet" href="styles.css?v=20260704-feedback-r1-1">
   </head>
   <body>
     <main class="app-shell">
@@ -15,7 +15,7 @@
           <div class="top-line">
             <p class="eyebrow">New Haven / Yale apartment decision support</p>
             <nav class="language-switch" aria-label="Language">
-              <a href="index.html?v=20260704-true-cost-1">中文</a>
+              <a href="index.html?v=20260704-feedback-r1-1">中文</a>
               <span>English</span>
             </nav>
           </div>
@@ -41,7 +41,7 @@
           </div>
 
           <fieldset>
-            <legend>1. What true monthly budget feels comfortable?</legend>
+            <legend>1. What's your comfortable monthly rent budget?<span class="legend-note">Utilities, internet, and other fees are shown separately in results.</span></legend>
             <div class="segmented budget-grid">
               <label><input type="radio" name="budget" value="1400"><span>&lt; $1,600 · Not covered in this version</span></label>
               <label><input type="radio" name="budget" value="1900"><span>$1,600-$1,900</span></label>
@@ -75,10 +75,10 @@
           <fieldset>
             <legend>4. Which unit setup details matter most? Choose up to 2.</legend>
             <div class="option-grid">
-              <label><input type="checkbox" name="setup" value="furniture_ready" checked><span>Furniture option / less setup work</span></label>
               <label><input type="checkbox" name="setup" value="wood_floor"><span>Wood-style floor / avoid carpet if possible</span></label>
               <label><input type="checkbox" name="setup" value="laundry"><span>In-unit laundry</span></label>
-              <label><input type="checkbox" name="setup" value="private_space"><span>Private kitchen or bathroom matters more</span></label>
+              <label><input type="checkbox" name="setup" value="private_space"><span>Not sharing kitchen or bathroom with roommates</span></label>
+              <label><input type="checkbox" name="setup" value="furniture_ready"><span>Less furniture hassle (rental ~$250/mo extra)</span></label>
             </div>
           </fieldset>
 
@@ -94,7 +94,6 @@
               <label><input type="checkbox" name="priority" value="food_store"><span>Restaurants, groceries, and pharmacy access</span></label>
               <label><input type="checkbox" name="priority" value="quiet_routine"><span>Street noise / quieter routine</span></label>
               <label><input type="checkbox" name="priority" value="roommate"><span>Roommate or split-cost fit</span></label>
-              <label><input type="checkbox" name="priority" value="trust"><span>Building trust / verification</span></label>
             </div>
           </fieldset>
 
@@ -159,7 +158,10 @@
         </div>
       </section>
     </main>
+    <footer class="site-footer">
+      <p>© 2026 XY-Vince. Not affiliated with Yale University or any property listed.</p>
+    </footer>
 
-    <script src="app.js?v=20260704-true-cost-1"></script>
+    <script src="app.js?v=20260704-feedback-r1-1"></script>
   </body>
 </html>

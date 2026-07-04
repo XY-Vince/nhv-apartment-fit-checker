@@ -46,7 +46,7 @@ const DEFAULT_COST_ASSUMPTIONS = {
     unknown: 180
   },
   renterInsurance: 15,
-  furnitureMonthly: 150,
+  furnitureMonthly: 250,
   parkingMonthly: 150,
   applicationFee: 50,
   securityDepositMultiplier: 1
@@ -78,7 +78,7 @@ const COST_ITEM_LABELS = {
     recurringFees: "Required monthly building fees",
     utilitiesEstimate: "Utilities / internet estimate",
     insuranceEstimate: "Renters insurance",
-    furnitureAmortized: "Furniture setup if needed",
+    furnitureAmortized: "Furniture rental if needed",
     parkingEstimate: "Parking if selected",
     concessionEstimate: "Estimated concession credit",
     firstMonth: "First month rent",
@@ -90,7 +90,7 @@ const COST_ITEM_LABELS = {
     recurringFees: "固定楼内月费",
     utilitiesEstimate: "水电网估算",
     insuranceEstimate: "租客保险",
-    furnitureAmortized: "需要家具时的月摊成本",
+    furnitureAmortized: "需要家具时的租赁估算",
     parkingEstimate: "选择停车时的估算",
     concessionEstimate: "估算优惠月摊",
     firstMonth: "首月租金",
@@ -334,10 +334,10 @@ const ANSWER_VALUE_LABELS = {
       amenity_tradeoff: "Pay more true cost for stronger amenities"
     },
     setup: {
-      furniture_ready: "Furniture option / less setup work",
+      furniture_ready: "Less furniture hassle (rental ~$250/mo extra)",
       wood_floor: "Wood-style floor / avoid carpet if possible",
       laundry: "In-unit laundry",
-      private_space: "Private kitchen or bathroom matters more"
+      private_space: "Not sharing kitchen or bathroom with roommates"
     },
     amenity: {
       basic: "Basic is enough",
@@ -348,7 +348,6 @@ const ANSWER_VALUE_LABELS = {
     worry: {
       application: "Application friction",
       true_cost: "True monthly cost / move-in cash",
-      trust: "Building trust / verification",
       roommate: "Roommate or split-cost fit"
     },
     daily: {
@@ -360,7 +359,6 @@ const ANSWER_VALUE_LABELS = {
     priority: {
       application: "Application friction",
       true_cost: "True monthly cost / move-in cash",
-      trust: "Building trust / verification",
       roommate: "Roommate or split-cost fit",
       basic: "Basic amenities are enough",
       package: "Package / front desk / maintenance",
@@ -379,10 +377,10 @@ const ANSWER_VALUE_LABELS = {
       amenity_tradeoff: "愿意为楼内配套承担更高真实成本"
     },
     setup: {
-      furniture_ready: "有家具方案 / 少折腾",
+      furniture_ready: "入住尽量少折腾（家具租赁约 $250/月额外）",
       wood_floor: "木地板风格 / 尽量不铺地毯",
       laundry: "房内洗衣机和烘干机",
-      private_space: "独立厨房或卫浴更重要"
+      private_space: "不想和室友共用厨房或卫生间"
     },
     amenity: {
       basic: "够用就行",
@@ -393,7 +391,6 @@ const ANSWER_VALUE_LABELS = {
     worry: {
       application: "申请门槛和材料",
       true_cost: "每月总成本 / 入住前现金",
-      trust: "信息核实 / 楼本身情况",
       roommate: "合租 / 分摊成本"
     },
     daily: {
@@ -405,7 +402,6 @@ const ANSWER_VALUE_LABELS = {
     priority: {
       application: "申请门槛和材料",
       true_cost: "每月总成本 / 入住前现金",
-      trust: "信息核实 / 楼本身情况",
       roommate: "合租 / 分摊成本",
       basic: "配套够用就行",
       package: "收包裹 / 前台 / 维修",
@@ -436,7 +432,7 @@ const APARTMENTS = [
       advertisedRent: 2055,
       utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
       insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
-      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
       parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
       concessionEstimate: { monthsFree: 0, leaseMonths: 12, confidence: "unknown" }
     },
@@ -463,7 +459,7 @@ const APARTMENTS = [
     dailyTags: ["building_access", "food_store", "late_route"],
     quietScore: 35,
     flooring: "needs exact-unit verification",
-    furnishing: "Unfurnished base; CORT furniture partner",
+    furnishing: "Unfurnished base; CORT furniture partner; 1BR rental is about $250/mo on a 12-mo lease",
     applicationFriction: 4,
     roommateFit: 2,
     confidence: "partial",
@@ -500,7 +496,7 @@ const APARTMENTS = [
       advertisedRent: 2400,
       utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
       insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
-      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
       parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
       concessionEstimate: { monthsFree: 2, leaseMonths: 12, confidence: "conditional_offer" }
     },
@@ -564,7 +560,7 @@ const APARTMENTS = [
       recurringFees: { amount: 55, confidence: "verified_public" },
       utilitiesEstimate: { amount: 90, confidence: "planning_assumption" },
       insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
-      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
       parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
       concessionEstimate: { monthsFree: 2, leaseMonths: 12, confidence: "conditional_offer" }
     },
@@ -590,7 +586,7 @@ const APARTMENTS = [
     dailyTags: ["building_access", "food_store", "late_route"],
     quietScore: 42,
     flooring: "needs exact-unit verification",
-    furnishing: "CORT / corporate furnished option visible; not verified as normal furnished-included",
+    furnishing: "CORT / corporate furnished option visible; not furnished-included; 1BR rental is about $250/mo on a 12-mo lease",
     applicationFriction: 4,
     roommateFit: 3,
     confidence: "partial",
@@ -628,7 +624,7 @@ const APARTMENTS = [
       recurringFees: { amount: 6.5, confidence: "sample_lease" },
       utilitiesEstimate: { amount: 90, confidence: "planning_assumption" },
       insuranceEstimate: { amount: 14, confidence: "sample_lease" },
-      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
       parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
       concessionEstimate: { monthsFree: 2, leaseMonths: 12, confidence: "conditional_offer" }
     },
@@ -691,7 +687,7 @@ const APARTMENTS = [
       advertisedRent: 2795,
       utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
       insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
-      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
       parkingEstimate: { amount: 180, confidence: "planning_assumption", appliesWhenPriority: "parking" },
       concessionEstimate: { monthsFree: 2, leaseMonths: 12, confidence: "conditional_offer" }
     },
@@ -755,7 +751,7 @@ const APARTMENTS = [
       recurringFees: { amount: 83.39, confidence: "verified_public" },
       utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
       insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
-      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
       parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
       concessionEstimate: { monthsFree: 2, leaseMonths: 12, confidence: "conditional_offer" }
     },
@@ -818,7 +814,7 @@ const APARTMENTS = [
       advertisedRent: 2250,
       utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
       insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
-      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
       parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
       concessionEstimate: { monthsFree: 1.5, leaseMonths: 12, confidence: "conditional_offer" }
     },
@@ -880,7 +876,7 @@ const APARTMENTS = [
       advertisedRent: 1695,
       utilitiesEstimate: { amount: 75, confidence: "planning_assumption" },
       insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
-      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
       parkingEstimate: { amount: 130, confidence: "verified_public", appliesWhenPriority: "parking" },
       concessionEstimate: { monthsFree: 0, leaseMonths: 12, confidence: "unknown" }
     },
@@ -941,7 +937,7 @@ const APARTMENTS = [
       advertisedRent: 2218,
       utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
       insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
-      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
       parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
       concessionEstimate: { monthsFree: 1, leaseMonths: 12, confidence: "conditional_offer" }
     },
@@ -1002,7 +998,7 @@ const APARTMENTS = [
       advertisedRent: 2400,
       utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
       insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
-      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
       parkingEstimate: { amount: 180, confidence: "planning_assumption", appliesWhenPriority: "parking" },
       concessionEstimate: { monthsFree: 0, leaseMonths: 12, confidence: "unknown" }
     },
@@ -1026,7 +1022,7 @@ const APARTMENTS = [
     dailyTags: ["building_access", "food_store", "late_route"],
     quietScore: 58,
     flooring: "wide plank flooring listed; verify exact unit",
-    furnishing: "Unfurnished base; CORT furnished solutions partner",
+    furnishing: "Unfurnished base; CORT furnished solutions partner; 1BR rental is about $250/mo on a 12-mo lease",
     applicationFriction: 4,
     roommateFit: 3,
     confidence: "partial",
@@ -1063,7 +1059,7 @@ const APARTMENTS = [
       advertisedRent: 2200,
       utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
       insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
-      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
       parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
       concessionEstimate: { monthsFree: 0, leaseMonths: 12, confidence: "unknown" }
     },
@@ -1312,7 +1308,7 @@ const APARTMENT_TRANSLATIONS = {
       concession: "官网显示部分房源最高免 2 个月租金，另有 $500 look-and-lease 优惠；这里先不拿优惠抵预算。",
       valueSignal: "按平台上的租金和面积粗算：Studio S $2,220-$2,345 / 517 sq ft，约 $4.29-$4.54/sq ft。大一点的 2BR 可能每尺更便宜，但总租金和费用会更高。",
       flooring: "需按具体房源确认",
-      furnishing: "普通 lease 默认不带家具；可看 CORT 家具方案",
+      furnishing: "普通 lease 默认不带家具；可看 CORT 家具方案，1BR 约 $250/月（12个月 lease）",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "Downtown 买菜吃饭方便，楼内服务完整",
       sourceLabel: "2026-06-29 查过官网；完整 fee sheet 还要书面确认",
@@ -1366,7 +1362,7 @@ const APARTMENT_TRANSLATIONS = {
       concession: "2026-08-01 或之前入住的 studio / 1BR lease 可免 2 个月租金；这里先不拿优惠抵预算。",
       valueSignal: "按平台上的租金和面积粗算：studio $1,920-$2,115 / 424-524 sq ft，约 $3.66-$4.99/sq ft。studio loft 面积更划算，但还要看具体 unit 状态。",
       flooring: "需按具体房源确认",
-      furnishing: "能看到 CORT / corporate furniture 选项；是否适合普通学生 lease 还要确认",
+      furnishing: "能看到 CORT / corporate furniture 选项；不是默认带家具，1BR 约 $250/月（12个月 lease）",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "Central Campus 和 Downtown 日常都方便",
       sourceLabel: "2026-06-29 查过 Paredim 和 RentCafe；fee sheet 仍不完整",
@@ -1548,7 +1544,7 @@ const APARTMENT_TRANSLATIONS = {
       area: "Wooster Square · 630 Chapel St",
       priceLabel: "官网说明价格会变化；准确租金要看最新 availability",
       flooring: "列有宽木板地板；仍需按具体房源确认",
-      furnishing: "普通 lease 默认不带家具；可看 CORT 家具方案",
+      furnishing: "普通 lease 默认不带家具；可看 CORT 家具方案，1BR 约 $250/月（12个月 lease）",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "Wooster Square 餐饮方便，也有收包裹 / concierge",
       sourceLabel: "2026-06-29 查过 Scully 官网",
@@ -2150,7 +2146,8 @@ function scoreUtilities(apartment, preference) {
 }
 
 function scoreSetup(apartment, preferences) {
-  const selected = preferences.length ? preferences : ["furniture_ready"];
+  if (!preferences.length) return SCORE.MID;
+  const selected = preferences;
   const scores = selected.map(preference => {
     if (apartment.setupTags.includes(preference)) return SCORE.FULL;
     if (preference === "wood_floor" && apartment.flooring.includes("verify")) return SCORE.MID;
