@@ -19,6 +19,8 @@ The beta is designed for mainstream New Haven apartment searches, especially stu
 
 It is not built for low-budget room search, sublets, independent landlords, or roommate matching.
 
+Result cards include true-monthly and move-in-cash estimates. These are planning estimates built from public fee signals and assumptions, not final lease numbers.
+
 ## Data And Trust
 
 All apartment data is a beta seed profile. Rent, availability, concessions, fees, furnished status, utilities, parking, insurance, and guarantor policies must be confirmed with the property before applying or signing.

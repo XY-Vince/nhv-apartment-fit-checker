@@ -438,6 +438,140 @@ button:focus-visible {
   background: #f1fbf7;
 }
 
+.cost-breakdown {
+  margin: 12px 0;
+  border: 1px solid #d2dee5;
+  border-radius: 8px;
+  padding: 12px;
+  background: #fbfdfd;
+}
+
+.cost-breakdown-title {
+  margin-bottom: 8px;
+  color: var(--brand-dark);
+  font-size: 0.82rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.cost-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.cost-metrics > div {
+  min-width: 0;
+  border: 1px solid #e0e7eb;
+  border-radius: 8px;
+  padding: 9px;
+  background: #fff;
+}
+
+.cost-metrics span,
+.cost-metrics em {
+  display: block;
+}
+
+.cost-metrics span {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 780;
+  text-transform: uppercase;
+}
+
+.cost-metrics strong {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-top: 4px;
+  color: #122132;
+  font-size: 1.08rem;
+}
+
+.cost-metrics small {
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 760;
+}
+
+.cost-metrics em {
+  margin-top: 3px;
+  color: #516170;
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.cost-metric-primary {
+  border-color: #b7d7cb !important;
+  background: #f3fbf7 !important;
+}
+
+.cost-gross,
+.cost-excluded,
+.cost-caveat {
+  margin: 8px 0 0;
+  color: #506071;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.cost-excluded {
+  color: #6f450b;
+}
+
+.cost-line-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.cost-line-grid h4 {
+  margin: 0 0 5px;
+  color: var(--brand-dark);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+}
+
+.cost-line-grid ul {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cost-line-grid li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px 8px;
+  align-items: baseline;
+  color: #3e4b58;
+  font-size: 0.78rem;
+  line-height: 1.3;
+}
+
+.cost-line-grid li span {
+  min-width: 0;
+}
+
+.cost-line-grid li strong {
+  color: #1e303f;
+  font-size: 0.8rem;
+}
+
+.cost-line-grid li em {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-style: normal;
+  font-weight: 700;
+}
+
 .value-caveat {
   margin: 0;
   border: 1px solid #b7d7cb;
@@ -710,6 +844,8 @@ button:focus-visible {
 
   .segmented,
   .facts,
+  .cost-metrics,
+  .cost-line-grid,
   .reason-grid,
   .two-col-fields {
     grid-template-columns: 1fr;

@@ -38,6 +38,101 @@ const BUDGET_BANDS = {
   4000: { lower: 3000, upper: 4200 }
 };
 
+const DEFAULT_COST_ASSUMPTIONS = {
+  utilitiesByPredictability: {
+    predictable: 80,
+    mixed: 120,
+    variable: 180,
+    unknown: 180
+  },
+  renterInsurance: 15,
+  furnitureMonthly: 150,
+  parkingMonthly: 150,
+  applicationFee: 50,
+  securityDepositMultiplier: 1
+};
+
+const COST_CONFIDENCE_LABELS = {
+  en: {
+    advertised_rent: "advertised rent",
+    verified_public: "public source",
+    sample_lease: "sample lease",
+    partial_public: "partial source",
+    planning_assumption: "planning assumption",
+    conditional_offer: "conditional",
+    unknown: "needs verification"
+  },
+  zh: {
+    advertised_rent: "展示租金",
+    verified_public: "公开信息",
+    sample_lease: "sample lease",
+    partial_public: "部分公开",
+    planning_assumption: "估算假设",
+    conditional_offer: "有条件",
+    unknown: "需核实"
+  }
+};
+
+const COST_ITEM_LABELS = {
+  en: {
+    recurringFees: "Required monthly building fees",
+    utilitiesEstimate: "Utilities / internet estimate",
+    insuranceEstimate: "Renters insurance",
+    furnitureAmortized: "Furniture setup if needed",
+    parkingEstimate: "Parking if selected",
+    concessionEstimate: "Estimated concession credit",
+    firstMonth: "First month rent",
+    securityDeposit: "Security deposit",
+    appFee: "Application fee",
+    adminFee: "Admin / move-in fee"
+  },
+  zh: {
+    recurringFees: "固定楼内月费",
+    utilitiesEstimate: "水电网估算",
+    insuranceEstimate: "租客保险",
+    furnitureAmortized: "需要家具时的月摊成本",
+    parkingEstimate: "选择停车时的估算",
+    concessionEstimate: "估算优惠月摊",
+    firstMonth: "首月租金",
+    securityDeposit: "押金",
+    appFee: "申请费",
+    adminFee: "admin / move-in fee"
+  }
+};
+
+const COST_TEXT = {
+  en: {
+    title: "True cost check",
+    advertised: "Advertised rent",
+    trueMonthly: "Estimated true monthly",
+    moveInCash: "Move-in cash",
+    monthlyDelta: delta => delta >= 0
+      ? `+${formatMoney(delta)} over advertised rent`
+      : `${formatMoney(Math.abs(delta))} below advertised after estimated concession`,
+    grossBeforeConcession: "Before concession",
+    monthlyIncludes: "Monthly estimate includes",
+    moveInIncludes: "Move-in estimate includes",
+    caveat: "Estimate only. Use it to compare hidden-cost exposure, then verify the exact fee sheet and lease terms before applying.",
+    excludedPrefix: "Not included yet",
+    estimateSuffix: "est."
+  },
+  zh: {
+    title: "真实成本粗算",
+    advertised: "展示租金",
+    trueMonthly: "估算月成本",
+    moveInCash: "入住前现金",
+    monthlyDelta: delta => delta >= 0
+      ? `比展示租金多 ${formatMoney(delta)}`
+      : `估算优惠后比展示租金低 ${formatMoney(Math.abs(delta))}`,
+    grossBeforeConcession: "优惠前估算",
+    monthlyIncludes: "月成本包含",
+    moveInIncludes: "入住前现金包含",
+    caveat: "这是估算，用来比较 hidden cost 暴露程度；申请前仍要用具体房源的 fee sheet 和 lease 条款核实。",
+    excludedPrefix: "暂未计入",
+    estimateSuffix: "估算"
+  }
+};
+
 const CAMPUS_LABELS = {
   central_campus: "Central Campus",
   med_school: "Med School / YNHH",
@@ -337,6 +432,20 @@ const APARTMENTS = [
       max: 5200,
       label: "$2,055+ studio / $2,254+ 1BR adv.; true cost higher"
     },
+    trueMonthlyCost: {
+      advertisedRent: 2055,
+      utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
+      insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
+      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
+      concessionEstimate: { monthsFree: 0, leaseMonths: 12, confidence: "unknown" }
+    },
+    moveInCash: {
+      firstMonth: { multiplier: 1, confidence: "advertised_rent" },
+      securityDeposit: { multiplier: 1, confidence: "planning_assumption" },
+      appFee: { amount: 50, confidence: "planning_assumption" },
+      adminFee: { amount: 0, confidence: "unknown" }
+    },
     concession: "Official page advertises up to 2 months free + $500 look-and-lease on selected homes; not counted in budget score.",
     valueSignal: "Marketplace sqft check: Studio S $2,220-$2,345 / 517 sq ft, about $4.29-$4.54 per sq ft. Larger 2BR layouts may have lower $/sq ft, but total rent and fees are higher.",
     // 1-5 fit scores, not minutes. 5 = strongest match for that campus destination.
@@ -387,6 +496,20 @@ const APARTMENTS = [
       max: 3800,
       label: "Official page shows specials; exact rent needs availability refresh"
     },
+    trueMonthlyCost: {
+      advertisedRent: 2400,
+      utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
+      insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
+      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
+      concessionEstimate: { monthsFree: 2, leaseMonths: 12, confidence: "conditional_offer" }
+    },
+    moveInCash: {
+      firstMonth: { multiplier: 1, confidence: "advertised_rent" },
+      securityDeposit: { multiplier: 1, confidence: "planning_assumption" },
+      appFee: { amount: 50, confidence: "planning_assumption" },
+      adminFee: { amount: 0, confidence: "unknown" }
+    },
     concession: "Official page shows up to 3 months free on select apartments and reduced pricing on select 1BR; not counted in budget score.",
     valueSignal: "Marketplace sqft check: A1 1BR $1,880-$2,824 / 631 sq ft, about $2.98-$4.48 per sq ft. Co-living floorplans appear separately, so compare rent basis carefully.",
     campusScores: {
@@ -435,6 +558,21 @@ const APARTMENTS = [
       min: 1865,
       max: 3300,
       label: "$1,865-$2,060 studio; $2,150-$2,440 1BR; $2,950-$3,300 2BR"
+    },
+    trueMonthlyCost: {
+      advertisedRent: 1865,
+      recurringFees: { amount: 55, confidence: "verified_public" },
+      utilitiesEstimate: { amount: 90, confidence: "planning_assumption" },
+      insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
+      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
+      concessionEstimate: { monthsFree: 2, leaseMonths: 12, confidence: "conditional_offer" }
+    },
+    moveInCash: {
+      firstMonth: { multiplier: 1, confidence: "advertised_rent" },
+      securityDeposit: { amount: 250, maxMultiplier: 1, confidence: "conditional_offer" },
+      appFee: { amount: 50, confidence: "planning_assumption" },
+      adminFee: { amount: 0, confidence: "unknown" }
     },
     concession: "2 months free for studio/1BR leases with move-in on or before 2026-08-01; not counted in budget score.",
     valueSignal: "Marketplace sqft check: studio $1,920-$2,115 / 424-524 sq ft, about $3.66-$4.99 per sq ft. Studio lofts look stronger on $/sq ft, but exact unit condition matters.",
@@ -485,6 +623,21 @@ const APARTMENTS = [
       max: 8513,
       label: "$2,232+ studio; $2,164+ 1BR; $3,041+ 2BR; $3,922+ 3BR total monthly price"
     },
+    trueMonthlyCost: {
+      advertisedRent: 2164,
+      recurringFees: { amount: 6.5, confidence: "sample_lease" },
+      utilitiesEstimate: { amount: 90, confidence: "planning_assumption" },
+      insuranceEstimate: { amount: 14, confidence: "sample_lease" },
+      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
+      concessionEstimate: { monthsFree: 2, leaseMonths: 12, confidence: "conditional_offer" }
+    },
+    moveInCash: {
+      firstMonth: { multiplier: 1, confidence: "advertised_rent" },
+      securityDeposit: { amount: 0, confidence: "sample_lease" },
+      appFee: { amount: 50, confidence: "planning_assumption" },
+      adminFee: { amount: 0, confidence: "unknown" }
+    },
     concession: "Official site shows up to 3 months free on 24+ month leases and up to 2 months free on immediate move-ins + Yale discounts; not counted in budget score.",
     valueSignal: "Marketplace sqft check: Sx1 studio $1,894-$4,944 / 387 sq ft has a wide value range. Larger shared layouts may lower $/sq ft, but roommate split and lease terms must be checked separately.",
     campusScores: {
@@ -533,6 +686,20 @@ const APARTMENTS = [
       min: 2795,
       max: 5795,
       label: "Studio inquire; $2,795+ 1BR; $3,870+ 2BR; $4,725+ 3BR; $5,795+ 4BR"
+    },
+    trueMonthlyCost: {
+      advertisedRent: 2795,
+      utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
+      insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
+      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      parkingEstimate: { amount: 180, confidence: "planning_assumption", appliesWhenPriority: "parking" },
+      concessionEstimate: { monthsFree: 2, leaseMonths: 12, confidence: "conditional_offer" }
+    },
+    moveInCash: {
+      firstMonth: { multiplier: 1, confidence: "advertised_rent" },
+      securityDeposit: { multiplier: 1, confidence: "planning_assumption" },
+      appFee: { amount: 50, confidence: "planning_assumption" },
+      adminFee: { amount: 0, confidence: "unknown" }
     },
     concession: "Opening offer: 2 months free on 12-month lease or 4 months free on 24+ month lease; not counted in budget score.",
     valueSignal: "Marketplace sqft check: S1 studio $2,290 / 469 sq ft, about $4.88 per sq ft. Larger layouts may improve $/sq ft but raise total monthly cost.",
@@ -583,6 +750,21 @@ const APARTMENTS = [
       max: 4425,
       label: "$1,852+ studio; $2,282+ 1BR; $3,084+ 2BR; $4,425+ 3BR/townhome"
     },
+    trueMonthlyCost: {
+      advertisedRent: 1852,
+      recurringFees: { amount: 83.39, confidence: "verified_public" },
+      utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
+      insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
+      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
+      concessionEstimate: { monthsFree: 2, leaseMonths: 12, confidence: "conditional_offer" }
+    },
+    moveInCash: {
+      firstMonth: { multiplier: 1, confidence: "advertised_rent" },
+      securityDeposit: { multiplier: 1, confidence: "planning_assumption" },
+      appFee: { amount: 50, confidence: "planning_assumption" },
+      adminFee: { amount: 0, confidence: "unknown" }
+    },
     concession: "Official page advertises reduced rates plus up to 3 months free on select homes; not counted in budget score.",
     valueSignal: "Marketplace sqft check: studio $1,935-$2,150 / 333-519 sq ft, about $3.73-$6.46 per sq ft. 2BR layouts look stronger on $/sq ft for roommate splits.",
     campusScores: {
@@ -632,6 +814,20 @@ const APARTMENTS = [
       max: 4952,
       label: "$2,250+ studio; $2,671+ 1BR; $3,691+ 2BR; $4,180+ 3BR estimated monthly cost"
     },
+    trueMonthlyCost: {
+      advertisedRent: 2250,
+      utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
+      insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
+      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
+      concessionEstimate: { monthsFree: 1.5, leaseMonths: 12, confidence: "conditional_offer" }
+    },
+    moveInCash: {
+      firstMonth: { multiplier: 1, confidence: "advertised_rent" },
+      securityDeposit: { multiplier: 1, confidence: "planning_assumption" },
+      appFee: { amount: 50, confidence: "planning_assumption" },
+      adminFee: { amount: 0, confidence: "unknown" }
+    },
     concession: "Official home page advertises up to 1.5 months free on select homes; not counted in budget score.",
     campusScores: {
       central_campus: 5,
@@ -680,6 +876,20 @@ const APARTMENTS = [
       max: 4795,
       label: "Madison studio $1,695+; Crown/Court/18 High vary by building"
     },
+    trueMonthlyCost: {
+      advertisedRent: 1695,
+      utilitiesEstimate: { amount: 75, confidence: "planning_assumption" },
+      insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
+      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      parkingEstimate: { amount: 130, confidence: "verified_public", appliesWhenPriority: "parking" },
+      concessionEstimate: { monthsFree: 0, leaseMonths: 12, confidence: "unknown" }
+    },
+    moveInCash: {
+      firstMonth: { multiplier: 1, confidence: "advertised_rent" },
+      securityDeposit: { multiplier: 1.5, confidence: "verified_public" },
+      appFee: { amount: 50, confidence: "verified_public" },
+      adminFee: { amount: 0, confidence: "unknown" }
+    },
     campusScores: {
       central_campus: 5,
       med_school: 4,
@@ -726,6 +936,20 @@ const APARTMENTS = [
       min: 2218,
       max: 3613,
       label: "$2,218+ Jr Studio; $2,486+ 1BR; $3,613+ 2BR"
+    },
+    trueMonthlyCost: {
+      advertisedRent: 2218,
+      utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
+      insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
+      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
+      concessionEstimate: { monthsFree: 1, leaseMonths: 12, confidence: "conditional_offer" }
+    },
+    moveInCash: {
+      firstMonth: { multiplier: 1, confidence: "advertised_rent" },
+      securityDeposit: { multiplier: 1, confidence: "planning_assumption" },
+      appFee: { amount: 50, confidence: "planning_assumption" },
+      adminFee: { amount: 0, confidence: "unknown" }
     },
     campusScores: {
       central_campus: 3,
@@ -774,6 +998,20 @@ const APARTMENTS = [
       max: 5400,
       label: "Official page says rates subject to change; exact rent needs refresh"
     },
+    trueMonthlyCost: {
+      advertisedRent: 2400,
+      utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
+      insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
+      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      parkingEstimate: { amount: 180, confidence: "planning_assumption", appliesWhenPriority: "parking" },
+      concessionEstimate: { monthsFree: 0, leaseMonths: 12, confidence: "unknown" }
+    },
+    moveInCash: {
+      firstMonth: { multiplier: 1, confidence: "advertised_rent" },
+      securityDeposit: { multiplier: 1, confidence: "planning_assumption" },
+      appFee: { amount: 50, confidence: "planning_assumption" },
+      adminFee: { amount: 0, confidence: "unknown" }
+    },
     campusScores: {
       central_campus: 4,
       med_school: 4,
@@ -820,6 +1058,20 @@ const APARTMENTS = [
       min: 2200,
       max: 3700,
       label: "Stale news baseline: studio $1,900, 1BR $2,625, 2BR $3,300"
+    },
+    trueMonthlyCost: {
+      advertisedRent: 2200,
+      utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
+      insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
+      furnitureAmortized: { amount: 150, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
+      concessionEstimate: { monthsFree: 0, leaseMonths: 12, confidence: "unknown" }
+    },
+    moveInCash: {
+      firstMonth: { multiplier: 1, confidence: "advertised_rent" },
+      securityDeposit: { multiplier: 1, confidence: "planning_assumption" },
+      appFee: { amount: 50, confidence: "planning_assumption" },
+      adminFee: { amount: 0, confidence: "unknown" }
     },
     valueSignal: "Marketplace sqft check: S1 studio $1,921-$2,201 / 373 sq ft, about $5.15-$5.90 per sq ft. 2BR B1 appears closer to $3.06+ per sq ft before fee confirmation.",
     campusScores: {
@@ -1556,6 +1808,14 @@ const WEIGHTS = {
   priority: 1.35
 };
 
+const QUIET_PRIORITY_WEIGHTS = {
+  budget: 1.2,
+  campus: 1.4,
+  utilities: 0.9,
+  setup: 0.75,
+  priority: 2
+};
+
 function activeLang() {
   if (typeof document === "undefined") return "en";
   return document.documentElement.lang.toLowerCase().startsWith("zh") ? "zh" : "en";
@@ -1634,46 +1894,235 @@ function getFormValues(form) {
   };
 }
 
-function scoreBudget(apartment, maxBudget) {
-  // Budget is a band fit, not just "does the cheapest unit fit".
-  // Concessions stay outside the score because eligibility and lease terms vary.
-  const minRent = apartment.price.min;
+function formatMoney(value) {
+  const rounded = Math.round(Number(value) || 0);
+  return `$${rounded.toLocaleString()}`;
+}
+
+function formatMoneyRange(min, max) {
+  const roundedMin = Math.round(Number(min) || 0);
+  const roundedMax = Math.round(Number(max) || roundedMin);
+  if (roundedMin === roundedMax) return formatMoney(roundedMin);
+  return `${formatMoney(roundedMin)}-${formatMoney(roundedMax)}`;
+}
+
+function costText(key, lang = activeLang()) {
+  return (COST_TEXT[lang] || COST_TEXT.en)[key];
+}
+
+function costItemLabel(key, lang = activeLang()) {
+  return (COST_ITEM_LABELS[lang] || COST_ITEM_LABELS.en)[key] || key;
+}
+
+function costConfidenceLabel(confidence, lang = activeLang()) {
+  const labels = COST_CONFIDENCE_LABELS[lang] || COST_CONFIDENCE_LABELS.en;
+  return labels[confidence] || labels.planning_assumption;
+}
+
+function costItemAmount(item, baseRent, fallbackAmount = 0) {
+  if (!item) return fallbackAmount;
+  if (Number.isFinite(item.amount)) return item.amount;
+  if (Number.isFinite(item.multiplier)) return baseRent * item.multiplier;
+  return fallbackAmount;
+}
+
+function costItemMaxAmount(item, baseRent, fallbackAmount = null) {
+  if (!item) return fallbackAmount;
+  if (Number.isFinite(item.maxAmount)) return item.maxAmount;
+  if (Number.isFinite(item.maxMultiplier)) return baseRent * item.maxMultiplier;
+  return fallbackAmount;
+}
+
+function appliesToAnswers(item, answers) {
+  if (!item) return false;
+  if (item.appliesWhenSetup && !(answers?.setup || []).includes(item.appliesWhenSetup)) return false;
+  if (item.appliesWhenPriority && !(answers?.priority || []).includes(item.appliesWhenPriority)) return false;
+  return true;
+}
+
+function monthlyCostLine(key, item, baseRent, answers, fallbackAmount = 0) {
+  if (!item) {
+    return {
+      key,
+      amount: fallbackAmount,
+      confidence: "planning_assumption"
+    };
+  }
+  if ((item.appliesWhenSetup || item.appliesWhenPriority) && !appliesToAnswers(item, answers)) return null;
+  const amount = costItemAmount(item, baseRent, fallbackAmount);
+  if (!amount && item.confidence === "unknown") return null;
+  return {
+    key,
+    amount,
+    confidence: item.confidence || "planning_assumption"
+  };
+}
+
+function concessionCostLine(item, baseRent) {
+  if (!item || item.monthsFree <= 0) return null;
+  const leaseMonths = item.leaseMonths || 12;
+  const amount = Number.isFinite(item.monthlyCredit)
+    ? item.monthlyCredit
+    : baseRent * (item.monthsFree / leaseMonths);
+  if (!amount) return null;
+  return {
+    key: "concessionEstimate",
+    amount,
+    confidence: item.confidence || "conditional_offer",
+    isCredit: true
+  };
+}
+
+function moveInCostLine(key, item, baseRent, fallbackAmount = 0) {
+  const amount = costItemAmount(item, baseRent, fallbackAmount);
+  const maxAmount = costItemMaxAmount(item, baseRent, amount);
+  const confidence = item?.confidence || "planning_assumption";
+  if (!amount && !maxAmount && confidence === "unknown") return null;
+  return { key, amount, maxAmount, confidence };
+}
+
+function calculateCosts(apartment, answers = {}) {
+  const monthlyProfile = apartment.trueMonthlyCost || {};
+  const moveInProfile = apartment.moveInCash || {};
+  const baseRent = monthlyProfile.advertisedRent || apartment.price.min;
+  const utilitiesFallback = DEFAULT_COST_ASSUMPTIONS.utilitiesByPredictability[apartment.utilities] || DEFAULT_COST_ASSUMPTIONS.utilitiesByPredictability.unknown;
+
+  const monthlyItems = [
+    monthlyCostLine("recurringFees", monthlyProfile.recurringFees, baseRent, answers, 0),
+    monthlyCostLine("utilitiesEstimate", monthlyProfile.utilitiesEstimate, baseRent, answers, utilitiesFallback),
+    monthlyCostLine("insuranceEstimate", monthlyProfile.insuranceEstimate, baseRent, answers, DEFAULT_COST_ASSUMPTIONS.renterInsurance),
+    monthlyCostLine("furnitureAmortized", monthlyProfile.furnitureAmortized, baseRent, answers, DEFAULT_COST_ASSUMPTIONS.furnitureMonthly),
+    monthlyCostLine("parkingEstimate", monthlyProfile.parkingEstimate, baseRent, answers, DEFAULT_COST_ASSUMPTIONS.parkingMonthly)
+  ].filter(Boolean);
+
+  const concessionLine = concessionCostLine(monthlyProfile.concessionEstimate, baseRent);
+  const grossMonthly = baseRent + monthlyItems.reduce((sum, item) => sum + item.amount, 0);
+  const concessionCredit = concessionLine ? concessionLine.amount : 0;
+  const trueMonthly = Math.max(0, grossMonthly - concessionCredit);
+
+  const moveInItems = [
+    moveInCostLine("firstMonth", moveInProfile.firstMonth || { multiplier: 1, confidence: "advertised_rent" }, baseRent, baseRent),
+    moveInCostLine("securityDeposit", moveInProfile.securityDeposit || { multiplier: DEFAULT_COST_ASSUMPTIONS.securityDepositMultiplier }, baseRent, baseRent),
+    moveInCostLine("appFee", moveInProfile.appFee, baseRent, DEFAULT_COST_ASSUMPTIONS.applicationFee),
+    moveInCostLine("adminFee", moveInProfile.adminFee, baseRent, 0)
+  ].filter(Boolean);
+  const moveInMin = moveInItems.reduce((sum, item) => sum + item.amount, 0);
+  const moveInMax = moveInItems.reduce((sum, item) => sum + (Number.isFinite(item.maxAmount) ? item.maxAmount : item.amount), 0);
+
+  const excluded = [];
+  if (moveInProfile.adminFee?.confidence === "unknown" && !moveInProfile.adminFee.amount) excluded.push("adminFee");
+
+  return {
+    baseRent,
+    grossMonthly,
+    trueMonthly,
+    concessionLine,
+    monthlyItems,
+    moveInMin,
+    moveInMax,
+    moveInItems,
+    monthlyDelta: trueMonthly - baseRent,
+    excluded
+  };
+}
+
+function renderCostLine(item, lang) {
+  const amount = item.maxAmount && item.maxAmount !== item.amount
+    ? formatMoneyRange(item.amount, item.maxAmount)
+    : formatMoney(item.amount);
+  const signedAmount = item.isCredit ? `-${amount}` : amount;
+  return `
+    <li>
+      <span>${escapeHtml(costItemLabel(item.key, lang))}</span>
+      <strong>${escapeHtml(signedAmount)}</strong>
+      <em>${escapeHtml(costConfidenceLabel(item.confidence, lang))}</em>
+    </li>
+  `;
+}
+
+function renderCostBreakdown(costs, lang = activeLang()) {
+  const text = COST_TEXT[lang] || COST_TEXT.en;
+  const monthlyLines = [...costs.monthlyItems, costs.concessionLine].filter(Boolean).map(item => renderCostLine(item, lang)).join("");
+  const moveInLines = costs.moveInItems.map(item => renderCostLine(item, lang)).join("");
+  const excluded = costs.excluded.length
+    ? `<p class="cost-excluded">${escapeHtml(text.excludedPrefix)}：${costs.excluded.map(key => escapeHtml(costItemLabel(key, lang))).join(" / ")}</p>`
+    : "";
+  return `
+    <div class="cost-breakdown">
+      <div class="cost-breakdown-title">${escapeHtml(text.title)}</div>
+      <div class="cost-metrics">
+        <div>
+          <span>${escapeHtml(text.advertised)}</span>
+          <strong>${escapeHtml(formatMoney(costs.baseRent))}</strong>
+        </div>
+        <div class="cost-metric-primary">
+          <span>${escapeHtml(text.trueMonthly)}</span>
+          <strong>${escapeHtml(formatMoney(costs.trueMonthly))}<small>${escapeHtml(text.estimateSuffix)}</small></strong>
+          <em>${escapeHtml(text.monthlyDelta(costs.monthlyDelta))}</em>
+        </div>
+        <div>
+          <span>${escapeHtml(text.moveInCash)}</span>
+          <strong>${escapeHtml(formatMoneyRange(costs.moveInMin, costs.moveInMax))}<small>${escapeHtml(text.estimateSuffix)}</small></strong>
+        </div>
+      </div>
+      ${costs.concessionLine ? `<p class="cost-gross">${escapeHtml(text.grossBeforeConcession)}：${escapeHtml(formatMoney(costs.grossMonthly))}</p>` : ""}
+      <div class="cost-line-grid">
+        <div>
+          <h4>${escapeHtml(text.monthlyIncludes)}</h4>
+          <ul>${monthlyLines}</ul>
+        </div>
+        <div>
+          <h4>${escapeHtml(text.moveInIncludes)}</h4>
+          <ul>${moveInLines}</ul>
+        </div>
+      </div>
+      ${excluded}
+      <p class="cost-caveat">${escapeHtml(text.caveat)}</p>
+    </div>
+  `;
+}
+
+function scoreBudget(apartment, budgetOrAnswers) {
+  // Budget is a band fit against estimated true monthly cost when answers are available.
+  // Direct numeric calls keep the older advertised-rent behavior for smoke tests.
+  const maxBudget = typeof budgetOrAnswers === "object" ? Number(budgetOrAnswers.budget) : Number(budgetOrAnswers);
+  const costBasis = typeof budgetOrAnswers === "object"
+    ? calculateCosts(apartment, budgetOrAnswers).trueMonthly
+    : apartment.price.min;
   const band = BUDGET_BANDS[maxBudget];
   if (!band) {
-    if (minRent <= maxBudget) return SCORE.FULL;
-    if (minRent <= maxBudget + 250) return SCORE.HIGH;
-    if (minRent <= maxBudget + 500) return SCORE.LOW;
+    if (costBasis <= maxBudget) return SCORE.FULL;
+    if (costBasis <= maxBudget + 250) return SCORE.HIGH;
+    if (costBasis <= maxBudget + 500) return SCORE.LOW;
     return SCORE.MISS;
   }
 
   if (maxBudget === 1900) {
-    if (minRent <= band.upper) return minRent < band.lower ? SCORE.VERY_HIGH : SCORE.FULL;
-    if (minRent <= band.upper + 250) return SCORE.HIGH;
-    if (minRent <= band.upper + 500) return SCORE.LOW;
+    if (costBasis <= band.upper) return SCORE.FULL;
+    if (costBasis <= band.upper + 250) return SCORE.HIGH;
+    if (costBasis <= band.upper + 500) return SCORE.LOW;
     return SCORE.MISS;
   }
 
   if (maxBudget === 2300) {
-    if (minRent >= 1850 && minRent <= band.upper) return SCORE.FULL;
-    if (minRent < 1850 && minRent >= 1600) return SCORE.HIGH;
-    if (minRent <= band.upper + 250) return SCORE.HIGH;
-    if (minRent <= band.upper + 500) return SCORE.LOW;
+    if (costBasis >= 1600 && costBasis <= band.upper) return SCORE.FULL;
+    if (costBasis <= band.upper + 250) return SCORE.HIGH;
+    if (costBasis <= band.upper + 500) return SCORE.LOW;
     return SCORE.MISS;
   }
 
   if (maxBudget === 3000) {
-    if (minRent >= 2000 && minRent <= band.upper) return SCORE.FULL;
-    if (minRent >= 1850 && minRent < 2000) return SCORE.VERY_HIGH;
-    if (minRent >= 1600 && minRent < 1850) return SCORE.MID;
-    if (minRent <= band.upper + 300) return SCORE.HIGH;
+    if (costBasis >= 1800 && costBasis <= band.upper) return SCORE.FULL;
+    if (costBasis >= 1600 && costBasis < 1800) return SCORE.HIGH;
+    if (costBasis <= band.upper + 300) return SCORE.HIGH;
     return SCORE.LOW;
   }
 
   if (maxBudget === 4000) {
-    if (minRent >= 2200 && minRent <= band.upper) return SCORE.FULL;
-    if (minRent >= 1850 && minRent < 2200) return SCORE.HIGH;
-    if (minRent >= 1600 && minRent < 1850) return SCORE.MID;
-    if (minRent <= band.upper + 500) return SCORE.HIGH;
+    if (costBasis >= 2200 && costBasis <= band.upper) return SCORE.FULL;
+    if (costBasis >= 1850 && costBasis < 2200) return SCORE.HIGH;
+    if (costBasis >= 1600 && costBasis < 1850) return SCORE.MID;
+    if (costBasis <= band.upper + 500) return SCORE.HIGH;
     return SCORE.LOW;
   }
 
@@ -1721,7 +2170,8 @@ function scoreAmenity(apartment, preference) {
 
 function scoreTrueCostConcern(apartment) {
   const predictability = UTILITY_PREDICTABILITY_SCORE[apartment.utilities] || SCORE.LOW;
-  const price = apartment.price.min < 1200 ? SCORE.FULL : apartment.price.min < 1800 ? SCORE.HIGH : apartment.price.min < 2400 ? SCORE.MID : SCORE.LOW;
+  const trueMonthly = calculateCosts(apartment, { setup: [], priority: [] }).trueMonthly;
+  const price = trueMonthly < 1600 ? SCORE.FULL : trueMonthly < 2200 ? SCORE.HIGH : trueMonthly < 2800 ? SCORE.MID : SCORE.LOW;
   // Keep this score about cost exposure only; source confidence is shown separately.
   return Math.round((predictability + price) / 2);
 }
@@ -1769,18 +2219,23 @@ function scorePriority(apartment, priorities) {
   return Math.round(scores.reduce((sum, score) => sum + score, 0) / scores.length);
 }
 
+function weightsForAnswers(answers) {
+  return (answers.priority || []).includes("quiet_routine") ? QUIET_PRIORITY_WEIGHTS : WEIGHTS;
+}
+
 function scoreApartment(apartment, answers) {
+  const weights = weightsForAnswers(answers);
   const breakdown = {
-    budget: scoreBudget(apartment, answers.budget),
+    budget: scoreBudget(apartment, answers),
     campus: scoreCampus(apartment, answers.campus),
     utilities: scoreUtilities(apartment, answers.utilities),
     setup: scoreSetup(apartment, answers.setup),
     priority: scorePriority(apartment, answers.priority || [])
   };
   const weightedTotal = Object.entries(breakdown).reduce((sum, [key, score]) => {
-    return sum + score * WEIGHTS[key];
+    return sum + score * weights[key];
   }, 0);
-  const max = Object.values(WEIGHTS).reduce((sum, value) => sum + value * 100, 0);
+  const max = Object.values(weights).reduce((sum, value) => sum + value * 100, 0);
   return {
     apartment,
     breakdown,
@@ -2031,6 +2486,7 @@ function renderResults(results, answers) {
   list.innerHTML = top.map((result, index) => {
     const apartment = result.apartment;
     const copy = apartmentCopy(apartment, lang);
+    const costs = calculateCosts(apartment, answers);
     const reasons = topReasons(result, lang, answers).map(escapeHtml);
     const rankLabel = apartment.isExploration
       ? `#${index + 1} ${ui("exploreDirection", lang)}`
@@ -2063,6 +2519,7 @@ function renderResults(results, answers) {
           <div class="fact"><strong>${escapeHtml(ui("facts", lang).daily)}</strong><span>${escapeHtml(copy.dailyLabel)}</span></div>
           <div class="fact"><strong>${escapeHtml(ui("facts", lang).source)}</strong><span>${escapeHtml(copy.sourceLabel)}</span></div>
         </div>
+        ${renderCostBreakdown(costs, lang)}
         ${copy.valueSignal || copy.concession ? `
           <div class="card-callouts">
             ${copy.valueSignal ? `
@@ -2192,6 +2649,9 @@ if (typeof module !== "undefined") {
     scoreWorry,
     scoreDaily,
     scorePriority,
+    calculateCosts,
+    formatMoney,
+    weightsForAnswers,
     compareResults,
     budgetLabel,
     isOutOfScope,
