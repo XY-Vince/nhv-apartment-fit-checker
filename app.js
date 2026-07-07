@@ -206,6 +206,7 @@ const UI_TEXT = {
     feedbackEmailSubject: "NHV Apartment Fit Checker beta feedback",
     feedbackEmailOpened: "Email draft opened. Please review and send it from your mail app.",
     feedbackTitle: "[NHV Apartment Fit Checker beta feedback]",
+    feedbackRecipient: email => `Send to: ${email}`,
     feedbackAnswers: "My answers:",
     feedbackTop: "Top 3 shown:",
     feedbackAccuracy: "Top 3 accuracy",
@@ -269,6 +270,7 @@ const UI_TEXT = {
     feedbackEmailSubject: "纽黑文公寓匹配器测试反馈",
     feedbackEmailOpened: "邮件草稿已打开，请检查内容后发送。",
     feedbackTitle: "[纽黑文公寓匹配器测试反馈]",
+    feedbackRecipient: email => `反馈收件人：${email}`,
     feedbackAnswers: "我的答案：",
     feedbackTop: "显示的前三名：",
     feedbackAccuracy: "前三名准确度",
@@ -2418,6 +2420,7 @@ function feedbackText() {
   const note = getInputValue("feedback-note") || ui("none", lang);
   return [
     ui("feedbackTitle", lang),
+    ui("feedbackRecipient", lang)(FEEDBACK_EMAIL),
     "",
     ui("feedbackAnswers", lang),
     formatAnswersForShare(latestAnswers, lang),
