@@ -22,6 +22,7 @@ const VALUE_SIGNAL_CAVEATS = {
 };
 
 const MVP_MIN_APARTMENT_BUDGET = 1600;
+const FEEDBACK_EMAIL = "vince.xy.wang@gmail.com";
 
 const BUDGET_LABELS = {
   1400: "< $1,600",
@@ -202,8 +203,8 @@ const UI_TEXT = {
     confidenceExploration: "This is an exploration direction, not a specific apartment recommendation. First identify a specific unit, then verify rent, fees, utilities, and lease terms.",
     confidenceStale: "This option has public signals, but the data is stale. Refresh official rent, availability, fees, and local services first.",
     confidenceLow: "This option has not been verified enough. Treat the fit score as directional only, and refresh rent, availability, fees, and policy before applying.",
-    feedbackCopied: "Copied. You can paste it into WeChat or a message.",
-    feedbackFailed: "Copy failed. Please select and copy the text manually.",
+    feedbackEmailSubject: "NHV Apartment Fit Checker beta feedback",
+    feedbackEmailOpened: "Email draft opened. Please review and send it from your mail app.",
     feedbackTitle: "[NHV Apartment Fit Checker beta feedback]",
     feedbackAnswers: "My answers:",
     feedbackTop: "Top 3 shown:",
@@ -265,8 +266,8 @@ const UI_TEXT = {
     confidenceExploration: "这是一个方向，不是具体公寓推荐。先锁定具体房源，再确认租金、费用、水电网和 lease 条款。",
     confidenceStale: "这个选项有公开线索，但信息比较旧。先确认最新租金、availability、费用和周边服务。",
     confidenceLow: "这个选项的信息还不够扎实，匹配分只能当方向参考。申请前先确认租金、availability、费用和政策。",
-    feedbackCopied: "已复制，可以直接粘贴到微信或消息里。",
-    feedbackFailed: "复制失败，请手动选中文本。",
+    feedbackEmailSubject: "纽黑文公寓匹配器测试反馈",
+    feedbackEmailOpened: "邮件草稿已打开，请检查内容后发送。",
     feedbackTitle: "[纽黑文公寓匹配器测试反馈]",
     feedbackAnswers: "我的答案：",
     feedbackTop: "显示的前三名：",
@@ -1305,7 +1306,7 @@ const APARTMENT_TRANSLATIONS = {
     "360-state": {
       area: "市中心高层 · 360 State St",
       priceLabel: "studio $2,055 起 / 1BR $2,254 起；加上费用后会更高",
-      concession: "官网显示部分房源最高免 2 个月租金，另有 $500 look-and-lease 优惠；这里先不拿优惠抵预算。",
+      concession: "官网显示部分房源最高免 2 个月租金，另有 $500 look-and-lease 优惠。",
       valueSignal: "按平台上的租金和面积粗算：Studio S $2,220-$2,345 / 517 sq ft，约 $4.29-$4.54/sq ft。大一点的 2BR 可能每尺更便宜，但总租金和费用会更高。",
       flooring: "需按具体房源确认",
       furnishing: "普通 lease 默认不带家具；可看 CORT 家具方案，1BR 约 $250/月（12个月 lease）",
@@ -1332,7 +1333,7 @@ const APARTMENT_TRANSLATIONS = {
     "olive-wooster": {
       area: "Wooster Square / Downtown 边缘 · 87 Union St",
       priceLabel: "官网有优惠信息；具体租金要看最新 availability",
-      concession: "官网显示部分公寓最高免 3 个月租金，部分 1BR 有降价；这里先不拿优惠抵预算。",
+      concession: "官网显示部分公寓最高免 3 个月租金，部分 1BR 有降价。",
       valueSignal: "按平台上的租金和面积粗算：A1 1BR $1,880-$2,824 / 631 sq ft，约 $2.98-$4.48/sq ft。co-living 户型要单独看租金口径。",
       flooring: "需按具体房源确认",
       furnishing: "是否带家具尚未核实",
@@ -1359,7 +1360,7 @@ const APARTMENT_TRANSLATIONS = {
     "the-taft": {
       area: "Central Campus / Chapel-College 走廊 · 265 College St",
       priceLabel: "studio $1,865-$2,060；1BR $2,150-$2,440；2BR $2,950-$3,300",
-      concession: "2026-08-01 或之前入住的 studio / 1BR lease 可免 2 个月租金；这里先不拿优惠抵预算。",
+      concession: "2026-08-01 或之前入住的 studio / 1BR lease 可免 2 个月租金。",
       valueSignal: "按平台上的租金和面积粗算：studio $1,920-$2,115 / 424-524 sq ft，约 $3.66-$4.99/sq ft。studio loft 面积更划算，但还要看具体 unit 状态。",
       flooring: "需按具体房源确认",
       furnishing: "能看到 CORT / corporate furniture 选项；不是默认带家具，1BR 约 $250/月（12个月 lease）",
@@ -1386,7 +1387,7 @@ const APARTMENT_TRANSLATIONS = {
     "the-archive": {
       area: "Downtown / Ninth Square · Chapel / Orange",
       priceLabel: "studio $2,232 起；1BR $2,164 起；2BR $3,041 起；3BR $3,922 起，按总月价展示",
-      concession: "官网显示 24 个月以上 lease 最高免 3 个月，immediate move-in 最高免 2 个月，另有 Yale discount；这里先不拿优惠抵预算。",
+      concession: "官网显示 24 个月以上 lease 最高免 3 个月，immediate move-in 最高免 2 个月，另有 Yale discount。",
       valueSignal: "按平台上的租金和面积粗算：Sx1 studio $1,894-$4,944 / 387 sq ft，区间很宽。多人合租大户型可能每尺更便宜，但室友分摊和 lease term 要单独核实。",
       flooring: "需按具体房源确认",
       furnishing: "是否带家具尚未核实",
@@ -1413,7 +1414,7 @@ const APARTMENT_TRANSLATIONS = {
     "estelle": {
       area: "Downtown / New Haven Green 边缘 · 19 Elm St",
       priceLabel: "studio 需询价；1BR $2,795 起；2BR $3,870 起；3BR $4,725 起；4BR $5,795 起",
-      concession: "开业优惠：12 个月 lease 免 2 个月，24 个月以上 lease 免 4 个月；这里先不拿优惠抵预算。",
+      concession: "开业优惠：12 个月 lease 免 2 个月，24 个月以上 lease 免 4 个月。",
       valueSignal: "按平台上的租金和面积粗算：S1 studio $2,290 / 469 sq ft，约 $4.88/sq ft。大户型可能每尺更便宜，但总月租会更高。",
       flooring: "需按具体房源确认",
       furnishing: "是否带家具尚未核实",
@@ -1440,7 +1441,7 @@ const APARTMENT_TRANSLATIONS = {
     "axis-201": {
       area: "Science Park / Munson St · 201 Munson St",
       priceLabel: "studio $1,852 起；1BR $2,282 起；2BR $3,084 起；3BR / townhome $4,425 起",
-      concession: "官网显示部分房源降价，并最高免 3 个月租金；这里先不拿优惠抵预算。",
+      concession: "官网显示部分房源降价，并最高免 3 个月租金。",
       valueSignal: "按平台上的租金和面积粗算：studio $1,935-$2,150 / 333-519 sq ft，约 $3.73-$6.46/sq ft。2BR 对合租分摊更值得细看。",
       flooring: "需按具体房源确认",
       furnishing: "是否带家具尚未核实",
@@ -1467,7 +1468,7 @@ const APARTMENT_TRANSLATIONS = {
     "the-audubon": {
       area: "Audubon / Whitney-Arts 走廊 · 367 Orange St",
       priceLabel: "studio $2,250 起；1BR $2,671 起；2BR $3,691 起；3BR $4,180 起，按估算月成本展示",
-      concession: "官网首页显示部分房源最高免 1.5 个月租金；这里先不拿优惠抵预算。",
+      concession: "官网首页显示部分房源最高免 1.5 个月租金。",
       flooring: "需按具体房源确认",
       furnishing: "是否带家具尚未核实",
       confidenceLabel: "部分信息已确认",
@@ -2432,37 +2433,23 @@ function feedbackText() {
   ].join("\n");
 }
 
-function copyText(text, statusId) {
-  const status = document.getElementById(statusId);
-  const lang = activeLang();
-  const done = () => {
-    if (status) status.textContent = ui("feedbackCopied", lang);
-  };
-  const fail = () => {
-    if (status) status.textContent = ui("feedbackFailed", lang);
-  };
-
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done, fail));
-    return;
-  }
-  fallbackCopy(text, done, fail);
+function feedbackMailtoHref(text, lang = activeLang()) {
+  const subject = ui("feedbackEmailSubject", lang);
+  return `mailto:${FEEDBACK_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
 }
 
-function fallbackCopy(text, done, fail) {
-  const textArea = document.createElement("textarea");
-  textArea.value = text;
-  textArea.setAttribute("readonly", "");
-  textArea.style.position = "fixed";
-  textArea.style.left = "-9999px";
-  document.body.appendChild(textArea);
-  textArea.select();
-  try {
-    document.execCommand("copy") ? done() : fail();
-  } catch {
-    fail();
+function openFeedbackEmail(statusId) {
+  const status = document.getElementById(statusId);
+  const lang = activeLang();
+  const anchor = document.createElement("a");
+  anchor.href = feedbackMailtoHref(feedbackText(), lang);
+  anchor.rel = "noopener";
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  if (status) {
+    status.textContent = ui("feedbackEmailOpened", lang);
   }
-  textArea.remove();
 }
 
 function renderResults(results, answers) {
@@ -2610,7 +2597,7 @@ function resetForm(form) {
 function init() {
   const form = document.getElementById("fit-form");
   const reset = document.getElementById("reset-button");
-  const copyFeedback = document.getElementById("copy-feedback");
+  const emailFeedback = document.getElementById("email-feedback");
   enforceMaxSelections(form, "setup", 2);
   enforceMaxSelections(form, "priority", 3);
   form.addEventListener("submit", event => {
@@ -2621,7 +2608,7 @@ function init() {
     if (event.target.name !== "setup" && event.target.name !== "priority") runMatch(form);
   });
   reset.addEventListener("click", () => resetForm(form));
-  copyFeedback.addEventListener("click", () => copyText(feedbackText(), "feedback-status"));
+  emailFeedback.addEventListener("click", () => openFeedbackEmail("feedback-status"));
   runMatch(form);
 }
 
