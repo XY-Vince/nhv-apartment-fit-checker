@@ -204,7 +204,8 @@ const UI_TEXT = {
     confidenceStale: "This option has public signals, but the data is stale. Refresh official rent, availability, fees, and local services first.",
     confidenceLow: "This option has not been verified enough. Treat the fit score as directional only, and refresh rent, availability, fees, and policy before applying.",
     feedbackEmailSubject: "NHV Apartment Fit Checker beta feedback",
-    feedbackEmailOpened: "Email draft opened. Please review and send it from your mail app.",
+    feedbackEmailOpenedCopied: "Gmail draft opened. Feedback text was also copied, so paste it if Gmail leaves the body blank.",
+    feedbackEmailOpenedNoCopy: "Gmail draft opened. If the body is blank, your browser blocked clipboard access; please use the prefilled Gmail draft.",
     feedbackTitle: "[NHV Apartment Fit Checker beta feedback]",
     feedbackRecipient: email => `Send to: ${email}`,
     feedbackAnswers: "My answers:",
@@ -268,7 +269,8 @@ const UI_TEXT = {
     confidenceStale: "这个选项有公开线索，但信息比较旧。先确认最新租金、availability、费用和周边服务。",
     confidenceLow: "这个选项的信息还不够扎实，匹配分只能当方向参考。申请前先确认租金、availability、费用和政策。",
     feedbackEmailSubject: "纽黑文公寓匹配器测试反馈",
-    feedbackEmailOpened: "邮件草稿已打开，请检查内容后发送。",
+    feedbackEmailOpenedCopied: "Gmail 草稿已打开；反馈文本也已复制。如果 Gmail 正文没有自动填入，可以直接粘贴。",
+    feedbackEmailOpenedNoCopy: "Gmail 草稿已打开。如果正文没有自动填入，说明浏览器拦截了剪贴板，请以 Gmail 草稿为准。",
     feedbackTitle: "[纽黑文公寓匹配器测试反馈]",
     feedbackRecipient: email => `反馈收件人：${email}`,
     feedbackAnswers: "我的答案：",
@@ -2436,22 +2438,53 @@ function feedbackText() {
   ].join("\n");
 }
 
-function feedbackMailtoHref(text, lang = activeLang()) {
+function feedbackGmailHref(text, lang = activeLang()) {
   const subject = ui("feedbackEmailSubject", lang);
-  return `mailto:${FEEDBACK_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
+  const params = new URLSearchParams({
+    view: "cm",
+    fs: "1",
+    to: FEEDBACK_EMAIL,
+    su: subject,
+    body: text
+  });
+  return `https://mail.google.com/mail/?${params.toString()}`;
+}
+
+function copyTextFallback(text) {
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.top = "-9999px";
+  textarea.style.left = "-9999px";
+  document.body.appendChild(textarea);
+  textarea.select();
+  let copied = false;
+  try {
+    copied = document.execCommand("copy");
+  } catch (error) {
+    copied = false;
+  }
+  textarea.remove();
+  return copied;
 }
 
 function openFeedbackEmail(statusId) {
   const status = document.getElementById(statusId);
   const lang = activeLang();
-  const anchor = document.createElement("a");
-  anchor.href = feedbackMailtoHref(feedbackText(), lang);
-  anchor.rel = "noopener";
-  document.body.appendChild(anchor);
-  anchor.click();
-  anchor.remove();
+  const text = feedbackText();
+  const copied = copyTextFallback(text);
+  const draft = window.open(feedbackGmailHref(text, lang), "_blank", "noopener");
+  if (!draft) {
+    window.location.href = feedbackGmailHref(text, lang);
+  }
+  if (!copied && navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => {
+      if (status) status.textContent = ui("feedbackEmailOpenedCopied", lang);
+    }).catch(() => {});
+  }
   if (status) {
-    status.textContent = ui("feedbackEmailOpened", lang);
+    status.textContent = ui(copied ? "feedbackEmailOpenedCopied" : "feedbackEmailOpenedNoCopy", lang);
   }
 }
 
