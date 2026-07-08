@@ -6,7 +6,7 @@
     <meta name="description" content="New Haven / Yale apartment fit checker: answer a few questions about budget, campus routine, utilities, setup, application friction, and daily convenience to find 2-3 better-fit options.">
     <title>New Haven Apartment Fit Checker | Needs first, apartments second</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20260707-feedback-email-2">
+    <link rel="stylesheet" href="styles.css?v=20260708-quick-start-1">
   </head>
   <body>
     <main class="app-shell">
@@ -33,11 +33,37 @@
         </div>
       </section>
 
+      <section class="quick-start panel" aria-labelledby="quick-start-title">
+        <div class="panel-heading">
+          <h2 id="quick-start-title">Start with your main Yale area</h2>
+          <p>If your needs are still fuzzy, start with a low-friction Top 3.</p>
+        </div>
+        <div class="quick-start-grid">
+          <button type="button" class="quick-start-button" data-campus="med_school">Med School / YNHH</button>
+          <button type="button" class="quick-start-button" data-campus="seas_science">Science Hill / SEAS</button>
+          <button type="button" class="quick-start-button" data-campus="central_campus">Central Campus / Law</button>
+          <button type="button" class="quick-start-button" data-campus="som_prospect">SOM / Broadway</button>
+          <button type="button" class="quick-start-button" data-campus="downtown_station">Downtown / Union Station</button>
+          <button type="button" class="quick-start-button" data-campus="balanced">Not sure yet; balanced access</button>
+        </div>
+      </section>
+
       <section class="workspace" aria-label="Apartment fit questionnaire and results">
+        <section class="panel results-panel" aria-live="polite">
+          <div class="panel-heading results-heading">
+            <div>
+              <h2>Top fits</h2>
+              <p id="result-summary">Using the default answers, start with these 3.</p>
+            </div>
+            <button type="button" id="reset-button" class="secondary-action">Reset</button>
+          </div>
+          <div id="results" class="results-list"></div>
+        </section>
+
         <form id="fit-form" class="panel form-panel">
           <div class="panel-heading">
-            <h2>Your actual needs</h2>
-            <p>5 core questions; amenities, route checks, and local services are combined at the end.</p>
+            <h2>Want a sharper fit?</h2>
+            <p>Answer 5 core questions; amenities, route checks, and local services are combined at the end.</p>
           </div>
 
           <fieldset>
@@ -99,17 +125,6 @@
 
           <button type="submit" class="primary-action">Find my best fits</button>
         </form>
-
-        <section class="panel results-panel" aria-live="polite">
-          <div class="panel-heading results-heading">
-            <div>
-              <h2>Top fits</h2>
-              <p id="result-summary">Using the default answers, start with these 3.</p>
-            </div>
-            <button type="button" id="reset-button" class="secondary-action">Reset</button>
-          </div>
-          <div id="results" class="results-list"></div>
-        </section>
       </section>
 
       <section class="launch-actions" aria-label="Beta feedback">
@@ -162,6 +177,6 @@
       <p>© 2026 XY-Vince. Not affiliated with Yale University or any property listed.</p>
     </footer>
 
-    <script src="app.js?v=20260707-feedback-email-2"></script>
+    <script src="app.js?v=20260708-quick-start-1"></script>
   </body>
 </html>

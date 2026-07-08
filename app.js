@@ -23,6 +23,8 @@ const VALUE_SIGNAL_CAVEATS = {
 
 const MVP_MIN_APARTMENT_BUDGET = 1600;
 const FEEDBACK_EMAIL = "vince.xy.wang@gmail.com";
+const HIGH_MOVE_IN_CASH_TOP_SHARE = 0.25;
+const STRONG_AMENITY_TAG_COUNT = 2;
 
 const BUDGET_LABELS = {
   1400: "< $1,600",
@@ -208,6 +210,10 @@ const UI_TEXT = {
     feedbackEmailOpenedNoCopy: "Gmail draft opened. If the body is blank, your browser blocked clipboard access; please use the prefilled Gmail draft.",
     feedbackTitle: "[NHV Apartment Fit Checker beta feedback]",
     feedbackRecipient: email => `Send to: ${email}`,
+    feedbackEntry: "Entry path",
+    entryDefault: "Default balanced view",
+    entryFullQuiz: "Full questionnaire / refined answers",
+    entryQuickStart: campus => `Quick start: ${campus}`,
     feedbackAnswers: "My answers:",
     feedbackTop: "Top 3 shown:",
     feedbackAccuracy: "Top 3 accuracy",
@@ -216,7 +222,17 @@ const UI_TEXT = {
     feedbackNote: "Note: this is beta feedback, not an application request.",
     notSpecified: "Not specified",
     none: "None",
-    noTop3: "No apartment top 3 shown"
+    noTop3: "No apartment top 3 shown",
+    quickStartSummary: (campus, count) => `Quick start for ${campus}: start with these ${count}. Use the questionnaire below to refine budget and true cost.`,
+    ruleTags: {
+      campusFit: campus => `${campus} access`,
+      balancedFit: "Balanced access",
+      utilitiesPredictable: "Predictable utilities",
+      amenityStrong: "Strong amenities",
+      parkingVerify: "Ask about parking",
+      moveInHigh: "Higher move-in cash",
+      roommateFriendly: "Roommate split friendly"
+    }
   },
   zh: {
     defaultSummary: "基于默认需求，先看这 3 个。",
@@ -273,6 +289,10 @@ const UI_TEXT = {
     feedbackEmailOpenedNoCopy: "Gmail 草稿已打开。如果正文没有自动填入，说明浏览器拦截了剪贴板，请以 Gmail 草稿为准。",
     feedbackTitle: "[纽黑文公寓匹配器测试反馈]",
     feedbackRecipient: email => `反馈收件人：${email}`,
+    feedbackEntry: "进入方式",
+    entryDefault: "默认均衡结果",
+    entryFullQuiz: "完整问卷 / 已细化答案",
+    entryQuickStart: campus => `快速入口：${campus}`,
     feedbackAnswers: "我的答案：",
     feedbackTop: "显示的前三名：",
     feedbackAccuracy: "前三名准确度",
@@ -281,7 +301,17 @@ const UI_TEXT = {
     feedbackNote: "注：这是测试反馈，不是申请请求。",
     notSpecified: "未填写",
     none: "无",
-    noTop3: "未显示公寓前三名"
+    noTop3: "未显示公寓前三名",
+    quickStartSummary: (campus, count) => `${campus} 快速入口：先看这 ${count} 个；预算和真实成本可以继续用下面的问卷细化。`,
+    ruleTags: {
+      campusFit: campus => `${campus} 方便`,
+      balancedFit: "通勤均衡",
+      utilitiesPredictable: "utilities 更好预估",
+      amenityStrong: "楼内配套强",
+      parkingVerify: "parking 要提前问",
+      moveInHigh: "move-in cash 较高",
+      roommateFriendly: "roommate 分摊友好"
+    }
   }
 };
 
@@ -422,6 +452,7 @@ const ANSWER_VALUE_LABELS = {
 
 let latestAnswers = null;
 let latestResults = [];
+let latestEntry = "default";
 
 const APARTMENTS = [
   {
@@ -954,7 +985,7 @@ const APARTMENTS = [
     },
     campusScores: {
       central_campus: 3,
-      med_school: 4,
+      med_school: 5,
       som_prospect: 2,
       seas_science: 2,
       downtown_station: 5,
@@ -2323,8 +2354,21 @@ function valueLabel(value, labels) {
   return labels[value] || value || "Not specified";
 }
 
+function labelLine(label, value, lang = activeLang()) {
+  return `${label}${lang === "zh" ? "：" : ": "}${value}`;
+}
+
 function budgetLabel(maxBudget) {
   return BUDGET_LABELS[maxBudget] || `$${maxBudget.toLocaleString()}`;
+}
+
+function entryLabel(entry = latestEntry, lang = activeLang()) {
+  if (entry.startsWith("quick_start:")) {
+    const campus = entry.split(":")[1];
+    return ui("entryQuickStart", lang)(campusLabel(campus, lang));
+  }
+  if (entry === "full_quiz") return ui("entryFullQuiz", lang);
+  return ui("entryDefault", lang);
 }
 
 function isOutOfScope(answers) {
@@ -2402,12 +2446,60 @@ function formatAnswersForShare(answers, lang = activeLang()) {
       priorities: "Other priorities"
     };
   return [
-    `${labels.budget}: ${budgetLabel(answers.budget)}`,
-    `${labels.campus}: ${campusLabel(answers.campus, lang)}`,
-    `${labels.utilities}: ${answerValueLabel("utilities", answers.utilities, lang)}`,
-    `${labels.setup}: ${setup}`,
-    `${labels.priorities}: ${priorities}`
+    labelLine(labels.budget, budgetLabel(answers.budget), lang),
+    labelLine(labels.campus, campusLabel(answers.campus, lang), lang),
+    labelLine(labels.utilities, answerValueLabel("utilities", answers.utilities, lang), lang),
+    labelLine(labels.setup, setup, lang),
+    labelLine(labels.priorities, priorities, lang)
   ].join("\n");
+}
+
+function highMoveInCashCutoff(answers) {
+  const amounts = APARTMENTS
+    .filter(isRankableApartment)
+    .map(apartment => calculateCosts(apartment, answers).moveInMin)
+    .filter(Number.isFinite)
+    .sort((a, b) => b - a);
+  if (!amounts.length) return Infinity;
+  const cutoffIndex = Math.max(0, Math.ceil(amounts.length * HIGH_MOVE_IN_CASH_TOP_SHARE) - 1);
+  return amounts[cutoffIndex];
+}
+
+function hasStrongAmenities(apartment) {
+  return apartment.amenityTags.filter(tag => tag !== "basic").length >= STRONG_AMENITY_TAG_COUNT;
+}
+
+function ruleBadges(apartment, answers, lang = activeLang()) {
+  const labels = ui("ruleTags", lang);
+  const badges = [];
+  const add = (label, level = "") => {
+    if (label && !badges.some(badge => badge.label === label)) badges.push({ label, level });
+  };
+
+  const campusScore = apartment.campusScores[answers.campus] || 0;
+  if (answers.campus === "balanced" && campusScore >= 4) {
+    add(labels.balancedFit, "good");
+  } else if (answers.campus && campusScore >= 4) {
+    add(labels.campusFit(campusLabel(answers.campus, lang)), "good");
+  }
+
+  if (apartment.utilities === "predictable") add(labels.utilitiesPredictable, "good");
+  if (hasStrongAmenities(apartment)) add(labels.amenityStrong, "good");
+  if (apartment.amenityTags.includes("parking") || (answers.priority || []).includes("parking")) {
+    add(labels.parkingVerify, "warn");
+  }
+  if (apartment.roommateFit >= 4) add(labels.roommateFriendly, "good");
+  if (calculateCosts(apartment, answers).moveInMin >= highMoveInCashCutoff(answers)) {
+    add(labels.moveInHigh, "warn");
+  }
+
+  return badges.slice(0, 5);
+}
+
+function renderRuleBadges(apartment, answers, lang = activeLang()) {
+  return ruleBadges(apartment, answers, lang)
+    .map(badge => `<span class="tag ${escapeHtml(badge.level)}">${escapeHtml(badge.label)}</span>`)
+    .join("");
 }
 
 function getInputValue(id) {
@@ -2423,6 +2515,7 @@ function feedbackText() {
   return [
     ui("feedbackTitle", lang),
     ui("feedbackRecipient", lang)(FEEDBACK_EMAIL),
+    labelLine(ui("feedbackEntry", lang), entryLabel(latestEntry, lang), lang),
     "",
     ui("feedbackAnswers", lang),
     formatAnswersForShare(latestAnswers, lang),
@@ -2430,9 +2523,9 @@ function feedbackText() {
     ui("feedbackTop", lang),
     topResultNames(latestResults, lang),
     "",
-    `${ui("feedbackAccuracy", lang)}: ${accuracy}`,
-    `${ui("feedbackMissing", lang)}: ${missing}`,
-    `${ui("feedbackImprove", lang)}: ${note}`,
+    labelLine(ui("feedbackAccuracy", lang), accuracy, lang),
+    labelLine(ui("feedbackMissing", lang), missing, lang),
+    labelLine(ui("feedbackImprove", lang), note, lang),
     "",
     ui("feedbackNote", lang)
   ].join("\n");
@@ -2488,7 +2581,7 @@ function openFeedbackEmail(statusId) {
   }
 }
 
-function renderResults(results, answers) {
+function renderResults(results, answers, options = {}) {
   const list = document.getElementById("results");
   const summary = document.getElementById("result-summary");
   const lang = activeLang();
@@ -2498,10 +2591,12 @@ function renderResults(results, answers) {
     return !result.apartment.isExploration && result.breakdown.budget >= SCORE.HIGH;
   });
   const budgetCoverageGap = !hasSpecificBudgetFit;
-  const baseSummary = ui("baseSummary", lang)(budgetLabel(answers.budget), campus, top.length);
+  const baseSummary = options.quickStart
+    ? ui("quickStartSummary", lang)(campus, top.length)
+    : ui("baseSummary", lang)(budgetLabel(answers.budget), campus, top.length);
   const budgetGapSummary = ui("budgetGapSummary", lang);
-  summary.textContent = budgetCoverageGap ? `${baseSummary} ${budgetGapSummary}` : baseSummary;
-  summary.classList.toggle("summary-warning", budgetCoverageGap);
+  summary.textContent = !options.quickStart && budgetCoverageGap ? `${baseSummary} ${budgetGapSummary}` : baseSummary;
+  summary.classList.toggle("summary-warning", !options.quickStart && budgetCoverageGap);
 
   list.innerHTML = top.map((result, index) => {
     const apartment = result.apartment;
@@ -2576,6 +2671,7 @@ function renderResults(results, answers) {
         <div class="breakdown">${bars}</div>
 
         <div class="tags">
+          ${renderRuleBadges(apartment, answers, lang)}
           <span class="tag ${confidenceClass(apartment.confidence)}">${escapeHtml(copy.confidenceLabel)}</span>
           ${apartment.isExploration ? `<span class="tag low">${escapeHtml(ui("tags", lang).exploration)}</span>` : ""}
           ${copy.concession ? `<span class="tag warn">${escapeHtml(ui("tags", lang).concession)}</span>` : ""}
@@ -2608,9 +2704,60 @@ function rankApartments(answers) {
     .sort((a, b) => compareResults(a, b, answers));
 }
 
-function runMatch(form) {
+function rankQuickStartApartments(answers) {
+  if (isOutOfScope(answers)) return [];
+  return APARTMENTS
+    .filter(isRankableApartment)
+    .map(apartment => scoreApartment(apartment, answers))
+    .sort((a, b) => {
+      const campusDiff = (b.apartment.campusScores[answers.campus] || 1) - (a.apartment.campusScores[answers.campus] || 1);
+      if (campusDiff !== 0) return campusDiff;
+      return compareResults(a, b, answers);
+    });
+}
+
+function setCampusValue(form, campus) {
+  const input = form.querySelector(`input[name="campus"][value="${campus}"]`);
+  if (input) input.checked = true;
+}
+
+function setActiveQuickStart(campus) {
+  document.querySelectorAll(".quick-start-button").forEach(button => {
+    button.classList.toggle("is-active", button.dataset.campus === campus);
+  });
+}
+
+function scrollResultsIntoView() {
+  const panel = document.querySelector(".results-panel");
+  if (panel && typeof panel.scrollIntoView === "function") {
+    panel.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+function runQuickStart(form, campus) {
+  setCampusValue(form, campus);
+  setActiveQuickStart(campus);
   const answers = getFormValues(form);
   latestAnswers = answers;
+  latestEntry = `quick_start:${campus}`;
+  if (isOutOfScope(answers)) {
+    latestResults = [];
+    renderOutOfScope(answers);
+    scrollResultsIntoView();
+    return [];
+  }
+  const results = rankQuickStartApartments(answers);
+  latestResults = results;
+  renderResults(results, answers, { quickStart: true });
+  scrollResultsIntoView();
+  return results;
+}
+
+function runMatch(form, entry = "full_quiz") {
+  const answers = getFormValues(form);
+  latestAnswers = answers;
+  latestEntry = entry;
+  setActiveQuickStart("");
   if (isOutOfScope(answers)) {
     latestResults = [];
     renderOutOfScope(answers);
@@ -2627,13 +2774,14 @@ function resetForm(form) {
   [...form.querySelectorAll("input")].forEach(input => {
     input.disabled = false;
   });
-  runMatch(form);
+  runMatch(form, "default");
 }
 
 function init() {
   const form = document.getElementById("fit-form");
   const reset = document.getElementById("reset-button");
   const emailFeedback = document.getElementById("email-feedback");
+  const quickStartButtons = [...document.querySelectorAll(".quick-start-button")];
   enforceMaxSelections(form, "setup", 2);
   enforceMaxSelections(form, "priority", 3);
   form.addEventListener("submit", event => {
@@ -2645,7 +2793,10 @@ function init() {
   });
   reset.addEventListener("click", () => resetForm(form));
   emailFeedback.addEventListener("click", () => openFeedbackEmail("feedback-status"));
-  runMatch(form);
+  quickStartButtons.forEach(button => {
+    button.addEventListener("click", () => runQuickStart(form, button.dataset.campus));
+  });
+  runMatch(form, "default");
 }
 
 if (typeof document !== "undefined") {
@@ -2677,10 +2828,13 @@ if (typeof module !== "undefined") {
     isOutOfScope,
     isRankableApartment,
     rankApartments,
+    rankQuickStartApartments,
     escapeHtml,
     formatAnswersForShare,
     topResultNames,
     topReasons,
+    entryLabel,
+    ruleBadges,
     campusLabel,
     categoryLabel,
     answerValueLabel,

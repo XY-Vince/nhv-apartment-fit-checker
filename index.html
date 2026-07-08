@@ -6,7 +6,7 @@
     <meta name="description" content="纽黑文 / Yale 公寓匹配器：根据预算、常去区域、水电网、家具配置、申请难度和日常便利度，找出 2-3 个更适合你的选项。">
     <title>纽黑文公寓匹配器 | 先问需求，再看公寓</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20260707-feedback-email-2">
+    <link rel="stylesheet" href="styles.css?v=20260708-quick-start-1">
   </head>
   <body>
     <main class="app-shell">
@@ -33,11 +33,37 @@
         </div>
       </section>
 
+      <section class="quick-start panel" aria-labelledby="quick-start-title">
+        <div class="panel-heading">
+          <h2 id="quick-start-title">先从你最常去的地方开始</h2>
+          <p>不确定具体需求也没关系，先看一个低门槛的 Top 3。</p>
+        </div>
+        <div class="quick-start-grid">
+          <button type="button" class="quick-start-button" data-campus="med_school">Med School / YNHH</button>
+          <button type="button" class="quick-start-button" data-campus="seas_science">Science Hill / SEAS</button>
+          <button type="button" class="quick-start-button" data-campus="central_campus">Central Campus / Law</button>
+          <button type="button" class="quick-start-button" data-campus="som_prospect">SOM / Broadway</button>
+          <button type="button" class="quick-start-button" data-campus="downtown_station">Downtown / Union Station</button>
+          <button type="button" class="quick-start-button" data-campus="balanced">还不确定，先看均衡推荐</button>
+        </div>
+      </section>
+
       <section class="workspace" aria-label="公寓匹配问卷和结果">
+        <section class="panel results-panel" aria-live="polite">
+          <div class="panel-heading results-heading">
+            <div>
+              <h2>最匹配的选项</h2>
+              <p id="result-summary">基于默认需求，先看这 3 个。</p>
+            </div>
+            <button type="button" id="reset-button" class="secondary-action">重置</button>
+          </div>
+          <div id="results" class="results-list"></div>
+        </section>
+
         <form id="fit-form" class="panel form-panel">
           <div class="panel-heading">
-            <h2>你的真实需求</h2>
-            <p>5 个核心问题；楼内配套、路线和周边服务合并在最后一题。</p>
+            <h2>想更准一点？</h2>
+            <p>再回答 5 个核心问题；楼内配套、路线和周边服务合并在最后一题。</p>
           </div>
 
           <fieldset>
@@ -99,17 +125,6 @@
 
           <button type="submit" class="primary-action">查看匹配结果</button>
         </form>
-
-        <section class="panel results-panel" aria-live="polite">
-          <div class="panel-heading results-heading">
-            <div>
-              <h2>最匹配的选项</h2>
-              <p id="result-summary">基于默认需求，先看这 3 个。</p>
-            </div>
-            <button type="button" id="reset-button" class="secondary-action">重置</button>
-          </div>
-          <div id="results" class="results-list"></div>
-        </section>
       </section>
 
       <section class="launch-actions" aria-label="Beta feedback">
@@ -162,6 +177,6 @@
       <p>© 2026 XY-Vince. Not affiliated with Yale University or any property listed.</p>
     </footer>
 
-    <script src="app.js?v=20260707-feedback-email-2"></script>
+    <script src="app.js?v=20260708-quick-start-1"></script>
   </body>
 </html>
