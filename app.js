@@ -624,7 +624,7 @@ const APARTMENTS = [
     amenityTags: ["package", "gym_pool"],
     dailyTags: ["building_access", "food_store", "late_route"],
     quietScore: 42,
-    flooring: "Vinyl plank or hardwood",
+    flooring: "Vinyl plank or hardwood; verify exact unit",
     furnishing: "CORT / corporate furnished option visible; not furnished-included; 1BR rental is about $250/mo on a 12-mo lease",
     applicationFriction: 4,
     roommateFit: 3,
@@ -639,12 +639,12 @@ const APARTMENTS = [
     ],
     tradeoffs: [
       "concession 条件很具体，不能直接折成 net rent 来打预算分",
-      "recurring Trash + Amenities 已见 $55/mo，但完整 fee sheet、parking、insurance 还缺",
+      "recurring Trash + Amenities 已见 $55/mo；The Taft 没有住户停车位，完整 fee sheet 和 insurance 仍缺",
       "不是 newer glass-tower profile，unit condition、laundry、flooring 要看 exact unit"
     ],
     verify: [
       "full fee sheet and whether skip-deposit offer has conditions",
-      "electricity, internet, laundry, parking, pet, and renter's insurance costs",
+      "electricity, internet, laundry, pet, and renter's insurance costs; nearby garage options if you have a car",
       "whether CORT / corporate furnished option works for normal student leases",
       "student guarantor/co-signer and remote application policy"
     ]
@@ -830,7 +830,7 @@ const APARTMENTS = [
     ],
     tradeoffs: [
       "到 Med School / Union Station / downtown errands 的 routine 不一定顺",
-      "已见 recurring fee $83.39/mo，但 utilities 和 parking 等还要补齐",
+      "平台列出 recurring fees $23/mo；utilities 和 pet/storage 等额外费用仍需确认",
       "concession 只适用于 select homes，不能替代 true monthly cost"
     ],
     verify: [
@@ -1378,7 +1378,7 @@ const APARTMENT_TRANSLATIONS = {
       priceLabel: "studio $2,055 起 / 1BR $2,254 起；加上费用后会更高",
       concession: "官网显示部分房源最高免 2 个月租金，另有 $500 look-and-lease 优惠。",
       valueSignal: "按平台上的租金和面积粗算：Studio S $2,220-$2,345 / 517 sq ft，约 $4.29-$4.54/sq ft。大一点的 2BR 可能每尺更便宜，但总租金和费用会更高。",
-      flooring: "需按具体房源确认",
+      flooring: "照片显示为硬木地板；具体房源需确认",
       furnishing: "普通 lease 默认不带家具；可看 CORT 家具方案，1BR 约 $250/月（12个月 lease）",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "Downtown 买菜吃饭方便，楼内服务完整",
@@ -1432,7 +1432,7 @@ const APARTMENT_TRANSLATIONS = {
       priceLabel: "studio $1,865-$2,060；1BR $2,150-$2,440；2BR $2,950-$3,300",
       concession: "2026-08-01 或之前入住的 studio / 1BR lease 可免 2 个月租金。",
       valueSignal: "按平台上的租金和面积粗算：studio $1,920-$2,115 / 424-524 sq ft，约 $3.66-$4.99/sq ft。studio loft 面积更划算，但还要看具体 unit 状态。",
-      flooring: "需按具体房源确认",
+      flooring: "资料列有 LVP 或硬木地板；具体房源需确认",
       furnishing: "能看到 CORT / corporate furniture 选项；不是默认带家具，1BR 约 $250/月（12个月 lease）",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "Central Campus 和 Downtown 日常都方便",
@@ -1444,12 +1444,12 @@ const APARTMENT_TRANSLATIONS = {
       ],
       tradeoffs: [
         "优惠条件很具体，不能直接折成净租金来打预算分",
-        "已看到 trash + amenity fee 合计 $55/月，但完整 fee sheet、停车和保险仍缺",
+        "已看到垃圾处理和配套费合计 $55/月；楼内没有住户停车位，完整费用表和租客保险仍需确认",
         "不是新玻璃楼类型，具体房源状态、洗衣和地板都要看房确认"
       ],
       verify: [
         "完整费用表以及免押金方案是否有条件",
-        "电费、网络、洗衣、停车、宠物和租客保险成本",
+        "电费、网络、洗衣、宠物和租客保险成本；如果有车，还要另查附近车库",
         "CORT 或企业家具选项是否适用于普通学生租约",
         "学生担保人、共同签署和远程申请政策"
       ]
@@ -1459,7 +1459,7 @@ const APARTMENT_TRANSLATIONS = {
       priceLabel: "studio $2,232 起；1BR $2,164 起；2BR $3,041 起；3BR $3,922 起，按总月价展示",
       concession: "官网显示 24 个月以上 lease 最高免 3 个月，immediate move-in 最高免 2 个月，另有 Yale discount。",
       valueSignal: "按平台上的租金和面积粗算：Sx1 studio $1,894-$4,944 / 387 sq ft，区间很宽。多人合租大户型可能每尺更便宜，但室友分摊和 lease term 要单独核实。",
-      flooring: "需按具体房源确认",
+      flooring: "照片显示为 LVT 地板；具体房源需确认",
       furnishing: "是否带家具尚未核实",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "Ninth Square / Downtown 服务多，也有多人户型",
@@ -1486,7 +1486,7 @@ const APARTMENT_TRANSLATIONS = {
       priceLabel: "studio 需询价；1BR $2,795 起；2BR $3,870 起；3BR $4,725 起；4BR $5,795 起",
       concession: "开业优惠：12 个月 lease 免 2 个月，24 个月以上 lease 免 4 个月。",
       valueSignal: "按平台上的租金和面积粗算：S1 studio $2,290 / 469 sq ft，约 $4.88/sq ft。大户型可能每尺更便宜，但总月租会更高。",
-      flooring: "需按具体房源确认",
+      flooring: "照片看起来是木纹地板；具体房源需确认",
       furnishing: "是否带家具尚未核实",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "新开 Downtown 楼，去 Central Campus 方便",
@@ -1525,7 +1525,7 @@ const APARTMENT_TRANSLATIONS = {
       ],
       tradeoffs: [
         "去 Med School、Union Station 或 Downtown 办事不一定顺",
-        "已看到 recurring fees 约 $83.39/月，但水电网和停车等仍需补齐",
+        "平台列出每月固定费用 $23；水电网和宠物/储物等额外费用仍需确认",
         "优惠只适用于部分房源，不能直接当作每月总成本"
       ],
       verify: [
@@ -1539,7 +1539,7 @@ const APARTMENT_TRANSLATIONS = {
       area: "Audubon / Whitney-Arts 走廊 · 367 Orange St",
       priceLabel: "studio $2,250 起；1BR $2,671 起；2BR $3,691 起；3BR $4,180 起，按估算月成本展示",
       concession: "官网首页显示部分房源最高免 1.5 个月租金。",
-      flooring: "需按具体房源确认",
+      flooring: "照片显示不同房源可能有多种地板；具体房源需确认",
       furnishing: "是否带家具尚未核实",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "Arts、Central Campus 和 Whitney-Audubon 走廊都方便",
@@ -1564,7 +1564,7 @@ const APARTMENT_TRANSLATIONS = {
     "new-haven-towers": {
       area: "Downtown York/Park/High 一带 · 4 栋楼",
       priceLabel: "Madison 单间 $1,695 起；Crown / Crown Court / 18 High 按楼不同",
-      flooring: "需按楼栋和具体房源确认",
+      flooring: "照片显示为硬木地板；需按楼栋和具体房源确认",
       furnishing: "是否带家具尚未核实",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "离校园近，但一定要按具体楼比较",
@@ -1589,7 +1589,7 @@ const APARTMENT_TRANSLATIONS = {
     "pierpont-city-crossing": {
       area: "Downtown Crossing / 车站-医学院边缘",
       priceLabel: "Jr Studio $2,218 起；1BR $2,486 起；2BR $3,613 起",
-      flooring: "需按具体房源确认",
+      flooring: "照片显示客厅为木纹 LVP、卧室为地毯；具体房源需确认",
       furnishing: "短租可能包含家具和水电网；普通 lease 是否带家具还没确认",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "Union Station、Med School 和 Downtown Crossing 作息",
@@ -1614,7 +1614,7 @@ const APARTMENT_TRANSLATIONS = {
     "the-whit": {
       area: "Wooster Square · 630 Chapel St",
       priceLabel: "官网说明价格会变化；准确租金要看最新 availability",
-      flooring: "列有宽木板地板；仍需按具体房源确认",
+      flooring: "照片显示为宽板地板；具体房源需确认",
       furnishing: "普通 lease 默认不带家具；可看 CORT 家具方案，1BR 约 $250/月（12个月 lease）",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "Wooster Square 餐饮方便，也有收包裹 / concierge",
@@ -1640,8 +1640,8 @@ const APARTMENT_TRANSLATIONS = {
       area: "Downtown Crossing / 联合车站一侧 · South Orange / George",
       priceLabel: "旧新闻基准：studio $1,900，1BR $2,625，2BR $3,300",
       valueSignal: "按平台上的租金和面积粗算：S1 studio $1,921-$2,201 / 373 sq ft，约 $5.15-$5.90/sq ft。B1 2BR 在确认费用前看起来约 $3.06/sq ft 起。",
-      flooring: "需核实",
-      furnishing: "是否带家具尚未核实",
+      flooring: "照片显示主起居区为抛光混凝土、卧室为地毯；具体房源需确认",
+      furnishing: "平台列有带家具和部分带家具的房源；具体房源需确认",
       confidenceLabel: "旧新闻线索（2024-12）；需要再查官网",
       dailyLabel: "Union Station / Med School 方向较好，周边服务还在变化",
       sourceLabel: "目前主要是 2024-12 新闻线索；仍需官网实时数据",
@@ -1708,12 +1708,12 @@ const APARTMENT_TRANSLATIONS = {
       ],
       tradeoffs: [
         "The concession has specific conditions, so it should not be directly converted into net rent for scoring.",
-        "Trash plus amenity charges are visible at $55/month, but the full fee sheet, parking, and insurance are still incomplete.",
+        "Trash plus amenity charges are visible at $55/month. The Taft has no resident parking; the full fee sheet and renter's insurance details are still incomplete.",
         "This is not a new glass-tower profile; exact unit condition, laundry, and flooring need unit-level confirmation."
       ],
       verify: [
         "Full fee sheet and whether the skip-deposit offer has conditions.",
-        "Electricity, internet, laundry, parking, pet, and renter's insurance costs.",
+        "Electricity, internet, laundry, pet, and renter's insurance costs; nearby garage options if you have a car.",
         "Whether CORT or corporate furnished options work for ordinary student leases.",
         "Student guarantor/co-signer and remote application policy."
       ]
@@ -1762,7 +1762,7 @@ const APARTMENT_TRANSLATIONS = {
       ],
       tradeoffs: [
         "The routine to Med School, Union Station, or downtown errands may not be smooth.",
-        "A recurring fee of about $83.39/month is visible, but utilities, parking, and other costs still need confirmation.",
+        "The marketplace lists $23/month in recurring fees; utilities and other pet/storage costs still need confirmation.",
         "The concession applies only to select homes, so it cannot replace true monthly cost."
       ],
       verify: [
@@ -2008,6 +2008,7 @@ function appliesToAnswers(item, answers) {
 }
 
 function monthlyCostLine(key, item, baseRent, answers, fallbackAmount = 0) {
+  if (item === null) return null;
   if (!item) {
     return {
       key,
