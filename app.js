@@ -231,8 +231,7 @@ const UI_TEXT = {
       amenityStrong: "Strong amenities",
       parkingVerify: "Ask about parking",
       moveInHigh: "Higher move-in cash",
-      roommateFriendly: "Roommate split friendly",
-      studioFriendly: "Studio friendly"
+      roommateFriendly: "Roommate split friendly"
     }
   },
   zh: {
@@ -311,8 +310,7 @@ const UI_TEXT = {
       amenityStrong: "楼内配套强",
       parkingVerify: "parking 要提前问",
       moveInHigh: "move-in cash 较高",
-      roommateFriendly: "roommate 分摊友好",
-      studioFriendly: "studio 户型友好"
+      roommateFriendly: "roommate 分摊友好"
     }
   }
 };
@@ -459,7 +457,6 @@ let latestEntry = "default";
 const APARTMENTS = [
   {
     id: "360-state",
-    unitTypes: ["studio", "1BR", "2BR"],
     name: "360 State Street",
     area: "Downtown high-rise · 360 State St",
     price: {
@@ -524,7 +521,6 @@ const APARTMENTS = [
   },
   {
     id: "olive-wooster",
-    unitTypes: ["studio", "1BR", "2BR", "3BR", "4BR", "co-living"],
     name: "Olive & Wooster",
     area: "Wooster Square / downtown edge · 87 Union St",
     price: {
@@ -550,7 +546,7 @@ const APARTMENTS = [
     valueSignal: "Marketplace sqft check: A1 1BR $1,880-$2,824 / 631 sq ft, about $2.98-$4.48 per sq ft. Co-living floorplans appear separately, so compare rent basis carefully.",
     campusScores: {
       central_campus: 3,
-      med_school: 5,
+      med_school: 3,
       som_prospect: 2,
       seas_science: 2,
       downtown_station: 5,
@@ -588,7 +584,6 @@ const APARTMENTS = [
   },
   {
     id: "the-taft",
-    unitTypes: ["studio", "1BR", "2BR"],
     name: "The Taft",
     area: "Central / Chapel-College corridor · 265 College St",
     price: {
@@ -653,7 +648,6 @@ const APARTMENTS = [
   },
   {
     id: "the-archive",
-    unitTypes: ["studio", "1BR", "2BR", "3BR"],
     name: "The Archive",
     area: "Downtown / Ninth Square · Chapel / Orange",
     price: {
@@ -718,7 +712,6 @@ const APARTMENTS = [
   },
   {
     id: "estelle",
-    unitTypes: ["studio", "1BR", "2BR", "3BR", "4BR"],
     name: "Estelle",
     area: "Downtown / New Haven Green edge · 19 Elm St",
     price: {
@@ -782,7 +775,6 @@ const APARTMENTS = [
   },
   {
     id: "axis-201",
-    unitTypes: ["studio", "1BR", "2BR", "3BR"],
     name: "Axis 201",
     area: "Science Park / Munson St · 201 Munson St",
     price: {
@@ -847,7 +839,6 @@ const APARTMENTS = [
   },
   {
     id: "the-audubon",
-    unitTypes: ["studio", "1BR", "2BR", "3BR"],
     name: "The Audubon",
     area: "Audubon / Whitney-Arts corridor · 367 Orange St",
     price: {
@@ -910,7 +901,6 @@ const APARTMENTS = [
   },
   {
     id: "new-haven-towers",
-    unitTypes: ["studio", "1BR", "2BR"],
     name: "New Haven Towers / NHV Towers",
     area: "Downtown York/Park/High cluster · 4 buildings",
     price: {
@@ -972,7 +962,6 @@ const APARTMENTS = [
   },
   {
     id: "pierpont-city-crossing",
-    unitTypes: ["studio", "1BR", "2BR"],
     name: "Pierpont at City Crossing",
     area: "Downtown Crossing / station-med edge",
     price: {
@@ -996,6 +985,8 @@ const APARTMENTS = [
     },
     campusScores: {
       central_campus: 3,
+      // Apartments.com pins City Crossing at 9 Tower Ln in The Hill and labels it "Walk To Campus";
+      // this keeps the Med score location-based rather than result-driven.
       med_school: 5,
       som_prospect: 2,
       seas_science: 2,
@@ -1014,7 +1005,7 @@ const APARTMENTS = [
     confidence: "partial",
     confidenceLabel: "Partial confidence",
     dailyLabel: "Station / Med / downtown crossing routine",
-    sourceLabel: "RMS official page + embedded RentCafe refreshed 2026-06-29",
+    sourceLabel: "RMS official page + Apartments.com 9 Tower Ln / Walk To Campus location check",
     bestFor: [
       "主要去 Med School / Union Station / downtown south side，想要 City Crossing 位置的学生",
       "想比较 Jr Studio / 1BR / 2BR，且能接受 standard lease 条款待确认的学生",
@@ -1034,7 +1025,6 @@ const APARTMENTS = [
   },
   {
     id: "the-whit",
-    unitTypes: ["studio", "1BR", "2BR", "3BR"],
     name: "The Whit",
     area: "Wooster Square · 630 Chapel St",
     price: {
@@ -1096,7 +1086,6 @@ const APARTMENTS = [
   },
   {
     id: "anthem-square10",
-    unitTypes: ["studio", "1BR", "2BR"],
     name: "The Anthem at Square 10",
     area: "Downtown Crossing / Union Station side · South Orange / George",
     price: {
@@ -1159,7 +1148,6 @@ const APARTMENTS = [
   },
   {
     id: "the-elm",
-    unitTypes: ["studio", "1BR", "2BR"],
     name: "The Elm",
     area: "Central campus edge",
     price: {
@@ -1207,7 +1195,6 @@ const APARTMENTS = [
   },
   {
     id: "corsair",
-    unitTypes: ["studio", "1BR", "2BR", "3BR"],
     name: "Corsair",
     area: "East Rock / State Street corridor",
     price: {
@@ -1255,7 +1242,6 @@ const APARTMENTS = [
   },
   {
     id: "east-rock-landlord",
-    unitTypes: ["room", "studio", "1BR", "2BR", "3BR"],
     name: "East Rock independent landlord",
     area: "Exploration direction · residential / roommate-friendly",
     isExploration: true,
@@ -1304,7 +1290,6 @@ const APARTMENTS = [
   },
   {
     id: "hamden-large",
-    unitTypes: ["studio", "1BR", "2BR", "3BR"],
     name: "Hamden large apartment",
     area: "Exploration direction · lower-rent commute trade-off",
     isExploration: true,
@@ -1575,7 +1560,7 @@ const APARTMENT_TRANSLATIONS = {
       furnishing: "短租可能包含家具和水电网；普通 lease 是否带家具还没确认",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "Union Station、Med School 和 Downtown Crossing 作息",
-      sourceLabel: "2026-06-29 查过 RMS 官网和嵌入的 RentCafe",
+      sourceLabel: "RMS 官网 + Apartments.com 9 Tower Ln / Walk To Campus 位置核对",
       bestFor: [
         "主要去 Med School、Union Station 或 Downtown 南侧，想要 City Crossing 位置的学生",
         "想比较 Jr Studio、1BR 和 2BR，并能接受普通 lease 条款待确认的学生",
@@ -2501,9 +2486,8 @@ function ruleBadges(apartment, answers, lang = activeLang()) {
   }
 
   if (apartment.utilities === "predictable") add(labels.utilitiesPredictable, "good");
-  if (apartment.unitTypes && apartment.unitTypes.includes("studio")) add(labels.studioFriendly, "good");
   if (hasStrongAmenities(apartment)) add(labels.amenityStrong, "good");
-  if (apartment.amenityTags.includes("parking") || (answers.priority || []).includes("parking")) {
+  if ((answers.priority || []).includes("parking")) {
     add(labels.parkingVerify, "warn");
   }
   if (apartment.roommateFit >= 4) add(labels.roommateFriendly, "good");
