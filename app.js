@@ -61,6 +61,7 @@ const COST_CONFIDENCE_LABELS = {
     verified_public: "public source",
     sample_lease: "sample lease",
     partial_public: "partial source",
+    marketplace_supplied: "marketplace",
     planning_assumption: "planning assumption",
     conditional_offer: "conditional",
     unknown: "needs verification"
@@ -70,6 +71,7 @@ const COST_CONFIDENCE_LABELS = {
     verified_public: "公开信息",
     sample_lease: "sample lease",
     partial_public: "部分公开",
+    marketplace_supplied: "平台信息",
     planning_assumption: "估算假设",
     conditional_offer: "有条件",
     unknown: "需核实"
@@ -465,17 +467,18 @@ const APARTMENTS = [
       label: "$2,055+ studio / $2,254+ 1BR adv.; true cost higher"
     },
     trueMonthlyCost: {
+        recurringFees: { amount: 115, confidence: "marketplace_supplied" },
       advertisedRent: 2055,
       utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
       insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
       furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
-      parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
+      parkingEstimate: { amount: 130, confidence: "marketplace_supplied", appliesWhenPriority: "parking" },
       concessionEstimate: { monthsFree: 0, leaseMonths: 12, confidence: "unknown" }
     },
     moveInCash: {
       firstMonth: { multiplier: 1, confidence: "advertised_rent" },
       securityDeposit: { multiplier: 1, confidence: "planning_assumption" },
-      appFee: { amount: 50, confidence: "planning_assumption" },
+      appFee: { amount: 27, confidence: "marketplace_supplied" },
       adminFee: { amount: 0, confidence: "unknown" }
     },
     concession: "Official page advertises up to 2 months free + $500 look-and-lease on selected homes; not counted in budget score.",
@@ -494,7 +497,7 @@ const APARTMENTS = [
     amenityTags: ["package", "gym_pool", "parking"],
     dailyTags: ["building_access", "food_store", "late_route"],
     quietScore: 35,
-    flooring: "needs exact-unit verification",
+    flooring: "Hardwood flooring",
     furnishing: "Unfurnished base; CORT furniture partner; 1BR rental is about $250/mo on a 12-mo lease",
     applicationFriction: 4,
     roommateFit: 2,
@@ -533,14 +536,14 @@ const APARTMENTS = [
       utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
       insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
       furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
-      parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
+      parkingEstimate: { amount: 175, confidence: "marketplace_supplied", appliesWhenPriority: "parking" },
       concessionEstimate: { monthsFree: 2, leaseMonths: 12, confidence: "conditional_offer" }
     },
     moveInCash: {
       firstMonth: { multiplier: 1, confidence: "advertised_rent" },
       securityDeposit: { multiplier: 1, confidence: "planning_assumption" },
-      appFee: { amount: 50, confidence: "planning_assumption" },
-      adminFee: { amount: 0, confidence: "unknown" }
+      appFee: { amount: 100, confidence: "marketplace_supplied" },
+      adminFee: { amount: 50, confidence: "marketplace_supplied" }
     },
     concession: "Official page shows up to 3 months free on select apartments and reduced pricing on select 1BR; not counted in budget score.",
     valueSignal: "Marketplace sqft check: A1 1BR $1,880-$2,824 / 631 sq ft, about $2.98-$4.48 per sq ft. Co-living floorplans appear separately, so compare rent basis carefully.",
@@ -602,8 +605,8 @@ const APARTMENTS = [
     },
     moveInCash: {
       firstMonth: { multiplier: 1, confidence: "advertised_rent" },
-      securityDeposit: { amount: 250, maxMultiplier: 1, confidence: "conditional_offer" },
-      appFee: { amount: 50, confidence: "planning_assumption" },
+      securityDeposit: { amount: 2000, confidence: "marketplace_supplied" },
+      appFee: { amount: 50, confidence: "marketplace_supplied" },
       adminFee: { amount: 0, confidence: "unknown" }
     },
     concession: "2 months free for studio/1BR leases with move-in on or before 2026-08-01; not counted in budget score.",
@@ -621,7 +624,7 @@ const APARTMENTS = [
     amenityTags: ["package", "gym_pool"],
     dailyTags: ["building_access", "food_store", "late_route"],
     quietScore: 42,
-    flooring: "needs exact-unit verification",
+    flooring: "Vinyl plank or hardwood",
     furnishing: "CORT / corporate furnished option visible; not furnished-included; 1BR rental is about $250/mo on a 12-mo lease",
     applicationFriction: 4,
     roommateFit: 3,
@@ -657,17 +660,17 @@ const APARTMENTS = [
     },
     trueMonthlyCost: {
       advertisedRent: 2164,
-      recurringFees: { amount: 6.5, confidence: "sample_lease" },
+      recurringFees: { amount: 0, confidence: "marketplace_supplied" },
       utilitiesEstimate: { amount: 90, confidence: "planning_assumption" },
       insuranceEstimate: { amount: 14, confidence: "sample_lease" },
       furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
-      parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
+      parkingEstimate: { amount: 200, confidence: "marketplace_supplied", appliesWhenPriority: "parking" },
       concessionEstimate: { monthsFree: 2, leaseMonths: 12, confidence: "conditional_offer" }
     },
     moveInCash: {
       firstMonth: { multiplier: 1, confidence: "advertised_rent" },
       securityDeposit: { amount: 0, confidence: "sample_lease" },
-      appFee: { amount: 50, confidence: "planning_assumption" },
+      appFee: { amount: 50, confidence: "marketplace_supplied" },
       adminFee: { amount: 0, confidence: "unknown" }
     },
     concession: "Official site shows up to 3 months free on 24+ month leases and up to 2 months free on immediate move-ins + Yale discounts; not counted in budget score.",
@@ -685,7 +688,7 @@ const APARTMENTS = [
     amenityTags: ["package"],
     dailyTags: ["building_access", "food_store", "late_route"],
     quietScore: 48,
-    flooring: "needs exact-unit verification",
+    flooring: "LVT (Luxury vinyl tile)",
     furnishing: "Furnished status not verified",
     applicationFriction: 4,
     roommateFit: 4,
@@ -722,7 +725,7 @@ const APARTMENTS = [
     trueMonthlyCost: {
       advertisedRent: 2795,
       utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
-      insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
+      insuranceEstimate: { amount: 15, confidence: "marketplace_supplied" },
       furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
       parkingEstimate: { amount: 180, confidence: "planning_assumption", appliesWhenPriority: "parking" },
       concessionEstimate: { monthsFree: 2, leaseMonths: 12, confidence: "conditional_offer" }
@@ -748,8 +751,8 @@ const APARTMENTS = [
     amenityTags: ["package", "gym_pool"],
     dailyTags: ["building_access", "food_store", "late_route"],
     quietScore: 50,
-    flooring: "needs exact-unit verification",
-    furnishing: "Furnished status not verified",
+    flooring: "Wood-style flooring",
+    furnishing: "Optional furnished apartments available for additional cost",
     applicationFriction: 4,
     roommateFit: 4,
     confidence: "partial",
@@ -784,17 +787,17 @@ const APARTMENTS = [
     },
     trueMonthlyCost: {
       advertisedRent: 1852,
-      recurringFees: { amount: 83.39, confidence: "verified_public" },
+      recurringFees: { amount: 23, confidence: "marketplace_supplied" },
       utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
-      insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
+      insuranceEstimate: { amount: 15, confidence: "marketplace_supplied" },
       furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
-      parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
+      parkingEstimate: { amount: 125, confidence: "marketplace_supplied", appliesWhenPriority: "parking" },
       concessionEstimate: { monthsFree: 2, leaseMonths: 12, confidence: "conditional_offer" }
     },
     moveInCash: {
       firstMonth: { multiplier: 1, confidence: "advertised_rent" },
       securityDeposit: { multiplier: 1, confidence: "planning_assumption" },
-      appFee: { amount: 50, confidence: "planning_assumption" },
+      appFee: { amount: 50, confidence: "marketplace_supplied" },
       adminFee: { amount: 0, confidence: "unknown" }
     },
     concession: "Official page advertises reduced rates plus up to 3 months free on select homes; not counted in budget score.",
@@ -919,7 +922,7 @@ const APARTMENTS = [
     moveInCash: {
       firstMonth: { multiplier: 1, confidence: "advertised_rent" },
       securityDeposit: { multiplier: 1.5, confidence: "verified_public" },
-      appFee: { amount: 50, confidence: "verified_public" },
+      appFee: { amount: 50, confidence: "marketplace_supplied" },
       adminFee: { amount: 0, confidence: "unknown" }
     },
     campusScores: {
@@ -935,7 +938,7 @@ const APARTMENTS = [
     amenityTags: ["package", "gym_pool", "parking"],
     dailyTags: ["building_access", "food_store", "late_route"],
     quietScore: 45,
-    flooring: "needs building/exact-unit verification",
+    flooring: "Hardwood floors",
     furnishing: "Furnished status not verified",
     applicationFriction: 3,
     roommateFit: 4,
@@ -980,7 +983,7 @@ const APARTMENTS = [
     moveInCash: {
       firstMonth: { multiplier: 1, confidence: "advertised_rent" },
       securityDeposit: { multiplier: 1, confidence: "planning_assumption" },
-      appFee: { amount: 50, confidence: "planning_assumption" },
+      appFee: { amount: 25, confidence: "marketplace_supplied" },
       adminFee: { amount: 0, confidence: "unknown" }
     },
     campusScores: {
@@ -998,7 +1001,7 @@ const APARTMENTS = [
     amenityTags: ["package"],
     dailyTags: ["building_access", "food_store", "late_route"],
     quietScore: 75,
-    flooring: "needs exact-unit verification",
+    flooring: "Luxury wood plank vinyl in living areas; textured carpet in bedrooms; porcelain tile in bathrooms",
     furnishing: "Short-term stays may include furniture/utilities; normal lease furnishing not verified",
     applicationFriction: 4,
     roommateFit: 3,
@@ -1042,7 +1045,7 @@ const APARTMENTS = [
     },
     moveInCash: {
       firstMonth: { multiplier: 1, confidence: "advertised_rent" },
-      securityDeposit: { multiplier: 1, confidence: "planning_assumption" },
+      securityDeposit: { amount: 500, confidence: "marketplace_supplied" },
       appFee: { amount: 50, confidence: "planning_assumption" },
       adminFee: { amount: 0, confidence: "unknown" }
     },
@@ -1094,9 +1097,10 @@ const APARTMENTS = [
       label: "Stale news baseline: studio $1,900, 1BR $2,625, 2BR $3,300"
     },
     trueMonthlyCost: {
+        recurringFees: { amount: 105.25, confidence: "marketplace_supplied" },
       advertisedRent: 2200,
       utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
-      insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
+      insuranceEstimate: { amount: 25, confidence: "marketplace_supplied" },
       furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
       parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
       concessionEstimate: { monthsFree: 0, leaseMonths: 12, confidence: "unknown" }
@@ -1104,7 +1108,7 @@ const APARTMENTS = [
     moveInCash: {
       firstMonth: { multiplier: 1, confidence: "advertised_rent" },
       securityDeposit: { multiplier: 1, confidence: "planning_assumption" },
-      appFee: { amount: 50, confidence: "planning_assumption" },
+      appFee: { amount: 0, confidence: "marketplace_supplied" },
       adminFee: { amount: 0, confidence: "unknown" }
     },
     valueSignal: "Marketplace sqft check: S1 studio $1,921-$2,201 / 373 sq ft, about $5.15-$5.90 per sq ft. 2BR B1 appears closer to $3.06+ per sq ft before fee confirmation.",
@@ -1121,8 +1125,8 @@ const APARTMENTS = [
     amenityTags: ["gym_pool", "parking"],
     dailyTags: ["food_store", "late_route"],
     quietScore: 65,
-    flooring: "needs verification",
-    furnishing: "Furnished status not verified",
+    flooring: "Polished concrete in main living areas, plush carpet in bedrooms",
+    furnishing: "Furnished and partially furnished units available",
     applicationFriction: 4,
     roommateFit: 3,
     confidence: "stale",
