@@ -469,6 +469,7 @@ const APARTMENTS = [
     trueMonthlyCost: {
         recurringFees: { amount: 115, confidence: "marketplace_supplied" },
       advertisedRent: 2055,
+      recurringFees: { amount: 115, confidence: "marketplace_supplied" },
       utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
       insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
       furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
@@ -600,7 +601,7 @@ const APARTMENTS = [
       utilitiesEstimate: { amount: 90, confidence: "planning_assumption" },
       insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
       furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
-      parkingEstimate: { amount: 150, confidence: "planning_assumption", appliesWhenPriority: "parking" },
+      parkingEstimate: null,
       concessionEstimate: { monthsFree: 2, leaseMonths: 12, confidence: "conditional_offer" }
     },
     moveInCash: {
@@ -688,7 +689,7 @@ const APARTMENTS = [
     amenityTags: ["package"],
     dailyTags: ["building_access", "food_store", "late_route"],
     quietScore: 48,
-    flooring: "LVT (Luxury vinyl tile)",
+    flooring: "Luxury vinyl tile (LVT)",
     furnishing: "Furnished status not verified",
     applicationFriction: 4,
     roommateFit: 4,
@@ -751,7 +752,7 @@ const APARTMENTS = [
     amenityTags: ["package", "gym_pool"],
     dailyTags: ["building_access", "food_store", "late_route"],
     quietScore: 50,
-    flooring: "Wood-style flooring",
+    flooring: "Warm wood-style flooring",
     furnishing: "Optional furnished apartments available for additional cost",
     applicationFriction: 4,
     roommateFit: 4,
@@ -1099,6 +1100,7 @@ const APARTMENTS = [
     trueMonthlyCost: {
         recurringFees: { amount: 105.25, confidence: "marketplace_supplied" },
       advertisedRent: 2200,
+      recurringFees: { amount: 105.25, confidence: "marketplace_supplied" },
       utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
       insuranceEstimate: { amount: 25, confidence: "marketplace_supplied" },
       furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
@@ -1125,7 +1127,7 @@ const APARTMENTS = [
     amenityTags: ["gym_pool", "parking"],
     dailyTags: ["food_store", "late_route"],
     quietScore: 65,
-    flooring: "Polished concrete in main living areas, plush carpet in bedrooms",
+    flooring: "Polished concrete in main living, carpet in bedrooms",
     furnishing: "Furnished and partially furnished units available",
     applicationFriction: 4,
     roommateFit: 3,
