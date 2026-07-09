@@ -877,7 +877,7 @@ const APARTMENTS = [
     amenityTags: ["package", "parking"],
     dailyTags: ["building_access", "food_store", "late_route"],
     quietScore: 62,
-    flooring: "Photos suggest hardwood floors; verify exact unit",
+    flooring: "Photos suggest multiple flooring selections; verify exact unit",
     furnishing: "Furnished status not verified",
     applicationFriction: 4,
     roommateFit: 3,
@@ -1037,10 +1037,11 @@ const APARTMENTS = [
     },
     trueMonthlyCost: {
       advertisedRent: 2400,
+      recurringFees: { amount: 15, confidence: "marketplace_supplied" },
       utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
       insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
       furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
-      parkingEstimate: { amount: 180, confidence: "planning_assumption", appliesWhenPriority: "parking" },
+      parkingEstimate: { amount: 128, confidence: "marketplace_supplied", appliesWhenPriority: "parking" },
       concessionEstimate: { monthsFree: 0, leaseMonths: 12, confidence: "unknown" }
     },
     moveInCash: {
@@ -1062,7 +1063,7 @@ const APARTMENTS = [
     amenityTags: ["package", "gym_pool", "parking"],
     dailyTags: ["building_access", "food_store", "late_route"],
     quietScore: 58,
-    flooring: "wide plank flooring listed; verify exact unit",
+    flooring: "Photos suggest wide plank flooring; verify exact unit",
     furnishing: "Unfurnished base; CORT furnished solutions partner; 1BR rental is about $250/mo on a 12-mo lease",
     applicationFriction: 4,
     roommateFit: 3,
@@ -1159,6 +1160,20 @@ const APARTMENTS = [
       max: 3000,
       label: "$2,000+ seed estimate; source pending"
     },
+    trueMonthlyCost: {
+      advertisedRent: 2000,
+      utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
+      insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
+      furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      parkingEstimate: { amount: 175, confidence: "marketplace_supplied", appliesWhenPriority: "parking" },
+      concessionEstimate: { monthsFree: 0, leaseMonths: 12, confidence: "unknown" }
+    },
+    moveInCash: {
+      firstMonth: { multiplier: 1, confidence: "advertised_rent" },
+      securityDeposit: { multiplier: 1, confidence: "unknown" },
+      appFee: { amount: 50, confidence: "marketplace_supplied" },
+      adminFee: { amount: 0, confidence: "unknown" }
+    },
     campusScores: {
       central_campus: 5,
       med_school: 3,
@@ -1172,7 +1187,7 @@ const APARTMENTS = [
     amenityTags: ["package"],
     dailyTags: ["food_store", "late_route"],
     quietScore: 48,
-    flooring: "needs verification",
+    flooring: "Photos suggest hardwood flooring; verify exact unit",
     furnishing: "Furnished status not verified",
     applicationFriction: 3,
     roommateFit: 2,
@@ -1206,6 +1221,20 @@ const APARTMENTS = [
       max: 3300,
       label: "$2,200+ seed estimate; source pending"
     },
+    trueMonthlyCost: {
+      advertisedRent: 2200,
+      utilitiesEstimate: { amount: 180, confidence: "planning_assumption" },
+      insuranceEstimate: { amount: 15, confidence: "planning_assumption" },
+      furnitureAmortized: { amount: 250, confidence: "planning_assumption", appliesWhenSetup: "furniture_ready" },
+      parkingEstimate: { amount: 117, confidence: "marketplace_supplied", appliesWhenPriority: "parking" },
+      concessionEstimate: { monthsFree: 0, leaseMonths: 12, confidence: "unknown" }
+    },
+    moveInCash: {
+      firstMonth: { multiplier: 1, confidence: "advertised_rent" },
+      securityDeposit: { amount: 500, confidence: "marketplace_supplied" },
+      appFee: { amount: 50, confidence: "planning_assumption" },
+      adminFee: { amount: 0, confidence: "unknown" }
+    },
     campusScores: {
       central_campus: 3,
       med_school: 2,
@@ -1219,7 +1248,7 @@ const APARTMENTS = [
     amenityTags: ["package", "gym_pool", "parking"],
     dailyTags: ["building_access", "quiet_routine"],
     quietScore: 74,
-    flooring: "needs verification",
+    flooring: "Photos suggest light hardwood flooring; verify exact unit",
     furnishing: "Furnished status not verified",
     applicationFriction: 4,
     roommateFit: 3,
