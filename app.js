@@ -231,7 +231,8 @@ const UI_TEXT = {
       amenityStrong: "Strong amenities",
       parkingVerify: "Ask about parking",
       moveInHigh: "Higher move-in cash",
-      roommateFriendly: "Roommate split friendly"
+      roommateFriendly: "Roommate split friendly",
+      studioFriendly: "Studio friendly"
     }
   },
   zh: {
@@ -310,7 +311,8 @@ const UI_TEXT = {
       amenityStrong: "楼内配套强",
       parkingVerify: "parking 要提前问",
       moveInHigh: "move-in cash 较高",
-      roommateFriendly: "roommate 分摊友好"
+      roommateFriendly: "roommate 分摊友好",
+      studioFriendly: "studio 户型友好"
     }
   }
 };
@@ -457,6 +459,7 @@ let latestEntry = "default";
 const APARTMENTS = [
   {
     id: "360-state",
+    unitTypes: ["studio", "1BR", "2BR"],
     name: "360 State Street",
     area: "Downtown high-rise · 360 State St",
     price: {
@@ -521,6 +524,7 @@ const APARTMENTS = [
   },
   {
     id: "olive-wooster",
+    unitTypes: ["studio", "1BR", "2BR", "3BR", "4BR", "co-living"],
     name: "Olive & Wooster",
     area: "Wooster Square / downtown edge · 87 Union St",
     price: {
@@ -584,6 +588,7 @@ const APARTMENTS = [
   },
   {
     id: "the-taft",
+    unitTypes: ["studio", "1BR", "2BR"],
     name: "The Taft",
     area: "Central / Chapel-College corridor · 265 College St",
     price: {
@@ -648,6 +653,7 @@ const APARTMENTS = [
   },
   {
     id: "the-archive",
+    unitTypes: ["studio", "1BR", "2BR", "3BR"],
     name: "The Archive",
     area: "Downtown / Ninth Square · Chapel / Orange",
     price: {
@@ -712,6 +718,7 @@ const APARTMENTS = [
   },
   {
     id: "estelle",
+    unitTypes: ["studio", "1BR", "2BR", "3BR", "4BR"],
     name: "Estelle",
     area: "Downtown / New Haven Green edge · 19 Elm St",
     price: {
@@ -775,6 +782,7 @@ const APARTMENTS = [
   },
   {
     id: "axis-201",
+    unitTypes: ["studio", "1BR", "2BR", "3BR"],
     name: "Axis 201",
     area: "Science Park / Munson St · 201 Munson St",
     price: {
@@ -839,6 +847,7 @@ const APARTMENTS = [
   },
   {
     id: "the-audubon",
+    unitTypes: ["studio", "1BR", "2BR", "3BR"],
     name: "The Audubon",
     area: "Audubon / Whitney-Arts corridor · 367 Orange St",
     price: {
@@ -901,6 +910,7 @@ const APARTMENTS = [
   },
   {
     id: "new-haven-towers",
+    unitTypes: ["studio", "1BR", "2BR"],
     name: "New Haven Towers / NHV Towers",
     area: "Downtown York/Park/High cluster · 4 buildings",
     price: {
@@ -962,6 +972,7 @@ const APARTMENTS = [
   },
   {
     id: "pierpont-city-crossing",
+    unitTypes: ["studio", "1BR", "2BR"],
     name: "Pierpont at City Crossing",
     area: "Downtown Crossing / station-med edge",
     price: {
@@ -1023,6 +1034,7 @@ const APARTMENTS = [
   },
   {
     id: "the-whit",
+    unitTypes: ["studio", "1BR", "2BR", "3BR"],
     name: "The Whit",
     area: "Wooster Square · 630 Chapel St",
     price: {
@@ -1084,6 +1096,7 @@ const APARTMENTS = [
   },
   {
     id: "anthem-square10",
+    unitTypes: ["studio", "1BR", "2BR"],
     name: "The Anthem at Square 10",
     area: "Downtown Crossing / Union Station side · South Orange / George",
     price: {
@@ -1146,6 +1159,7 @@ const APARTMENTS = [
   },
   {
     id: "the-elm",
+    unitTypes: ["studio", "1BR", "2BR"],
     name: "The Elm",
     area: "Central campus edge",
     price: {
@@ -1193,6 +1207,7 @@ const APARTMENTS = [
   },
   {
     id: "corsair",
+    unitTypes: ["studio", "1BR", "2BR", "3BR"],
     name: "Corsair",
     area: "East Rock / State Street corridor",
     price: {
@@ -1240,6 +1255,7 @@ const APARTMENTS = [
   },
   {
     id: "east-rock-landlord",
+    unitTypes: ["room", "studio", "1BR", "2BR", "3BR"],
     name: "East Rock independent landlord",
     area: "Exploration direction · residential / roommate-friendly",
     isExploration: true,
@@ -1288,6 +1304,7 @@ const APARTMENTS = [
   },
   {
     id: "hamden-large",
+    unitTypes: ["studio", "1BR", "2BR", "3BR"],
     name: "Hamden large apartment",
     area: "Exploration direction · lower-rent commute trade-off",
     isExploration: true,
@@ -2484,6 +2501,7 @@ function ruleBadges(apartment, answers, lang = activeLang()) {
   }
 
   if (apartment.utilities === "predictable") add(labels.utilitiesPredictable, "good");
+  if (apartment.unitTypes && apartment.unitTypes.includes("studio")) add(labels.studioFriendly, "good");
   if (hasStrongAmenities(apartment)) add(labels.amenityStrong, "good");
   if (apartment.amenityTags.includes("parking") || (answers.priority || []).includes("parking")) {
     add(labels.parkingVerify, "warn");
