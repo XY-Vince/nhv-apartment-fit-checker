@@ -878,16 +878,12 @@ button:focus-visible {
   margin: 0;
 }
 
-.site-footer .referral-note {
-  max-width: 920px;
-  margin: 0 auto 10px;
+.action-panel > .referral-note {
+  margin: -4px 0 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
   color: #4f5967;
-  text-align: left;
-}
-
-.referral-note sup {
-  color: var(--brand-dark);
-  font-weight: 800;
+  font-size: 0.82rem;
 }
 
 @media (max-width: 980px) {

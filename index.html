@@ -6,7 +6,7 @@
     <meta name="description" content="MatchNHV 纽黑文公寓匹配器：根据预算、常去区域、水电网、房间配置和生活偏好，找出 2-3 个更适合你的选项。">
     <title>MatchNHV | 纽黑文公寓匹配器</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20260709-priority-signals-1">
+    <link rel="stylesheet" href="styles.css?v=20260709-flow-copy-2">
   </head>
   <body>
     <main class="app-shell">
@@ -38,15 +38,26 @@
         <div class="quick-start-grid">
           <button type="button" class="quick-start-button" data-campus="med_school">Med School / YNHH</button>
           <button type="button" class="quick-start-button" data-campus="seas_science">Science Hill / SEAS</button>
-          <button type="button" class="quick-start-button" data-campus="central_campus">Central Campus / Law</button>
-          <button type="button" class="quick-start-button" data-campus="som_prospect">SOM / Broadway</button>
-          <button type="button" class="quick-start-button" data-campus="downtown_station">Downtown / Union Station</button>
+          <button type="button" class="quick-start-button" data-campus="central_campus">Central Campus / Law / Humanities / Arts</button>
+          <button type="button" class="quick-start-button" data-campus="som_prospect">SOM / Prospect Hill</button>
+          <button type="button" class="quick-start-button" data-campus="downtown_station">Downtown</button>
           <button type="button" class="quick-start-button" data-campus="balanced">还不确定，先看均衡推荐</button>
         </div>
       </section>
 
       <section class="workspace" aria-label="公寓匹配问卷和结果">
-        <form id="fit-form" class="panel form-panel">
+        <section class="panel results-panel" aria-live="polite" tabindex="-1" hidden>
+          <div class="panel-heading results-heading">
+            <div>
+              <h2>最匹配的选项</h2>
+              <p id="result-summary">先选择一个常去区域，再用下面的问题细化结果。</p>
+            </div>
+            <button type="button" id="reset-button" class="secondary-action">重置</button>
+          </div>
+          <div id="results" class="results-list"></div>
+        </section>
+
+        <form id="fit-form" class="panel form-panel" hidden>
           <div class="panel-heading">
             <h2>想更准一点？</h2>
             <p>再回答 5 个核心问题；楼内配套、路线和周边服务合并在最后一题。</p>
@@ -66,11 +77,11 @@
           <fieldset>
             <legend>2. 你最常去的 Yale 区域是哪里？</legend>
             <div class="option-grid">
-              <label><input type="radio" name="campus" value="central_campus" checked><span>Central Campus / 法学院 / 艺术学院 / 人文区域</span></label>
+              <label><input type="radio" name="campus" value="central_campus" checked><span>Central Campus / Law / Humanities / Arts</span></label>
               <label><input type="radio" name="campus" value="med_school"><span>Med School / YNHH / 公共卫生学院</span></label>
               <label><input type="radio" name="campus" value="som_prospect"><span>SOM / Divinity / Prospect Hill</span></label>
               <label><input type="radio" name="campus" value="seas_science"><span>SEAS / Science Hill / Engineering</span></label>
-              <label><input type="radio" name="campus" value="downtown_station"><span>Downtown / Union Station / 日常办事</span></label>
+              <label><input type="radio" name="campus" value="downtown_station"><span>Downtown</span></label>
               <label><input type="radio" name="campus" value="balanced"><span>还不确定，先要均衡通勤</span></label>
             </div>
           </fieldset>
@@ -116,16 +127,6 @@
           <button type="submit" class="primary-action">查看匹配结果</button>
         </form>
 
-        <section class="panel results-panel" aria-live="polite" tabindex="-1" hidden>
-          <div class="panel-heading results-heading">
-            <div>
-              <h2>最匹配的选项</h2>
-              <p id="result-summary">选择一个快速入口，或回答问题后查看结果。</p>
-            </div>
-            <button type="button" id="reset-button" class="secondary-action">重置</button>
-          </div>
-          <div id="results" class="results-list"></div>
-        </section>
       </section>
 
       <section class="launch-actions" aria-label="Beta feedback">
@@ -134,6 +135,7 @@
             <h2>测试反馈</h2>
             <p>生成一段结构化反馈，打开 Gmail 草稿发到 vince.xy.wang@gmail.com；反馈文本也会自动复制。本工具不会保存内容。</p>
           </div>
+          <p class="referral-note">如果你决定申请某栋楼，也想了解 referral bonus，可以在反馈邮件里写上公寓名称；有现住租客可联系时，可以帮你们认识。目前 360 State、New Haven Towers 和 City Crossing 暂时没有这样的联系人。是否有 referral 不会影响匹配分和排序。</p>
           <div class="field-stack">
             <div>
               <label class="field-label" for="feedback-accuracy">前三名感觉准吗？</label>
@@ -179,10 +181,9 @@
       </section>
     </main>
     <footer class="site-footer">
-      <p class="referral-note"><sup>1</sup> 如果你决定申请某栋楼，也想了解 referral bonus，可以在反馈邮件里写上公寓名称；有现住租客可联系时，可以帮你们认识。目前 360 State、New Haven Towers 和 City Crossing 暂时没有这样的联系人。是否有 referral 不会影响匹配分和排序。</p>
       <p>© 2026 XY-Vince. Not affiliated with Yale University or any property listed.</p>
     </footer>
 
-    <script src="app.js?v=20260709-priority-signals-1"></script>
+    <script src="app.js?v=20260709-flow-copy-2"></script>
   </body>
 </html>

@@ -139,20 +139,20 @@ const COST_TEXT = {
 };
 
 const CAMPUS_LABELS = {
-  central_campus: "Central Campus",
+  central_campus: "Central Campus / Law / Humanities / Arts",
   med_school: "Med School / YNHH",
   som_prospect: "SOM / Prospect Hill",
   seas_science: "SEAS / Science Hill",
-  downtown_station: "Downtown / Union Station",
+  downtown_station: "Downtown",
   balanced: "Not sure / balanced"
 };
 
 const CAMPUS_LABELS_ZH = {
-  central_campus: "Central Campus",
+  central_campus: "Central Campus / Law / Humanities / Arts",
   med_school: "Med School / YNHH",
   som_prospect: "SOM / Prospect Hill",
   seas_science: "SEAS / Science Hill",
-  downtown_station: "Downtown / Union Station",
+  downtown_station: "Downtown",
   balanced: "不确定 / 均衡通勤"
 };
 
@@ -767,7 +767,7 @@ const APARTMENTS = [
       appFee: { amount: 50, confidence: "marketplace_supplied" },
       adminFee: { amount: 0, confidence: "unknown" }
     },
-    concession: "Official site shows up to 3 months free on 24+ month leases and up to 2 months free on immediate move-ins + Yale discounts.",
+    concession: "Official site shows up to 2 months free on immediate move-ins + Yale discounts.",
     valueSignal: "Marketplace sqft check: Sx1 studio $1,894-$4,944 / 387 sq ft has a wide value range. Larger shared layouts may lower $/sq ft, but roommate split and lease terms must be checked separately.",
     campusScores: {
       central_campus: 4,
@@ -803,7 +803,7 @@ const APARTMENTS = [
     verify: [
       "what Total Monthly Leasing Price includes",
       "utilities, internet, parking, pet, insurance, application/admin fees",
-      "exact concession terms for 24+ month lease, immediate move-in, and Yale discount",
+      "exact concession terms for immediate move-in and Yale discount",
       "whether to split profile by building/address"
     ]
   },
@@ -1561,7 +1561,7 @@ const APARTMENT_TRANSLATIONS = {
     "the-archive": {
       area: "Downtown / Ninth Square · Chapel / Orange",
       priceLabel: "studio $2,232 起；1BR $2,164 起；2BR $3,041 起；3BR $3,922 起，按总月价展示",
-      concession: "官网显示 24 个月以上 lease 最高免 3 个月，immediate move-in 最高免 2 个月，另有 Yale discount。",
+      concession: "官网显示 immediate move-in 最高免 2 个月，另有 Yale discount。",
       valueSignal: "按平台上的租金和面积粗算：Sx1 studio $1,894-$4,944 / 387 sq ft，区间很宽。多人合租大户型可能每尺更便宜，但室友分摊和 lease term 要单独核实。",
       flooring: "照片显示为 LVT 地板；具体房源需确认",
       furnishing: "是否带家具尚未核实",
@@ -1581,7 +1581,7 @@ const APARTMENT_TRANSLATIONS = {
       verify: [
         "总月租到底包含哪些项目",
         "水电网、网络、停车、宠物、保险、申请费和管理费",
-        "24 个月以上租约、立即入住和耶鲁折扣的准确优惠条件",
+        "立即入住和 Yale discount 的准确优惠条件",
         "是否需要按楼栋或地址拆分资料"
       ]
     },
@@ -1836,7 +1836,7 @@ const APARTMENT_TRANSLATIONS = {
       verify: [
         "What the total monthly leasing price includes.",
         "Utilities, internet, parking, pet fees, insurance, application fees, and admin fees.",
-        "Exact concession terms for 24+ month leases, immediate move-in, and Yale discounts.",
+        "Exact concession terms for immediate move-ins and Yale discounts.",
         "Whether the profile should be split by building or address."
       ]
     },
@@ -3098,11 +3098,21 @@ function showResultsPanel() {
   if (panel) panel.hidden = false;
 }
 
+function showRefinementForm() {
+  const form = document.getElementById("fit-form");
+  if (form) form.hidden = false;
+}
+
 function hideResultsPanel() {
   const panel = document.querySelector(".results-panel");
   const list = document.getElementById("results");
   if (list) list.innerHTML = "";
   if (panel) panel.hidden = true;
+}
+
+function hideRefinementForm() {
+  const form = document.getElementById("fit-form");
+  if (form) form.hidden = true;
 }
 
 function scrollResultsIntoView() {
@@ -3115,6 +3125,7 @@ function scrollResultsIntoView() {
 function runQuickStart(form, campus) {
   setCampusValue(form, campus);
   setActiveQuickStart(campus);
+  showRefinementForm();
   const answers = getFormValues(form);
   latestAnswers = answers;
   latestEntry = `quick_start:${campus}`;
@@ -3157,6 +3168,7 @@ function resetForm(form) {
   latestResults = [];
   latestEntry = "default";
   hideResultsPanel();
+  hideRefinementForm();
 }
 
 function init() {
@@ -3171,15 +3183,13 @@ function init() {
     runMatch(form);
     scrollResultsIntoView();
   });
-  form.addEventListener("change", event => {
-    if (event.target.name !== "setup" && event.target.name !== "priority") runMatch(form);
-  });
   reset.addEventListener("click", () => resetForm(form));
   emailFeedback.addEventListener("click", () => openFeedbackEmail("feedback-status"));
   quickStartButtons.forEach(button => {
     button.addEventListener("click", () => runQuickStart(form, button.dataset.campus));
   });
   hideResultsPanel();
+  hideRefinementForm();
 }
 
 if (typeof document !== "undefined") {

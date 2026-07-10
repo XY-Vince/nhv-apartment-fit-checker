@@ -4,8 +4,8 @@ Beta static site for matching Yale / New Haven apartment options to a student's 
 
 It is a lightweight decision-support prototype:
 
-- answer a few fit questions
-- get 2-3 mainstream apartment options
+- choose a main Yale area and get 2-3 mainstream apartment options
+- optionally answer 5 questions to refine the same results
 - read why they fit, what trade-offs matter, and what to verify before applying
 
 ## Language Versions

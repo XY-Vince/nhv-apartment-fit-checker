@@ -6,7 +6,7 @@
     <meta name="description" content="MatchNHV is a New Haven apartment fit checker that matches budget, campus routine, true cost, setup, and daily priorities to 2-3 better-fit options.">
     <title>MatchNHV | New Haven Apartment Fit Checker</title>
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=20260709-priority-signals-1">
+    <link rel="stylesheet" href="../styles.css?v=20260709-flow-copy-2">
   </head>
   <body>
     <main class="app-shell">
@@ -38,15 +38,26 @@
         <div class="quick-start-grid">
           <button type="button" class="quick-start-button" data-campus="med_school">Med School / YNHH</button>
           <button type="button" class="quick-start-button" data-campus="seas_science">Science Hill / SEAS</button>
-          <button type="button" class="quick-start-button" data-campus="central_campus">Central Campus / Law</button>
-          <button type="button" class="quick-start-button" data-campus="som_prospect">SOM / Broadway</button>
-          <button type="button" class="quick-start-button" data-campus="downtown_station">Downtown / Union Station</button>
+          <button type="button" class="quick-start-button" data-campus="central_campus">Central Campus / Law / Humanities / Arts</button>
+          <button type="button" class="quick-start-button" data-campus="som_prospect">SOM / Prospect Hill</button>
+          <button type="button" class="quick-start-button" data-campus="downtown_station">Downtown</button>
           <button type="button" class="quick-start-button" data-campus="balanced">Not sure yet; balanced access</button>
         </div>
       </section>
 
       <section class="workspace" aria-label="Apartment fit questionnaire and results">
-        <form id="fit-form" class="panel form-panel">
+        <section class="panel results-panel" aria-live="polite" tabindex="-1" hidden>
+          <div class="panel-heading results-heading">
+            <div>
+              <h2>Top fits</h2>
+              <p id="result-summary">Choose a main Yale area first, then refine the results below.</p>
+            </div>
+            <button type="button" id="reset-button" class="secondary-action">Reset</button>
+          </div>
+          <div id="results" class="results-list"></div>
+        </section>
+
+        <form id="fit-form" class="panel form-panel" hidden>
           <div class="panel-heading">
             <h2>Want a sharper fit?</h2>
             <p>Answer 5 core questions; amenities, route checks, and local services are combined at the end.</p>
@@ -66,11 +77,11 @@
           <fieldset>
             <legend>2. Which Yale area do you expect to visit most?</legend>
             <div class="option-grid">
-              <label><input type="radio" name="campus" value="central_campus" checked><span>Central Campus / Law / Art / Humanities</span></label>
+              <label><input type="radio" name="campus" value="central_campus" checked><span>Central Campus / Law / Humanities / Arts</span></label>
               <label><input type="radio" name="campus" value="med_school"><span>Med School / YNHH / School of Public Health</span></label>
               <label><input type="radio" name="campus" value="som_prospect"><span>SOM / Divinity / Prospect Hill</span></label>
               <label><input type="radio" name="campus" value="seas_science"><span>SEAS / Science Hill / Engineering</span></label>
-              <label><input type="radio" name="campus" value="downtown_station"><span>Downtown / Union Station / daily errands</span></label>
+              <label><input type="radio" name="campus" value="downtown_station"><span>Downtown</span></label>
               <label><input type="radio" name="campus" value="balanced"><span>Not sure yet; prefer balanced access</span></label>
             </div>
           </fieldset>
@@ -116,16 +127,6 @@
           <button type="submit" class="primary-action">Find my best fits</button>
         </form>
 
-        <section class="panel results-panel" aria-live="polite" tabindex="-1" hidden>
-          <div class="panel-heading results-heading">
-            <div>
-              <h2>Top fits</h2>
-              <p id="result-summary">Choose a quick start or answer the questionnaire to see your fits.</p>
-            </div>
-            <button type="button" id="reset-button" class="secondary-action">Reset</button>
-          </div>
-          <div id="results" class="results-list"></div>
-        </section>
       </section>
 
       <section class="launch-actions" aria-label="Beta feedback">
@@ -134,6 +135,7 @@
             <h2>Beta feedback</h2>
             <p>Generate structured feedback, open a Gmail draft to vince.xy.wang@gmail.com, and copy the feedback text. This tool does not store anything.</p>
           </div>
+          <p class="referral-note">If you decide to apply to a building and would like to explore a referral bonus, reply with the property name. Where a current-tenant contact is available, we can make an introduction. Current-tenant contacts are not yet available for 360 State, New Haven Towers, or City Crossing. Referral availability never affects fit scores or ranking.</p>
           <div class="field-stack">
             <div>
               <label class="field-label" for="feedback-accuracy">Does the Top 3 feel right?</label>
@@ -179,10 +181,9 @@
       </section>
     </main>
     <footer class="site-footer">
-      <p class="referral-note"><sup>1</sup> If you decide to apply to a building and would like to explore a referral bonus, reply with the property name. Where a current-tenant contact is available, we can make an introduction. Current-tenant contacts are not yet available for 360 State, New Haven Towers, or City Crossing. Referral availability never affects fit scores or ranking.</p>
       <p>© 2026 XY-Vince. Not affiliated with Yale University or any property listed.</p>
     </footer>
 
-    <script src="../app.js?v=20260709-priority-signals-1"></script>
+    <script src="../app.js?v=20260709-flow-copy-2"></script>
   </body>
 </html>
