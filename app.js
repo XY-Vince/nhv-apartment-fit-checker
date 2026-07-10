@@ -24,7 +24,7 @@ const VALUE_SIGNAL_CAVEATS = {
 const MVP_MIN_APARTMENT_BUDGET = 1600;
 const FEEDBACK_EMAIL = "vince.xy.wang@gmail.com";
 const HIGH_MOVE_IN_CASH_TOP_SHARE = 0.25;
-const STRONG_AMENITY_TAG_COUNT = 2;
+const STRONG_AMENITY_FEATURE_COUNT = 4;
 
 const BUDGET_LABELS = {
   1400: "< $1,600",
@@ -207,10 +207,10 @@ const UI_TEXT = {
     confidenceExploration: "This is an exploration direction, not a specific apartment recommendation. First identify a specific unit, then verify rent, fees, utilities, and lease terms.",
     confidenceStale: "This option has public signals, but the data is stale. Refresh official rent, availability, fees, and local services first.",
     confidenceLow: "This option has not been verified enough. Treat the fit score as directional only, and refresh rent, availability, fees, and policy before applying.",
-    feedbackEmailSubject: "NHV Apartment Fit Checker beta feedback",
+    feedbackEmailSubject: "MatchNHV beta feedback",
     feedbackEmailOpenedCopied: "Gmail draft opened. Feedback text was also copied, so paste it if Gmail leaves the body blank.",
     feedbackEmailOpenedNoCopy: "Gmail draft opened. If the body is blank, your browser blocked clipboard access; please use the prefilled Gmail draft.",
-    feedbackTitle: "[NHV Apartment Fit Checker beta feedback]",
+    feedbackTitle: "[MatchNHV beta feedback]",
     feedbackRecipient: email => `Send to: ${email}`,
     feedbackEntry: "Entry path",
     entryDefault: "Default balanced view",
@@ -230,10 +230,35 @@ const UI_TEXT = {
       campusFit: campus => `${campus} access`,
       balancedFit: "Balanced access",
       utilitiesPredictable: "Predictable utilities",
-      amenityStrong: "Strong amenities",
-      parkingVerify: "Ask about parking",
+      newerBuilding: year => `Opened ${year}`,
+      newerBuildingVerify: "Building age / renovation needs verification",
+      amenityStrong: "Broad amenity set",
+      amenityModerate: "Core amenities covered",
+      amenityLimited: "Amenity set is more limited",
+      densityLower: "Lower-density evidence found",
+      densityVerify: "Resident density needs verification",
+      accessRouteStrong: "Access + late-route signals found",
+      accessRoutePartial: "Verify access and late-night route",
+      parkingAmple: "Official page says ample; verify current space",
+      parkingAvailable: "Parking listed; verify current space",
+      parkingNone: "No onsite resident parking",
+      parkingVerify: "Parking needs verification",
+      petPolicyFound: policy => `Pets: $${policy.oneTimeFee} fee + $${policy.monthlyRent}/mo`,
+      petPolicyVerify: "Pet policy needs verification",
+      concessionStrong: discount => `Estimated ${discount}% concession`,
+      concessionNone: "No usable concession in current estimate",
+      concessionVerify: "Current concession needs verification",
+      shuttleFound: "Yale Shuttle access verified",
+      shuttleVerify: "Yale Shuttle stop / service needs verification",
+      applicationLower: "Lower application-friction signal",
+      applicationVerify: "Confirm application and guarantor rules",
+      localServices: "Daily services nearby",
+      localServicesVerify: "Local services need a route check",
+      quietStrong: "Stronger quiet-routine signal",
+      quietVerify: "Check unit orientation and street noise",
       moveInHigh: "Higher move-in cash",
-      roommateFriendly: "Roommate split friendly"
+      roommateFriendly: "Roommate split friendly",
+      roommateVerify: "Roommate layout / lease fit needs verification"
     }
   },
   zh: {
@@ -286,10 +311,10 @@ const UI_TEXT = {
     confidenceExploration: "这是一个方向，不是具体公寓推荐。先锁定具体房源，再确认租金、费用、水电网和 lease 条款。",
     confidenceStale: "这个选项有公开线索，但信息比较旧。先确认最新租金、availability、费用和周边服务。",
     confidenceLow: "这个选项的信息还不够扎实，匹配分只能当方向参考。申请前先确认租金、availability、费用和政策。",
-    feedbackEmailSubject: "纽黑文公寓匹配器测试反馈",
+    feedbackEmailSubject: "MatchNHV 测试反馈",
     feedbackEmailOpenedCopied: "Gmail 草稿已打开；反馈文本也已复制。如果 Gmail 正文没有自动填入，可以直接粘贴。",
     feedbackEmailOpenedNoCopy: "Gmail 草稿已打开。如果正文没有自动填入，说明浏览器拦截了剪贴板，请以 Gmail 草稿为准。",
-    feedbackTitle: "[纽黑文公寓匹配器测试反馈]",
+    feedbackTitle: "[MatchNHV 测试反馈]",
     feedbackRecipient: email => `反馈收件人：${email}`,
     feedbackEntry: "进入方式",
     entryDefault: "默认均衡结果",
@@ -309,10 +334,35 @@ const UI_TEXT = {
       campusFit: campus => `${campus} 方便`,
       balancedFit: "通勤均衡",
       utilitiesPredictable: "utilities 更好预估",
-      amenityStrong: "楼内配套强",
-      parkingVerify: "parking 要提前问",
+      newerBuilding: year => `${year} 年开业`,
+      newerBuildingVerify: "楼龄与翻新待确认",
+      amenityStrong: "楼内设施较全",
+      amenityModerate: "常用设施基本覆盖",
+      amenityLimited: "楼内设施相对精简",
+      densityLower: "有较低租户密度证据",
+      densityVerify: "租户密度待确认",
+      accessRouteStrong: "门禁与晚间路线信息较全",
+      accessRoutePartial: "门禁与晚间路线要确认",
+      parkingAmple: "官网称 parking 充足，空位仍要确认",
+      parkingAvailable: "有 parking，空位要确认",
+      parkingNone: "没有住户 onsite parking",
+      parkingVerify: "parking 情况待确认",
+      petPolicyFound: policy => `宠物：$${policy.oneTimeFee} fee + $${policy.monthlyRent}/月`,
+      petPolicyVerify: "pet policy 待确认",
+      concessionStrong: discount => `估算优惠约 ${discount}%`,
+      concessionNone: "当前没有可计入的优惠",
+      concessionVerify: "当前优惠待确认",
+      shuttleFound: "Yale Shuttle 信息已核实",
+      shuttleVerify: "Yale Shuttle 站点与班次待确认",
+      applicationLower: "申请流程相对省事",
+      applicationVerify: "申请材料与 guarantor 要确认",
+      localServices: "吃饭买菜方便",
+      localServicesVerify: "周边服务要按路线确认",
+      quietStrong: "更适合怕街噪",
+      quietVerify: "楼层、朝向与街噪要确认",
       moveInHigh: "move-in cash 较高",
-      roommateFriendly: "roommate 分摊友好"
+      roommateFriendly: "roommate 分摊友好",
+      roommateVerify: "合租户型与 lease 要确认"
     }
   }
 };
@@ -343,6 +393,13 @@ const PRIORITY_REASON_LABELS = {
     package: "Building-service fit",
     gym_pool: "Amenity fit",
     parking: "Parking fit",
+    newer_building: "New-building fit",
+    amenity_breadth: "Amenity-breadth fit",
+    low_density: "Resident-density check",
+    access_late_route: "Access and late-route fit",
+    pet_friendly: "Pet-policy fit",
+    concession: "Concession fit",
+    yale_shuttle: "Yale Shuttle check",
     building_access: "Building-access fit",
     late_route: "Route fit",
     food_store: "Local-service fit",
@@ -356,6 +413,13 @@ const PRIORITY_REASON_LABELS = {
     package: "楼内服务匹配",
     gym_pool: "配套匹配",
     parking: "停车匹配",
+    newer_building: "新楼匹配",
+    amenity_breadth: "设施完整度匹配",
+    low_density: "租户密度核实",
+    access_late_route: "门禁与晚间路线匹配",
+    pet_friendly: "宠物政策匹配",
+    concession: "入住优惠匹配",
+    yale_shuttle: "Yale Shuttle 核实",
     building_access: "门禁/报修匹配",
     late_route: "晚间路线匹配",
     food_store: "生活便利匹配",
@@ -401,6 +465,13 @@ const ANSWER_VALUE_LABELS = {
       package: "Package / front desk / maintenance",
       gym_pool: "Gym / pool / lounge",
       parking: "Parking / EV / car-friendly",
+      newer_building: "Newer building",
+      amenity_breadth: "Broader building amenities",
+      low_density: "Lower resident density",
+      access_late_route: "Building access and late-night route",
+      pet_friendly: "Pet-friendly policy",
+      concession: "Move-in concession",
+      yale_shuttle: "Yale Shuttle access",
       building_access: "Access, package, and repairs",
       late_route: "Late-night routes and transportation",
       food_store: "Restaurants, groceries, and pharmacy",
@@ -444,6 +515,13 @@ const ANSWER_VALUE_LABELS = {
       package: "收包裹 / 前台 / 维修",
       gym_pool: "健身房 / 泳池 / 公共休息区",
       parking: "停车 / 充电 / 对开车友好",
+      newer_building: "新楼 / 近期建成",
+      amenity_breadth: "楼内设施更全",
+      low_density: "租户密度低",
+      access_late_route: "楼内门禁与晚间路线",
+      pet_friendly: "宠物友好",
+      concession: "免租期 / 入住优惠",
+      yale_shuttle: "Yale Shuttle 方便",
       building_access: "门禁、收包裹和报修",
       late_route: "晚间路线和交通",
       food_store: "餐馆、买菜和药店",
@@ -496,6 +574,19 @@ const APARTMENTS = [
     setupTags: ["furniture_ready", "laundry", "private_space"],
     amenityTags: ["package", "gym_pool", "parking"],
     dailyTags: ["building_access", "food_store", "late_route"],
+    decisionSignals: {
+      parkingAvailability: "official_ample_claim",
+      parkingSource: "Official amenities page checked 2026-07-01",
+      petPolicy: {
+        confidence: "verified_public",
+        source: "Official amenities page checked 2026-07-01",
+        oneTimeFee: 400,
+        monthlyRent: 35,
+        maxPets: 2,
+        restrictionsApply: true
+      },
+      concessionAvailability: "limited_not_scored"
+    },
     quietScore: 35,
     flooring: "Photos suggest hardwood flooring; verify exact unit",
     furnishing: "Unfurnished base; CORT furniture partner; 1BR rental is about $250/mo on a 12-mo lease",
@@ -623,6 +714,9 @@ const APARTMENTS = [
     setupTags: ["furniture_ready", "private_space"],
     amenityTags: ["package", "gym_pool"],
     dailyTags: ["building_access", "food_store", "late_route"],
+    decisionSignals: {
+      parkingAvailability: "no_onsite"
+    },
     quietScore: 42,
     flooring: "Vinyl plank or hardwood; verify exact unit",
     furnishing: "CORT / corporate furnished option visible; not furnished-included; 1BR rental is about $250/mo on a 12-mo lease",
@@ -750,6 +844,11 @@ const APARTMENTS = [
     setupTags: ["private_space"],
     amenityTags: ["package", "gym_pool"],
     dailyTags: ["building_access", "food_store", "late_route"],
+    decisionSignals: {
+      openedYear: 2026,
+      openedYearConfidence: "verified_public",
+      openedYearSource: "Official opening announcement checked 2026-07-01"
+    },
     quietScore: 50,
     flooring: "Photos suggest warm wood-style flooring; verify exact unit",
     furnishing: "Optional furnished apartments available for additional cost",
@@ -1062,6 +1161,11 @@ const APARTMENTS = [
     setupTags: ["furniture_ready", "laundry", "private_space", "wood_floor"],
     amenityTags: ["package", "gym_pool", "parking"],
     dailyTags: ["building_access", "food_store", "late_route"],
+    decisionSignals: {
+      openedYear: 2022,
+      openedYearConfidence: "public_news",
+      openedYearSource: "Public completion coverage checked 2026-07-01"
+    },
     quietScore: 58,
     flooring: "Photos suggest wide plank flooring; verify exact unit",
     furnishing: "Unfurnished base; CORT furnished solutions partner; 1BR rental is about $250/mo on a 12-mo lease",
@@ -2317,6 +2421,82 @@ function scoreAmenity(apartment, preference) {
   return SCORE.LOW;
 }
 
+function amenityFeatureCount(apartment) {
+  return [
+    apartment.amenityTags.includes("package"),
+    apartment.amenityTags.includes("gym_pool"),
+    apartment.amenityTags.includes("parking"),
+    apartment.setupTags.includes("laundry"),
+    apartment.dailyTags.includes("building_access")
+  ].filter(Boolean).length;
+}
+
+function scoreAmenityBreadth(apartment) {
+  const count = amenityFeatureCount(apartment);
+  if (count >= STRONG_AMENITY_FEATURE_COUNT) return SCORE.FULL;
+  if (count === 3) return SCORE.HIGH;
+  if (count === 2) return SCORE.MID;
+  return SCORE.LOW;
+}
+
+function scoreNewerBuilding(apartment) {
+  const openedYear = apartment.decisionSignals?.openedYear;
+  const confidence = apartment.decisionSignals?.openedYearConfidence;
+  if (!Number.isFinite(openedYear) || !confidence) return SCORE.MID;
+  if (openedYear >= 2024) return SCORE.FULL;
+  if (openedYear >= 2020) return SCORE.HIGH;
+  if (openedYear >= 2010) return SCORE.MID;
+  return SCORE.LOW;
+}
+
+function scoreParking(apartment) {
+  const availability = apartment.decisionSignals?.parkingAvailability;
+  if (availability === "no_onsite") return SCORE.MISS;
+  if (availability === "official_ample_claim") return SCORE.FULL;
+  const estimate = apartment.trueMonthlyCost?.parkingEstimate;
+  if (apartment.amenityTags.includes("parking") || Number.isFinite(estimate?.amount)) return SCORE.HIGH;
+  return SCORE.MID;
+}
+
+function scorePetPolicy(apartment) {
+  return apartment.decisionSignals?.petPolicy?.confidence === "verified_public" ? SCORE.FULL : SCORE.MID;
+}
+
+function concessionDiscountPercent(apartment) {
+  const concession = apartment.trueMonthlyCost?.concessionEstimate;
+  if (!concession || !Number.isFinite(concession.monthsFree) || !Number.isFinite(concession.leaseMonths) || concession.leaseMonths <= 0) return 0;
+  return Math.round((concession.monthsFree / concession.leaseMonths) * 100);
+}
+
+function scoreConcession(apartment) {
+  if (apartment.decisionSignals?.concessionAvailability === "limited_not_scored") return SCORE.LOW;
+  const discount = concessionDiscountPercent(apartment);
+  if (discount >= 15) return SCORE.FULL;
+  if (discount >= 8) return SCORE.HIGH;
+  if (discount > 0) return SCORE.MID;
+  return SCORE.MID;
+}
+
+function scoreAccessAndLateRoute(apartment) {
+  const access = apartment.dailyTags.includes("building_access");
+  const lateRoute = apartment.dailyTags.includes("late_route");
+  if (access && lateRoute) return SCORE.FULL;
+  if (access || lateRoute) return SCORE.HIGH;
+  return SCORE.MID;
+}
+
+function scoreLowDensity(apartment) {
+  const score = apartment.decisionSignals?.lowDensityScore;
+  const source = apartment.decisionSignals?.lowDensitySource;
+  return Number.isFinite(score) && source ? Math.max(SCORE.MISS, Math.min(SCORE.FULL, score * 20)) : SCORE.MID;
+}
+
+function scoreYaleShuttle(apartment) {
+  const score = apartment.decisionSignals?.yaleShuttleScore;
+  const source = apartment.decisionSignals?.yaleShuttleSource;
+  return Number.isFinite(score) && source ? Math.max(SCORE.MISS, Math.min(SCORE.FULL, score * 20)) : SCORE.MID;
+}
+
 function scoreTrueCostConcern(apartment) {
   const predictability = UTILITY_PREDICTABILITY_SCORE[apartment.utilities] || SCORE.LOW;
   const trueMonthly = calculateCosts(apartment, { setup: [], priority: [] }).trueMonthly;
@@ -2354,7 +2534,15 @@ function scoreDaily(apartment, preference) {
 function scoreSinglePriority(apartment, preference) {
   if (SCORABLE_WORRY_VALUES.has(preference)) return scoreSingleWorry(apartment, preference);
   if (preference === "trust") return null;
-  if (["basic", "package", "gym_pool", "parking"].includes(preference)) return scoreAmenity(apartment, preference);
+  if (preference === "newer_building") return scoreNewerBuilding(apartment);
+  if (preference === "amenity_breadth") return scoreAmenityBreadth(apartment);
+  if (preference === "low_density") return scoreLowDensity(apartment);
+  if (preference === "access_late_route") return scoreAccessAndLateRoute(apartment);
+  if (preference === "parking") return scoreParking(apartment);
+  if (preference === "pet_friendly") return scorePetPolicy(apartment);
+  if (preference === "concession") return scoreConcession(apartment);
+  if (preference === "yale_shuttle") return scoreYaleShuttle(apartment);
+  if (["basic", "package", "gym_pool"].includes(preference)) return scoreAmenity(apartment, preference);
   if (["building_access", "late_route", "food_store", "quiet_routine"].includes(preference)) return scoreDaily(apartment, preference);
   return SCORE.MID;
 }
@@ -2583,7 +2771,7 @@ function highMoveInCashCutoff(answers) {
 }
 
 function hasStrongAmenities(apartment) {
-  return apartment.amenityTags.filter(tag => tag !== "basic").length >= STRONG_AMENITY_TAG_COUNT;
+  return amenityFeatureCount(apartment) >= STRONG_AMENITY_FEATURE_COUNT;
 }
 
 function ruleBadges(apartment, answers, lang = activeLang()) {
@@ -2600,13 +2788,62 @@ function ruleBadges(apartment, answers, lang = activeLang()) {
     add(labels.campusFit(campusLabel(answers.campus, lang)), "good");
   }
 
+  (answers.priority || []).forEach(priority => {
+    if (priority === "newer_building") {
+      const openedYear = apartment.decisionSignals?.openedYear;
+      const hasEvidence = Number.isFinite(openedYear) && apartment.decisionSignals?.openedYearConfidence;
+      add(hasEvidence ? labels.newerBuilding(openedYear) : labels.newerBuildingVerify, hasEvidence ? "good" : "warn");
+    }
+    if (priority === "amenity_breadth") {
+      const amenityCount = amenityFeatureCount(apartment);
+      if (amenityCount >= STRONG_AMENITY_FEATURE_COUNT) add(labels.amenityStrong, "good");
+      else if (amenityCount === 3) add(labels.amenityModerate);
+      else add(labels.amenityLimited, "warn");
+    }
+    if (priority === "low_density") {
+      const hasDensityEvidence = Number.isFinite(apartment.decisionSignals?.lowDensityScore) && apartment.decisionSignals?.lowDensitySource;
+      add(hasDensityEvidence ? labels.densityLower : labels.densityVerify, hasDensityEvidence ? "good" : "warn");
+    }
+    if (priority === "access_late_route") {
+      add(scoreAccessAndLateRoute(apartment) === SCORE.FULL ? labels.accessRouteStrong : labels.accessRoutePartial, scoreAccessAndLateRoute(apartment) === SCORE.FULL ? "good" : "warn");
+    }
+    if (priority === "parking") {
+      const parkingSignal = apartment.decisionSignals?.parkingAvailability;
+      if (parkingSignal === "official_ample_claim") add(labels.parkingAmple, "good");
+      else if (parkingSignal === "no_onsite") add(labels.parkingNone, "warn");
+      else if (scoreParking(apartment) >= SCORE.HIGH) add(labels.parkingAvailable, "warn");
+      else add(labels.parkingVerify, "warn");
+    }
+    if (priority === "pet_friendly") {
+      const petPolicy = apartment.decisionSignals?.petPolicy;
+      add(scorePetPolicy(apartment) === SCORE.FULL ? labels.petPolicyFound(petPolicy) : labels.petPolicyVerify, scorePetPolicy(apartment) === SCORE.FULL ? "good" : "warn");
+    }
+    if (priority === "concession") {
+      const discount = concessionDiscountPercent(apartment);
+      if (discount > 0) add(labels.concessionStrong(discount), "good");
+      else if (apartment.decisionSignals?.concessionAvailability === "limited_not_scored") add(labels.concessionNone, "warn");
+      else add(labels.concessionVerify, "warn");
+    }
+    if (priority === "yale_shuttle") {
+      const hasShuttleEvidence = Number.isFinite(apartment.decisionSignals?.yaleShuttleScore) && apartment.decisionSignals?.yaleShuttleSource;
+      add(hasShuttleEvidence ? labels.shuttleFound : labels.shuttleVerify, hasShuttleEvidence ? "good" : "warn");
+    }
+    if (priority === "application") {
+      add(apartment.applicationFriction <= 3 ? labels.applicationLower : labels.applicationVerify, apartment.applicationFriction <= 3 ? "good" : "warn");
+    }
+    if (priority === "food_store") {
+      add(apartment.dailyTags.includes("food_store") ? labels.localServices : labels.localServicesVerify, apartment.dailyTags.includes("food_store") ? "good" : "warn");
+    }
+    if (priority === "quiet_routine") {
+      add(apartment.quietScore >= 75 ? labels.quietStrong : labels.quietVerify, apartment.quietScore >= 75 ? "good" : "warn");
+    }
+    if (priority === "roommate") {
+      add(apartment.roommateFit >= 4 ? labels.roommateFriendly : labels.roommateVerify, apartment.roommateFit >= 4 ? "good" : "warn");
+    }
+  });
+
   if (apartment.utilities === "predictable") add(labels.utilitiesPredictable, "good");
-  if (hasStrongAmenities(apartment)) add(labels.amenityStrong, "good");
-  if ((answers.priority || []).includes("parking")) {
-    add(labels.parkingVerify, "warn");
-  }
-  if (apartment.roommateFit >= 4) add(labels.roommateFriendly, "good");
-  if (calculateCosts(apartment, answers).moveInMin >= highMoveInCashCutoff(answers)) {
+  if ((answers.priority || []).includes("true_cost") && calculateCosts(apartment, answers).moveInMin >= highMoveInCashCutoff(answers)) {
     add(labels.moveInHigh, "warn");
   }
 
@@ -2963,6 +3200,15 @@ if (typeof module !== "undefined") {
     scoreUtilities,
     scoreSetup,
     scoreAmenity,
+    scoreAmenityBreadth,
+    scoreNewerBuilding,
+    scoreParking,
+    scorePetPolicy,
+    scoreConcession,
+    scoreAccessAndLateRoute,
+    scoreLowDensity,
+    scoreYaleShuttle,
+    scoreSinglePriority,
     scoreWorry,
     scoreDaily,
     scorePriority,
@@ -2981,6 +3227,8 @@ if (typeof module !== "undefined") {
     topReasons,
     entryLabel,
     ruleBadges,
+    amenityFeatureCount,
+    concessionDiscountPercent,
     campusLabel,
     categoryLabel,
     answerValueLabel,

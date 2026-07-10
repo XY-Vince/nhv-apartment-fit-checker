@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="纽黑文 / Yale 公寓匹配器：根据预算、常去区域、水电网、家具配置、申请难度和日常便利度，找出 2-3 个更适合你的选项。">
-    <title>纽黑文公寓匹配器 | 先问需求，再看公寓</title>
+    <meta name="description" content="MatchNHV 纽黑文公寓匹配器：根据预算、常去区域、水电网、房间配置和生活偏好，找出 2-3 个更适合你的选项。">
+    <title>MatchNHV | 纽黑文公寓匹配器</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20260709-results-flow-1">
+    <link rel="stylesheet" href="styles.css?v=20260709-priority-signals-1">
   </head>
   <body>
     <main class="app-shell">
@@ -14,12 +14,9 @@
         <div>
           <div class="top-line">
             <p class="eyebrow">纽黑文 / Yale 租房决策工具</p>
-            <nav class="language-switch" aria-label="Language">
-              <span>中文</span>
-              <a href="en.html?v=20260707-feedback-email-2">English</a>
-            </nav>
           </div>
-          <h1 id="page-title">先问需求，再看公寓。</h1>
+          <h1 id="page-title">MatchNHV</h1>
+          <p class="tagline">先问需求，再看公寓。</p>
           <p class="intro-copy">
             回答几个关键问题，会从目前整理过的主流公寓里挑出 2-3 个更可能适合你的选项，并说明为什么、哪里需要取舍、申请前要问清楚什么。
           </p>
@@ -99,13 +96,17 @@
 
           <fieldset>
             <legend>5. 除了预算和位置，你还最在意什么？最多选 3 个。</legend>
-            <div class="option-grid">
-              <label><input type="checkbox" name="priority" value="application" checked><span>申请门槛和材料</span></label>
+            <div class="option-grid priority-grid">
               <label><input type="checkbox" name="priority" value="true_cost" checked><span>每月总成本 / 入住前现金</span></label>
-              <label><input type="checkbox" name="priority" value="package"><span>门禁、收包裹、维修方便</span></label>
-              <label><input type="checkbox" name="priority" value="gym_pool"><span>健身房 / 泳池 / 公共休息区</span></label>
-              <label><input type="checkbox" name="priority" value="parking"><span>停车 / 充电 / 对开车友好</span></label>
-              <label><input type="checkbox" name="priority" value="late_route"><span>晚上回家的路线和交通</span></label>
+              <label><input type="checkbox" name="priority" value="application" checked><span>申请流程尽量省事</span></label>
+              <label><input type="checkbox" name="priority" value="concession"><span>免租期 / 入住优惠</span></label>
+              <label><input type="checkbox" name="priority" value="newer_building"><span>新楼 / 近期建成</span></label>
+              <label><input type="checkbox" name="priority" value="amenity_breadth"><span>楼内设施更全</span></label>
+              <label><input type="checkbox" name="priority" value="low_density"><span>租户密度低</span></label>
+              <label><input type="checkbox" name="priority" value="access_late_route"><span>楼内门禁与晚间路线</span></label>
+              <label><input type="checkbox" name="priority" value="parking"><span>停车位 / 充电</span></label>
+              <label><input type="checkbox" name="priority" value="pet_friendly"><span>宠物友好</span></label>
+              <label><input type="checkbox" name="priority" value="yale_shuttle"><span>Yale Shuttle 方便</span></label>
               <label><input type="checkbox" name="priority" value="food_store"><span>吃饭、买菜、药店方便</span></label>
               <label><input type="checkbox" name="priority" value="quiet_routine"><span>街道噪音 / 住得安静</span></label>
               <label><input type="checkbox" name="priority" value="roommate"><span>合租 / 分摊成本</span></label>
@@ -163,20 +164,25 @@
           <span>每月总成本</span>
           <span>水电网可预期性</span>
           <span>申请门槛</span>
+          <span>新楼与楼内设施</span>
+          <span>停车与宠物政策</span>
+          <span>入住优惠</span>
           <span>家具和入住准备</span>
           <span>地板和洗衣配置</span>
           <span>楼内配套和日常便利</span>
           <span>租期和入住时间</span>
           <span>合租适配度</span>
-          <span>晚间路线和周边服务</span>
+          <span>门禁、晚间路线和周边服务</span>
+          <span>Yale Shuttle 与租户密度待核实</span>
           <span>信息可信度单独展示，不参与匹配分</span>
         </div>
       </section>
     </main>
     <footer class="site-footer">
+      <p class="referral-note"><sup>1</sup> 如果你决定申请某栋楼，也想了解 referral bonus，可以在反馈邮件里写上公寓名称；有现住租客可联系时，可以帮你们认识。目前 360 State、New Haven Towers 和 City Crossing 暂时没有这样的联系人。是否有 referral 不会影响匹配分和排序。</p>
       <p>© 2026 XY-Vince. Not affiliated with Yale University or any property listed.</p>
     </footer>
 
-    <script src="app.js?v=20260709-results-flow-1"></script>
+    <script src="app.js?v=20260709-priority-signals-1"></script>
   </body>
 </html>
