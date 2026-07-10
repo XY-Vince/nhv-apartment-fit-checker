@@ -1,4 +1,4 @@
-# New Haven / Yale Apartment Fit Checker
+# MatchNHV
 
 Beta static site for matching Yale / New Haven apartment options to a student's actual needs.
 
@@ -11,7 +11,7 @@ It is a lightweight decision-support prototype:
 ## Language Versions
 
 - Chinese: `index.html`
-- English: `en.html`
+- English: `en/index.html` (`en.html` redirects old links)
 
 ## Current Scope
 
