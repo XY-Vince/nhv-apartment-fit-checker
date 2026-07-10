@@ -6,7 +6,7 @@
     <meta name="description" content="New Haven / Yale apartment fit checker: answer a few questions about budget, campus routine, utilities, setup, application friction, and daily convenience to find 2-3 better-fit options.">
     <title>New Haven Apartment Fit Checker | Needs first, apartments second</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20260708-quick-start-1">
+    <link rel="stylesheet" href="styles.css?v=20260709-results-flow-1">
   </head>
   <body>
     <main class="app-shell">
@@ -49,17 +49,6 @@
       </section>
 
       <section class="workspace" aria-label="Apartment fit questionnaire and results">
-        <section class="panel results-panel" aria-live="polite">
-          <div class="panel-heading results-heading">
-            <div>
-              <h2>Top fits</h2>
-              <p id="result-summary">Using the default answers, start with these 3.</p>
-            </div>
-            <button type="button" id="reset-button" class="secondary-action">Reset</button>
-          </div>
-          <div id="results" class="results-list"></div>
-        </section>
-
         <form id="fit-form" class="panel form-panel">
           <div class="panel-heading">
             <h2>Want a sharper fit?</h2>
@@ -125,6 +114,17 @@
 
           <button type="submit" class="primary-action">Find my best fits</button>
         </form>
+
+        <section class="panel results-panel" aria-live="polite" tabindex="-1" hidden>
+          <div class="panel-heading results-heading">
+            <div>
+              <h2>Top fits</h2>
+              <p id="result-summary">Choose a quick start or answer the questionnaire to see your fits.</p>
+            </div>
+            <button type="button" id="reset-button" class="secondary-action">Reset</button>
+          </div>
+          <div id="results" class="results-list"></div>
+        </section>
       </section>
 
       <section class="launch-actions" aria-label="Beta feedback">
@@ -177,6 +177,6 @@
       <p>© 2026 XY-Vince. Not affiliated with Yale University or any property listed.</p>
     </footer>
 
-    <script src="app.js?v=20260709-data-sync-1"></script>
+    <script src="app.js?v=20260709-results-flow-1"></script>
   </body>
 </html>

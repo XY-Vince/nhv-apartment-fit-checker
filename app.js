@@ -201,7 +201,7 @@ const UI_TEXT = {
     },
     tags: {
       exploration: "Exploration direction",
-      concession: "Concession not in budget score",
+      concession: "Conditional offer",
       rent: "Verify current rent"
     },
     confidenceExploration: "This is an exploration direction, not a specific apartment recommendation. First identify a specific unit, then verify rent, fees, utilities, and lease terms.",
@@ -280,7 +280,7 @@ const UI_TEXT = {
     },
     tags: {
       exploration: "探索方向",
-      concession: "优惠未计入预算",
+      concession: "优惠有条件",
       rent: "租金要再确认"
     },
     confidenceExploration: "这是一个方向，不是具体公寓推荐。先锁定具体房源，再确认租金、费用、水电网和 lease 条款。",
@@ -481,7 +481,7 @@ const APARTMENTS = [
       appFee: { amount: 27, confidence: "marketplace_supplied" },
       adminFee: { amount: 0, confidence: "unknown" }
     },
-    concession: "Official page advertises up to 2 months free + $500 look-and-lease on selected homes; not counted in budget score.",
+    concession: "Official page advertises up to 2 months free + $500 look-and-lease on selected homes.",
     valueSignal: "Marketplace sqft check: Studio S $2,220-$2,345 / 517 sq ft, about $4.29-$4.54 per sq ft. Larger 2BR layouts may have lower $/sq ft, but total rent and fees are higher.",
     // 1-5 fit scores, not minutes. 5 = strongest match for that campus destination.
     campusScores: {
@@ -545,7 +545,7 @@ const APARTMENTS = [
       appFee: { amount: 100, confidence: "marketplace_supplied" },
       adminFee: { amount: 50, confidence: "marketplace_supplied" }
     },
-    concession: "Official page shows up to 3 months free on select apartments and reduced pricing on select 1BR; not counted in budget score.",
+    concession: "Official page shows up to 3 months free on select apartments and reduced pricing on select 1BR.",
     valueSignal: "Marketplace sqft check: A1 1BR $1,880-$2,824 / 631 sq ft, about $2.98-$4.48 per sq ft. Co-living floorplans appear separately, so compare rent basis carefully.",
     campusScores: {
       central_campus: 3,
@@ -609,7 +609,7 @@ const APARTMENTS = [
       appFee: { amount: 50, confidence: "marketplace_supplied" },
       adminFee: { amount: 0, confidence: "unknown" }
     },
-    concession: "2 months free for studio/1BR leases with move-in on or before 2026-08-01; not counted in budget score.",
+    concession: "2 months free for studio/1BR leases with move-in on or before 2026-08-01.",
     valueSignal: "Marketplace sqft check: studio $1,920-$2,115 / 424-524 sq ft, about $3.66-$4.99 per sq ft. Studio lofts look stronger on $/sq ft, but exact unit condition matters.",
     campusScores: {
       central_campus: 5,
@@ -673,7 +673,7 @@ const APARTMENTS = [
       appFee: { amount: 50, confidence: "marketplace_supplied" },
       adminFee: { amount: 0, confidence: "unknown" }
     },
-    concession: "Official site shows up to 3 months free on 24+ month leases and up to 2 months free on immediate move-ins + Yale discounts; not counted in budget score.",
+    concession: "Official site shows up to 3 months free on 24+ month leases and up to 2 months free on immediate move-ins + Yale discounts.",
     valueSignal: "Marketplace sqft check: Sx1 studio $1,894-$4,944 / 387 sq ft has a wide value range. Larger shared layouts may lower $/sq ft, but roommate split and lease terms must be checked separately.",
     campusScores: {
       central_campus: 4,
@@ -736,7 +736,7 @@ const APARTMENTS = [
       appFee: { amount: 50, confidence: "planning_assumption" },
       adminFee: { amount: 0, confidence: "unknown" }
     },
-    concession: "Opening offer: 2 months free on 12-month lease or 4 months free on 24+ month lease; not counted in budget score.",
+    concession: "Opening offer: 2 months free on 12-month lease or 4 months free on 24+ month lease.",
     valueSignal: "Marketplace sqft check: S1 studio $2,290 / 469 sq ft, about $4.88 per sq ft. Larger layouts may improve $/sq ft but raise total monthly cost.",
     campusScores: {
       central_campus: 5,
@@ -800,7 +800,7 @@ const APARTMENTS = [
       appFee: { amount: 50, confidence: "marketplace_supplied" },
       adminFee: { amount: 0, confidence: "unknown" }
     },
-    concession: "Official page advertises reduced rates plus up to 3 months free on select homes; not counted in budget score.",
+    concession: "Official page advertises reduced rates plus up to 3 months free on select homes.",
     valueSignal: "Marketplace sqft check: studio $1,935-$2,150 / 333-519 sq ft, about $3.73-$6.46 per sq ft. 2BR layouts look stronger on $/sq ft for roommate splits.",
     campusScores: {
       central_campus: 3,
@@ -863,7 +863,7 @@ const APARTMENTS = [
       appFee: { amount: 50, confidence: "planning_assumption" },
       adminFee: { amount: 0, confidence: "unknown" }
     },
-    concession: "Official home page advertises up to 1.5 months free on select homes; not counted in budget score.",
+    concession: "Official home page advertises up to 1.5 months free on select homes.",
     campusScores: {
       central_campus: 5,
       med_school: 3,
@@ -1913,19 +1913,99 @@ function answerValueLabel(group, value, lang = activeLang()) {
 function utilityLabel(value, lang = activeLang()) {
   const labels = {
     en: {
-      predictable: "predictable",
-      mixed: "mixed",
-      variable: "variable",
-      unknown: "unknown"
+      predictable: "Key utilities are included, so monthly costs are more predictable",
+      mixed: "Some utilities are included; others are billed separately",
+      variable: "Most utilities are billed separately, so monthly costs can vary",
+      unknown: "What is included still needs confirmation"
     },
     zh: {
-      predictable: "较可预期",
-      mixed: "部分可预期",
-      variable: "浮动较多",
-      unknown: "尚不清楚"
+      predictable: "主要水电项目已包含，每月支出更容易预估",
+      mixed: "部分水电项目已包含，其余项目另付",
+      variable: "多数水电项目另付，每月金额会浮动",
+      unknown: "包含哪些水电项目仍需确认"
     }
   };
   return (labels[lang] || labels.en)[value] || value;
+}
+
+const CARD_FOOTNOTE_TEXT = {
+  en: {
+    flooring: "Flooring can vary by unit; confirm the exact unit.",
+    concessionIncluded: "The advertised offer is prorated into estimated monthly cost and budget fit; confirm the exact unit and lease eligibility.",
+    concessionExcluded: "This offer is shown for reference but is not included in estimated monthly cost or budget fit; confirm current eligibility."
+  },
+  zh: {
+    flooring: "地板可能因房源而不同，需按具体房源确认。",
+    concessionIncluded: "优惠已按租期折算进估算月成本和预算匹配；具体房源和租期资格仍需确认。",
+    concessionExcluded: "这条优惠只作参考，未计入估算月成本或预算匹配；当前资格仍需确认。"
+  }
+};
+
+function sentenceEnding(value, lang) {
+  const text = String(value || "").trim();
+  if (!text || /[.!?。！？]$/.test(text)) return text;
+  return `${text}${lang === "zh" ? "。" : "."}`;
+}
+
+function normalizeSourceNote(value, lang) {
+  let note = String(value || "").trim();
+  if (lang === "zh") {
+    note = note
+      .replace(/^完整 fee sheet 还要书面确认$/i, "完整费用表仍需书面确认")
+      .replace(/^fee sheet 仍不完整$/i, "完整费用表仍需补齐");
+  }
+  return sentenceEnding(note, lang);
+}
+
+function splitCardDisplay(value, kind, lang = activeLang()) {
+  const text = String(value || "").trim();
+  if (kind === "flooring") {
+    const match = text.match(/^(.*?)[;；]\s*(?:verify exact unit|具体房源需确认|需按楼栋和具体房源确认)$/i);
+    if (match?.[1]?.trim()) {
+      return {
+        text: match[1].trim(),
+        note: (CARD_FOOTNOTE_TEXT[lang] || CARD_FOOTNOTE_TEXT.en).flooring
+      };
+    }
+  }
+  if (kind === "source") {
+    const parts = text.split(/\s*[;；]\s*/).filter(Boolean);
+    if (parts.length > 1) {
+      const noteText = parts.slice(1).join(lang === "zh" ? "；" : "; ");
+      const isVerificationNote = /need|pending|incomplete|not visible|confirm|stale|未|需|待确认|不完整|没有稳定|还要|尚/i.test(noteText);
+      if (!isVerificationNote) return { text, note: "" };
+      return {
+        text: parts.shift(),
+        note: normalizeSourceNote(noteText, lang)
+      };
+    }
+  }
+  if (kind === "concession") {
+    return {
+      text: text.replace(/[;；]\s*not counted in budget score\.?$/i, "").trim(),
+      note: ""
+    };
+  }
+  return { text, note: "" };
+}
+
+function addCardFootnote(footnotes, note) {
+  if (!note) return "";
+  let index = footnotes.indexOf(note);
+  if (index === -1) {
+    footnotes.push(note);
+    index = footnotes.length - 1;
+  }
+  return `<sup class="footnote-marker">${index + 1}</sup>`;
+}
+
+function renderCardFootnotes(footnotes) {
+  if (!footnotes.length) return "";
+  return `
+    <ol class="card-footnotes">
+      ${footnotes.map((note, index) => `<li><sup>${index + 1}</sup><span>${escapeHtml(note)}</span></li>`).join("")}
+    </ol>
+  `;
 }
 
 function apartmentCopy(apartment, lang = activeLang()) {
@@ -2416,6 +2496,7 @@ function isRankableApartment(apartment) {
 }
 
 function renderOutOfScope(answers) {
+  showResultsPanel();
   const list = document.getElementById("results");
   const summary = document.getElementById("result-summary");
   const lang = activeLang();
@@ -2618,6 +2699,7 @@ function openFeedbackEmail(statusId) {
 }
 
 function renderResults(results, answers, options = {}) {
+  showResultsPanel();
   const list = document.getElementById("results");
   const summary = document.getElementById("result-summary");
   const lang = activeLang();
@@ -2638,6 +2720,16 @@ function renderResults(results, answers, options = {}) {
     const apartment = result.apartment;
     const copy = apartmentCopy(apartment, lang);
     const costs = calculateCosts(apartment, answers);
+    const flooringDisplay = splitCardDisplay(copy.flooring, "flooring", lang);
+    const sourceDisplay = splitCardDisplay(copy.sourceLabel, "source", lang);
+    const concessionDisplay = splitCardDisplay(copy.concession, "concession", lang);
+    const footnotes = [];
+    const flooringMarker = addCardFootnote(footnotes, flooringDisplay.note);
+    const sourceMarker = addCardFootnote(footnotes, sourceDisplay.note);
+    const concessionNote = copy.concession
+      ? (CARD_FOOTNOTE_TEXT[lang] || CARD_FOOTNOTE_TEXT.en)[costs.concessionLine ? "concessionIncluded" : "concessionExcluded"]
+      : "";
+    const concessionMarker = addCardFootnote(footnotes, concessionNote);
     const reasons = topReasons(result, lang, answers).map(escapeHtml);
     const rankLabel = apartment.isExploration
       ? `#${index + 1} ${ui("exploreDirection", lang)}`
@@ -2665,10 +2757,9 @@ function renderResults(results, answers, options = {}) {
         <div class="facts">
           <div class="fact"><strong>${escapeHtml(ui("facts", lang).cost)}</strong><span>${escapeHtml(copy.priceLabel)}</span></div>
           <div class="fact"><strong>${escapeHtml(ui("facts", lang).utilities)}</strong><span>${escapeHtml(utilityLabel(apartment.utilities, lang))}</span></div>
-          <div class="fact"><strong>${escapeHtml(ui("facts", lang).furnishing)}</strong><span>${escapeHtml(copy.furnishing)}</span></div>
-          <div class="fact"><strong>${escapeHtml(ui("facts", lang).flooring)}</strong><span>${escapeHtml(copy.flooring)}</span></div>
+          <div class="fact"><strong>${escapeHtml(ui("facts", lang).flooring)}</strong><span>${escapeHtml(flooringDisplay.text)}${flooringMarker}</span></div>
           <div class="fact"><strong>${escapeHtml(ui("facts", lang).daily)}</strong><span>${escapeHtml(copy.dailyLabel)}</span></div>
-          <div class="fact"><strong>${escapeHtml(ui("facts", lang).source)}</strong><span>${escapeHtml(copy.sourceLabel)}</span></div>
+          <div class="fact"><strong>${escapeHtml(ui("facts", lang).source)}</strong><span>${escapeHtml(sourceDisplay.text)}${sourceMarker}</span></div>
         </div>
         ${renderCostBreakdown(costs, lang)}
         ${copy.valueSignal || copy.concession ? `
@@ -2683,11 +2774,13 @@ function renderResults(results, answers, options = {}) {
             ${copy.concession ? `
               <div class="card-callout concession-callout">
                 <strong>${escapeHtml(ui("facts", lang).concession)}</strong>
-                <span>${escapeHtml(copy.concession)}</span>
+                <span>${escapeHtml(concessionDisplay.text)}${concessionMarker}</span>
               </div>
             ` : ""}
           </div>
         ` : ""}
+
+        ${renderCardFootnotes(footnotes)}
 
         <div class="reason-grid">
           <div class="reason-box">
@@ -2763,6 +2856,18 @@ function setActiveQuickStart(campus) {
   });
 }
 
+function showResultsPanel() {
+  const panel = document.querySelector(".results-panel");
+  if (panel) panel.hidden = false;
+}
+
+function hideResultsPanel() {
+  const panel = document.querySelector(".results-panel");
+  const list = document.getElementById("results");
+  if (list) list.innerHTML = "";
+  if (panel) panel.hidden = true;
+}
+
 function scrollResultsIntoView() {
   const panel = document.querySelector(".results-panel");
   if (panel && typeof panel.scrollIntoView === "function") {
@@ -2810,7 +2915,11 @@ function resetForm(form) {
   [...form.querySelectorAll("input")].forEach(input => {
     input.disabled = false;
   });
-  runMatch(form, "default");
+  setActiveQuickStart("");
+  latestAnswers = null;
+  latestResults = [];
+  latestEntry = "default";
+  hideResultsPanel();
 }
 
 function init() {
@@ -2823,6 +2932,7 @@ function init() {
   form.addEventListener("submit", event => {
     event.preventDefault();
     runMatch(form);
+    scrollResultsIntoView();
   });
   form.addEventListener("change", event => {
     if (event.target.name !== "setup" && event.target.name !== "priority") runMatch(form);
@@ -2832,7 +2942,7 @@ function init() {
   quickStartButtons.forEach(button => {
     button.addEventListener("click", () => runQuickStart(form, button.dataset.campus));
   });
-  runMatch(form, "default");
+  hideResultsPanel();
 }
 
 if (typeof document !== "undefined") {

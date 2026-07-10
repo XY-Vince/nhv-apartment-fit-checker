@@ -6,7 +6,7 @@
     <meta name="description" content="纽黑文 / Yale 公寓匹配器：根据预算、常去区域、水电网、家具配置、申请难度和日常便利度，找出 2-3 个更适合你的选项。">
     <title>纽黑文公寓匹配器 | 先问需求，再看公寓</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20260708-quick-start-1">
+    <link rel="stylesheet" href="styles.css?v=20260709-results-flow-1">
   </head>
   <body>
     <main class="app-shell">
@@ -49,17 +49,6 @@
       </section>
 
       <section class="workspace" aria-label="公寓匹配问卷和结果">
-        <section class="panel results-panel" aria-live="polite">
-          <div class="panel-heading results-heading">
-            <div>
-              <h2>最匹配的选项</h2>
-              <p id="result-summary">基于默认需求，先看这 3 个。</p>
-            </div>
-            <button type="button" id="reset-button" class="secondary-action">重置</button>
-          </div>
-          <div id="results" class="results-list"></div>
-        </section>
-
         <form id="fit-form" class="panel form-panel">
           <div class="panel-heading">
             <h2>想更准一点？</h2>
@@ -125,6 +114,17 @@
 
           <button type="submit" class="primary-action">查看匹配结果</button>
         </form>
+
+        <section class="panel results-panel" aria-live="polite" tabindex="-1" hidden>
+          <div class="panel-heading results-heading">
+            <div>
+              <h2>最匹配的选项</h2>
+              <p id="result-summary">选择一个快速入口，或回答问题后查看结果。</p>
+            </div>
+            <button type="button" id="reset-button" class="secondary-action">重置</button>
+          </div>
+          <div id="results" class="results-list"></div>
+        </section>
       </section>
 
       <section class="launch-actions" aria-label="Beta feedback">
@@ -177,6 +177,6 @@
       <p>© 2026 XY-Vince. Not affiliated with Yale University or any property listed.</p>
     </footer>
 
-    <script src="app.js?v=20260709-data-sync-1"></script>
+    <script src="app.js?v=20260709-results-flow-1"></script>
   </body>
 </html>

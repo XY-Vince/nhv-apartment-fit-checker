@@ -18,6 +18,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 body {
   margin: 0;
   color: var(--ink);
@@ -656,6 +660,39 @@ button:focus-visible {
   color: #3f4856;
   font-weight: 700;
   line-height: 1.35;
+}
+
+.footnote-marker {
+  margin-left: 3px;
+  color: var(--muted);
+  font-size: 0.66em;
+  font-weight: 760;
+  vertical-align: super;
+}
+
+.card-footnotes {
+  display: grid;
+  gap: 4px;
+  margin: 8px 0 12px;
+  padding: 8px 10px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.74rem;
+  line-height: 1.35;
+  list-style: none;
+}
+
+.card-footnotes li {
+  display: grid;
+  grid-template-columns: 14px minmax(0, 1fr);
+  gap: 3px;
+}
+
+.card-footnotes sup {
+  font-size: 0.72rem;
+  font-weight: 760;
+  line-height: 1.35;
+  vertical-align: baseline;
 }
 
 .concession-callout {
