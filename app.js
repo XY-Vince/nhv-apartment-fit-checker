@@ -2116,12 +2116,9 @@ const COST_ITEM_LABELS = {
 const COST_TEXT = {
   en: {
     title: "True cost check",
-    advertised: "Advertised rent",
+    advertised: "Advertised rent (lowest)",
     trueMonthly: "Estimated true monthly",
     moveInCash: "Move-in cash",
-    monthlyDelta: delta => delta >= 0
-      ? `+${formatMoney(delta)} over advertised rent`
-      : `${formatMoney(Math.abs(delta))} below displayed rent at the current cost basis`,
     grossBeforeConcession: "Before concession",
     potentialConcession: amount => `Estimated concession credit: about ${formatMoney(amount)}/mo; confirm exact-unit and lease eligibility.`,
     monthlyIncludes: "Monthly estimate includes",
@@ -2132,12 +2129,9 @@ const COST_TEXT = {
   },
   zh: {
     title: "真实成本粗算",
-    advertised: "展示租金",
+    advertised: "展示租金（最低）",
     trueMonthly: "估算月成本",
     moveInCash: "入住前现金",
-    monthlyDelta: delta => delta >= 0
-      ? `比展示租金多 ${formatMoney(delta)}`
-      : `按当前可见房源粗算，比展示租金低 ${formatMoney(Math.abs(delta))}`,
     grossBeforeConcession: "优惠前估算",
     potentialConcession: amount => `优惠月摊估算约 ${formatMoney(amount)}；具体房源和租期资格仍需确认。`,
     monthlyIncludes: "月成本包含",
@@ -2256,6 +2250,14 @@ const UI_TEXT = {
     feedbackScopeTop: "Scope result shown:",
     feedbackContact: email => `Project email: ${email}`,
     ruleTags: {
+      budgetOver: amount => `${formatMoney(amount)}/mo over budget`,
+      budgetNeedsConcession: "Needs the current concession to fit budget",
+      laundryVerify: "In-unit laundry needs confirmation",
+      laundryMiss: "Selected unit does not show in-unit laundry",
+      woodFloorVerify: "Flooring needs confirmation",
+      woodFloorMiss: "Carpet may conflict with your preference",
+      privateSpaceVerify: "Private kitchen/bath needs confirmation",
+      furnitureReadyVerify: "Move-in setup needs confirmation",
       campusFit: campus => `${campus} access`,
       balancedFit: "Balanced access",
       utilitiesPredictable: "Predictable utilities",
@@ -2284,7 +2286,7 @@ const UI_TEXT = {
       localServices: "Daily services nearby",
       localServicesVerify: "Local services need a route check",
       quietStrong: "Stronger quiet-routine signal",
-      quietVerify: "Check unit orientation and street noise",
+      quietVerify: "Quieter-living fit is limited; check orientation and street noise",
       moveInHigh: "Higher move-in cash",
       roommateFriendly: "Roommate split friendly",
       roommateVerify: "Roommate layout / lease fit needs verification"
@@ -2379,6 +2381,14 @@ const UI_TEXT = {
     feedbackScopeTop: "显示的范围判断：",
     feedbackContact: email => `项目邮箱：${email}`,
     ruleTags: {
+      budgetOver: amount => `高于预算上限 ${formatMoney(amount)}/月`,
+      budgetNeedsConcession: "需要当前优惠后才在预算内",
+      laundryVerify: "房内洗烘待确认",
+      laundryMiss: "所选户型未显示房内洗烘",
+      woodFloorVerify: "地板类型待确认",
+      woodFloorMiss: "可能有地毯",
+      privateSpaceVerify: "独立厨卫待确认",
+      furnitureReadyVerify: "入住准备程度待确认",
       campusFit: campus => `${campus} 方便`,
       balancedFit: "通勤均衡",
       utilitiesPredictable: "utilities 更好预估",
@@ -2407,7 +2417,7 @@ const UI_TEXT = {
       localServices: "吃饭买菜方便",
       localServicesVerify: "周边服务要按路线确认",
       quietStrong: "更适合怕街噪",
-      quietVerify: "楼层、朝向与街噪要确认",
+      quietVerify: "安静匹配一般，注意房源朝向和街噪",
       moveInHigh: "move-in cash 较高",
       roommateFriendly: "roommate 分摊友好",
       roommateVerify: "合租户型与 lease 要确认"
@@ -2443,14 +2453,14 @@ const CATEGORY_LABELS_BY_LANG = {
     budget: "Budget fit",
     campus: "Campus fit",
     utilities: "Utilities",
-    setup: "Setup",
+    setup: "Main needs",
     priority: "Priority fit"
   },
   zh: {
     budget: "预算匹配",
     campus: "位置匹配",
     utilities: "水电网",
-    setup: "入住配置",
+    setup: "主要需求匹配",
     priority: "关注点匹配"
   }
 };
@@ -3214,7 +3224,7 @@ const APARTMENTS = [
     "roommateFit": 3,
     "confidence": "partial",
     "confidenceLabel": "Partial confidence",
-    "dailyLabel": "Central campus + downtown daily routine",
+    "dailyLabel": "Convenient for Central Campus and Med School",
     "sourceLabel": "Paredim + RentCafe refreshed 2026-06-29; fee sheet still incomplete",
     "bestFor": [
       "Central Campus / Law / downtown 活动多，想用 location 降低 daily friction 的学生",
@@ -3222,7 +3232,7 @@ const APARTMENTS = [
       "需要 heat/hot water included，并愿意核实电费、网络和家具方案的学生"
     ],
     "tradeoffs": [
-      "优惠已按 2/12 折算进月成本和预算匹配；具体房源和入住日期仍要确认",
+      "已把 2 个月免租期优惠折算进月成本；具体房源和入住日期仍要确认",
       "recurring Trash + Amenities 已见 $55/mo；The Taft 没有住户停车位，完整 fee sheet 和 insurance 仍缺",
       "不是 newer glass-tower profile，unit condition、laundry、flooring 要看 exact unit"
     ],
@@ -4180,7 +4190,7 @@ const APARTMENTS = [
     "roommateFit": 4,
     "confidence": "partial",
     "confidenceLabel": "Partial confidence",
-    "dailyLabel": "Campus-adjacent downtown cluster; tower-specific fit",
+    "dailyLabel": "Campus-adjacent; slight differences across the four buildings",
     "sourceLabel": "Official floorplans refreshed 2026-06-29; tower-level pricing captured",
     "bestFor": [
       "Central Campus / Law / Art / Med 附近活动多，想要老牌 downtown cluster 的学生",
@@ -5643,7 +5653,7 @@ const APARTMENT_TRANSLATIONS = {
       flooring: "资料列有 LVP 或硬木地板；具体房源需确认",
       furnishing: "能看到 CORT / corporate furniture 选项；不是默认带家具，1BR 约 $250/月（12个月 lease）",
       confidenceLabel: "部分信息已确认",
-      dailyLabel: "Central Campus 和 Downtown 日常都方便",
+      dailyLabel: "Central Campus 和 Med School 都方便",
       sourceLabel: "2026-06-29 查过 Paredim 和 RentCafe；fee sheet 仍不完整",
       bestFor: [
         "Central Campus、Law School 或 Downtown 活动多，想靠位置省事的学生",
@@ -5651,7 +5661,7 @@ const APARTMENT_TRANSLATIONS = {
         "需要暖气和热水包含，并愿意核实电费、网络和家具方案的学生"
       ],
       tradeoffs: [
-        "优惠已按 2/12 折算进月成本和预算匹配；具体房源和入住日期仍要确认",
+        "已把 2 个月免租期优惠折算进月成本；具体房源和入住日期仍要确认",
         "已看到垃圾处理和配套费合计 $55/月；楼内没有住户停车位，完整费用表和租客保险仍需确认",
         "不是新玻璃楼类型，具体房源状态、洗衣和地板都要看房确认"
       ],
@@ -5705,7 +5715,7 @@ const APARTMENT_TRANSLATIONS = {
         "已有室友或预算较高，想比较 2BR、3BR、4BR 分摊的学生"
       ],
       tradeoffs: [
-        "单间当前只显示需询价，不能把筛选器里的低价当作已确认单间租金",
+        "studio 当前只显示需询价，不能把筛选器里的低价当作已确认 studio 租金",
         "开业优惠很强，但优惠、价格、租期和空房可能每天变化",
         "费用表、水电网、停车、押金和保险还没有进入真实成本评分"
       ],
@@ -5771,11 +5781,11 @@ const APARTMENT_TRANSLATIONS = {
     },
     "new-haven-towers": {
       area: "Downtown York/Park/High 一带 · 4 栋楼",
-      priceLabel: "Madison 单间 $1,695 起；Crown / Crown Court / 18 High 按楼不同",
+      priceLabel: "Madison studio $1,695 起；Crown / Crown Court / 18 High 按楼不同",
       flooring: "照片显示为硬木地板；需按楼栋和具体房源确认",
       furnishing: "是否带家具尚未核实",
       confidenceLabel: "部分信息已确认",
-      dailyLabel: "离校园近，但一定要按具体楼比较",
+      dailyLabel: "离校园近，4 栋楼之间略有差异",
       sourceLabel: "2026-06-29 查过官方户型页；已整理到楼栋级价格",
       bestFor: [
         "Central Campus、Law School、Art 或医学院附近活动多，想住老牌 Downtown 公寓的学生",
@@ -5913,7 +5923,7 @@ const APARTMENT_TRANSLATIONS = {
         "Students who need heat and hot water included, and are willing to verify electricity, internet, and furniture options."
       ],
       tradeoffs: [
-        "The 2/12 concession is included in estimated monthly cost and budget fit; confirm the exact unit and move-in deadline.",
+        "Two months free is prorated into the monthly cost; confirm the exact unit and move-in deadline.",
         "Trash plus amenity charges are visible at $55/month. The Taft has no resident parking; the full fee sheet and renter's insurance details are still incomplete.",
         "This is not a new glass-tower profile; exact unit condition, laundry, and flooring need unit-level confirmation."
       ],
@@ -6150,7 +6160,7 @@ function renderUtilityDetails(apartment, lang = activeLang()) {
   const note = profile.note ? text[profile.note] : "";
   const statusLabel = row => {
     if (row.item === "air_conditioning_most_units" && row.status === "included") {
-      return lang === "zh" ? "已包含（多数房源）" : "Included (most units)";
+      return lang === "zh" ? "（多数房间）已包含" : "Included (most units)";
     }
     return text[row.status];
   };
@@ -6726,9 +6736,6 @@ function renderCostLine(item, lang) {
 }
 
 function renderCostMetrics(costs, text) {
-  const deltaLabel = costs.monthlyDelta >= 0 || !costs.currentAvailabilityUsed
-    ? text.monthlyDelta(costs.monthlyDelta)
-    : text.monthlyDelta(costs.monthlyDelta);
   return `
     <div class="cost-metrics">
       <div>
@@ -6738,7 +6745,6 @@ function renderCostMetrics(costs, text) {
       <div class="cost-metric-primary">
         <span>${escapeHtml(text.trueMonthly)}</span>
         <strong>${escapeHtml(formatMoneyRange(costs.trueMonthlyMin, costs.trueMonthlyMax))}<small>${escapeHtml(text.estimateSuffix)}</small></strong>
-        <em>${escapeHtml(deltaLabel)}</em>
       </div>
       <div>
         <span>${escapeHtml(text.moveInCash)}</span>
@@ -6950,8 +6956,8 @@ function renderSelectedBudgetBasis(apartment, answers, lang = activeLang()) {
           : "Uses current official 10/11/12-month unit pricing.");
   const concessionPolicy = concessionCredit > 0
     ? (lang === "zh"
-        ? `已按公开的 ${concessionLabel(concession, lang)}折算；若具体房源或租期不符合资格，仍以优惠前 ${formatMoney(grossComparisonPrice)}/月为准。`
-        : `The public ${concessionLabel(concession, lang)} is applied here. If the exact unit or lease is not eligible, use the pre-concession ${formatMoney(grossComparisonPrice)}/mo instead.`)
+        ? `已把 ${concession.monthsFree} 个月免租期优惠折算进月成本；若具体房源或租期不符合资格，仍以优惠前 ${formatMoney(grossComparisonPrice)}/月为准。`
+        : `${concession.monthsFree} months free is prorated into monthly cost. If the exact unit or lease is not eligible, use the pre-concession ${formatMoney(grossComparisonPrice)}/mo instead.`)
     : "";
   const conservative = selection.unitType.conservative
     ? (lang === "zh" ? "Not sure 按 1BR 保守比较。" : "Not sure uses a conservative 1BR basis.")
@@ -6971,11 +6977,45 @@ function renderSelectedBudgetBasis(apartment, answers, lang = activeLang()) {
   `;
 }
 
+function budgetComparison(apartment, answers = {}) {
+  const ceilingValue = Number(answers.budget);
+  if (!Number.isFinite(ceilingValue)) return null;
+  const unitType = budgetUnitTypeSelection(answers).resolved;
+  const selection = selectBudgetCandidate(apartment, answers, { respectFeatures: true });
+  const candidate = selection.candidate;
+  if (!candidate || !candidate.budgetEligible || !["comparable", "policy_comparable"].includes(candidate.comparisonStatus)) return null;
+  const grossCost = Number(candidate.standardLeasePrice);
+  if (!Number.isFinite(grossCost)) return null;
+  const concessionBase = Number.isFinite(candidate.trace?.baseRentMin)
+    ? candidate.trace.baseRentMin
+    : grossCost;
+  const concessionCredit = knownConcessionCredit(apartment, concessionBase, candidate.unitType || unitType);
+  const effectiveCost = Math.max(0, grossCost - concessionCredit);
+  const band = budgetBand(ceilingValue, unitType);
+  const ceiling = band ? band.upper : ceilingValue;
+  return {
+    candidate,
+    selection,
+    unitType,
+    grossCost,
+    concessionCredit,
+    effectiveCost,
+    ceiling,
+    overage: Math.max(0, effectiveCost - ceiling),
+    requiresConcession: concessionCredit > 0 && grossCost > ceiling && effectiveCost <= ceiling
+  };
+}
+
 function scoreBudget(apartment, budgetOrAnswers) {
   const maxBudget = typeof budgetOrAnswers === "object" ? Number(budgetOrAnswers.budget) : Number(budgetOrAnswers);
   const unitType = typeof budgetOrAnswers === "object"
     ? budgetUnitTypeSelection(budgetOrAnswers).resolved
     : "studio";
+
+  if (typeof budgetOrAnswers === "object") {
+    const comparison = budgetComparison(apartment, budgetOrAnswers);
+    if (comparison) return applyBudgetCeiling(comparison.effectiveCost, maxBudget, unitType);
+  }
 
   const propertySnapshot = AVAILABILITY_PRICE_SNAPSHOT[apartment.id];
   const selection = propertySnapshot
@@ -7053,19 +7093,30 @@ function scoreUtilities(apartment, preference) {
   return apartment.amenityTags.includes("gym_pool") || apartment.amenityTags.includes("package") ? SCORE.VERY_HIGH : SCORE.MID;
 }
 
-function scoreSetup(apartment, preferences) {
+function scoreSetup(apartment, preferences, answers = {}) {
   if (!preferences.length) return null;
   const selected = preferences;
   const scores = selected.map(preference => {
     if (apartment.setupTags.includes(preference)) return SCORE.FULL;
     if (preference === "wood_floor") {
       const fs = apartment.flooringStatus;
-      if (!fs || !fs.materials.length || fs.scope === null) return null;
+      if (!fs || !fs.materials.length || fs.scope === null) return SCORE.MID;
       if (fs.materials.includes("carpet") && !fs.materials.includes("wood_look") && !fs.materials.includes("hard_surface") && !fs.materials.includes("hardwood") && !fs.materials.includes("lvp") && !fs.materials.includes("lvt")) return SCORE.MISS;
       if (fs.scope === "exact_unit" && (fs.materials.includes("wood_look") || fs.materials.includes("hard_surface") || fs.materials.includes("hardwood") || fs.materials.includes("lvp") || fs.materials.includes("lvt"))) return SCORE.FULL;
       if (fs.scope === "floorplan" && (fs.evidenceType === "official_claim" || fs.evidenceType === "marketplace_claim")) return SCORE.HIGH;
       if (fs.scope === "building" && (fs.evidenceType === "official_claim" || fs.evidenceType === "marketplace_claim")) return SCORE.MID;
       if (fs.evidenceType === "photo_inferred") return SCORE.MID;
+      return SCORE.MID;
+    }
+    if (Object.hasOwn(SETUP_TO_BUDGET_FEATURE, preference)) {
+      const selection = selectBudgetCandidate(
+        apartment,
+        { ...answers, setup: [preference] },
+        { respectFeatures: true }
+      );
+      if (selection.compatibility === "compatible") return SCORE.FULL;
+      if (selection.compatibility === "incompatible") return SCORE.MISS;
+      if (selection.compatibility === "unknown_feature_compatibility") return SCORE.MID;
       return null;
     }
     if (preference === "furniture_ready" && apartment.setupTags.includes("private_space")) return SCORE.LOW;
@@ -7250,7 +7301,15 @@ function scoreWorry(apartment, preferences) {
 }
 
 function scoreDaily(apartment, preference) {
-  if (preference === "quiet_routine") return apartment.quietScore || SCORE.LOW;
+  if (preference === "quiet_routine") {
+    const quiet = Number(apartment.quietScore);
+    if (!Number.isFinite(quiet)) return SCORE.MID;
+    if (quiet >= 75) return SCORE.FULL;
+    if (quiet >= 60) return SCORE.HIGH;
+    if (quiet >= 40) return SCORE.MID;
+    if (quiet >= 25) return SCORE.LOW;
+    return SCORE.MISS;
+  }
   if (apartment.dailyTags.includes(preference)) return SCORE.FULL;
   if (preference === "building_access" && apartment.amenityTags.includes("package")) return SCORE.HIGH;
   if (preference === "food_store" && apartment.campusScores.downtown_station >= 4) return SCORE.HIGH;
@@ -7294,7 +7353,7 @@ function scoreApartment(apartment, answers) {
     budget: scoreBudget(apartment, answers),
     campus: scoreCampus(apartment, answers.campus),
     utilities: scoreUtilities(apartment, answers.utilities),
-    setup: scoreSetup(apartment, answers.setup),
+    setup: scoreSetup(apartment, answers.setup, answers),
     priority: scorePriority(apartment, answers.priority || [], answers)
   };
   const breakdown = Object.fromEntries(Object.entries(rawBreakdown).filter(([, score]) => Number.isFinite(score)));
@@ -7357,24 +7416,21 @@ function budgetRankingTier(result) {
 }
 
 function compareResults(a, b, answers = null) {
-  if (selectedHardRequirements(answers || {}).length) {
-    const hardRequirementDiff = (b.hardRequirementTier ?? 1) - (a.hardRequirementTier ?? 1);
-    if (hardRequirementDiff !== 0) return hardRequirementDiff;
-  }
-
-  const budgetMissDiff = Number(confirmedBudgetMiss(a)) - Number(confirmedBudgetMiss(b));
-  if (budgetMissDiff !== 0) return budgetMissDiff;
-
   if (answers?.campus && answers.campus !== "balanced") {
     const campusTierDiff = campusFitTier(b.apartment, answers.campus) - campusFitTier(a.apartment, answers.campus);
     if (campusTierDiff !== 0) return campusTierDiff;
   }
 
-  const budgetTierDiff = budgetRankingTier(b) - budgetRankingTier(a);
-  if (budgetTierDiff !== 0) return budgetTierDiff;
-
   const scoreDiff = b.score - a.score;
   if (scoreDiff !== 0) return scoreDiff;
+  const aEffectivePrice = budgetComparison(a.apartment, answers || {})?.effectiveCost;
+  const bEffectivePrice = budgetComparison(b.apartment, answers || {})?.effectiveCost;
+  if (Number.isFinite(aEffectivePrice) && Number.isFinite(bEffectivePrice)) {
+    const priceDiff = aEffectivePrice - bEffectivePrice;
+    if (priceDiff !== 0) return priceDiff;
+  } else if (Number.isFinite(aEffectivePrice) !== Number.isFinite(bEffectivePrice)) {
+    return Number.isFinite(aEffectivePrice) ? -1 : 1;
+  }
   if ((answers?.priority || []).length) {
     const priorityDiff = (b.breakdown.priority ?? -Infinity) - (a.breakdown.priority ?? -Infinity);
     if (priorityDiff !== 0) return priorityDiff;
@@ -7383,8 +7439,8 @@ function compareResults(a, b, answers = null) {
   if (budgetDiff !== 0) return budgetDiff;
   const campusDiff = b.breakdown.campus - a.breakdown.campus;
   if (campusDiff !== 0) return campusDiff;
-  const priceDiff = a.apartment.price.min - b.apartment.price.min;
-  if (priceDiff !== 0) return priceDiff;
+  const advertisedPriceDiff = a.apartment.price.min - b.apartment.price.min;
+  if (advertisedPriceDiff !== 0) return advertisedPriceDiff;
   return a.apartment.name.localeCompare(b.apartment.name);
 }
 
@@ -7629,14 +7685,14 @@ function formatAnswersForShare(answers, lang = activeLang()) {
       unitType: "户型",
       budget: "预算",
       campus: "常去地点",
-      requirements: "不能妥协",
+      requirements: "主要需求",
       priorities: "其他关注点"
     }
     : {
       unitType: "Unit type",
       budget: "Budget",
       campus: "Main Yale area",
-      requirements: "Non-negotiables",
+      requirements: "Main needs",
       priorities: "Other priorities"
     };
   return [
@@ -7678,12 +7734,36 @@ function hasStrongAmenities(apartment) {
   return amenityFeatureCount(apartment) >= STRONG_AMENITY_FEATURE_COUNT;
 }
 
+function mainNeedWarning(apartment, requirement, answers, labels) {
+  const score = scoreSetup(apartment, [requirement], answers);
+  if (Number.isFinite(score) && score >= SCORE.HIGH) return null;
+
+  const selection = Object.hasOwn(SETUP_TO_BUDGET_FEATURE, requirement)
+    ? selectBudgetCandidate(apartment, { ...answers, setup: [requirement] }, { respectFeatures: true })
+    : null;
+  const explicitMiss = selection?.compatibility === "incompatible" || score === SCORE.MISS;
+
+  if (requirement === "laundry") return explicitMiss ? labels.laundryMiss : labels.laundryVerify;
+  if (requirement === "wood_floor") return explicitMiss ? labels.woodFloorMiss : labels.woodFloorVerify;
+  if (requirement === "private_space") return labels.privateSpaceVerify;
+  if (requirement === "furniture_ready") return labels.furnitureReadyVerify;
+  return null;
+}
+
 function ruleBadges(apartment, answers, lang = activeLang()) {
   const labels = ui("ruleTags", lang);
   const badges = [];
   const add = (label, level = "") => {
     if (label && !badges.some(badge => badge.label === label)) badges.push({ label, level });
   };
+
+  const budgetState = budgetComparison(apartment, answers);
+  if (budgetState?.overage > 0) add(labels.budgetOver(Math.ceil(budgetState.overage)), "warn");
+  else if (budgetState?.requiresConcession) add(labels.budgetNeedsConcession, "warn");
+
+  (answers.requirements || [])
+    .filter(requirement => Object.hasOwn(SETUP_TO_BUDGET_FEATURE, requirement))
+    .forEach(requirement => add(mainNeedWarning(apartment, requirement, answers, labels), "warn"));
 
   const campusScore = apartment.campusScores[answers.campus] || 0;
   if (answers.campus === "balanced" && campusScore >= 4) {
@@ -8212,6 +8292,7 @@ if (typeof module !== "undefined") {
     MVP_MIN_APARTMENT_BUDGET,
     scoreApartment,
     scoreBudget,
+    budgetComparison,
     applyBudgetCeiling,
     budgetUnitTypeSelection,
     budgetSnapshotCandidates,
