@@ -15,15 +15,12 @@ values regardless of lease term. The Archive comparison prices are official-rang
 lower bounds approved as 12-month comparison values. Result cards disclose both
 policies. Estelle Studio is explicitly N/A; its 1BR and 2BR data remain eligible.
 
-## Research Files
+## Internal Leads
 
-- `apartment_research_consolidated_2026-07-10.csv`: broader research table with
-  source tier and verification caveats retained
-- `csv_source_inventory_2026-07-10.csv`: inventory of the inputs used by that
-  consolidated research table
-- `availability_price_snapshot_2026-07-11.csv` and
-  `real_price_reconciliation_2026-07-11.md`: historical pre-Phase-D review files
+Marketplace, social, forum, and review-site material is kept outside the public
+package under `internal_leads/`. It may be used only to identify a question or a
+field that needs checking. A value cannot enter the public app or scoring until
+it has independent evidence from an official property/manager page, a written
+leasing-office response, or a user-supplied official document.
 
-Marketplace and social-source material remains labeled by source tier. It must
-not be presented as an official property claim or promoted into scoring without
-the applicable review gate.
+See `docs/source_use_policy.md` for the collection and publication rules.

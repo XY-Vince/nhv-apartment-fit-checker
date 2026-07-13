@@ -83,8 +83,8 @@ const UTILITY_DETAIL_TEXT = Object.freeze({
 const SCORABLE_WORRY_VALUES = new Set(["application", "true_cost", "roommate"]);
 
 const VALUE_SIGNAL_CAVEATS = {
-  en: "Approximate $/sqft uses marketplace-listed rent and square footage. The cheapest rent and largest unit may not be the same unit; compare within the same fee mode.",
-  zh: "每平方英尺价格使用平台展示的租金和面积粗算。最低租金和最大面积不一定来自同一个房源；只应在同一费用口径内比较。"
+  en: "Approximate $/sqft uses reviewed property-site price and area rows. Compare only within the same lease and fee basis.",
+  zh: "每平方英尺价格只使用审核过的公寓官网价格和面积；请在相同租期与费用口径内比较。"
 };
 
 const MVP_MIN_APARTMENT_BUDGET = 1600;
@@ -2651,7 +2651,10 @@ const APARTMENTS = [
         "sourceFile": "data/360_availability_v2.md",
         "priceClassification": "advertised_gap",
         "rentMode": "total_including_required_fees",
-        "includes": ["base rent", "required monthly fees"],
+        "includes": [
+          "base rent",
+          "required monthly fees"
+        ],
         "unitCount": 31,
         "advertisedByType": {
           "studio": 1735,
@@ -2670,10 +2673,42 @@ const APARTMENTS = [
           "pricePerSqft": 4.59
         },
         "currentMinByType": {
-          "studio": { "rent": 2372, "baseRent": 2257, "unit": "APT 705", "availableFrom": "Available Now", "leaseMonths": 11, "sqft": 517, "pricePerSqft": 4.59 },
-          "1br": { "rent": 2385, "baseRent": 2270, "unit": "APT 1109", "availableFrom": "Available Now", "leaseMonths": 12, "sqft": 582, "pricePerSqft": 4.10 },
-          "2br": { "rent": 3628, "baseRent": 3513, "unit": "APT 2418", "availableFrom": "Available Now", "leaseMonths": 10, "sqft": 1012, "pricePerSqft": 3.58 },
-          "3br": { "rent": 4822, "baseRent": 4707, "unit": "APT 3107", "availableFrom": "Available Now", "leaseMonths": 12, "sqft": 1256, "pricePerSqft": 3.84 }
+          "studio": {
+            "rent": 2372,
+            "baseRent": 2257,
+            "unit": "APT 705",
+            "availableFrom": "Available Now",
+            "leaseMonths": 11,
+            "sqft": 517,
+            "pricePerSqft": 4.59
+          },
+          "1br": {
+            "rent": 2385,
+            "baseRent": 2270,
+            "unit": "APT 1109",
+            "availableFrom": "Available Now",
+            "leaseMonths": 12,
+            "sqft": 582,
+            "pricePerSqft": 4.1
+          },
+          "2br": {
+            "rent": 3628,
+            "baseRent": 3513,
+            "unit": "APT 2418",
+            "availableFrom": "Available Now",
+            "leaseMonths": 10,
+            "sqft": 1012,
+            "pricePerSqft": 3.58
+          },
+          "3br": {
+            "rent": 4822,
+            "baseRent": 4707,
+            "unit": "APT 3107",
+            "availableFrom": "Available Now",
+            "leaseMonths": 12,
+            "sqft": 1256,
+            "pricePerSqft": 3.84
+          }
         }
       }
     },
@@ -2681,10 +2716,10 @@ const APARTMENTS = [
       "advertisedRent": 1735,
       "recurringFees": {
         "amount": 115,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/360-state-new-haven-ct/h1zvdd1/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": "https://www.360statestreet.com/floorplans",
+        "sourceRef": "data/360_availability_v2.md",
+        "checkedDate": "2026-07-11"
       },
       "utilitiesEstimate": {
         "amount": 180,
@@ -2702,10 +2737,10 @@ const APARTMENTS = [
       "parkingEstimate": {
         "amount": 130,
         "appliesWhenPriority": "parking",
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/360-state-new-haven-ct/h1zvdd1/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "concessionEstimate": {
         "monthsFree": null,
@@ -2726,17 +2761,17 @@ const APARTMENTS = [
       "securityDeposit": {
         "amount": 350,
         "maxMultiplier": 2,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/360-state-new-haven-ct/h1zvdd1/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "appFee": {
         "amount": 27,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/360-state-new-haven-ct/h1zvdd1/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "adminFee": {
         "confidence": "unknown"
@@ -2784,10 +2819,10 @@ const APARTMENTS = [
         "petDeposit": null,
         "monthlyRent": 35,
         "monthlyRentRange": null,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.zillow.com/homes/360-State-Street,-New-Haven,-CT_rb/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-10"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "concessionAvailability": "limited_not_scored"
     },
@@ -2824,11 +2859,11 @@ const APARTMENTS = [
         "hardwood"
       ],
       "scope": "building",
-      "evidenceType": "marketplace_claim",
-      "confidence": "marketplace_supplied",
-      "sourceUrl": "https://www.apartments.com/360-state-new-haven-ct/h1zvdd1/",
-      "sourceRef": null,
-      "checkedDate": "2026-07-09"
+      "evidenceType": "photo_inferred",
+      "confidence": "verified_public",
+      "sourceUrl": null,
+      "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+      "checkedDate": "2026-07-13"
     },
     "applicationPolicy": {
       "ssnRequired": {
@@ -2898,7 +2933,9 @@ const APARTMENTS = [
         "sourceFile": "data/olive_parsed_fixed.md",
         "priceClassification": "range_including_current_special",
         "rentMode": "range_including_current_special",
-        "includes": ["published price range"],
+        "includes": [
+          "published price range"
+        ],
         "unitCount": 34,
         "budgetBasis": {
           "unitType": "studio",
@@ -2910,12 +2947,55 @@ const APARTMENTS = [
           "pricePerSqft": 2.99
         },
         "currentMinByType": {
-          "studio": { "rent": 1808, "rentMax": 2170, "unit": "226W", "availableFrom": "7/10/26", "sqft": 605, "pricePerSqft": 2.99 },
-          "1br": { "rent": 1864, "rentMax": 2237, "unit": "321E", "availableFrom": "8/22/26", "sqft": 631, "pricePerSqft": 2.95 },
-          "2br": { "rent": 2416, "rentMax": 3141, "unit": "233W", "availableFrom": "8/22/26", "sqft": 967, "pricePerSqft": 2.50 },
-          "3br": { "rent": 4019, "rentMax": 5828, "unit": "302E", "availableFrom": "8/14/26", "sqft": 1314, "pricePerSqft": 3.06 },
-          "4br": { "rent": 5368, "rentMax": 6442, "unit": "651W", "availableFrom": "NOW", "sqft": 1386, "pricePerSqft": 3.87 },
-          "co_living": { "rent": 1010, "rentMax": 1211, "unit": "Unspecified", "availableFrom": "9/2/26", "sqft": 347, "pricePerSqft": 2.91, "perPerson": true }
+          "studio": {
+            "rent": 1808,
+            "rentMax": 2170,
+            "unit": "226W",
+            "availableFrom": "7/10/26",
+            "sqft": 605,
+            "pricePerSqft": 2.99
+          },
+          "1br": {
+            "rent": 1864,
+            "rentMax": 2237,
+            "unit": "321E",
+            "availableFrom": "8/22/26",
+            "sqft": 631,
+            "pricePerSqft": 2.95
+          },
+          "2br": {
+            "rent": 2416,
+            "rentMax": 3141,
+            "unit": "233W",
+            "availableFrom": "8/22/26",
+            "sqft": 967,
+            "pricePerSqft": 2.5
+          },
+          "3br": {
+            "rent": 4019,
+            "rentMax": 5828,
+            "unit": "302E",
+            "availableFrom": "8/14/26",
+            "sqft": 1314,
+            "pricePerSqft": 3.06
+          },
+          "4br": {
+            "rent": 5368,
+            "rentMax": 6442,
+            "unit": "651W",
+            "availableFrom": "NOW",
+            "sqft": 1386,
+            "pricePerSqft": 3.87
+          },
+          "co_living": {
+            "rent": 1010,
+            "rentMax": 1211,
+            "unit": "Unspecified",
+            "availableFrom": "9/2/26",
+            "sqft": 347,
+            "pricePerSqft": 2.91,
+            "perPerson": true
+          }
         }
       }
     },
@@ -2937,20 +3017,22 @@ const APARTMENTS = [
       "parkingEstimate": {
         "amount": 175,
         "appliesWhenPriority": "parking",
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/olive-wooster-new-haven-ct/dmwfmsl/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "concessionEstimate": {
-        "monthsFree": 2,
+        "monthsFree": 3,
         "leaseMonths": 12,
         "monthlyCredit": null,
         "eligibleUnits": null,
         "moveInDeadline": null,
         "validThrough": null,
         "confidence": "conditional_offer",
-        "sourceUrl": "https://www.apartments.com/olive-wooster-new-haven-ct/dmwfmsl/"
+        "sourceUrl": "https://oliveandwooster.com/availability",
+        "sourceRef": "data/apartment_research_consolidated_2026-07-02.csv#official_concession",
+        "checkedDate": "2026-07-01"
       }
     },
     "moveInCash": {
@@ -2964,17 +3046,17 @@ const APARTMENTS = [
       },
       "appFee": {
         "amount": 100,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/olive-wooster-new-haven-ct/dmwfmsl/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "adminFee": {
         "amount": 50,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/olive-wooster-new-haven-ct/dmwfmsl/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       }
     },
     "concession": "Official page shows up to 3 months free on select apartments and reduced pricing on select 1BR.",
@@ -3034,9 +3116,11 @@ const APARTMENTS = [
         "wood_look"
       ],
       "scope": "building",
-      "evidenceType": "marketplace_claim",
-      "sourceUrl": "https://www.apartments.com/olive-wooster-new-haven-ct/3ssfmyq/",
-      "checkedDate": "2026-07-09"
+      "evidenceType": "photo_inferred",
+      "sourceUrl": null,
+      "checkedDate": "2026-07-13",
+      "confidence": "verified_public",
+      "sourceRef": "VERIFICATION_LOG.md#restored-fields"
     },
     "decisionSignals": {
       "petPolicy": {
@@ -3116,7 +3200,9 @@ const APARTMENTS = [
       "recurringFees": {
         "amount": 55,
         "confidence": "verified_public",
-        "sourceUrl": "https://www.apartments.com/the-taft-new-haven-ct/3q7c2gd/"
+        "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/taft-apartments/default.aspx",
+        "sourceRef": "docs/phase_c_evidence/the-taft_2026-07-12.md",
+        "checkedDate": "2026-07-12"
       },
       "utilitiesEstimate": {
         "amount": 90,
@@ -3141,10 +3227,12 @@ const APARTMENTS = [
           "studio",
           "1br"
         ],
-        "moveInDeadline": null,
+        "moveInDeadline": "2026-08-01",
         "validThrough": null,
         "confidence": "conditional_offer",
-        "sourceUrl": "https://www.apartments.com/the-taft-new-haven-ct/3q7c2gd/"
+        "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/taft-apartments/default.aspx",
+        "sourceRef": "docs/phase_c_evidence/the-taft_2026-07-12.md",
+        "checkedDate": "2026-07-12"
       }
     },
     "moveInCash": {
@@ -3154,24 +3242,24 @@ const APARTMENTS = [
       },
       "securityDeposit": {
         "amount": 2000,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/the-taft-new-haven-ct/3q7c2gd/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "appFee": {
         "amount": 50,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/the-taft-new-haven-ct/3q7c2gd/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "adminFee": {
         "confidence": "unknown"
       }
     },
     "concession": "2 months free for studio/1BR leases with move-in on or before 2026-08-01.",
-    "valueSignal": "Marketplace sqft check: studio $1,920-$2,115 / 424-524 sq ft, about $3.66-$4.99 per sq ft.",
+    "valueSignal": "Reviewed official snapshot: Studio 05O is $1,895 / 424 sq ft ($4.47/sqft); 1BR 05S is $1,999 / 697 sq ft ($2.87/sqft). Compare total price, lease, and unit condition together.",
     "campusScores": {
       "central_campus": 5,
       "med_school": 4,
@@ -3209,13 +3297,14 @@ const APARTMENTS = [
         "petDeposit": null,
         "monthlyRent": 50,
         "monthlyRentRange": null,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/the-taft-new-haven-ct/3q7c2gd/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
-      "parkingSourceUrl": "https://www.apartments.com/the-taft-new-haven-ct/3q7c2gd/",
-      "parkingCheckedDate": "2026-07-09"
+      "parkingSourceUrl": null,
+      "parkingCheckedDate": "2026-07-09",
+      "parkingSourceRef": "user_supplied_official_site_review_2026-07-09"
     },
     "quietScore": 42,
     "flooring": "Vinyl plank or hardwood; verify exact unit",
@@ -3250,11 +3339,11 @@ const APARTMENTS = [
         "hard_surface"
       ],
       "scope": "building",
-      "evidenceType": "marketplace_claim",
-      "confidence": "marketplace_supplied",
-      "sourceUrl": "https://www.apartments.com/the-taft-new-haven-ct/3q7c2gd/",
-      "sourceRef": null,
-      "checkedDate": "2026-07-09"
+      "evidenceType": "photo_inferred",
+      "confidence": "verified_public",
+      "sourceUrl": null,
+      "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+      "checkedDate": "2026-07-13"
     },
     "applicationPolicy": {
       "ssnRequired": {
@@ -3322,8 +3411,10 @@ const APARTMENTS = [
       "advertisedRent": 2164,
       "recurringFees": {
         "amount": 0,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/the-archive-new-haven-ct/hdc5400/"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "utilitiesEstimate": {
         "amount": 90,
@@ -3332,7 +3423,9 @@ const APARTMENTS = [
       "insuranceEstimate": {
         "amount": 14,
         "confidence": "sample_lease",
-        "sourceUrl": "https://www.apartments.com/the-archive-new-haven-ct/hdc5400/"
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "furnitureAmortized": {
         "amount": 250,
@@ -3342,10 +3435,10 @@ const APARTMENTS = [
       "parkingEstimate": {
         "amount": 200,
         "appliesWhenPriority": "parking",
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/the-archive-new-haven-ct/hdc5400/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": "https://entrata.thearchiveapts.com/new-haven/the-archive/conventional/",
+        "sourceRef": "docs/phase_c_evidence/the-archive_2026-07-12.md",
+        "checkedDate": "2026-07-12"
       },
       "concessionEstimate": {
         "monthsFree": 2,
@@ -3355,7 +3448,9 @@ const APARTMENTS = [
         "moveInDeadline": null,
         "validThrough": null,
         "confidence": "conditional_offer",
-        "sourceUrl": "https://www.apartments.com/the-archive-new-haven-ct/hdc5400/"
+        "sourceUrl": "https://entrata.thearchiveapts.com/new-haven/the-archive/conventional/",
+        "sourceRef": "data/apartment_research_consolidated_2026-07-02.csv#official_concession",
+        "checkedDate": "2026-07-01"
       }
     },
     "moveInCash": {
@@ -3366,21 +3461,23 @@ const APARTMENTS = [
       "securityDeposit": {
         "amount": 0,
         "confidence": "sample_lease",
-        "sourceUrl": "https://www.apartments.com/the-archive-new-haven-ct/hdc5400/"
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "appFee": {
         "amount": 50,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/the-archive-new-haven-ct/hdc5400/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": "https://entrata.thearchiveapts.com/new-haven/the-archive/conventional/",
+        "sourceRef": "docs/phase_c_evidence/the-archive_2026-07-12.md",
+        "checkedDate": "2026-07-12"
       },
       "adminFee": {
         "confidence": "unknown"
       }
     },
     "concession": "Official site shows up to 2 months free on immediate move-ins + Yale discounts.",
-    "valueSignal": "Marketplace sqft check: Sx1 studio $1,894-$4,944 / 387 sq ft has a wide value range. Larger shared layouts may lower $/sq ft, but roommate split and lease terms must be checked separately.",
+    "valueSignal": "Reviewed official total monthly price: Sx1 Studio starts at $2,232 / 387 sq ft ($5.77/sqft); 1x1 starts at $2,464 / 503 sq ft ($4.90/sqft).",
     "campusScores": {
       "central_campus": 4,
       "med_school": 3,
@@ -3434,21 +3531,30 @@ const APARTMENTS = [
         "lvt"
       ],
       "scope": "building",
-      "evidenceType": "marketplace_claim",
-      "confidence": "marketplace_supplied",
-      "sourceUrl": "https://www.apartments.com/the-archive-new-haven-ct/hdc5400/",
-      "sourceRef": null,
-      "checkedDate": "2026-07-09"
+      "evidenceType": "photo_inferred",
+      "confidence": "verified_public",
+      "sourceUrl": null,
+      "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+      "checkedDate": "2026-07-13"
     },
     "decisionSignals": {
       "petPolicy": {
-        "allowed": null,
-        "allowedTypes": null,
+        "allowed": true,
+        "allowedTypes": [
+          "cat",
+          "dog"
+        ],
         "weightLimitLbs": null,
+        "breedRestrictions": null,
+        "maxPets": null,
+        "oneTimeFee": 350,
         "petDeposit": null,
+        "monthlyRent": null,
         "monthlyRentRange": null,
-        "confidence": "unknown",
-        "checkedDate": null
+        "confidence": "verified_public",
+        "sourceUrl": "https://entrata.thearchiveapts.com/new-haven/the-archive/conventional/",
+        "sourceRef": "docs/phase_c_evidence/the-archive_2026-07-12.md",
+        "checkedDate": "2026-07-12"
       },
       "utilitiesIncluded": [
         "internet"
@@ -3544,7 +3650,9 @@ const APARTMENTS = [
         "moveInDeadline": null,
         "validThrough": null,
         "confidence": "conditional_offer",
-        "sourceUrl": "https://www.apartments.com/estelle-new-haven-new-haven-ct/kmxwvs8/"
+        "sourceUrl": "https://estellenewhaven.securecafe.com/onlineleasing/estelle-new-haven/floorplans",
+        "sourceRef": "data/apartment_research_consolidated_2026-07-02.csv#official_concession",
+        "checkedDate": "2026-07-01"
       }
     },
     "moveInCash": {
@@ -3564,8 +3672,8 @@ const APARTMENTS = [
         "confidence": "unknown"
       }
     },
-    "concession": "Opening offer: 2 months free on 12-month lease or 4 months free on 24+ month lease.",
-    "valueSignal": "Marketplace sqft check: S1 studio $2,290 / 469 sq ft, about $4.88 per sq ft. Larger layouts may improve $/sq ft but raise total monthly cost.",
+    "concession": "Official page shows 2 months free on a 12-month lease; confirm exact-unit eligibility.",
+    "valueSignal": "Reviewed official snapshot: 1BR starts at $2,835 total and 2BR starts at $3,910 total. The reviewed rows do not contain reliable square footage, so no $/sqft claim is shown.",
     "campusScores": {
       "central_campus": 5,
       "med_school": 3,
@@ -3623,7 +3731,7 @@ const APARTMENTS = [
     "verify": [
       "final opening / move-in readiness and exact available unit",
       "fee sheet, utility billing, parking, deposit, pet, insurance, and internet",
-      "concession restrictions for 12-month vs 24+ month leases",
+      "12-month concession eligibility for the exact unit",
       "postal code discrepancy and student application requirements"
     ],
     "priceAvailabilityConfidence": "partial_public",
@@ -3636,7 +3744,9 @@ const APARTMENTS = [
       "scope": null,
       "evidenceType": null,
       "sourceUrl": null,
-      "checkedDate": null
+      "checkedDate": "2026-07-13",
+      "confidence": "verified_public",
+      "sourceRef": "VERIFICATION_LOG.md#restored-fields"
     },
     "applicationPolicy": {
       "ssnRequired": {
@@ -3706,26 +3816,64 @@ const APARTMENTS = [
         "sourceFile": "data/axis_201_availability.md",
         "priceClassification": "verified_available",
         "rentMode": "base_rent",
-        "includes": ["base rent"],
+        "includes": [
+          "base rent"
+        ],
         "unitCount": 56,
-        "advertisedByType": { "studio": 1852, "1br": 2282, "2br": 3084, "3br": 4425 },
-        "budgetBasis": { "unitType": "studio", "rent": 1852, "unit": "0249", "availableFrom": "Today", "sqft": 345, "pricePerSqft": 5.37 },
+        "advertisedByType": {
+          "studio": 1852,
+          "1br": 2282,
+          "2br": 3084,
+          "3br": 4425
+        },
+        "budgetBasis": {
+          "unitType": "studio",
+          "rent": 1852,
+          "unit": "0249",
+          "availableFrom": "Today",
+          "sqft": 345,
+          "pricePerSqft": 5.37
+        },
         "currentMinByType": {
-          "studio": { "rent": 1852, "unit": "0249", "availableFrom": "Today", "sqft": 345, "pricePerSqft": 5.37 },
-          "1br": { "rent": 2445, "unit": "0331", "availableFrom": "Jul 7", "sqft": 681, "pricePerSqft": 3.59 },
-          "2br": { "rent": 3084, "unit": "0647", "availableFrom": "Today", "sqft": 918, "pricePerSqft": 3.36 },
-          "3br": { "rent": 4425, "unit": "0120", "availableFrom": "Today", "sqft": 1310, "pricePerSqft": 3.38 }
+          "studio": {
+            "rent": 1852,
+            "unit": "0249",
+            "availableFrom": "Today",
+            "sqft": 345,
+            "pricePerSqft": 5.37
+          },
+          "1br": {
+            "rent": 2445,
+            "unit": "0331",
+            "availableFrom": "Jul 7",
+            "sqft": 681,
+            "pricePerSqft": 3.59
+          },
+          "2br": {
+            "rent": 3084,
+            "unit": "0647",
+            "availableFrom": "Today",
+            "sqft": 918,
+            "pricePerSqft": 3.36
+          },
+          "3br": {
+            "rent": 4425,
+            "unit": "0120",
+            "availableFrom": "Today",
+            "sqft": 1310,
+            "pricePerSqft": 3.38
+          }
         }
       }
     },
     "trueMonthlyCost": {
       "advertisedRent": 1852,
       "recurringFees": {
-        "amount": 23,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/axis-201-new-haven-ct/vdv51qf/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "amount": 83.39,
+        "confidence": "verified_public",
+        "sourceUrl": "https://axis201.com/floor-plans",
+        "sourceRef": "docs/phase_c_evidence/axis-201_2026-07-12.md",
+        "checkedDate": "2026-07-12"
       },
       "utilitiesEstimate": {
         "amount": 180,
@@ -3733,8 +3881,10 @@ const APARTMENTS = [
       },
       "insuranceEstimate": {
         "amount": 15,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/axis-201-new-haven-ct/vdv51qf/"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "furnitureAmortized": {
         "amount": 250,
@@ -3745,10 +3895,10 @@ const APARTMENTS = [
         "amount": 125,
         "maxAmount": 195,
         "appliesWhenPriority": "parking",
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/axis-201-new-haven-ct/vdv51qf/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "concessionEstimate": {
         "monthsFree": 2,
@@ -3758,7 +3908,9 @@ const APARTMENTS = [
         "moveInDeadline": null,
         "validThrough": null,
         "confidence": "conditional_offer",
-        "sourceUrl": "https://www.apartments.com/axis-201-new-haven-ct/vdv51qf/"
+        "sourceUrl": "https://axis201.com/floor-plans",
+        "sourceRef": "docs/phase_c_evidence/axis-201_2026-07-12.md",
+        "checkedDate": "2026-07-12"
       }
     },
     "moveInCash": {
@@ -3768,23 +3920,23 @@ const APARTMENTS = [
       },
       "securityDeposit": {
         "amount": 250,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/axis-201-new-haven-ct/vdv51qf/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "appFee": {
         "amount": 50,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/axis-201-new-haven-ct/vdv51qf/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "adminFee": {
         "confidence": "unknown"
       }
     },
-    "concession": "Official page advertises reduced rates plus up to 3 months free on select homes.",
+    "concession": "Official page advertises up to 2 months free on qualifying leases.",
     "valueSignal": "Current snapshot: studio starts at $1,852 / 345 sq ft ($5.37/sqft); 1BR starts at $2,445 / 681 sq ft ($3.59/sqft). The low studio entry price does not represent the 1BR market.",
     "campusScores": {
       "central_campus": 3,
@@ -3822,7 +3974,7 @@ const APARTMENTS = [
     ],
     "tradeoffs": [
       "到医学院 / Union Station / Downtown 办事不一定顺",
-      "平台列出 recurring fees $23/mo；utilities 和 pet/storage 等额外费用仍需确认",
+      "官网价格页列出 required fees $83.39/月；水电网和宠物/储物等额外费用仍需确认",
       "公开优惠已计入估算；若具体房源不符合资格，应改看优惠前金额"
     ],
     "verify": [
@@ -3839,7 +3991,9 @@ const APARTMENTS = [
       "scope": "building",
       "evidenceType": null,
       "sourceUrl": null,
-      "checkedDate": null
+      "checkedDate": "2026-07-13",
+      "confidence": "verified_public",
+      "sourceRef": "VERIFICATION_LOG.md#restored-fields"
     },
     "decisionSignals": {
       "petPolicy": {
@@ -3942,7 +4096,9 @@ const APARTMENTS = [
         "moveInDeadline": null,
         "validThrough": null,
         "confidence": "conditional_offer",
-        "sourceUrl": "https://www.apartments.com/the-audubon-new-haven-new-haven-ct/kcmgr7b/"
+        "sourceUrl": "https://www.theaudubonapts.com/floorplans",
+        "sourceRef": "data/apartment_research_consolidated_2026-07-02.csv#official_concession",
+        "checkedDate": "2026-07-01"
       }
     },
     "moveInCash": {
@@ -4017,7 +4173,9 @@ const APARTMENTS = [
       "scope": null,
       "evidenceType": null,
       "sourceUrl": null,
-      "checkedDate": null
+      "checkedDate": "2026-07-13",
+      "confidence": "verified_public",
+      "sourceRef": "VERIFICATION_LOG.md#restored-fields"
     },
     "decisionSignals": {
       "petPolicy": {
@@ -4033,10 +4191,10 @@ const APARTMENTS = [
         "petDeposit": null,
         "monthlyRent": 50,
         "monthlyRentRange": null,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/the-audubon-new-haven-new-haven-ct/kcmgr7b/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       }
     },
     "applicationPolicy": {
@@ -4132,10 +4290,10 @@ const APARTMENTS = [
         "validThrough": null,
         "monthsFree": 2,
         "leaseMonths": 12,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/new-haven-towers-new-haven-ct/0rkff2m/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "conditional_offer",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       }
     },
     "moveInCash": {
@@ -4216,11 +4374,11 @@ const APARTMENTS = [
         "hardwood"
       ],
       "scope": "building",
-      "evidenceType": "marketplace_claim",
-      "confidence": "marketplace_supplied",
-      "sourceUrl": "https://www.apartments.com/new-haven-towers-new-haven-ct/0rkff2m/",
-      "sourceRef": null,
-      "checkedDate": "2026-07-09"
+      "evidenceType": "photo_inferred",
+      "confidence": "verified_public",
+      "sourceUrl": null,
+      "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+      "checkedDate": "2026-07-13"
     },
     "decisionSignals": {
       "petPolicy": {
@@ -4310,7 +4468,8 @@ const APARTMENTS = [
         "parking": null,
         "units": null
       }
-    ]
+    ],
+    "concession": "Official site shows 2 months free; confirm eligible tower, unit, and lease."
   },
   {
     "id": "pierpont-city-crossing",
@@ -4349,7 +4508,9 @@ const APARTMENTS = [
         "moveInDeadline": null,
         "validThrough": null,
         "confidence": "conditional_offer",
-        "sourceUrl": "https://www.apartments.com/pierpont-at-city-crossing-new-haven-ct/vy0jd8n/"
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       }
     },
     "moveInCash": {
@@ -4363,10 +4524,10 @@ const APARTMENTS = [
       },
       "appFee": {
         "amount": 25,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/pierpont-at-city-crossing-new-haven-ct/vy0jd8n/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "adminFee": {
         "confidence": "unknown"
@@ -4400,7 +4561,7 @@ const APARTMENTS = [
     "confidence": "partial",
     "confidenceLabel": "Partial confidence",
     "dailyLabel": "Station / Med / downtown crossing routine",
-    "sourceLabel": "RMS official page + Apartments.com 9 Tower Ln / Walk To Campus location check",
+    "sourceLabel": "RMS and official RentCafe pages checked 2026-07-12",
     "bestFor": [
       "主要去医学院、Union Station 或 Downtown 南侧，想住 Pierpont 的学生",
       "想比较 Jr Studio、1BR 和 2BR，并愿意按具体房源确认价格和入住日期的学生"
@@ -4424,11 +4585,11 @@ const APARTMENTS = [
         "tile"
       ],
       "scope": "building",
-      "evidenceType": "marketplace_claim",
-      "confidence": "marketplace_supplied",
-      "sourceUrl": "https://www.apartments.com/pierpont-at-city-crossing-new-haven-ct/vy0jd8n/",
-      "sourceRef": null,
-      "checkedDate": "2026-07-09"
+      "evidenceType": "photo_inferred",
+      "confidence": "verified_public",
+      "sourceUrl": null,
+      "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+      "checkedDate": "2026-07-13"
     },
     "decisionSignals": {
       "petPolicy": {
@@ -4444,10 +4605,10 @@ const APARTMENTS = [
         "petDeposit": null,
         "monthlyRent": 25,
         "monthlyRentRange": null,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.zillow.com/homes/Pierpont-at-City-Crossing,-New-Haven,-CT_rb/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-10"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       }
     },
     "applicationPolicy": {
@@ -4501,7 +4662,8 @@ const APARTMENTS = [
       "walkSource": null,
       "walkCheckedDate": null
     },
-    "floorplans": []
+    "floorplans": [],
+    "concession": "Official site shows 1 month free on select units and lease terms; confirm eligibility."
   },
   {
     "id": "the-whit",
@@ -4518,14 +4680,52 @@ const APARTMENTS = [
         "sourceFile": "data/whit_parsed.md",
         "priceClassification": "verified_available",
         "rentMode": "base_rent",
-        "includes": ["base rent"],
+        "includes": [
+          "base rent"
+        ],
         "unitCount": 18,
-        "budgetBasis": { "unitType": "studio", "rent": 2306, "unit": "Studio / 591 sqft", "availableFrom": "Jun 28 2026", "leaseMonths": 11, "sqft": 591, "pricePerSqft": 3.90 },
+        "budgetBasis": {
+          "unitType": "studio",
+          "rent": 2306,
+          "unit": "Studio / 591 sqft",
+          "availableFrom": "Jun 28 2026",
+          "leaseMonths": 11,
+          "sqft": 591,
+          "pricePerSqft": 3.9
+        },
         "currentMinByType": {
-          "studio": { "rent": 2306, "unit": "Studio / 591 sqft", "availableFrom": "Jun 28 2026", "leaseMonths": 11, "sqft": 591, "pricePerSqft": 3.90 },
-          "1br": { "rent": 2475, "unit": "1-Bedroom 1-Bathroom / 677 sqft", "availableFrom": "Aug 3 2026", "leaseMonths": 12, "sqft": 677, "pricePerSqft": 3.66 },
-          "2br": { "rent": 3400, "unit": "2-Bedroom 2-Bathroom / 1114 sqft", "availableFrom": "May 11 2026", "leaseMonths": 11, "sqft": 1114, "pricePerSqft": 3.05 },
-          "3br": { "rent": 5190, "unit": "3-Bedroom 3-Bath w/ Loft / 1396 sqft", "availableFrom": "Jul 14 2026", "leaseMonths": 11, "sqft": 1396, "pricePerSqft": 3.72 }
+          "studio": {
+            "rent": 2306,
+            "unit": "Studio / 591 sqft",
+            "availableFrom": "Jun 28 2026",
+            "leaseMonths": 11,
+            "sqft": 591,
+            "pricePerSqft": 3.9
+          },
+          "1br": {
+            "rent": 2475,
+            "unit": "1-Bedroom 1-Bathroom / 677 sqft",
+            "availableFrom": "Aug 3 2026",
+            "leaseMonths": 12,
+            "sqft": 677,
+            "pricePerSqft": 3.66
+          },
+          "2br": {
+            "rent": 3400,
+            "unit": "2-Bedroom 2-Bathroom / 1114 sqft",
+            "availableFrom": "May 11 2026",
+            "leaseMonths": 11,
+            "sqft": 1114,
+            "pricePerSqft": 3.05
+          },
+          "3br": {
+            "rent": 5190,
+            "unit": "3-Bedroom 3-Bath w/ Loft / 1396 sqft",
+            "availableFrom": "Jul 14 2026",
+            "leaseMonths": 11,
+            "sqft": 1396,
+            "pricePerSqft": 3.72
+          }
         }
       }
     },
@@ -4533,10 +4733,10 @@ const APARTMENTS = [
       "advertisedRent": 2400,
       "recurringFees": {
         "amount": 15,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/the-whit-new-haven-ct/7j5t4nf/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": "https://www.scullycompany.com/apartments/new-england/new-haven-county/new-haven/the-whit/",
+        "sourceRef": "docs/phase_c_evidence/the-whit_2026-07-12.md",
+        "checkedDate": "2026-07-12"
       },
       "utilitiesEstimate": {
         "amount": 180,
@@ -4555,10 +4755,10 @@ const APARTMENTS = [
         "amount": 128,
         "maxAmount": 213,
         "appliesWhenPriority": "parking",
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/the-whit-new-haven-ct/7j5t4nf/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "concessionEstimate": {
         "monthsFree": null,
@@ -4578,10 +4778,10 @@ const APARTMENTS = [
       },
       "securityDeposit": {
         "amount": 500,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/the-whit-new-haven-ct/7j5t4nf/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "appFee": {
         "amount": 50,
@@ -4633,10 +4833,10 @@ const APARTMENTS = [
         "petDeposit": 500,
         "monthlyRent": 60,
         "monthlyRentRange": null,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.zillow.com/homes/The-Whit,-New-Haven,-CT_rb/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-10"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       }
     },
     "quietScore": 58,
@@ -4673,11 +4873,11 @@ const APARTMENTS = [
         "hard_surface"
       ],
       "scope": "building",
-      "evidenceType": "marketplace_claim",
-      "confidence": "marketplace_supplied",
-      "sourceUrl": "https://www.apartments.com/the-whit-new-haven-ct/7j5t4nf/",
-      "sourceRef": null,
-      "checkedDate": "2026-07-09"
+      "evidenceType": "photo_inferred",
+      "confidence": "verified_public",
+      "sourceUrl": null,
+      "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+      "checkedDate": "2026-07-13"
     },
     "applicationPolicy": {
       "ssnRequired": {
@@ -4745,10 +4945,10 @@ const APARTMENTS = [
       "advertisedRent": 2200,
       "recurringFees": {
         "amount": 105.25,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/the-anthem-at-square-10-new-haven-ct/er60hxm/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": "https://www.anthemsquare10.com/floorplans",
+        "sourceRef": "docs/phase_c_evidence/anthem-square10_2026-07-12.md",
+        "checkedDate": "2026-07-12"
       },
       "utilitiesEstimate": {
         "amount": 180,
@@ -4756,10 +4956,10 @@ const APARTMENTS = [
       },
       "insuranceEstimate": {
         "amount": 25,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/the-anthem-at-square-10-new-haven-ct/er60hxm/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "furnitureAmortized": {
         "amount": 250,
@@ -4790,23 +4990,23 @@ const APARTMENTS = [
       "securityDeposit": {
         "amount": 2265,
         "maxAmount": 3800,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.zillow.com/homes/The-Anthem-at-Square-10,-New-Haven,-CT_rb/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-10"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "appFee": {
         "amount": 0,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/the-anthem-at-square-10-new-haven-ct/er60hxm/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "adminFee": {
         "confidence": "unknown"
       }
     },
-    "valueSignal": "Marketplace sqft check: S1 studio $1,921-$2,201 / 373 sq ft, about $5.15-$5.90 per sq ft. 2BR B1 appears closer to $3.06+ per sq ft before fee confirmation.",
+    "valueSignal": "Reviewed official snapshot: S1 Studio is $1,930.25 total / 373 sq ft ($5.18/sqft); A1 1BR is $2,790.25 / 718 sq ft ($3.89/sqft); B2 2BR is $3,440.25 / 1,064 sq ft ($3.23/sqft).",
     "campusScores": {
       "central_campus": 3,
       "med_school": 4,
@@ -4833,9 +5033,9 @@ const APARTMENTS = [
     "applicationFriction": 4,
     "roommateFit": 3,
     "confidence": "partial",
-    "confidenceLabel": "Zillow data found; needs official refresh",
+    "confidenceLabel": "Official price snapshot available; fees and policies remain partial",
     "dailyLabel": "Good station/Med orientation, services changing",
-    "sourceLabel": "Marketplace floorplan and fee details checked 2026-07-10; displayed starting-rent copy still needs an official refresh",
+    "sourceLabel": "Official floorplans and availability checked 2026-07-12; policies remain partial",
     "bestFor": [
       "主要去医学院 / Union Station / Downtown 南侧，想关注新楼供给的学生",
       "愿意追踪新盘 concessions、affordable/market-rate mix 和后续 retail 变化的学生",
@@ -4861,11 +5061,11 @@ const APARTMENTS = [
         "carpet"
       ],
       "scope": "building",
-      "evidenceType": "marketplace_claim",
-      "confidence": "marketplace_supplied",
-      "sourceUrl": "https://www.apartments.com/the-anthem-at-square-10-new-haven-ct/er60hxm/",
-      "sourceRef": null,
-      "checkedDate": "2026-07-09"
+      "evidenceType": "photo_inferred",
+      "confidence": "verified_public",
+      "sourceUrl": null,
+      "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+      "checkedDate": "2026-07-13"
     },
     "decisionSignals": {
       "petPolicy": {
@@ -4881,10 +5081,10 @@ const APARTMENTS = [
         "petDeposit": null,
         "monthlyRent": 50,
         "monthlyRentRange": null,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.zillow.com/homes/The-Anthem-at-Square-10,-New-Haven,-CT_rb/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-10"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       }
     },
     "applicationPolicy": {
@@ -4939,7 +5139,7 @@ const APARTMENTS = [
       "walkCheckedDate": null
     },
     "floorplans": [],
-    "priceAvailabilitySourceUrl": "https://www.apartments.com/the-anthem-at-square-10-new-haven-ct/er60hxm/",
+    "priceAvailabilitySourceUrl": null,
     "priceAvailabilityCheckedDate": "2026-07-09"
   },
   {
@@ -4970,10 +5170,10 @@ const APARTMENTS = [
         "amount": 175,
         "maxAmount": 200,
         "appliesWhenPriority": "parking",
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/the-elm-new-haven-ct/wsc486b/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "concessionEstimate": {
         "monthsFree": null,
@@ -4994,17 +5194,17 @@ const APARTMENTS = [
       "securityDeposit": {
         "amount": 2095,
         "maxAmount": 2100,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.zillow.com/homes/The-Elm-New-Haven-CT_rb/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-10"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "appFee": {
         "amount": 50,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/the-elm-new-haven-ct/wsc486b/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "adminFee": {
         "confidence": "unknown"
@@ -5062,11 +5262,11 @@ const APARTMENTS = [
         "hardwood"
       ],
       "scope": "building",
-      "evidenceType": "marketplace_claim",
-      "confidence": "marketplace_supplied",
-      "sourceUrl": "https://www.apartments.com/the-elm-new-haven-ct/wsc486b/",
-      "sourceRef": null,
-      "checkedDate": "2026-07-09"
+      "evidenceType": "photo_inferred",
+      "confidence": "verified_public",
+      "sourceUrl": null,
+      "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+      "checkedDate": "2026-07-13"
     },
     "decisionSignals": {
       "petPolicy": {
@@ -5082,10 +5282,10 @@ const APARTMENTS = [
         "petDeposit": null,
         "monthlyRent": 25,
         "monthlyRentRange": null,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/the-elm-new-haven-ct/wsc486b/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       }
     },
     "applicationPolicy": {
@@ -5169,10 +5369,10 @@ const APARTMENTS = [
         "amount": 117,
         "maxAmount": 186,
         "appliesWhenPriority": "parking",
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/corsair-new-haven-ct/fkt0ldx/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "concessionEstimate": {
         "monthsFree": null,
@@ -5192,10 +5392,10 @@ const APARTMENTS = [
       },
       "securityDeposit": {
         "amount": 500,
-        "confidence": "marketplace_supplied",
-        "sourceUrl": "https://www.apartments.com/corsair-new-haven-ct/fkt0ldx/",
-        "sourceRef": null,
-        "checkedDate": "2026-07-09"
+        "confidence": "verified_public",
+        "sourceUrl": null,
+        "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+        "checkedDate": "2026-07-13"
       },
       "appFee": {
         "amount": 50,
@@ -5260,11 +5460,11 @@ const APARTMENTS = [
         "hardwood"
       ],
       "scope": "building",
-      "evidenceType": "marketplace_claim",
-      "confidence": "marketplace_supplied",
-      "sourceUrl": "https://www.apartments.com/corsair-new-haven-ct/fkt0ldx/",
-      "sourceRef": null,
-      "checkedDate": "2026-07-09"
+      "evidenceType": "photo_inferred",
+      "confidence": "verified_public",
+      "sourceUrl": null,
+      "sourceRef": "VERIFICATION_LOG.md#restored-fields",
+      "checkedDate": "2026-07-13"
     },
     "decisionSignals": {
       "petPolicy": {
@@ -5596,7 +5796,7 @@ const APARTMENT_TRANSLATIONS = {
       area: "市中心高层 · 360 State St",
       priceLabel: "展示 studio $2,055；当前可见 total 从 $2,372 起",
       valueSignal: "按当前快照：Studio APT 705 为 $2,372 total / 517 sq ft（$4.59/sqft）；1BR APT 1109 为 $2,385 total / 582 sq ft（$4.10/sqft）。应在相同租期和费用口径内比较。",
-      flooring: "照片显示为硬木地板；具体房源需确认",
+      flooring: "照片显示为硬木地板；具体房间可能不同",
       furnishing: "普通 lease 默认不带家具；可看 CORT 家具方案，1BR 约 $250/月（12个月 lease）",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "Downtown 买菜吃饭方便，楼内服务完整",
@@ -5623,7 +5823,7 @@ const APARTMENT_TRANSLATIONS = {
       priceLabel: "当前 studio $1,808-$2,170；1BR $1,864-$2,237（含 special 口径）",
       concession: "官网显示部分公寓最高免 3 个月租金，部分 1BR 有降价。",
       valueSignal: "按当前快照：整租 studio $1,808-$2,170 / 605 sq ft，1BR $1,864-$2,237 / 631 sq ft。低端价格可能含当前 special；co-living 要按人单独比较。",
-      flooring: "需按具体房源确认",
+      flooring: "照片显示为木纹地板；具体房间可能不同",
       furnishing: "是否带家具尚未核实",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "医学院方向和 Wooster Square 餐饮方便",
@@ -5649,8 +5849,8 @@ const APARTMENT_TRANSLATIONS = {
       area: "Central Campus / Chapel-College 走廊 · 265 College St",
       priceLabel: "studio $1,865-$2,060；1BR $2,150-$2,440；2BR $2,950-$3,300",
       concession: "2026-08-01 或之前入住的 studio / 1BR lease 可免 2 个月租金。",
-      valueSignal: "按平台上的租金和面积粗算：studio $1,920-$2,115 / 424-524 sq ft，约 $3.66-$4.99/sq ft。",
-      flooring: "资料列有 LVP 或硬木地板；具体房源需确认",
+      valueSignal: "按审核过的官网快照：Studio 05O 为 $1,895 / 424 sq ft（$4.47/sqft）；1BR 05S 为 $1,999 / 697 sq ft（$2.87/sqft）。总价、租期和具体房源状态要一起比较。",
+      flooring: "LVP 或硬木地板；具体房间可能不同",
       furnishing: "能看到 CORT / corporate furniture 选项；不是默认带家具，1BR 约 $250/月（12个月 lease）",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "Central Campus 和 Med School 都方便",
@@ -5676,8 +5876,8 @@ const APARTMENT_TRANSLATIONS = {
       area: "Downtown / Ninth Square · Chapel / Orange",
       priceLabel: "studio $2,232 起；1BR $2,164 起；2BR $3,041 起；3BR $3,922 起，按总月价展示",
       concession: "官网显示 immediate move-in 最高免 2 个月，另有 Yale discount。",
-      valueSignal: "按平台上的租金和面积粗算：Sx1 studio $1,894-$4,944 / 387 sq ft，区间很宽。多人合租大户型可能每尺更便宜，但室友分摊和 lease term 要单独核实。",
-      flooring: "照片显示为 LVT 地板；具体房源需确认",
+      valueSignal: "按审核过的官网总月价：Sx1 Studio 从 $2,232 / 387 sq ft（$5.77/sqft）起；1x1 从 $2,464 / 503 sq ft（$4.90/sqft）起。",
+      flooring: "照片显示为 LVT 地板；具体房间可能不同",
       furnishing: "是否带家具尚未核实",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "Ninth Square / Downtown 服务多，也有多人户型",
@@ -5702,9 +5902,9 @@ const APARTMENT_TRANSLATIONS = {
     "estelle": {
       area: "Downtown / New Haven Green 边缘 · 19 Elm St",
       priceLabel: "studio 需询价；1BR $2,795 起；2BR $3,870 起；3BR $4,725 起；4BR $5,795 起",
-      concession: "开业优惠：12 个月 lease 免 2 个月，24 个月以上 lease 免 4 个月。",
-      valueSignal: "按平台上的租金和面积粗算：S1 studio $2,290 / 469 sq ft，约 $4.88/sq ft。大户型可能每尺更便宜，但总月租会更高。",
-      flooring: "照片看起来是木纹地板；具体房源需确认",
+      concession: "官网显示 12 个月 lease 免 2 个月；具体房源资格需确认。",
+      valueSignal: "按审核过的官网快照：1BR 总月价从 $2,835 起，2BR 从 $3,910 起。现有审核行没有可靠面积，因此不展示每平方英尺价格。",
+      flooring: "照片显示为木纹地板；具体房间可能不同",
       furnishing: "是否带家具尚未核实",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "新开 Downtown 楼，去 Central Campus 方便",
@@ -5722,14 +5922,14 @@ const APARTMENT_TRANSLATIONS = {
       verify: [
         "最终开业和入住准备状态，以及具体可租房源",
         "费用表、水电网计费、停车、押金、宠物、保险和网络",
-        "12 个月与 24 个月以上租约的优惠限制",
+        "具体房源是否符合 12 个月 lease 的优惠资格",
         "邮编差异和学生申请要求"
       ]
     },
     "axis-201": {
       area: "Science Park / Munson St · 201 Munson St",
       priceLabel: "当前 studio $1,852 起；1BR $2,445 起；2BR $3,084 起；3BR $4,425 起",
-      concession: "官网显示部分房源降价，并最高免 3 个月租金。",
+      concession: "官网显示符合条件的 lease 最高免 2 个月租金。",
       valueSignal: "按当前快照：studio 从 $1,852 / 345 sq ft（$5.37/sqft）起；1BR 从 $2,445 / 681 sq ft（$3.59/sqft）起。studio 的低价不能代表 1BR。",
       flooring: "需按具体房源确认",
       furnishing: "是否带家具尚未核实",
@@ -5743,7 +5943,7 @@ const APARTMENT_TRANSLATIONS = {
       ],
       tradeoffs: [
         "去医学院、Union Station 或 Downtown 办事不一定顺",
-        "平台列出每月固定费用 $23；水电网和宠物/储物等额外费用仍需确认",
+        "官网价格页列出 required fees $83.39/月；水电网和宠物/储物等额外费用仍需确认",
         "优惠只适用于部分房源，不能直接当作每月总成本"
       ],
       verify: [
@@ -5757,7 +5957,7 @@ const APARTMENT_TRANSLATIONS = {
       area: "Audubon / Whitney-Arts 走廊 · 367 Orange St",
       priceLabel: "studio $2,250 起；1BR $2,671 起；2BR $3,691 起；3BR $4,180 起，按估算月成本展示",
       concession: "官网首页显示部分房源最高免 1.5 个月租金。",
-      flooring: "照片显示不同房源可能有多种地板；具体房源需确认",
+      flooring: "不同房间可能使用不同地板",
       furnishing: "是否带家具尚未核实",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "Arts、Central Campus 和 Whitney-Audubon 走廊都方便",
@@ -5782,7 +5982,8 @@ const APARTMENT_TRANSLATIONS = {
     "new-haven-towers": {
       area: "Downtown York/Park/High 一带 · 4 栋楼",
       priceLabel: "Madison studio $1,695 起；Crown / Crown Court / 18 High 按楼不同",
-      flooring: "照片显示为硬木地板；需按楼栋和具体房源确认",
+      concession: "官网显示免 2 个月租金；需确认适用楼栋、房间和 lease。",
+      flooring: "照片显示为硬木地板；4 栋楼和具体房间可能不同",
       furnishing: "是否带家具尚未核实",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "离校园近，4 栋楼之间略有差异",
@@ -5807,11 +6008,12 @@ const APARTMENT_TRANSLATIONS = {
     "pierpont-city-crossing": {
       area: "Downtown Crossing / 车站-医学院边缘",
       priceLabel: "Jr Studio $2,218 起；1BR $2,486 起；2BR $3,613 起",
-      flooring: "照片显示客厅为木纹 LVP、卧室为地毯；具体房源需确认",
+      concession: "官网显示部分房间和 lease 免 1 个月租金；需确认资格。",
+      flooring: "客厅为木纹 LVP、卧室为地毯；具体房间可能不同",
       furnishing: "是否带家具尚未核实",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "Union Station、医学院和 Downtown 南侧通勤",
-      sourceLabel: "RMS 官网 + Apartments.com 9 Tower Ln / Walk To Campus 位置核对",
+      sourceLabel: "2026-07-12 查过 RMS 和官方 RentCafe 页面",
       bestFor: [
         "主要去医学院、Union Station 或 Downtown 南侧，想住 Pierpont 的学生",
         "想比较 Jr Studio、1BR 和 2BR，并愿意按具体房源确认价格和入住日期的学生"
@@ -5830,7 +6032,7 @@ const APARTMENT_TRANSLATIONS = {
       area: "Wooster Square · 630 Chapel St",
       priceLabel: "当前 studio $2,306 起；1BR $2,475 起；2BR $3,400 起",
       valueSignal: "按当前快照：studio 从 $2,306 / 591 sq ft（$3.90/sqft）起；1BR 从 $2,475 / 677 sq ft（$3.66/sqft）起。11个月 studio 价格不能代表 1BR。",
-      flooring: "照片显示为宽板地板；具体房源需确认",
+      flooring: "宽板硬质地板；具体房间可能不同",
       furnishing: "普通 lease 默认不带家具；可看 CORT 家具方案，1BR 约 $250/月（12个月 lease）",
       confidenceLabel: "部分信息已确认",
       dailyLabel: "Wooster Square 餐饮方便，也有收包裹 / concierge",
@@ -5855,12 +6057,12 @@ const APARTMENT_TRANSLATIONS = {
     "anthem-square10": {
       area: "Downtown Crossing / 联合车站一侧 · South Orange / George",
       priceLabel: "旧新闻基准：studio $1,900，1BR $2,625，2BR $3,300",
-      valueSignal: "按平台上的租金和面积粗算：S1 studio $1,921-$2,201 / 373 sq ft，约 $5.15-$5.90/sq ft。B1 2BR 在确认费用前看起来约 $3.06/sq ft 起。",
-      flooring: "照片显示主起居区为抛光混凝土、卧室为地毯；具体房源需确认",
-      furnishing: "平台列有带家具和部分带家具的房源；具体房源需确认",
-      confidenceLabel: "旧新闻线索（2024-12）；需要再查官网",
+      valueSignal: "按审核过的官网快照：S1 Studio 为 $1,930.25 total / 373 sq ft（$5.18/sqft）；A1 1BR 为 $2,790.25 / 718 sq ft（$3.89/sqft）；B2 2BR 为 $3,440.25 / 1,064 sq ft（$3.23/sqft）。",
+      flooring: "主起居区为抛光混凝土、卧室为地毯；具体房间可能不同",
+      furnishing: "有带家具和部分带家具的房源；具体配置需确认",
+      confidenceLabel: "已有官网价格快照；费用和政策仍不完整",
       dailyLabel: "Union Station / 医学院方向较好，周边服务还在变化",
-      sourceLabel: "2026-07-10 核对过平台户型和费用；卡片里的起租价仍需官网更新",
+      sourceLabel: "2026-07-12 查过官网户型和 availability；政策仍不完整",
       bestFor: [
         "主要去医学院、Union Station 或 Downtown 南侧，并想关注新楼供应的学生",
         "愿意追踪新楼优惠、市场价 / affordable units 和后续商业配套变化的学生",
@@ -5966,7 +6168,7 @@ const APARTMENT_TRANSLATIONS = {
       verify: [
         "Final opening and move-in readiness, plus the exact available unit.",
         "Fee sheet, utility billing, parking, deposit, pet, insurance, and internet.",
-        "Concession restrictions for 12-month versus 24+ month leases.",
+        "Whether the exact unit qualifies for the 12-month concession.",
         "Postal code discrepancy and student application requirements."
       ]
     },
@@ -5978,7 +6180,7 @@ const APARTMENT_TRANSLATIONS = {
       ],
       tradeoffs: [
         "The routine to Med School, Union Station, or downtown errands may not be smooth.",
-        "The marketplace lists $23/month in recurring fees; utilities and other pet/storage costs still need confirmation.",
+        "The official price page lists $83.39/month in required fees; utilities and other pet/storage costs still need confirmation.",
         "The published special is included in the estimate; use the pre-concession amount if the exact home is not eligible."
       ],
       verify: [
@@ -7103,8 +7305,8 @@ function scoreSetup(apartment, preferences, answers = {}) {
       if (!fs || !fs.materials.length || fs.scope === null) return SCORE.MID;
       if (fs.materials.includes("carpet") && !fs.materials.includes("wood_look") && !fs.materials.includes("hard_surface") && !fs.materials.includes("hardwood") && !fs.materials.includes("lvp") && !fs.materials.includes("lvt")) return SCORE.MISS;
       if (fs.scope === "exact_unit" && (fs.materials.includes("wood_look") || fs.materials.includes("hard_surface") || fs.materials.includes("hardwood") || fs.materials.includes("lvp") || fs.materials.includes("lvt"))) return SCORE.FULL;
-      if (fs.scope === "floorplan" && (fs.evidenceType === "official_claim" || fs.evidenceType === "marketplace_claim")) return SCORE.HIGH;
-      if (fs.scope === "building" && (fs.evidenceType === "official_claim" || fs.evidenceType === "marketplace_claim")) return SCORE.MID;
+      if (fs.scope === "floorplan" && fs.evidenceType === "official_claim") return SCORE.HIGH;
+      if (fs.scope === "building" && fs.evidenceType === "official_claim") return SCORE.MID;
       if (fs.evidenceType === "photo_inferred") return SCORE.MID;
       return SCORE.MID;
     }
@@ -7475,7 +7677,7 @@ function topReasons(result, lang = activeLang(), answers = null) {
 function confidenceClass(apartment) {
   if (["low", "stale"].includes(apartment.priceAvailabilityConfidence)) return "low";
   if (apartment.priceAvailabilityConfidence === "verified_public" &&
-      ["verified_public", "marketplace_supplied"].includes(apartment.feeConfidence) &&
+      apartment.feeConfidence === "verified_public" &&
       apartment.applicationConfidence === "verified_public") return "good";
   return "warn";
 }
@@ -7549,10 +7751,7 @@ function apartmentEvidence(apartment) {
     }
   };
   visit(apartment);
-  const sortedUrls = [...urls].sort((a, b) => {
-    const marketplace = url => /apartments\.com|zillow\.com/i.test(url) ? 1 : 0;
-    return marketplace(a) - marketplace(b) || a.localeCompare(b);
-  });
+  const sortedUrls = [...urls].sort((a, b) => a.localeCompare(b));
   return {
     urls: sortedUrls.slice(0, 3),
     checkedDate: dates.sort().at(-1) || null
@@ -7560,8 +7759,6 @@ function apartmentEvidence(apartment) {
 }
 
 function evidenceLinkLabel(url, lang) {
-  if (/apartments\.com/i.test(url)) return "Apartments.com";
-  if (/zillow\.com/i.test(url)) return "Zillow";
   if (/newhaventowers\.com/i.test(url)) return ui("officialSource", lang);
   return ui("publicSource", lang);
 }

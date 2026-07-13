@@ -63,6 +63,20 @@ They do not overwrite the original official ranges or imply current inventory.
 - Rent, availability, fees, utilities, and lease policies must be confirmed
   before applying.
 
+## Source Policy
+
+Public facts and scoring inputs must come from an official property/manager
+page, a written leasing-office response, or a user-supplied official document.
+Marketplace, social, forum, and review-site material is treated only as an
+internal lead and is not shipped in the public data package or used in ranking.
+Automated collection from third-party marketplaces and community platforms is
+not part of the approved workflow.
+
+See [`SOURCE_POLICY.md`](SOURCE_POLICY.md) for the Review Gate and escalation
+rules. [`VERIFICATION_LOG.md`](VERIFICATION_LOG.md) records the 2026-07-13
+human review that restored independently official-site-verified fields while
+keeping marketplace source labels out of the public app.
+
 ## Deployment
 
 GitHub Pages serves the repository from `main` and `/root`.
