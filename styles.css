@@ -405,6 +405,7 @@ button:focus-visible {
   border-radius: 8px;
   background: #fff;
   padding: 16px;
+  line-height: 1.45;
   animation: card-in 160ms ease-out both;
 }
 
@@ -489,7 +490,7 @@ button:focus-visible {
 .facts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
-  gap: 8px;
+  gap: 12px;
   margin: 12px 0;
 }
 
@@ -505,7 +506,7 @@ button:focus-visible {
   min-height: 66px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  padding: 8px;
+  padding: 10px;
   background: #fbfcfd;
 }
 
@@ -518,9 +519,58 @@ button:focus-visible {
 
 .fact span {
   display: block;
-  font-weight: 760;
-  line-height: 1.25;
+  font-weight: 680;
+  line-height: 1.45;
   overflow-wrap: anywhere;
+}
+
+.price-signal-list {
+  display: grid;
+  gap: 4px;
+}
+
+.price-signal-list span {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 8px;
+  align-items: baseline;
+}
+
+.price-signal-list b {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 760;
+}
+
+.utility-details {
+  display: grid;
+  gap: 5px;
+}
+
+.utility-details > div {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 7px;
+  align-items: start;
+}
+
+.utility-details b {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 760;
+}
+
+.utility-details span {
+  font-size: 0.86rem;
+  font-weight: 680;
+}
+
+.utility-details small {
+  display: block;
+  padding-top: 3px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.4;
 }
 
 .concession-fact {
@@ -1112,11 +1162,12 @@ button:focus-visible {
 }
 
 .action-panel > .referral-note {
-  margin: -4px 0 16px;
-  padding-top: 12px;
+  margin: -4px 0 14px;
+  padding-top: 10px;
   border-top: 1px solid var(--line);
-  color: #4f5967;
-  font-size: 0.82rem;
+  color: var(--muted);
+  font-size: 0.74rem;
+  line-height: 1.45;
 }
 
 @media (max-width: 980px) {

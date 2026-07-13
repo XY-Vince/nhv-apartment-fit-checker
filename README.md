@@ -40,8 +40,9 @@ They do not overwrite the original official ranges or imply current inventory.
 - Missing price evidence stays visible and does not count as affordability.
 - Requested unit-level features with unknown evidence can remove budget scoring
   from that card instead of pairing an unverified feature with a cheap unit.
-- Concessions are shown separately and are not automatically deducted from the
-  budget comparison.
+- Recorded months-free offers with a usable lease term are prorated into the
+  monthly estimate and budget comparison. Cards retain the pre-concession
+  amount because exact-unit eligibility still needs confirmation.
 - Source confidence is displayed separately from fit score.
 - The app does not score protected-class traits or label an area as safe/unsafe.
 - Rent, availability, fees, utilities, and lease policies must be confirmed
