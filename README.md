@@ -13,11 +13,17 @@ about unit type, budget, utilities, setup, and daily priorities.
 Apartment profiles and scoring logic are embedded in `app.js`, so the site can
 run as a static GitHub Pages project without a backend.
 
+Feedback is copied to the clipboard. Set the project-only inbox once in the
+single `FEEDBACK_EMAIL` constant; do not put a personal address in public HTML.
+
 ## Phase D Price Matching
 
 The public questionnaire supports Studio, 1BR, 2BR, and Not sure. Not sure uses
 a disclosed 1BR comparison basis. Budget bands change with the selected unit
-type, and budget only affects ordering within the same campus-fit tier.
+type. Switching unit type clears the old budget choice. Each band uses only its
+upper bound as the affordability ceiling, so a cheaper apartment receives the
+same full budget fit rather than being penalized for not using the whole range.
+The open-ended top band does not impose a hidden ceiling.
 
 The current comparison snapshot is
 `data/availability_price_snapshot_2026-07-13.csv`:
@@ -43,6 +49,11 @@ They do not overwrite the original official ranges or imply current inventory.
 - Recorded months-free offers with a usable lease term are prorated into the
   monthly estimate and budget comparison. Cards retain the pre-concession
   amount because exact-unit eligibility still needs confirmation.
+- Parking, furniture rental, and pet costs enter the displayed estimate only
+  when the user selects the corresponding need. They do not redefine the base
+  affordability score.
+- Move-in cash and guarantor/co-signer uncertainty stay visible as separate
+  checks instead of being hidden inside monthly budget fit.
 - Source confidence is displayed separately from fit score.
 - The app does not score protected-class traits or label an area as safe/unsafe.
 - Rent, availability, fees, utilities, and lease policies must be confirmed

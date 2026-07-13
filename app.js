@@ -91,14 +91,12 @@ const UTILITY_DETAIL_TEXT = Object.freeze({
     included: "Included",
     tenantPays: "Tenant pays",
     verify: "Verify",
-    noneConfirmed: "none confirmed",
     pierpont_short_term: "Short-term stays include utilities and Wi-Fi; standard leases still need confirmation."
   },
   zh: {
     included: "已包含",
     tenantPays: "租客另付",
     verify: "待确认",
-    noneConfirmed: "尚未确认",
     pierpont_short_term: "短租包含水电网；普通 lease 仍需确认。"
   }
 });
@@ -111,7 +109,8 @@ const VALUE_SIGNAL_CAVEATS = {
 };
 
 const MVP_MIN_APARTMENT_BUDGET = 1600;
-const FEEDBACK_EMAIL = "vince.xy.wang@gmail.com";
+// Project-only inbox shown in the feedback section.
+const FEEDBACK_EMAIL = "MatchNHV@gmail.com";
 const HIGH_MOVE_IN_CASH_TOP_SHARE = 0.25;
 const STRONG_AMENITY_FEATURE_COUNT = 4;
 const HARD_REQUIREMENT_PRIORITIES = new Set(["parking", "pet_friendly"]);
@@ -129,27 +128,27 @@ function formatPetPolicyTag(policy, lang) {
 }
 
 const STUDIO_BUDGET_OPTIONS = [
-  { value: 1400, lower: 0, upper: 1599, label: "< $1,600", scope: "out" },
-  { value: 1900, lower: 1600, upper: 1900, label: "$1,600-$1,900" },
-  { value: 2300, lower: 1900, upper: 2300, label: "$1,900-$2,300" },
-  { value: 2700, lower: 2300, upper: 2700, label: "$2,300-$2,700" },
-  { value: 3200, lower: 2700, upper: 3400, label: "$2,700+" }
+  { value: 1900, lower: 0, upper: 1900, label: "< $1,900" },
+  { value: 2100, lower: 1900, upper: 2100, label: "$1,900-$2,100" },
+  { value: 2300, lower: 2100, upper: 2300, label: "$2,100-$2,300" },
+  { value: 2500, lower: 2300, upper: 2500, label: "$2,300-$2,500" },
+  { value: 99999, lower: 2500, upper: Infinity, label: "$2,500+", openEnded: true }
 ];
 
 const ONE_BR_BUDGET_OPTIONS = [
-  { value: 1400, lower: 0, upper: 1599, label: "< $1,600", scope: "out" },
-  { value: 2300, lower: 1600, upper: 2300, label: "$1,600-$2,300" },
-  { value: 2700, lower: 2300, upper: 2700, label: "$2,300-$2,700" },
-  { value: 3100, lower: 2700, upper: 3100, label: "$2,700-$3,100" },
-  { value: 4000, lower: 3100, upper: 4200, label: "$3,100+" }
+  { value: 2200, lower: 0, upper: 2200, label: "< $2,200" },
+  { value: 2500, lower: 2200, upper: 2500, label: "$2,200-$2,500" },
+  { value: 2800, lower: 2500, upper: 2800, label: "$2,500-$2,800" },
+  { value: 3100, lower: 2800, upper: 3100, label: "$2,800-$3,100" },
+  { value: 99999, lower: 3100, upper: Infinity, label: "$3,100+", openEnded: true }
 ];
 
 const TWO_BR_BUDGET_OPTIONS = [
-  { value: 2800, lower: 0, upper: 2800, label: "< $2,800", scope: "below_range" },
-  { value: 3300, lower: 2800, upper: 3300, label: "$2,800-$3,300" },
-  { value: 3800, lower: 3300, upper: 3800, label: "$3,300-$3,800" },
-  { value: 4300, lower: 3800, upper: 4300, label: "$3,800-$4,300" },
-  { value: 5200, lower: 4300, upper: 5400, label: "$4,300+" }
+  { value: 2800, lower: 0, upper: 2800, label: "< $2,800" },
+  { value: 3200, lower: 2800, upper: 3200, label: "$2,800-$3,200" },
+  { value: 3500, lower: 3200, upper: 3500, label: "$3,200-$3,500" },
+  { value: 3800, lower: 3500, upper: 3800, label: "$3,500-$3,800" },
+  { value: 99999, lower: 3800, upper: Infinity, label: "$3,800+", openEnded: true }
 ];
 
 const BUDGET_OPTIONS_BY_UNIT_TYPE = Object.freeze({
@@ -2111,11 +2110,13 @@ const COST_ITEM_LABELS = {
     insuranceEstimate: "Renters insurance",
     furnitureAmortized: "Furniture rental if needed",
     parkingEstimate: "Parking if selected",
+    petRent: "Pet rent if selected",
     concessionEstimate: "Estimated concession credit",
     firstMonth: "First month rent",
     securityDeposit: "Security deposit",
     appFee: "Application fee",
-    adminFee: "Admin / move-in fee"
+    adminFee: "Admin / move-in fee",
+    petFee: "Pet fee / deposit if selected"
   },
   zh: {
     recurringFees: "固定楼内月费",
@@ -2123,11 +2124,13 @@ const COST_ITEM_LABELS = {
     insuranceEstimate: "租客保险",
     furnitureAmortized: "需要家具时的租赁估算",
     parkingEstimate: "选择停车时的估算",
+    petRent: "养宠物时的每月费用",
     concessionEstimate: "估算优惠月摊",
     firstMonth: "首月租金",
     securityDeposit: "押金",
     appFee: "申请费",
-    adminFee: "admin / move-in fee"
+    adminFee: "admin / move-in fee",
+    petFee: "养宠物时的一次性费用 / 押金"
   }
 };
 
@@ -2212,7 +2215,7 @@ const UI_TEXT = {
     match: "match",
     exploreDirection: "explore direction",
     scoreLabel: "fit score",
-    campusTierLabel: "campus tier",
+    campusTierLabel: "Location fit",
     facts: {
       cost: "Cost signal",
       value: "Value signal",
@@ -2237,10 +2240,10 @@ const UI_TEXT = {
     confidenceStale: "This option has public signals, but the data is stale. Refresh official rent, availability, fees, and local services first.",
     confidenceLow: "This option has not been verified enough. Treat the fit score as directional only, and refresh rent, availability, fees, and policy before applying.",
     feedbackEmailSubject: "MatchNHV beta feedback",
-    feedbackEmailOpenedCopied: "Gmail draft opened. Feedback text was also copied, so paste it if Gmail leaves the body blank.",
-    feedbackEmailOpenedNoCopy: "Gmail draft opened. If the body is blank, your browser blocked clipboard access; please use the prefilled Gmail draft.",
+    feedbackCopied: "Feedback email copied.",
+    feedbackCopying: "Copying feedback email...",
+    feedbackCopyFailed: "Copy was blocked by the browser. Select the text and copy it manually.",
     feedbackTitle: "[MatchNHV beta feedback]",
-    feedbackRecipient: email => `Send to: ${email}`,
     feedbackEntry: "Entry path",
     entryDefault: "Default balanced view",
     entryFullQuiz: "Full questionnaire / refined answers",
@@ -2260,8 +2263,6 @@ const UI_TEXT = {
     fullTieSummary: "Some options are in the same score tier. Compare the cost and trade-off summaries instead of treating their order as precise.",
     locationCandidate: "Location option",
     balancedCandidate: "balanced reference",
-    locationStrong: "Strong location fit",
-    locationPossible: "Possible location fit",
     sameTierMatch: "Same-tier match",
     viewDetails: "View full analysis",
     quickWhy: "Why it may fit",
@@ -2273,8 +2274,7 @@ const UI_TEXT = {
     refinementPending: "Answers changed. Select “Find my best fits” to update the Top 3.",
     feedbackScopeAccuracy: "Scope judgment",
     feedbackScopeTop: "Scope result shown:",
-    feedbackEmailAttemptedCopied: `Feedback copied. Gmail was opened when available; if no draft appears, send it to ${FEEDBACK_EMAIL} or use the default email link below.`,
-    feedbackEmailAttemptedNoCopy: `Gmail was opened when available. If no draft appears, use the default email link below and send it to ${FEEDBACK_EMAIL}.`,
+    feedbackContact: email => `Project email: ${email}`,
     ruleTags: {
       campusFit: campus => `${campus} access`,
       balancedFit: "Balanced access",
@@ -2337,7 +2337,7 @@ const UI_TEXT = {
     match: "匹配",
     exploreDirection: "探索方向",
     scoreLabel: "匹配分",
-    campusTierLabel: "位置档",
+    campusTierLabel: "位置匹配",
     facts: {
       cost: "价格线索",
       value: "面积/价格参考",
@@ -2362,10 +2362,10 @@ const UI_TEXT = {
     confidenceStale: "这个选项有公开线索，但信息比较旧。先确认最新租金、availability、费用和周边服务。",
     confidenceLow: "这个选项的信息还不够扎实，匹配分只能当方向参考。申请前先确认租金、availability、费用和政策。",
     feedbackEmailSubject: "MatchNHV 测试反馈",
-    feedbackEmailOpenedCopied: "Gmail 草稿已打开；反馈文本也已复制。如果 Gmail 正文没有自动填入，可以直接粘贴。",
-    feedbackEmailOpenedNoCopy: "Gmail 草稿已打开。如果正文没有自动填入，说明浏览器拦截了剪贴板，请以 Gmail 草稿为准。",
+    feedbackCopied: "反馈邮件正文已复制。",
+    feedbackCopying: "正在复制反馈邮件正文……",
+    feedbackCopyFailed: "浏览器没有允许复制，请手动选中文本复制。",
     feedbackTitle: "[MatchNHV 测试反馈]",
-    feedbackRecipient: email => `反馈收件人：${email}`,
     feedbackEntry: "进入方式",
     entryDefault: "默认均衡结果",
     entryFullQuiz: "完整问卷 / 已细化答案",
@@ -2385,8 +2385,6 @@ const UI_TEXT = {
     fullTieSummary: "部分选项处在同一分数档，请重点比较成本和取舍，不必把先后顺序当成精确排名。",
     locationCandidate: "位置候选",
     balancedCandidate: "均衡参考",
-    locationStrong: "位置高度匹配",
-    locationPossible: "位置可以考虑",
     sameTierMatch: "同档匹配",
     viewDetails: "查看完整分析",
     quickWhy: "为什么可能适合",
@@ -2398,8 +2396,7 @@ const UI_TEXT = {
     refinementPending: "答案已修改，点击“查看匹配结果”更新 Top 3。",
     feedbackScopeAccuracy: "范围判断",
     feedbackScopeTop: "显示的范围判断：",
-    feedbackEmailAttemptedCopied: `反馈已复制。已尝试打开 Gmail；如果没有进入草稿，请发送到 ${FEEDBACK_EMAIL}，或使用下方默认邮件入口。`,
-    feedbackEmailAttemptedNoCopy: `已尝试打开 Gmail；如果没有进入草稿，请使用下方默认邮件入口发送到 ${FEEDBACK_EMAIL}。`,
+    feedbackContact: email => `项目邮箱：${email}`,
     ruleTags: {
       campusFit: campus => `${campus} 方便`,
       balancedFit: "通勤均衡",
@@ -3163,7 +3160,7 @@ const APARTMENTS = [
       }
     },
     "concession": "2 months free for studio/1BR leases with move-in on or before 2026-08-01.",
-    "valueSignal": "Marketplace sqft check: studio $1,920-$2,115 / 424-524 sq ft, about $3.66-$4.99 per sq ft. Studio lofts look stronger on $/sq ft, but exact unit condition matters.",
+    "valueSignal": "Marketplace sqft check: studio $1,920-$2,115 / 424-524 sq ft, about $3.66-$4.99 per sq ft.",
     "campusScores": {
       "central_campus": 5,
       "med_school": 4,
@@ -5644,7 +5641,7 @@ const APARTMENT_TRANSLATIONS = {
       area: "Central Campus / Chapel-College 走廊 · 265 College St",
       priceLabel: "studio $1,865-$2,060；1BR $2,150-$2,440；2BR $2,950-$3,300",
       concession: "2026-08-01 或之前入住的 studio / 1BR lease 可免 2 个月租金。",
-      valueSignal: "按平台上的租金和面积粗算：studio $1,920-$2,115 / 424-524 sq ft，约 $3.66-$4.99/sq ft。studio loft 面积更划算，但还要看具体 unit 状态。",
+      valueSignal: "按平台上的租金和面积粗算：studio $1,920-$2,115 / 424-524 sq ft，约 $3.66-$4.99/sq ft。",
       flooring: "资料列有 LVP 或硬木地板；具体房源需确认",
       furnishing: "能看到 CORT / corporate furniture 选项；不是默认带家具，1BR 约 $250/月（12个月 lease）",
       confidenceLabel: "部分信息已确认",
@@ -6153,15 +6150,20 @@ function utilityItemLabel(key, lang = activeLang()) {
 function renderUtilityDetails(apartment, lang = activeLang()) {
   const profile = utilityProfile(apartment);
   const text = UTILITY_DETAIL_TEXT[lang] || UTILITY_DETAIL_TEXT.en;
-  const value = items => items.length
-    ? items.map(item => utilityItemLabel(item, lang)).join(lang === "zh" ? "、" : ", ")
-    : text.noneConfirmed;
+  const rows = [
+    ...(profile.included || []).map(item => ({ item, status: "included" })),
+    ...(profile.tenantPays || []).map(item => ({ item, status: "tenantPays" })),
+    ...(profile.verify || []).map(item => ({ item, status: "verify" }))
+  ];
   const note = profile.note ? text[profile.note] : "";
   return `
     <div class="utility-details">
-      <div><b>${escapeHtml(text.included)}</b><span>${escapeHtml(value(profile.included || []))}</span></div>
-      <div><b>${escapeHtml(text.tenantPays)}</b><span>${escapeHtml(value(profile.tenantPays || []))}</span></div>
-      <div><b>${escapeHtml(text.verify)}</b><span>${escapeHtml(value(profile.verify || []))}</span></div>
+      ${rows.map(row => `
+        <div>
+          <b>${escapeHtml(utilityItemLabel(row.item, lang))}</b>
+          <span class="utility-status ${escapeHtml(row.status)}">${escapeHtml(text[row.status])}</span>
+        </div>
+      `).join("")}
       ${note ? `<small>${escapeHtml(note)}</small>` : ""}
     </div>
   `;
@@ -6283,59 +6285,42 @@ function getFormValues(form) {
 }
 
 function budgetOptionDisplay(option, lang) {
-  if (option.scope === "out") {
-    return `${option.label} · ${lang === "zh" ? "当前版本暂不覆盖" : "Not covered in this version"}`;
-  }
-  if (option.scope === "below_range") {
-    return `${option.label} · ${lang === "zh" ? "低于当前可见 2BR 区间" : "Below the current visible 2BR range"}`;
-  }
   return option.label;
 }
 
-function renderBudgetOptions(form, { preserve = true, preferredValue = null } = {}) {
+function renderBudgetOptions(form, { preserve = true, preferredValue = null, clearSelection = false } = {}) {
   const container = form.querySelector("#budget-options");
   if (!container) return;
   const lang = activeLang();
   const unitType = form.querySelector('input[name="unit_type"]:checked')?.value || "studio";
-  const currentValue = preserve
-    ? Number(form.querySelector('input[name="budget"]:checked')?.value)
-    : Number(preferredValue);
+  const currentInput = preserve ? form.querySelector('input[name="budget"]:checked') : null;
+  const currentValue = clearSelection
+    ? null
+    : currentInput
+      ? Number(currentInput.value)
+      : Number.isFinite(Number(preferredValue)) && preferredValue !== null
+        ? Number(preferredValue)
+        : null;
   const options = budgetOptionsFor(unitType);
-  const hasCurrentOption = Number.isFinite(currentValue) && options.some(option => option.value === currentValue);
-  const customOption = Number.isFinite(currentValue) && !hasCurrentOption
-    ? {
-        value: currentValue,
-        label: lang === "zh"
-          ? `${formatMoney(currentValue)} 上限 · 已保留原预算`
-          : `${formatMoney(currentValue)} ceiling · Previous budget kept`,
-        custom: true
-      }
-    : null;
-  const selectedValue = Number.isFinite(currentValue)
-    ? currentValue
-    : options.find(option => option.value === 2300)?.value || options[1]?.value || options[0].value;
-  const visibleOptions = customOption ? [customOption, ...options] : options;
-  container.innerHTML = visibleOptions.map(option => `
-    <label><input type="radio" name="budget" value="${option.value}"${option.value === selectedValue ? " checked" : ""}><span>${escapeHtml(option.custom ? option.label : budgetOptionDisplay(option, lang))}</span></label>
+  const selectedValue = options.some(option => option.value === currentValue) ? currentValue : null;
+  container.innerHTML = options.map(option => `
+    <label><input type="radio" name="budget" value="${option.value}" required${option.value === selectedValue ? " checked" : ""}><span>${escapeHtml(budgetOptionDisplay(option, lang))}</span></label>
   `).join("");
 
   const note = form.querySelector("#budget-range-note");
   if (!note) return;
-  if (customOption) {
-    note.textContent = lang === "zh"
-      ? `切换户型后仍保留 ${formatMoney(currentValue)} 的原预算，没有自动上调。`
-      : `Your ${formatMoney(currentValue)} ceiling was kept when the unit type changed; it was not raised automatically.`;
-  } else if (unitType === "2br") {
-    note.textContent = lang === "zh"
-      ? "当前可比 2BR 约从 $2,950 起；更低预算仍可测试，但大多数结果会显示超预算。"
-      : "Current comparable 2BR prices start around $2,950. You can test a lower ceiling, but most results will show as over budget.";
-  } else if (unitType === "not_sure") {
-    note.textContent = lang === "zh"
-      ? "不确定户型时按 1BR 做保守预算比较，不会自动换成更便宜的 Studio。"
-      : "Not sure uses a conservative 1BR budget basis and never substitutes a cheaper Studio.";
-  } else {
-    note.textContent = "";
+  const notes = [lang === "zh" ? "$1,600 以下将在后续版本覆盖。" : "Budgets below $1,600 will be covered in a future version."];
+  if (clearSelection || selectedValue === null) {
+    notes.unshift(lang === "zh" ? "户型已切换，请重新选择预算区间。" : "Unit type changed; choose a new budget band.");
+  } else if (options.find(option => option.value === selectedValue)?.openEnded) {
+    notes.unshift(lang === "zh" ? "最高档不设隐藏上限，预算不会鼓励把钱花满。" : "The top band has no hidden ceiling; budget fit does not reward spending more.");
   }
+  if (unitType === "not_sure") {
+    notes.push(lang === "zh"
+      ? "不确定户型时按 1BR 做保守预算比较，不会自动换成更便宜的 Studio。"
+      : "Not sure uses a conservative 1BR budget basis and never substitutes a cheaper Studio.");
+  }
+  note.textContent = notes.join(" ");
 }
 
 function formatMoney(value) {
@@ -6624,6 +6609,25 @@ function calculateCosts(apartment, answers = {}, options = {}) {
   const utilitiesFallback = DEFAULT_COST_ASSUMPTIONS.utilitiesByPredictability[apartment.utilities] || DEFAULT_COST_ASSUMPTIONS.utilitiesByPredictability.unknown;
 
   const excluded = [];
+  const petSelected = (answers.priority || []).includes("pet_friendly");
+  const petPolicy = apartment.decisionSignals?.petPolicy || null;
+  const petTypeAllowed = !answers.petType
+    || !Array.isArray(petPolicy?.allowedTypes)
+    || petPolicy.allowedTypes.includes(answers.petType);
+  const petPolicyApplies = petSelected && petPolicy?.allowed === true && petTypeAllowed;
+  const petMonthlyItem = petPolicyApplies && Number.isFinite(petPolicy.monthlyRent)
+    ? {
+        key: "petRent",
+        amount: petPolicy.monthlyRent,
+        maxAmount: petPolicy.monthlyRent,
+        confidence: petPolicy.confidence || "unknown"
+      }
+    : null;
+  const petOneTimeAmount = petPolicyApplies
+    ? (Number(petPolicy.oneTimeFee) || 0) + (Number(petPolicy.petDeposit) || 0)
+    : 0;
+  if (petSelected && petPolicy?.allowed !== false && !petMonthlyItem) excluded.push("petRent");
+  if (petSelected && petPolicy?.allowed !== false && !petOneTimeAmount) excluded.push("petFee");
 
   const recurringItem = currentBasis?.includesRequiredFees
     ? null
@@ -6637,7 +6641,8 @@ function calculateCosts(apartment, answers = {}, options = {}) {
     monthlyCostLine("utilitiesEstimate", monthlyProfile.utilitiesEstimate, baseRent, answers, utilitiesFallback),
     monthlyCostLine("insuranceEstimate", monthlyProfile.insuranceEstimate, baseRent, answers, DEFAULT_COST_ASSUMPTIONS.renterInsurance),
     monthlyCostLine("furnitureAmortized", monthlyProfile.furnitureAmortized, baseRent, answers, DEFAULT_COST_ASSUMPTIONS.furnitureMonthly),
-    monthlyCostLine("parkingEstimate", monthlyProfile.parkingEstimate, baseRent, answers, DEFAULT_COST_ASSUMPTIONS.parkingMonthly)
+    monthlyCostLine("parkingEstimate", monthlyProfile.parkingEstimate, baseRent, answers, DEFAULT_COST_ASSUMPTIONS.parkingMonthly),
+    petMonthlyItem
   ].filter(Boolean);
 
   const selectedUnitType = selectedCandidate?.unitType || budgetUnitTypeSelection(answers).resolved;
@@ -6657,7 +6662,13 @@ function calculateCosts(apartment, answers = {}, options = {}) {
     moveInCostLine("firstMonth", moveInProfile.firstMonth || { multiplier: 1, confidence: "advertised_rent" }, baseRent, baseRent),
     moveInCostLine("securityDeposit", moveInProfile.securityDeposit || { multiplier: DEFAULT_COST_ASSUMPTIONS.securityDepositMultiplier }, baseRent, baseRent),
     moveInCostLine("appFee", moveInProfile.appFee, baseRent, DEFAULT_COST_ASSUMPTIONS.applicationFee),
-    moveInCostLine("adminFee", moveInProfile.adminFee, baseRent, 0)
+    moveInCostLine("adminFee", moveInProfile.adminFee, baseRent, 0),
+    petOneTimeAmount > 0 ? {
+      key: "petFee",
+      amount: petOneTimeAmount,
+      maxAmount: petOneTimeAmount,
+      confidence: petPolicy.confidence || "unknown"
+    } : null
   ].filter(Boolean);
   if (Number.isFinite(currentBasis?.rentMax) && moveInItems[0]) moveInItems[0].maxAmount = currentBasis.rentMax;
   const moveInMin = moveInItems.reduce((sum, item) => sum + item.amount, 0);
@@ -6726,7 +6737,14 @@ function renderCostMetrics(costs, text) {
 
 function renderCostSummary(costs, lang = activeLang()) {
   const text = COST_TEXT[lang] || COST_TEXT.en;
-  return `<div class="cost-summary">${renderCostMetrics(costs, text)}</div>`;
+  const specialComparison = costs.concessionApplied
+    ? `<div class="special-comparison">
+        <span>${escapeHtml(lang === "zh" ? "优惠前" : "Before special")} <strong>${escapeHtml(formatMoneyRange(costs.grossMonthlyMin, costs.grossMonthlyMax))}</strong></span>
+        <b aria-hidden="true">→</b>
+        <span>${escapeHtml(lang === "zh" ? "优惠后" : "After special")} <strong>${escapeHtml(formatMoneyRange(costs.trueMonthlyMin, costs.trueMonthlyMax))}</strong></span>
+      </div>`
+    : "";
+  return `<div class="cost-summary">${renderCostMetrics(costs, text)}${specialComparison}</div>`;
 }
 
 function renderCostBreakdown(costs, lang = activeLang(), options = {}) {
@@ -6958,7 +6976,7 @@ function scoreBudget(apartment, budgetOrAnswers) {
         ? availability.trace.baseRentMin
         : grossCostBasis;
       const concessionCredit = knownConcessionCredit(apartment, concessionBase, availability.unitType || unitType);
-      return _applyBudgetBand(Math.max(0, grossCostBasis - concessionCredit), maxBudget, unitType);
+      return applyBudgetCeiling(Math.max(0, grossCostBasis - concessionCredit), maxBudget, unitType);
     }
 
     if (status === 'comparable' && !eligible) {
@@ -6978,10 +6996,10 @@ function scoreBudget(apartment, budgetOrAnswers) {
   const costBasis = typeof budgetOrAnswers === "object"
     ? calculateCosts(apartment, budgetOrAnswers).trueMonthlyMax
     : apartment.price.min;
-  return _applyBudgetBand(costBasis, maxBudget, unitType);
+  return applyBudgetCeiling(costBasis, maxBudget, unitType);
 }
 
-function _applyBudgetBand(costBasis, maxBudget, unitType = "studio") {
+function applyBudgetCeiling(costBasis, maxBudget, unitType = "studio") {
   const band = budgetBand(maxBudget, unitType);
   if (!band) {
     if (costBasis <= maxBudget) return SCORE.FULL;
@@ -7260,9 +7278,23 @@ function campusFitTier(apartment, campus) {
   return 1;
 }
 
-function campusFitTierLabel(apartment, campus) {
-  const tier = campusFitTier(apartment, campus);
-  return ({ 4: "A", 3: "B", 2: "C", 1: "D" })[tier] || null;
+function campusFitTierLabel(apartment, campus, lang = activeLang()) {
+  if (!campus || campus === "balanced") return null;
+  return locationFitLabel(apartment?.campusScores?.[campus] || 1, lang);
+}
+
+function locationFitLabel(campusScore, lang = activeLang()) {
+  const score = Number(campusScore) || 1;
+  if (lang === "zh") {
+    if (score >= 5) return "位置匹配极佳";
+    if (score >= 4) return "位置匹配良好";
+    if (score >= 3) return "位置匹配一般";
+    return "位置匹配较弱";
+  }
+  if (score >= 5) return "Excellent location fit";
+  if (score >= 4) return "Good location fit";
+  if (score >= 3) return "Moderate location fit";
+  return "Weak location fit";
 }
 
 function confirmedBudgetMiss(result) {
@@ -7579,6 +7611,21 @@ function highMoveInCashCutoff(answers) {
   return amounts[cutoffIndex];
 }
 
+function renderMoveInChecks(apartment, answers, costs, lang = activeLang()) {
+  const checks = [];
+  if (costs.moveInMin >= highMoveInCashCutoff(answers)) {
+    checks.push(lang === "zh" ? "入住前现金处于较高一档" : "Higher move-in cash estimate");
+  }
+  const guarantor = apartment.applicationPolicy?.guarantorAccepted;
+  if (!guarantor || guarantor.value === null || guarantor.confidence === "unknown") {
+    checks.push(lang === "zh" ? "guarantor / co-signer 政策待确认" : "Guarantor / co-signer policy needs confirmation");
+  } else if (guarantor.value === false) {
+    checks.push(lang === "zh" ? "不接受 guarantor / co-signer" : "Guarantor / co-signer not accepted");
+  }
+  if (!checks.length) return "";
+  return `<div class="move-in-checks">${checks.map(check => `<span>${escapeHtml(check)}</span>`).join("")}</div>`;
+}
+
 function hasStrongAmenities(apartment) {
   return amenityFeatureCount(apartment) >= STRONG_AMENITY_FEATURE_COUNT;
 }
@@ -7693,7 +7740,6 @@ function feedbackText() {
   const note = getInputValue("feedback-note") || ui("none", lang);
   return [
     ui("feedbackTitle", lang),
-    ui("feedbackRecipient", lang)(FEEDBACK_EMAIL),
     labelLine(ui("feedbackEntry", lang), entryLabel(latestEntry, lang), lang),
     "",
     ui("feedbackAnswers", lang),
@@ -7708,23 +7754,6 @@ function feedbackText() {
     "",
     ui("feedbackNote", lang)
   ].join("\n");
-}
-
-function feedbackGmailHref(text, lang = activeLang()) {
-  const subject = ui("feedbackEmailSubject", lang);
-  const params = new URLSearchParams({
-    view: "cm",
-    fs: "1",
-    to: FEEDBACK_EMAIL,
-    su: subject,
-    body: text
-  });
-  return `https://mail.google.com/mail/?${params.toString()}`;
-}
-
-function feedbackMailtoHref(text, lang = activeLang()) {
-  const subject = ui("feedbackEmailSubject", lang);
-  return `mailto:${FEEDBACK_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
 }
 
 function copyTextFallback(text) {
@@ -7746,28 +7775,33 @@ function copyTextFallback(text) {
   return copied;
 }
 
-function openFeedbackEmail(statusId) {
+async function copyWithClipboardApi(text, timeoutMs = 1200) {
+  if (!navigator.clipboard || !window.isSecureContext) return false;
+  return Promise.race([
+    navigator.clipboard.writeText(text).then(() => true, () => false),
+    new Promise(resolve => window.setTimeout(() => resolve(false), timeoutMs))
+  ]);
+}
+
+async function copyFeedback(statusId) {
   const status = document.getElementById(statusId);
+  const preview = document.getElementById("feedback-preview");
   const lang = activeLang();
   const text = feedbackText();
-  const copied = copyTextFallback(text);
-  const mailto = feedbackMailtoHref(text, lang);
-  const fallback = document.getElementById("mailto-feedback");
-  if (fallback) {
-    fallback.href = mailto;
-    fallback.hidden = false;
+  if (status) status.textContent = ui("feedbackCopying", lang);
+  if (preview) {
+    preview.value = text;
+    preview.hidden = true;
   }
-  const draft = window.open(feedbackGmailHref(text, lang), "_blank", "noopener");
-  if (!draft) {
-    window.location.href = mailto;
-  }
-  if (!copied && navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(text).then(() => {
-      if (status) status.textContent = ui("feedbackEmailAttemptedCopied", lang);
-    }).catch(() => {});
-  }
-  if (status) {
-    status.textContent = ui(copied ? "feedbackEmailAttemptedCopied" : "feedbackEmailAttemptedNoCopy", lang);
+  let copied = copyTextFallback(text);
+  if (!copied) copied = await copyWithClipboardApi(text);
+  if (status) status.textContent = ui(copied ? "feedbackCopied" : "feedbackCopyFailed", lang);
+  if (preview) {
+    preview.hidden = copied;
+    if (!copied) {
+      preview.focus();
+      preview.select();
+    }
   }
 }
 
@@ -7837,11 +7871,11 @@ function renderResults(results, answers, options = {}) {
         <strong>${Math.round(value)}</strong>
       </div>
     `).join("");
-    const campusTier = campusFitTierLabel(apartment, answers.campus);
+    const campusTier = campusFitTierLabel(apartment, answers.campus, lang);
     const scorePill = options.quickStart
-      ? `<div class="score-pill quick-score">${escapeHtml(ui(result.score >= SCORE.FULL ? "locationStrong" : "locationPossible", lang))}</div>`
+      ? `<div class="score-pill quick-score">${escapeHtml(locationFitLabel(apartment.campusScores[answers.campus] || 1, lang))}</div>`
       : campusTier
-        ? `<div class="score-pill">${escapeHtml(campusTier)}<small>${escapeHtml(ui("campusTierLabel", lang))}</small></div>`
+        ? `<div class="score-pill quick-score">${escapeHtml(campusTier)}</div>`
         : `<div class="score-pill">${result.score}<small>${escapeHtml(ui("scoreLabel", lang))}</small></div>`;
     const tags = `
       ${renderRuleBadges(apartment, answers, lang)}
@@ -7870,6 +7904,7 @@ function renderResults(results, answers, options = {}) {
           <div class="fact"><strong>${escapeHtml(ui("facts", lang).daily)}</strong><span>${escapeHtml(copy.dailyLabel)}</span></div>
         </div>
         ${renderCostSummary(costs, lang)}
+        ${renderMoveInChecks(apartment, answers, costs, lang)}
         ${options.quickStart ? "" : renderSelectedBudgetBasis(apartment, answers, lang)}
 
         <div class="quick-insights">
@@ -8072,8 +8107,6 @@ function resetForm(form) {
   latestEntry = "default";
   const petFollowup = document.getElementById("pet-type-followup");
   if (petFollowup) petFollowup.hidden = true;
-  const mailtoFallback = document.getElementById("mailto-feedback");
-  if (mailtoFallback) mailtoFallback.hidden = true;
   setFeedbackMode("results");
   setRefinementStatus("");
   hideResultsPanel();
@@ -8083,7 +8116,8 @@ function resetForm(form) {
 function init() {
   const form = document.getElementById("fit-form");
   const reset = document.getElementById("reset-button");
-  const emailFeedback = document.getElementById("email-feedback");
+  const copyFeedbackButton = document.getElementById("copy-feedback");
+  const feedbackRecipient = document.getElementById("feedback-recipient");
   const petPriority = form.querySelector('input[name="priority"][value="pet_friendly"]');
   const petFollowup = document.getElementById("pet-type-followup");
   const quickStartButtons = [...document.querySelectorAll(".quick-start-button")];
@@ -8101,7 +8135,7 @@ function init() {
   };
   if (petPriority) petPriority.addEventListener("change", syncPetFollowup);
   unitTypeInputs.forEach(input => {
-    input.addEventListener("change", () => renderBudgetOptions(form));
+    input.addEventListener("change", () => renderBudgetOptions(form, { preserve: false, clearSelection: true }));
   });
   form.addEventListener("change", () => {
     syncPetFollowup();
@@ -8113,13 +8147,17 @@ function init() {
     scrollResultsIntoView();
   });
   reset.addEventListener("click", () => resetForm(form));
-  emailFeedback.addEventListener("click", () => openFeedbackEmail("feedback-status"));
+  copyFeedbackButton.addEventListener("click", () => copyFeedback("feedback-status"));
   quickStartButtons.forEach(button => {
     button.addEventListener("click", () => runQuickStart(form, button.dataset.campus));
   });
   hideResultsPanel();
   hideRefinementForm();
   renderBudgetOptions(form);
+  if (feedbackRecipient && FEEDBACK_EMAIL) {
+    feedbackRecipient.textContent = ui("feedbackContact", activeLang())(FEEDBACK_EMAIL);
+    feedbackRecipient.hidden = false;
+  }
   syncPetFollowup();
 }
 
@@ -8140,6 +8178,7 @@ if (typeof module !== "undefined") {
     MVP_MIN_APARTMENT_BUDGET,
     scoreApartment,
     scoreBudget,
+    applyBudgetCeiling,
     budgetUnitTypeSelection,
     budgetSnapshotCandidates,
     candidateFeatureCompatibility,
@@ -8156,6 +8195,7 @@ if (typeof module !== "undefined") {
     hardRequirementTier,
     campusFitTier,
     campusFitTierLabel,
+    locationFitLabel,
     confirmedBudgetMiss,
     budgetRankingTier,
     scoreConcession,
