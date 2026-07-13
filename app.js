@@ -32,8 +32,7 @@ const UTILITY_PROFILES = Object.freeze({
   "pierpont-city-crossing": {
     included: [],
     tenantPays: [],
-    verify: ["standard_lease_utilities", "standard_lease_internet"],
-    note: "pierpont_short_term"
+    verify: ["standard_lease_utilities", "standard_lease_internet"]
   },
   "anthem-square10": { included: [], tenantPays: [], verify: ["electricity", "heating_cooling", "water_sewer", "internet"] },
   "the-whit": { included: [], tenantPays: [], verify: ["electricity", "heating_cooling", "water_sewer", "internet"] }
@@ -58,7 +57,7 @@ const UTILITY_ITEM_LABELS = Object.freeze({
     hot_water: "热水",
     high_speed_internet: "高速网络",
     air_conditioning_most_units: "空调",
-    electricity_lights_appliances: "照明和电器用电",
+    electricity_lights_appliances: "电费",
     electricity: "电费",
     heating_cooling: "冷暖气计费",
     water_sewer: "水费和污水费",
@@ -72,14 +71,12 @@ const UTILITY_DETAIL_TEXT = Object.freeze({
   en: {
     included: "Included",
     tenantPays: "Tenant pays",
-    verify: "Verify",
-    pierpont_short_term: "Short-term stays include utilities and Wi-Fi; standard leases still need confirmation."
+    verify: "Verify"
   },
   zh: {
     included: "已包含",
     tenantPays: "租客另付",
-    verify: "待确认",
-    pierpont_short_term: "短租包含水电网；普通 lease 仍需确认。"
+    verify: "待确认"
   }
 });
 
@@ -2162,7 +2159,7 @@ const CAMPUS_LABELS = {
 
 const CAMPUS_LABELS_ZH = {
   central_campus: "Central Campus / Law / Humanities",
-  med_school: "Med School / YNHH",
+  med_school: "医学院 / YNHH",
   som_prospect: "SOM / Prospect Hill",
   seas_science: "SEAS / Science Hill",
   downtown_station: "Downtown",
@@ -2233,7 +2230,7 @@ const UI_TEXT = {
     feedbackAnswers: "My answers:",
     feedbackTop: "Top 3 shown:",
     feedbackAccuracy: "Top 3 accuracy",
-    feedbackMissing: "Missing apartment",
+    feedbackMissing: "What is missing",
     feedbackImprove: "What to improve",
     feedbackNote: "Note: this is beta feedback, not an application request.",
     notSpecified: "Not specified",
@@ -2356,7 +2353,7 @@ const UI_TEXT = {
     feedbackAnswers: "我的答案：",
     feedbackTop: "显示的前三名：",
     feedbackAccuracy: "前三名准确度",
-    feedbackMissing: "缺少的公寓",
+    feedbackMissing: "这里还漏了哪些",
     feedbackImprove: "需要改进的地方",
     feedbackNote: "注：这是测试反馈，不是申请请求。",
     notSpecified: "未填写",
@@ -2800,7 +2797,7 @@ const APARTMENTS = [
     ],
     "tradeoffs": [
       "advertised rent 之外还要确认 utilities、insurance、deposit、parking、amenity/admin fees",
-      "到 Med School、SOM、Science Hill 的体感差异会很大，不能只看楼名",
+      "到医学院、SOM、Science Hill 的体感差异会很大，不能只看楼名",
       "家具不是默认包含，CORT partner 只是降低 setup friction"
     ],
     "verify": [
@@ -3004,7 +3001,7 @@ const APARTMENTS = [
     "dailyLabel": "Med District / Wooster food convenience",
     "sourceLabel": "Official availability snapshot checked 2026-07-11; lower bounds may include current special",
     "bestFor": [
-      "主要去 Med School / YNHH / SPH，且想住 newer building 的学生",
+      "主要去医学院 / YNHH / 公卫学院，且想住 newer building 的学生",
       "看重 in-unit laundry、fob access、amenities 和 Wooster/downtown local services 的学生",
       "有 roommate 或较高预算，愿意核实 concessions 后再比较 true cost 的学生"
     ],
@@ -3814,7 +3811,7 @@ const APARTMENTS = [
       "日常更看重 building routine 和安静感，而不是 downtown nightlife 的学生"
     ],
     "tradeoffs": [
-      "到 Med School / Union Station / downtown errands 的 routine 不一定顺",
+      "到医学院 / Union Station / Downtown 办事不一定顺",
       "平台列出 recurring fees $23/mo；utilities 和 pet/storage 等额外费用仍需确认",
       "公开优惠已计入估算；若具体房源不符合资格，应改看优惠前金额"
     ],
@@ -3994,7 +3991,7 @@ const APARTMENTS = [
     "tradeoffs": [
       "页面使用 Estimated Monthly Cost，但 full fee breakdown 还没完整捕捉",
       "学生社群里出现过 garage / neighbor / access-related concerns，只能作为 route/access verification trigger",
-      "到 Med School 或 downtown south side 的路线需要按真实作息看"
+      "到医学院或 Downtown 南侧的路线需要按真实作息看"
     ],
     "verify": [
       "cost-estimator fee breakdown and utility billing",
@@ -4387,7 +4384,7 @@ const APARTMENTS = [
     ],
     "quietScore": 75,
     "flooring": "Photos suggest luxury wood plank vinyl in living areas, carpet in bedrooms; verify exact unit",
-    "furnishing": "Short-term stays may include furniture/utilities; normal lease furnishing not verified",
+    "furnishing": "Furnished status has not been verified for standard leases",
     "applicationFriction": 4,
     "roommateFit": 3,
     "confidence": "partial",
@@ -4395,19 +4392,16 @@ const APARTMENTS = [
     "dailyLabel": "Station / Med / downtown crossing routine",
     "sourceLabel": "RMS official page + Apartments.com 9 Tower Ln / Walk To Campus location check",
     "bestFor": [
-      "主要去 Med School / Union Station / downtown south side，想要 City Crossing 位置的学生",
-      "想比较 Jr Studio / 1BR / 2BR，且能接受 standard lease 条款待确认的学生",
-      "可能需要短租/临时落脚选项，但会把 short-term terms 和 normal lease 分开核实的学生"
+      "主要去医学院、Union Station 或 Downtown 南侧，想住 Pierpont 的学生",
+      "想比较 Jr Studio、1BR 和 2BR，并愿意按具体房源确认价格和入住日期的学生"
     ],
     "tradeoffs": [
-      "学生说的 City Crossing 可能还包括其他楼，Pierpont 只是当前锁定的官方身份之一",
-      "short-term 家具/utility/parking 包含不能外推到普通 lease",
-      "standard lease 的 fees、utilities、parking 和 application policy 还要补"
+      "位置在 Downtown 南侧；去 Central Campus、SOM 或 Science Hill 不如市中心核心区方便",
+      "部分费用、水电网、parking 和标准 lease 政策仍需确认"
     ],
     "verify": [
-      "whether your target is Pierpont or another City Crossing building",
-      "standard lease fee sheet, utilities, parking, and renter's insurance",
-      "short-term vs normal lease terms if you need temporary housing",
+      "the exact unit, price, and move-in date",
+      "the full fee sheet, utilities, parking, and renter's insurance",
       "student guarantor/co-signer and remote signing policy"
     ],
     "priceAvailabilityConfidence": "partial_public",
@@ -4646,7 +4640,7 @@ const APARTMENTS = [
     "sourceLabel": "Official availability snapshot checked 2026-07-11; fee sheet and manager details still incomplete",
     "valueSignal": "Current snapshot: studio starts at $2,306 / 591 sq ft ($3.90/sqft); 1BR starts at $2,475 / 677 sq ft ($3.66/sqft). The 11-month studio price should not represent the 1BR cost.",
     "bestFor": [
-      "想在 Wooster Square / Chapel corridor，兼顾 Central Campus 和 Med School 的学生",
+      "想在 Wooster Square / Chapel corridor，兼顾 Central Campus 和医学院的学生",
       "明确在意 in-unit washer/dryer、wide plank floor、package/concierge 和 gym/pool 的学生",
       "需要家具解决方案但可以接受 furniture rental，而非租金内 furnished 的学生"
     ],
@@ -4833,7 +4827,7 @@ const APARTMENTS = [
     "dailyLabel": "Good station/Med orientation, services changing",
     "sourceLabel": "Marketplace floorplan and fee details checked 2026-07-10; displayed starting-rent copy still needs an official refresh",
     "bestFor": [
-      "主要去 Med School / Union Station / downtown south side，想关注新楼供给的学生",
+      "主要去医学院 / Union Station / Downtown 南侧，想关注新楼供给的学生",
       "愿意追踪新盘 concessions、affordable/market-rate mix 和后续 retail 变化的学生",
       "有 roommate、预算中高，想比较 downtown south side 与 Wooster/Downtown core 的学生"
     ],
@@ -5239,7 +5233,7 @@ const APARTMENTS = [
     ],
     "tradeoffs": [
       "官方 New Haven source 尚未锁定，暂时只能当 candidate",
-      "到 Med School / downtown south side 的通勤需要按时间段核实",
+      "到医学院 / Downtown 南侧的通勤需要按时间段核实",
       "flooring、utilities、concessions 不能按楼名假设"
     ],
     "verify": [
@@ -5604,7 +5598,7 @@ const APARTMENT_TRANSLATIONS = {
       ],
       tradeoffs: [
         "展示租金之外还要确认水电网、保险、押金、停车、配套费和管理费",
-        "去 Med School、SOM 和 Science Hill 的实际通勤感觉差很多，不能只看楼名",
+        "去医学院、SOM 和 Science Hill 的实际通勤感觉差很多，不能只看楼名",
         "家具不是默认包含，家具合作方只能降低准备成本"
       ],
       verify: [
@@ -5622,10 +5616,10 @@ const APARTMENT_TRANSLATIONS = {
       flooring: "需按具体房源确认",
       furnishing: "是否带家具尚未核实",
       confidenceLabel: "部分信息已确认",
-      dailyLabel: "Med School 方向和 Wooster Square 餐饮方便",
+      dailyLabel: "医学院方向和 Wooster Square 餐饮方便",
       sourceLabel: "2026-07-11 查过 availability；低端价格可能含当前 special",
       bestFor: [
-        "主要去 Med School、YNHH 或 SPH，并想住较新楼的学生",
+        "主要去医学院、YNHH 或公卫学院，并想住较新楼的学生",
         "看重房内洗衣、门禁、楼内配套和 Wooster / Downtown 生活服务的学生",
         "有室友或预算较高，并愿意核实优惠后再比较真实成本的学生"
       ],
@@ -5738,7 +5732,7 @@ const APARTMENT_TRANSLATIONS = {
         "日常更看重楼内秩序和安静感，而不是市中心夜生活的学生"
       ],
       tradeoffs: [
-        "去 Med School、Union Station 或 Downtown 办事不一定顺",
+        "去医学院、Union Station 或 Downtown 办事不一定顺",
         "平台列出每月固定费用 $23；水电网和宠物/储物等额外费用仍需确认",
         "优惠只适用于部分房源，不能直接当作每月总成本"
       ],
@@ -5784,7 +5778,7 @@ const APARTMENT_TRANSLATIONS = {
       dailyLabel: "离校园近，但一定要按具体楼比较",
       sourceLabel: "2026-06-29 查过官方户型页；已整理到楼栋级价格",
       bestFor: [
-        "Central Campus、Law School、Art 或 Med School 附近活动多，想住老牌 Downtown 公寓的学生",
+        "Central Campus、Law School、Art 或医学院附近活动多，想住老牌 Downtown 公寓的学生",
         "希望暖气和热水包含，让水电网更可预期的学生",
         "愿意按 Madison、Crown、Crown Court 和 18 High 分楼比较价格和位置的学生"
       ],
@@ -5804,24 +5798,21 @@ const APARTMENT_TRANSLATIONS = {
       area: "Downtown Crossing / 车站-医学院边缘",
       priceLabel: "Jr Studio $2,218 起；1BR $2,486 起；2BR $3,613 起",
       flooring: "照片显示客厅为木纹 LVP、卧室为地毯；具体房源需确认",
-      furnishing: "短租可能包含家具和水电网；普通 lease 是否带家具还没确认",
+      furnishing: "是否带家具尚未核实",
       confidenceLabel: "部分信息已确认",
-      dailyLabel: "Union Station、Med School 和 Downtown Crossing 作息",
+      dailyLabel: "Union Station、医学院和 Downtown 南侧通勤",
       sourceLabel: "RMS 官网 + Apartments.com 9 Tower Ln / Walk To Campus 位置核对",
       bestFor: [
-        "主要去 Med School、Union Station 或 Downtown 南侧，想要 City Crossing 位置的学生",
-        "想比较 Jr Studio、1BR 和 2BR，并能接受普通 lease 条款待确认的学生",
-        "可能需要短租或临时落脚，但会把短租和普通 lease 分开核实的学生"
+        "主要去医学院、Union Station 或 Downtown 南侧，想住 Pierpont 的学生",
+        "想比较 Jr Studio、1BR 和 2BR，并愿意按具体房源确认价格和入住日期的学生"
       ],
       tradeoffs: [
-        "学生说的 City Crossing 可能包括其他楼，Pierpont 只是当前锁定的官方身份之一",
-        "短租包含家具、水电网或停车，不能外推到普通租约",
-        "普通租约的费用、水电网、停车和申请政策还要补"
+        "位置在 Downtown 南侧；去 Central Campus、SOM 或 Science Hill 不如市中心核心区方便",
+        "部分费用、水电网、parking 和标准 lease 政策仍需确认"
       ],
       verify: [
-        "你的目标是 Pierpont 还是另一栋 City Crossing 楼",
-        "普通租约费用表、水电网、停车和租客保险",
-        "如果需要临时住房，短租和普通租约的区别",
+        "具体房源、价格和入住日期",
+        "完整费用表、水电网、parking 和租客保险",
         "学生担保人、共同签署和远程签约政策"
       ]
     },
@@ -5835,7 +5826,7 @@ const APARTMENT_TRANSLATIONS = {
       dailyLabel: "Wooster Square 餐饮方便，也有收包裹 / concierge",
       sourceLabel: "2026-07-11 查过 availability；费用表和管理方信息仍不完整",
       bestFor: [
-        "想住在 Wooster Square 或 Chapel 走廊，兼顾 Central Campus 和 Med School 的学生",
+        "想住在 Wooster Square 或 Chapel 走廊，兼顾 Central Campus 和医学院的学生",
         "明确在意房内洗衣、宽木板地板、收包裹 / concierge 和健身房 / 泳池的学生",
         "需要家具解决方案但可以接受租家具，而不是租金内自带家具的学生"
       ],
@@ -5858,10 +5849,10 @@ const APARTMENT_TRANSLATIONS = {
       flooring: "照片显示主起居区为抛光混凝土、卧室为地毯；具体房源需确认",
       furnishing: "平台列有带家具和部分带家具的房源；具体房源需确认",
       confidenceLabel: "旧新闻线索（2024-12）；需要再查官网",
-      dailyLabel: "Union Station / Med School 方向较好，周边服务还在变化",
+      dailyLabel: "Union Station / 医学院方向较好，周边服务还在变化",
       sourceLabel: "2026-07-10 核对过平台户型和费用；卡片里的起租价仍需官网更新",
       bestFor: [
-        "主要去 Med School、Union Station 或 Downtown 南侧，并想关注新楼供应的学生",
+        "主要去医学院、Union Station 或 Downtown 南侧，并想关注新楼供应的学生",
         "愿意追踪新楼优惠、市场价 / affordable units 和后续商业配套变化的学生",
         "已有室友、预算中高，想比较 Downtown 南侧、Wooster Square 和核心 Downtown 的学生"
       ],
@@ -6025,19 +6016,16 @@ const APARTMENT_TRANSLATIONS = {
     },
     "pierpont-city-crossing": {
       bestFor: [
-        "Students mainly going to Med School, Union Station, or the south side of downtown who want a City Crossing location.",
-        "Students comparing Jr Studio, 1BR, and 2BR options while accepting that standard lease terms still need confirmation.",
-        "Students who may need a short-term landing option, but will separate short-term terms from normal lease terms."
+        "Students mainly going to Med School, Union Station, or the south side of downtown who want to live at Pierpont.",
+        "Students comparing Jr Studio, 1BR, and 2BR options who will confirm the exact unit, price, and move-in date."
       ],
       tradeoffs: [
-        "What students call City Crossing may include other buildings; Pierpont is only the official identity currently pinned down.",
-        "Short-term furniture, utility, or parking inclusions should not be applied to ordinary leases.",
-        "Standard lease fees, utilities, parking, and application policy still need follow-up."
+        "This is on the south side of downtown; Central Campus, SOM, and Science Hill are less convenient than from the downtown core.",
+        "Some fees, utilities, parking, and standard lease policies still need confirmation."
       ],
       verify: [
-        "Whether your target is Pierpont or another City Crossing building.",
-        "Standard lease fee sheet, utilities, parking, and renter's insurance.",
-        "Short-term versus normal lease terms if you need temporary housing.",
+        "The exact unit, price, and move-in date.",
+        "The full fee sheet, utilities, parking, and renter's insurance.",
         "Student guarantor/co-signer and remote signing policy."
       ]
     },
@@ -6388,8 +6376,11 @@ function priceStatus(apartment, lang = activeLang(), answers = null) {
   if (answers) {
     const selection = selectBudgetCandidate(apartment, answers, { respectFeatures: true });
     const candidate = selection.candidate;
-    if (!candidate && ["unknown_feature_compatibility", "incompatible"].includes(selection.compatibility)) {
-      return { level: "warn", label: lang === "zh" ? "具体房源配置待核实" : "Exact-unit features need verification" };
+    if (!candidate && selection.compatibility === "incompatible") {
+      return { level: "warn", label: lang === "zh" ? "没有符合硬性要求的房源" : "No unit meets the selected requirement" };
+    }
+    if (candidate && selection.compatibility === "unknown_feature_compatibility") {
+      return { level: "warn", label: lang === "zh" ? "价格已核对 · 配置待确认" : "Price checked · features to confirm" };
     }
     if (candidate?.comparisonStatus === "not_applicable") {
       return { level: "warn", label: lang === "zh" ? "所选户型当前 N/A" : "Selected unit type is N/A" };
@@ -6419,10 +6410,10 @@ function priceSignalText(apartment, lang = activeLang(), answers = null) {
     const selection = selectBudgetCandidate(apartment, answers, { respectFeatures: true });
     const candidate = selection.candidate;
     const label = unitTypeLabel(selection.unitType.resolved, lang);
-    if (!candidate && ["unknown_feature_compatibility", "incompatible"].includes(selection.compatibility)) {
+    if (!candidate && selection.compatibility === "incompatible") {
       return lang === "zh"
-        ? `${label} 的具体房源配置未核实，暂不计预算分`
-        : `${label} exact-unit features are unverified; budget is not scored`;
+        ? `${label} 暂无符合所选硬性要求的房源价格`
+        : `No ${label} price currently meets the selected requirement`;
     }
     if (candidate?.comparisonStatus === "not_applicable") {
       return lang === "zh" ? `${label} 当前 N/A` : `${label} is currently N/A`;
@@ -6879,12 +6870,13 @@ function selectBudgetCandidate(apartment, answersOrUnitType = {}, options = {}) 
       pool = compatible;
       compatibility = "compatible";
     } else {
-      const hasUnknown = statuses.some(item => item.status === "unknown");
-      return {
-        candidate: null,
-        unitType,
-        compatibility: hasUnknown ? "unknown_feature_compatibility" : "incompatible"
-      };
+      const unknown = statuses.filter(item => item.status === "unknown").map(item => item.candidate);
+      if (unknown.length) {
+        pool = unknown;
+        compatibility = "unknown_feature_compatibility";
+      } else {
+        return { candidate: null, unitType, compatibility: "incompatible" };
+      }
     }
   }
 
@@ -6907,10 +6899,10 @@ function renderSelectedBudgetBasis(apartment, answers, lang = activeLang()) {
   const selection = selectBudgetCandidate(apartment, answers, { respectFeatures: true });
   const candidate = selection.candidate;
   const unitLabel = unitTypeLabel(selection.unitType.resolved, lang);
-  if (!candidate && ["unknown_feature_compatibility", "incompatible"].includes(selection.compatibility)) {
+  if (!candidate && selection.compatibility === "incompatible") {
     const text = lang === "zh"
-      ? `${unitLabel} 的具体房源还不能确认是否满足你选的房内配置，因此这张卡暂不使用价格参与排序。`
-      : `The exact ${unitLabel} candidate cannot yet be confirmed against your selected unit features, so its price is not used in ranking.`;
+      ? `${unitLabel} 暂无明确符合所选硬性要求的房源，因此没有采用其他房源价格代替。`
+      : `No ${unitLabel} candidate is confirmed to meet the selected requirement, so another unit's price is not substituted.`;
     return `<div class="budget-basis-note warn"><strong>${escapeHtml(lang === "zh" ? "预算采用" : "Budget basis")}</strong><span>${escapeHtml(text)}</span></div>`;
   }
   if (!candidate) return "";
@@ -6964,12 +6956,17 @@ function renderSelectedBudgetBasis(apartment, answers, lang = activeLang()) {
   const conservative = selection.unitType.conservative
     ? (lang === "zh" ? "Not sure 按 1BR 保守比较。" : "Not sure uses a conservative 1BR basis.")
     : "";
+  const featureNote = selection.compatibility === "unknown_feature_compatibility"
+    ? (lang === "zh"
+        ? "价格已计入预算；房内配置仍需按具体房源确认。"
+        : "The price is included in budget fit; confirm the selected in-unit feature for the exact unit.")
+    : "";
   return `
-    <div class="budget-basis-note${candidate.comparisonStatus === "policy_comparable" ? " warn" : ""}">
+    <div class="budget-basis-note${candidate.comparisonStatus === "policy_comparable" || featureNote ? " warn" : ""}">
       <strong>${escapeHtml(lang === "zh" ? "预算采用" : "Budget basis")}</strong>
       <span>${escapeHtml(`${unitLabel} ${formatMoney(comparisonPrice)} / ${lang === "zh" ? "月" : "mo"}${concessionCredit > 0 ? (lang === "zh" ? "（含当前优惠）" : " after current special") : ""}`)}</span>
       ${details.length ? `<em>${escapeHtml(details.join(" · "))}</em>` : ""}
-      <small>${escapeHtml([policy, concessionPolicy, conservative].filter(Boolean).join(" "))}</small>
+      <small>${escapeHtml([policy, concessionPolicy, conservative, featureNote].filter(Boolean).join(" "))}</small>
     </div>
   `;
 }
@@ -7857,6 +7854,7 @@ async function copyFeedback(statusId) {
 }
 
 function renderResults(results, answers) {
+  document.querySelector(".workspace")?.classList.remove("is-location-browse");
   showResultsPanel({ showFeedback: true });
   setFeedbackMode("results");
   const list = document.getElementById("results");
@@ -8002,6 +8000,7 @@ function renderResults(results, answers) {
 }
 
 function renderLocationBrowse(results, campus) {
+  document.querySelector(".workspace")?.classList.add("is-location-browse");
   showResultsPanel({ showFeedback: false });
   const list = document.getElementById("results");
   const summary = document.getElementById("result-summary");
@@ -8085,6 +8084,7 @@ function showResultsPanel({ showFeedback = true } = {}) {
 }
 
 function hideResultsPanel() {
+  document.querySelector(".workspace")?.classList.remove("is-location-browse");
   const panel = document.querySelector(".results-panel");
   const feedbackPanel = document.getElementById("feedback-panel");
   const list = document.getElementById("results");
@@ -8114,6 +8114,7 @@ function runLocationBrowse(form, campus) {
 }
 
 function runMatch(form, entry = "full_quiz") {
+  document.querySelector(".workspace")?.classList.remove("is-location-browse");
   const answers = getFormValues(form);
   latestAnswers = answers;
   latestEntry = entry;
@@ -8157,7 +8158,7 @@ function init() {
   const locationBrowseButtons = [...document.querySelectorAll(".location-browser-button")];
   const unitTypeInputs = [...form.querySelectorAll('input[name="unit_type"]')];
   enforceMaxSelections(form, "requirement", 2);
-  enforceMaxSelections(form, "preference", 2);
+  enforceMaxSelections(form, "preference", 3);
   const syncPetFollowup = () => {
     if (!petFollowup || !petPriority) return;
     petFollowup.hidden = !petPriority.checked;

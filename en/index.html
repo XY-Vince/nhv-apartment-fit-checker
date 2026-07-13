@@ -6,7 +6,7 @@
     <meta name="description" content="MatchNHV is a New Haven apartment fit checker that matches budget, campus routine, true cost, setup, and daily priorities to 2-3 better-fit options.">
     <title>MatchNHV | New Haven Apartment Fit Checker</title>
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=20260713-survey-v12">
+    <link rel="stylesheet" href="../styles.css?v=20260713-polish-v13">
   </head>
   <body>
     <main class="app-shell">
@@ -48,7 +48,7 @@
               <h2>Beta feedback</h2>
               <p>Fill in the three fields below, then copy the feedback email.</p>
             </div>
-            <p class="referral-note">For referral help, include the property name in your email. Tenant contacts are not currently available for 360 State, NHV Towers, or City Crossing. Referrals never affect ranking.</p>
+            <p class="referral-note">For a referral bonus, include the property name in your email and I will contact a current resident. 360 State, NHV Towers, and City Crossing currently have no referral bonus. Referral programs never affect scoring.</p>
             <p id="feedback-recipient" class="feedback-recipient" hidden></p>
             <div class="field-stack">
               <div>
@@ -60,8 +60,8 @@
                 </select>
               </div>
               <div id="feedback-missing-field">
-                <label class="field-label" for="feedback-missing">Which are we missing here?</label>
-                <input id="feedback-missing" type="text" placeholder="Example: The Union / Corsair / other">
+                <label class="field-label" for="feedback-missing">What are we missing here?</label>
+                <input id="feedback-missing" type="text" placeholder="Example: a building, fee, preference, or other detail">
               </div>
               <div>
                 <label class="field-label" for="feedback-note">One sentence on what should improve</label>
@@ -76,7 +76,7 @@
 
         <form id="fit-form" class="panel form-panel">
           <div class="panel-heading">
-            <h2>About 45 seconds, 5 short sections</h2>
+            <h2>About 15 seconds, 5 short sections</h2>
             <p>Tell us what you actually need, then see the formal ranking.</p>
           </div>
 
@@ -129,7 +129,7 @@
           </fieldset>
 
           <fieldset>
-            <legend>5. What else matters? Choose up to 2, or leave blank.</legend>
+            <legend>5. What else matters? Choose up to 3, or leave blank.</legend>
             <div class="option-grid priority-grid">
               <label><input type="checkbox" name="preference" value="true_cost"><span>More predictable total monthly cost</span></label>
               <label><input type="checkbox" name="preference" value="utilities_predictable"><span>Clearer utility costs</span></label>
@@ -188,6 +188,6 @@
       <p>© 2026 XY-Vince. Not affiliated with Yale University or any property listed.</p>
     </footer>
 
-    <script src="../app.js?v=20260713-survey-v12"></script>
+    <script src="../app.js?v=20260713-polish-v13"></script>
   </body>
 </html>

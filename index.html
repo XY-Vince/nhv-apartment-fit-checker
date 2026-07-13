@@ -6,7 +6,7 @@
     <meta name="description" content="MatchNHV 纽黑文公寓匹配器：根据预算、常去区域、水电网、房间配置和生活偏好，找出 2-3 个更适合你的选项。">
     <title>MatchNHV | 纽黑文公寓匹配器</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20260713-survey-v12">
+    <link rel="stylesheet" href="styles.css?v=20260713-polish-v13">
   </head>
   <body>
     <main class="app-shell">
@@ -48,7 +48,7 @@
               <h2>测试反馈</h2>
               <p>填完下面三项，再复制反馈邮件正文。</p>
             </div>
-            <p class="referral-note">想了解 referral，可在邮件里写公寓名；目前 360 State、NHV Towers、City Crossing 暂无租客联系人。Referral 不影响排序。</p>
+            <p class="referral-note">想了解 referral bonus（推荐奖金），可在邮件里写上公寓名称，我会联系目前住客；目前 360 State、NHV Towers、City Crossing 暂无推荐奖金。Referral program 对打分机制无影响。</p>
             <p id="feedback-recipient" class="feedback-recipient" hidden></p>
             <div class="field-stack">
               <div>
@@ -60,8 +60,8 @@
                 </select>
               </div>
               <div id="feedback-missing-field">
-                <label class="field-label" for="feedback-missing">这里还漏了哪些公寓？</label>
-                <input id="feedback-missing" type="text" placeholder="例如 The Union / Corsair / 其他">
+                <label class="field-label" for="feedback-missing">这里还漏了哪些？</label>
+                <input id="feedback-missing" type="text" placeholder="例如：公寓、费用、偏好或其他情况">
               </div>
               <div>
                 <label class="field-label" for="feedback-note">一句话告诉我们哪里要改</label>
@@ -76,7 +76,7 @@
 
         <form id="fit-form" class="panel form-panel">
           <div class="panel-heading">
-            <h2>约 45 秒，回答 5 组问题</h2>
+            <h2>15 秒，回答 5 组问题</h2>
             <p>先告诉我们你的实际需求，再看正式排序。</p>
           </div>
 
@@ -100,7 +100,7 @@
             <legend>3. 你最常去哪里？</legend>
             <div class="option-grid campus-grid">
               <label><input type="radio" name="campus" value="central_campus" required><span>Central Campus / Law / Humanities</span></label>
-              <label><input type="radio" name="campus" value="med_school" required><span>Med School / YNHH / 公共卫生学院</span></label>
+              <label><input type="radio" name="campus" value="med_school" required><span>医学院 / YNHH / 公卫学院</span></label>
               <label><input type="radio" name="campus" value="som_prospect" required><span>SOM / Divinity / Prospect Hill</span></label>
               <label><input type="radio" name="campus" value="seas_science" required><span>SEAS / Science Hill / Engineering</span></label>
               <label><input type="radio" name="campus" value="downtown_station" required><span>Downtown</span></label>
@@ -109,7 +109,7 @@
           </fieldset>
 
           <fieldset>
-            <legend>4. 哪些条件没有就不考虑？最多选 2 项，可以不选。</legend>
+            <legend>4. 你有哪些硬性要求？最多选 2 项，可以不选。</legend>
             <div class="option-grid priority-grid">
               <label><input type="checkbox" name="requirement" value="laundry"><span>房内洗衣机和烘干机</span></label>
               <label><input type="checkbox" name="requirement" value="wood_floor"><span>尽量不铺地毯</span></label>
@@ -129,7 +129,7 @@
           </fieldset>
 
           <fieldset>
-            <legend>5. 还比较在意什么？最多选 2 项，可以不选。</legend>
+            <legend>5. 还比较在意什么？最多选 3 项，可以不选。</legend>
             <div class="option-grid priority-grid">
               <label><input type="checkbox" name="preference" value="true_cost"><span>每月总成本更可控</span></label>
               <label><input type="checkbox" name="preference" value="utilities_predictable"><span>水电暖费用更明确</span></label>
@@ -153,7 +153,7 @@
             <p>这里只比较位置，不计算匹配分，也不考虑预算、户型或生活偏好。</p>
           </div>
           <div class="location-browser-grid">
-            <button type="button" class="location-browser-button" data-campus="med_school">Med School / YNHH</button>
+            <button type="button" class="location-browser-button" data-campus="med_school">医学院 / YNHH</button>
             <button type="button" class="location-browser-button" data-campus="seas_science">Science Hill / SEAS</button>
             <button type="button" class="location-browser-button" data-campus="central_campus">Central Campus / Law / Humanities</button>
             <button type="button" class="location-browser-button" data-campus="som_prospect">SOM / Prospect Hill</button>
@@ -188,6 +188,6 @@
       <p>© 2026 XY-Vince. Not affiliated with Yale University or any property listed.</p>
     </footer>
 
-    <script src="app.js?v=20260713-survey-v12"></script>
+    <script src="app.js?v=20260713-polish-v13"></script>
   </body>
 </html>

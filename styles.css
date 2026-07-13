@@ -175,6 +175,18 @@ h1 {
   margin: 0 auto;
 }
 
+.workspace.is-location-browse .location-browser {
+  order: 2;
+}
+
+.workspace.is-location-browse .results-panel {
+  order: 3;
+}
+
+.workspace.is-location-browse .launch-actions {
+  order: 4;
+}
+
 .panel {
   border: 1px solid var(--line);
   border-radius: 8px;
