@@ -14,25 +14,7 @@ const UTILITY_PREDICTABILITY_SCORE = {
   unknown: 44
 };
 
-// Quick Start is a low-context entry point, so its reviewed baseline stays
-// separate from the personalized questionnaire score.
-const QUICK_START_ORDER = Object.freeze({
-  med_school: [
-    "pierpont-city-crossing",
-    "new-haven-towers",
-    "the-taft",
-    "the-whit",
-    "anthem-square10"
-  ],
-  balanced: [
-    "new-haven-towers",
-    "axis-201",
-    "the-taft",
-    "360-state",
-    "pierpont-city-crossing",
-    "the-audubon"
-  ]
-});
+const LOCATION_BROWSE_LIMIT = 5;
 
 const UTILITY_PROFILES = Object.freeze({
   "360-state": { included: [], tenantPays: [], verify: ["electricity", "heating_cooling", "water_sewer", "internet"] },
@@ -75,7 +57,7 @@ const UTILITY_ITEM_LABELS = Object.freeze({
     heat: "暖气",
     hot_water: "热水",
     high_speed_internet: "高速网络",
-    air_conditioning_most_units: "多数房源的空调",
+    air_conditioning_most_units: "空调",
     electricity_lights_appliances: "照明和电器用电",
     electricity: "电费",
     heating_cooling: "冷暖气计费",
@@ -2247,7 +2229,7 @@ const UI_TEXT = {
     feedbackEntry: "Entry path",
     entryDefault: "Default balanced view",
     entryFullQuiz: "Full questionnaire / refined answers",
-    entryQuickStart: campus => `Quick start: ${campus}`,
+    entryLocationBrowse: campus => `Location browse: ${campus}`,
     feedbackAnswers: "My answers:",
     feedbackTop: "Top 3 shown:",
     feedbackAccuracy: "Top 3 accuracy",
@@ -2257,9 +2239,10 @@ const UI_TEXT = {
     notSpecified: "Not specified",
     none: "None",
     noTop3: "No apartment top 3 shown",
-    quickStartSummary: (campus, count) => `Quick start for ${campus}: start with these ${count}. Use the questionnaire below to refine budget and true cost.`,
-    quickStartTieSummary: (campus, omitted) => `These are 3 starting points for ${campus}. Other options in the same location tier: ${omitted}.`,
-    balancedQuickStartSummary: "Balanced quick start uses a reviewed general-purpose order. Use the questionnaire below to rerank by your unit type, budget, and priorities.",
+    fullResultsTitle: "Apartments that fit your needs",
+    locationBrowseTitle: campus => `Apartments worth comparing near ${campus}`,
+    locationBrowseSummary: (campus, count) => `${count} options are shown by the current ${campus} location tier only; options in the same tier are not ranked. Complete the questionnaire for a formal ranking by budget, unit type, and living preferences.`,
+    locationBrowseCardNote: "Location view only. Complete the questionnaire before comparing price, amenities, and application fit.",
     fullTieSummary: "Some options are in the same score tier. Compare the cost and trade-off summaries instead of treating their order as precise.",
     locationCandidate: "Location option",
     balancedCandidate: "balanced reference",
@@ -2271,7 +2254,7 @@ const UI_TEXT = {
     evidenceChecked: date => `Evidence checked ${date}`,
     publicSource: "Public source",
     officialSource: "Official site",
-    refinementPending: "Answers changed. Select “Find my best fits” to update the Top 3.",
+    refinementPending: "Answers changed. Submit the questionnaire again to update the ranking.",
     feedbackScopeAccuracy: "Scope judgment",
     feedbackScopeTop: "Scope result shown:",
     feedbackContact: email => `Project email: ${email}`,
@@ -2369,7 +2352,7 @@ const UI_TEXT = {
     feedbackEntry: "进入方式",
     entryDefault: "默认均衡结果",
     entryFullQuiz: "完整问卷 / 已细化答案",
-    entryQuickStart: campus => `快速入口：${campus}`,
+    entryLocationBrowse: campus => `按地点浏览：${campus}`,
     feedbackAnswers: "我的答案：",
     feedbackTop: "显示的前三名：",
     feedbackAccuracy: "前三名准确度",
@@ -2379,9 +2362,10 @@ const UI_TEXT = {
     notSpecified: "未填写",
     none: "无",
     noTop3: "未显示公寓前三名",
-    quickStartSummary: (campus, count) => `${campus} 快速入口：先看这 ${count} 个；预算和真实成本可以继续用下面的问卷细化。`,
-    quickStartTieSummary: (campus, omitted) => `这里先给出 3 个 ${campus} 参考选项；同一位置档还有：${omitted}。`,
-    balancedQuickStartSummary: "均衡入口先按已审阅的常见选择顺序展示；再用下面的问卷按户型、预算和具体需求重排。",
+    fullResultsTitle: "适合你的公寓",
+    locationBrowseTitle: campus => `${campus} 附近值得进一步比较的公寓`,
+    locationBrowseSummary: (campus, count) => `这里只按现有位置资料展示 ${count} 个 ${campus} 参考选项，同一位置档不分先后。补充预算、户型和居住偏好，获得正式排序。`,
+    locationBrowseCardNote: "这里只看位置；完成问卷后再比较价格、设施和申请条件。",
     fullTieSummary: "部分选项处在同一分数档，请重点比较成本和取舍，不必把先后顺序当成精确排名。",
     locationCandidate: "位置候选",
     balancedCandidate: "均衡参考",
@@ -2393,7 +2377,7 @@ const UI_TEXT = {
     evidenceChecked: date => `资料核对于 ${date}`,
     publicSource: "公开来源",
     officialSource: "官网来源",
-    refinementPending: "答案已修改，点击“查看匹配结果”更新 Top 3。",
+    refinementPending: "答案已修改，请重新提交问卷更新排序。",
     feedbackScopeAccuracy: "范围判断",
     feedbackScopeTop: "显示的范围判断：",
     feedbackContact: email => `项目邮箱：${email}`,
@@ -2478,6 +2462,7 @@ const PRIORITY_REASON_LABELS = {
   en: {
     application: "Application fit",
     true_cost: "True-cost fit",
+    utilities_predictable: "Utility-cost fit",
     roommate: "Roommate fit",
     basic: "Basic-amenity fit",
     package: "Building-service fit",
@@ -2498,6 +2483,7 @@ const PRIORITY_REASON_LABELS = {
   zh: {
     application: "申请门槛匹配",
     true_cost: "真实成本匹配",
+    utilities_predictable: "水电暖费用匹配",
     roommate: "合租匹配",
     basic: "基础配套匹配",
     package: "楼内服务匹配",
@@ -2530,6 +2516,14 @@ const ANSWER_VALUE_LABELS = {
       laundry: "In-unit laundry",
       private_space: "Not sharing kitchen or bathroom with roommates"
     },
+    requirement: {
+      laundry: "In-unit laundry",
+      wood_floor: "Avoid carpet if possible",
+      private_space: "Private kitchen and bathroom",
+      furniture_ready: "Less move-in setup",
+      parking: "Parking",
+      pet_friendly: "Pet-friendly policy"
+    },
     amenity: {
       basic: "Basic is enough",
       package: "Package / front desk / maintenance",
@@ -2550,6 +2544,7 @@ const ANSWER_VALUE_LABELS = {
     priority: {
       application: "Application friction",
       true_cost: "True monthly cost / move-in cash",
+      utilities_predictable: "Clearer utility costs",
       roommate: "Roommate or split-cost fit",
       basic: "Basic amenities are enough",
       package: "Package / front desk / maintenance",
@@ -2580,6 +2575,14 @@ const ANSWER_VALUE_LABELS = {
       laundry: "房内洗衣机和烘干机",
       private_space: "不想和室友共用厨房或卫生间"
     },
+    requirement: {
+      laundry: "房内洗衣机和烘干机",
+      wood_floor: "尽量不铺地毯",
+      private_space: "独立厨房和卫生间",
+      furniture_ready: "入住时少折腾",
+      parking: "停车位",
+      pet_friendly: "宠物友好"
+    },
     amenity: {
       basic: "够用就行",
       package: "收包裹 / 前台 / 维修",
@@ -2600,6 +2603,7 @@ const ANSWER_VALUE_LABELS = {
     priority: {
       application: "申请门槛和材料",
       true_cost: "每月总成本 / 入住前现金",
+      utilities_predictable: "水电暖费用更明确",
       roommate: "合租 / 分摊成本",
       basic: "配套够用就行",
       package: "收包裹 / 前台 / 维修",
@@ -6156,12 +6160,18 @@ function renderUtilityDetails(apartment, lang = activeLang()) {
     ...(profile.verify || []).map(item => ({ item, status: "verify" }))
   ];
   const note = profile.note ? text[profile.note] : "";
+  const statusLabel = row => {
+    if (row.item === "air_conditioning_most_units" && row.status === "included") {
+      return lang === "zh" ? "已包含（多数房源）" : "Included (most units)";
+    }
+    return text[row.status];
+  };
   return `
     <div class="utility-details">
       ${rows.map(row => `
         <div>
           <b>${escapeHtml(utilityItemLabel(row.item, lang))}</b>
-          <span class="utility-status ${escapeHtml(row.status)}">${escapeHtml(text[row.status])}</span>
+          <span class="utility-status ${escapeHtml(row.status)}">${escapeHtml(statusLabel(row))}</span>
         </div>
       `).join("")}
       ${note ? `<small>${escapeHtml(note)}</small>` : ""}
@@ -6273,13 +6283,20 @@ function getSelectedValues(form, name) {
 
 function getFormValues(form) {
   const data = new FormData(form);
+  const requirements = getSelectedValues(form, "requirement");
+  const preferences = getSelectedValues(form, "preference");
+  const setup = requirements.filter(value => ["wood_floor", "laundry", "private_space", "furniture_ready"].includes(value));
+  const requirementPriorities = requirements.filter(value => HARD_REQUIREMENT_PRIORITIES.has(value));
+  const budgetValue = data.get("budget");
   return {
-    budget: Number(data.get("budget")),
-    unitType: data.get("unit_type") || "studio",
+    budget: budgetValue === null ? null : Number(budgetValue),
+    unitType: data.get("unit_type") || null,
     campus: data.get("campus"),
-    utilities: data.get("utilities"),
-    setup: getSelectedValues(form, "setup"),
-    priority: getSelectedValues(form, "priority"),
+    utilities: preferences.includes("utilities_predictable") ? "predictable" : null,
+    requirements,
+    preferences,
+    setup,
+    priority: [...preferences.filter(value => value !== "utilities_predictable"), ...requirementPriorities],
     petType: data.get("pet_type") || null
   };
 }
@@ -6292,7 +6309,13 @@ function renderBudgetOptions(form, { preserve = true, preferredValue = null, cle
   const container = form.querySelector("#budget-options");
   if (!container) return;
   const lang = activeLang();
-  const unitType = form.querySelector('input[name="unit_type"]:checked')?.value || "studio";
+  const unitType = form.querySelector('input[name="unit_type"]:checked')?.value || null;
+  const note = form.querySelector("#budget-range-note");
+  if (!unitType) {
+    container.innerHTML = "";
+    if (note) note.textContent = lang === "zh" ? "请先选择户型。" : "Choose a unit type first.";
+    return;
+  }
   const currentInput = preserve ? form.querySelector('input[name="budget"]:checked') : null;
   const currentValue = clearSelection
     ? null
@@ -6307,7 +6330,6 @@ function renderBudgetOptions(form, { preserve = true, preferredValue = null, cle
     <label><input type="radio" name="budget" value="${option.value}" required${option.value === selectedValue ? " checked" : ""}><span>${escapeHtml(budgetOptionDisplay(option, lang))}</span></label>
   `).join("");
 
-  const note = form.querySelector("#budget-range-note");
   if (!note) return;
   const notes = [lang === "zh" ? "$1,600 以下将在后续版本覆盖。" : "Budgets below $1,600 will be covered in a future version."];
   if (clearSelection || selectedValue === null) {
@@ -7023,6 +7045,7 @@ function scoreLocation(apartment, preference) {
 }
 
 function scoreUtilities(apartment, preference) {
+  if (!preference) return null;
   if (preference === "predictable") return UTILITY_PREDICTABILITY_SCORE[apartment.utilities] || SCORE.LOW;
   if (preference === "some_variable") {
     if (apartment.utilities === "mixed") return SCORE.VERY_HIGH;
@@ -7119,9 +7142,29 @@ function hasRequirementEvidence(item) {
   return Boolean(item && !["unknown", "planning_assumption", "low", "stale"].includes(item.confidence));
 }
 
+function selectedHardRequirements(answers = {}) {
+  return [...new Set([
+    ...(answers.requirements || []),
+    ...(answers.setup || []),
+    ...(answers.priority || []).filter(value => HARD_REQUIREMENT_PRIORITIES.has(value))
+  ])];
+}
+
 function hardRequirementTier(apartment, answers = {}) {
-  const selected = new Set(answers.priority || []);
+  const selected = new Set(selectedHardRequirements(answers));
   const tiers = [];
+
+  const setupRequirements = [...selected].filter(value => Object.hasOwn(SETUP_TO_BUDGET_FEATURE, value));
+  if (setupRequirements.length) {
+    const selection = selectBudgetCandidate(
+      apartment,
+      { ...answers, setup: setupRequirements },
+      { respectFeatures: true }
+    );
+    if (selection.compatibility === "compatible") tiers.push(2);
+    else if (selection.compatibility === "incompatible") tiers.push(0);
+    else tiers.push(1);
+  }
 
   if (selected.has("pet_friendly")) {
     const petScore = scorePetPolicy(apartment, answers.petType || null);
@@ -7221,6 +7264,7 @@ function scoreDaily(apartment, preference) {
 function scoreSinglePriority(apartment, preference, answers = {}) {
   if (SCORABLE_WORRY_VALUES.has(preference)) return scoreSingleWorry(apartment, preference);
   if (preference === "trust") return null;
+  if (preference === "utilities_predictable") return scoreUtilities(apartment, "predictable");
   if (preference === "newer_building") return scoreNewerBuilding(apartment);
   if (preference === "amenity_breadth") return scoreAmenityBreadth(apartment);
   if (preference === "low_density") return scoreLowDensity(apartment);
@@ -7235,8 +7279,8 @@ function scoreSinglePriority(apartment, preference, answers = {}) {
 }
 
 function scorePriority(apartment, priorities, answers = {}) {
-  const selected = priorities.length ? priorities : ["application", "true_cost"];
-  const scores = selected
+  if (!priorities.length) return null;
+  const scores = priorities
     .map(preference => scoreSinglePriority(apartment, preference, answers))
     .filter(Number.isFinite);
   if (!scores.length) return null;
@@ -7297,6 +7341,12 @@ function locationFitLabel(campusScore, lang = activeLang()) {
   return "Weak location fit";
 }
 
+function locationBrowseTierLabel(campusScore, lang = activeLang()) {
+  const score = Number(campusScore) || 1;
+  if (lang === "zh") return score >= 5 ? "最接近的一档" : "较近的一档";
+  return score >= 5 ? "Closest location tier" : "Nearby location tier";
+}
+
 function confirmedBudgetMiss(result) {
   return result?.breakdown?.budget === SCORE.MISS;
 }
@@ -7310,7 +7360,7 @@ function budgetRankingTier(result) {
 }
 
 function compareResults(a, b, answers = null) {
-  if ((answers?.priority || []).some(priority => HARD_REQUIREMENT_PRIORITIES.has(priority))) {
+  if (selectedHardRequirements(answers || {}).length) {
     const hardRequirementDiff = (b.hardRequirementTier ?? 1) - (a.hardRequirementTier ?? 1);
     if (hardRequirementDiff !== 0) return hardRequirementDiff;
   }
@@ -7499,9 +7549,9 @@ function budgetLabel(maxBudget, unitType = "studio", lang = activeLang()) {
 }
 
 function entryLabel(entry = latestEntry, lang = activeLang()) {
-  if (entry.startsWith("quick_start:")) {
+  if (entry.startsWith("location_browse:")) {
     const campus = entry.split(":")[1];
-    return ui("entryQuickStart", lang)(campusLabel(campus, lang));
+    return ui("entryLocationBrowse", lang)(campusLabel(campus, lang));
   }
   if (entry === "full_quiz") return ui("entryFullQuiz", lang);
   return ui("entryDefault", lang);
@@ -7563,7 +7613,7 @@ function renderOutOfScope(answers) {
 
 function topResultNames(results, lang = activeLang()) {
   if (!results.length) return ui("noTop3", lang);
-  const showScores = !latestEntry.startsWith("quick_start:");
+  const showScores = !latestEntry.startsWith("location_browse:");
   return results.slice(0, 3).map((result, index) => {
     return `${index + 1}. ${result.apartment.name}${showScores ? ` (${result.score})` : ""}`;
   }).join("\n");
@@ -7571,32 +7621,33 @@ function topResultNames(results, lang = activeLang()) {
 
 function formatAnswersForShare(answers, lang = activeLang()) {
   if (!answers) return lang === "zh" ? "还没有记录问卷答案。" : "No questionnaire answers captured yet.";
-  const setup = answers.setup.map(value => answerValueLabel("setup", value, lang)).join(", ") || ui("none", lang);
-  const priorities = (answers.priority || []).map(value => answerValueLabel("priority", value, lang)).join(", ") || ui("none", lang);
+  const requirements = selectedHardRequirements(answers)
+    .map(value => answerValueLabel("requirement", value, lang))
+    .join(", ") || ui("none", lang);
+  const preferences = (answers.preferences || (answers.priority || []).filter(value => !HARD_REQUIREMENT_PRIORITIES.has(value)))
+    .map(value => answerValueLabel("priority", value, lang))
+    .join(", ") || ui("none", lang);
   const labels = lang === "zh"
     ? {
       unitType: "户型",
       budget: "预算",
-      campus: "校区",
-      utilities: "水电网",
-      setup: "房间配置",
+      campus: "常去地点",
+      requirements: "不能妥协",
       priorities: "其他关注点"
     }
     : {
       unitType: "Unit type",
       budget: "Budget",
-      campus: "Campus",
-      utilities: "Utilities",
-      setup: "Setup",
+      campus: "Main Yale area",
+      requirements: "Non-negotiables",
       priorities: "Other priorities"
     };
   return [
     labelLine(labels.unitType, unitTypeLabel(answers.unitType, lang), lang),
     labelLine(labels.budget, budgetLabel(answers.budget, answers.unitType, lang), lang),
     labelLine(labels.campus, campusLabel(answers.campus, lang), lang),
-    labelLine(labels.utilities, answerValueLabel("utilities", answers.utilities, lang), lang),
-    labelLine(labels.setup, setup, lang),
-    labelLine(labels.priorities, priorities, lang)
+    labelLine(labels.requirements, requirements, lang),
+    labelLine(labels.priorities, preferences, lang)
   ].join("\n");
 }
 
@@ -7805,12 +7856,15 @@ async function copyFeedback(statusId) {
   }
 }
 
-function renderResults(results, answers, options = {}) {
-  showResultsPanel();
+function renderResults(results, answers) {
+  showResultsPanel({ showFeedback: true });
   setFeedbackMode("results");
   const list = document.getElementById("results");
   const summary = document.getElementById("result-summary");
+  const title = document.getElementById("results-title");
   const lang = activeLang();
+  if (title) title.textContent = ui("fullResultsTitle", lang);
+  list.classList.remove("location-browse-results");
   const eligibleResults = results.filter(r => isTopThreeEligible(r.apartment));
   const top = eligibleResults.slice(0, 3);
   const campus = campusLabel(answers.campus, lang);
@@ -7818,33 +7872,23 @@ function renderResults(results, answers, options = {}) {
     return !result.apartment.isExploration && result.breakdown.budget >= SCORE.HIGH;
   });
   const budgetCoverageGap = !hasSpecificBudgetFit;
-  const cutoffScore = top.at(-1)?.score;
-  const omittedAtCutoff = options.quickStart
-    ? eligibleResults.slice(3).filter(result => result.score === cutoffScore).map(result => result.apartment.name)
-    : [];
   const topHasTie = top.some((result, index) => top.some((other, otherIndex) => otherIndex !== index && other.score === result.score));
-  let baseSummary = options.quickStart
-    ? ui("quickStartSummary", lang)(campus, top.length)
-    : ui("baseSummary", lang)(unitTypeLabel(answers.unitType, lang), budgetLabel(answers.budget, answers.unitType, lang), campus, top.length);
-  if (options.quickStart && answers.campus === "balanced") {
-    baseSummary = ui("balancedQuickStartSummary", lang);
-  } else if (options.quickStart && omittedAtCutoff.length) {
-    baseSummary = ui("quickStartTieSummary", lang)(campus, omittedAtCutoff.join(" / "));
-  } else if (!options.quickStart && topHasTie) {
+  let baseSummary = ui("baseSummary", lang)(unitTypeLabel(answers.unitType, lang), budgetLabel(answers.budget, answers.unitType, lang), campus, top.length);
+  if (topHasTie) {
     baseSummary = `${baseSummary} ${ui("fullTieSummary", lang)}`;
   }
   const budgetGapSummary = ui("budgetGapSummary", lang);
-  summary.textContent = !options.quickStart && budgetCoverageGap ? `${baseSummary} ${budgetGapSummary}` : baseSummary;
-  summary.classList.toggle("summary-warning", !options.quickStart && budgetCoverageGap);
+  summary.textContent = budgetCoverageGap ? `${baseSummary} ${budgetGapSummary}` : baseSummary;
+  summary.classList.toggle("summary-warning", budgetCoverageGap);
 
   list.innerHTML = top.map((result, index) => {
     const apartment = result.apartment;
     const copy = apartmentCopy(apartment, lang);
-    const costs = calculateCosts(apartment, answers, { isQuickStart: options.quickStart });
+    const costs = calculateCosts(apartment, answers);
     const flooringDisplay = splitCardDisplay(copy.flooring, "flooring", lang);
     const sourceDisplay = splitCardDisplay(copy.sourceLabel, "source", lang);
     const concessionDisplay = splitCardDisplay(copy.concession, "concession", lang);
-    const priceAnswers = options.quickStart ? null : answers;
+    const priceAnswers = answers;
     const priceTag = priceStatus(apartment, lang, priceAnswers);
     const footnotes = [];
     const flooringMarker = addCardFootnote(footnotes, flooringDisplay.note);
@@ -7855,15 +7899,11 @@ function renderResults(results, answers, options = {}) {
     const concessionMarker = addCardFootnote(footnotes, concessionNote);
     const reasons = topReasons(result, lang, answers).map(escapeHtml);
     const sameScoreCount = top.filter(other => other.score === result.score).length;
-    const rankLabel = options.quickStart
-      ? answers.campus === "balanced"
-        ? `#${index + 1} ${ui("balancedCandidate", lang)}`
-        : ui("locationCandidate", lang)
-      : apartment.isExploration
-        ? `#${index + 1} ${ui("exploreDirection", lang)}`
-        : sameScoreCount > 1
-          ? ui("sameTierMatch", lang)
-          : `#${index + 1} ${ui("match", lang)}`;
+    const rankLabel = apartment.isExploration
+      ? `#${index + 1} ${ui("exploreDirection", lang)}`
+      : sameScoreCount > 1
+        ? ui("sameTierMatch", lang)
+        : `#${index + 1} ${ui("match", lang)}`;
     const bars = Object.entries(result.breakdown).map(([key, value]) => `
       <div class="bar-row">
         <span>${escapeHtml(categoryLabel(key, lang))}</span>
@@ -7872,11 +7912,9 @@ function renderResults(results, answers, options = {}) {
       </div>
     `).join("");
     const campusTier = campusFitTierLabel(apartment, answers.campus, lang);
-    const scorePill = options.quickStart
-      ? `<div class="score-pill quick-score">${escapeHtml(locationFitLabel(apartment.campusScores[answers.campus] || 1, lang))}</div>`
-      : campusTier
-        ? `<div class="score-pill quick-score">${escapeHtml(campusTier)}</div>`
-        : `<div class="score-pill">${result.score}<small>${escapeHtml(ui("scoreLabel", lang))}</small></div>`;
+    const scorePill = campusTier
+      ? `<div class="score-pill quick-score">${escapeHtml(campusTier)}</div>`
+      : `<div class="score-pill">${result.score}<small>${escapeHtml(ui("scoreLabel", lang))}</small></div>`;
     const tags = `
       ${renderRuleBadges(apartment, answers, lang)}
       <span class="tag ${confidenceClass(apartment)}">${escapeHtml(confidenceSummaryLabel(apartment, lang))}</span>
@@ -7905,7 +7943,7 @@ function renderResults(results, answers, options = {}) {
         </div>
         ${renderCostSummary(costs, lang)}
         ${renderMoveInChecks(apartment, answers, costs, lang)}
-        ${options.quickStart ? "" : renderSelectedBudgetBasis(apartment, answers, lang)}
+        ${renderSelectedBudgetBasis(apartment, answers, lang)}
 
         <div class="quick-insights">
           <div><strong>${escapeHtml(ui("quickWhy", lang))}</strong><span>${escapeHtml(copy.bestFor[0] || "")}</span></div>
@@ -7922,7 +7960,6 @@ function renderResults(results, answers, options = {}) {
               <div class="fact"><strong>${escapeHtml(ui("facts", lang).flooring)}</strong><span>${escapeHtml(flooringDisplay.text)}${flooringMarker}</span></div>
               <div class="fact"><strong>${escapeHtml(ui("facts", lang).source)}</strong><span>${escapeHtml(sourceDisplay.text)}${sourceMarker}</span></div>
             </div>
-            ${options.quickStart ? renderPriceAvailability(apartment, lang) : ""}
             ${renderCostBreakdown(costs, lang, { showMetrics: false })}
             ${copy.valueSignal || copy.concession ? `
               <div class="card-callouts">
@@ -7964,6 +8001,33 @@ function renderResults(results, answers, options = {}) {
   }).join("");
 }
 
+function renderLocationBrowse(results, campus) {
+  showResultsPanel({ showFeedback: false });
+  const list = document.getElementById("results");
+  const summary = document.getElementById("result-summary");
+  const title = document.getElementById("results-title");
+  const lang = activeLang();
+  const campusName = campusLabel(campus, lang);
+  if (title) title.textContent = ui("locationBrowseTitle", lang)(campusName);
+  summary.textContent = ui("locationBrowseSummary", lang)(campusName, results.length);
+  summary.classList.remove("summary-warning");
+  list.classList.add("location-browse-results");
+  list.innerHTML = results.map(result => {
+    const apartment = result.apartment;
+    const copy = apartmentCopy(apartment, lang);
+    return `
+      <article class="result-card location-browse-card">
+        <div>
+          <span class="location-tier">${escapeHtml(locationBrowseTierLabel(result.locationScore, lang))}</span>
+          <h3>${escapeHtml(apartment.name)}</h3>
+          <p class="subtitle">${escapeHtml(copy.area)}</p>
+        </div>
+        <p>${escapeHtml(ui("locationBrowseCardNote", lang))}</p>
+      </article>
+    `;
+  }).join("");
+}
+
 function enforceMaxSelections(form, name, max) {
   const inputs = [...form.querySelectorAll(`input[name="${name}"]`)];
   inputs.forEach(input => {
@@ -7990,31 +8054,16 @@ function rankApartments(answers) {
     .sort((a, b) => compareResults(a, b, answers));
 }
 
-function quickStartOrderIndex(campus, apartmentId) {
-  const order = QUICK_START_ORDER[campus] || [];
-  const index = order.indexOf(apartmentId);
-  return index === -1 ? 1000 : index;
-}
-
-function rankQuickStartApartments(answers) {
-  const results = APARTMENTS
-    .filter(isRankableApartment)
-    .map(apartment => {
-      const score = (apartment.campusScores[answers.campus] || 1) * 20;
-      return {
-        apartment,
-        breakdown: { campus: score },
-        score
-      };
-    });
-  return results.sort((a, b) => {
-    const reviewedOrderDiff = quickStartOrderIndex(answers.campus, a.apartment.id) - quickStartOrderIndex(answers.campus, b.apartment.id);
-    if (answers.campus === "balanced" && reviewedOrderDiff !== 0) return reviewedOrderDiff;
-    const campusScoreDiff = b.score - a.score;
-    if (campusScoreDiff !== 0) return campusScoreDiff;
-    if (reviewedOrderDiff !== 0) return reviewedOrderDiff;
-    return a.apartment.name.localeCompare(b.apartment.name);
-  });
+function rankLocationBrowseApartments({ campus } = {}) {
+  if (!campus || campus === "balanced") return [];
+  return APARTMENTS
+    .filter(apartment => isRankableApartment(apartment) && (apartment.campusScores[campus] || 1) >= 4)
+    .map(apartment => ({
+      apartment,
+      locationScore: apartment.campusScores[campus]
+    }))
+    .sort((a, b) => b.locationScore - a.locationScore || a.apartment.name.localeCompare(b.apartment.name))
+    .slice(0, LOCATION_BROWSE_LIMIT);
 }
 
 function setCampusValue(form, campus) {
@@ -8022,22 +8071,17 @@ function setCampusValue(form, campus) {
   if (input) input.checked = true;
 }
 
-function setActiveQuickStart(campus) {
-  document.querySelectorAll(".quick-start-button").forEach(button => {
+function setActiveLocationBrowse(campus) {
+  document.querySelectorAll(".location-browser-button").forEach(button => {
     button.classList.toggle("is-active", button.dataset.campus === campus);
   });
 }
 
-function showResultsPanel() {
+function showResultsPanel({ showFeedback = true } = {}) {
   const panel = document.querySelector(".results-panel");
   const feedbackPanel = document.getElementById("feedback-panel");
   if (panel) panel.hidden = false;
-  if (feedbackPanel) feedbackPanel.hidden = false;
-}
-
-function showRefinementForm() {
-  const form = document.getElementById("fit-form");
-  if (form) form.hidden = false;
+  if (feedbackPanel) feedbackPanel.hidden = !showFeedback;
 }
 
 function hideResultsPanel() {
@@ -8049,11 +8093,6 @@ function hideResultsPanel() {
   if (feedbackPanel) feedbackPanel.hidden = true;
 }
 
-function hideRefinementForm() {
-  const form = document.getElementById("fit-form");
-  if (form) form.hidden = true;
-}
-
 function scrollResultsIntoView() {
   const panel = document.querySelector(".results-panel");
   if (panel && typeof panel.scrollIntoView === "function") {
@@ -8061,17 +8100,15 @@ function scrollResultsIntoView() {
   }
 }
 
-function runQuickStart(form, campus) {
+function runLocationBrowse(form, campus) {
   setCampusValue(form, campus);
-  setActiveQuickStart(campus);
-  showRefinementForm();
-  const answers = getFormValues(form);
-  latestAnswers = answers;
-  latestEntry = `quick_start:${campus}`;
+  setActiveLocationBrowse(campus);
+  latestAnswers = { campus, requirements: [], preferences: [], setup: [], priority: [] };
+  latestEntry = `location_browse:${campus}`;
   setRefinementStatus("");
-  const results = rankQuickStartApartments(answers);
+  const results = rankLocationBrowseApartments({ campus });
   latestResults = results;
-  renderResults(results, answers, { quickStart: true });
+  renderLocationBrowse(results, campus);
   scrollResultsIntoView();
   return results;
 }
@@ -8081,7 +8118,7 @@ function runMatch(form, entry = "full_quiz") {
   latestAnswers = answers;
   latestEntry = entry;
   setRefinementStatus("");
-  setActiveQuickStart("");
+  setActiveLocationBrowse("");
   if (isOutOfScope(answers)) {
     latestResults = [];
     renderOutOfScope(answers);
@@ -8095,13 +8132,11 @@ function runMatch(form, entry = "full_quiz") {
 
 function resetForm(form) {
   form.reset();
-  const studio = form.querySelector('input[name="unit_type"][value="studio"]');
-  if (studio) studio.checked = true;
-  renderBudgetOptions(form, { preserve: false, preferredValue: 2300 });
+  renderBudgetOptions(form, { preserve: false });
   [...form.querySelectorAll("input")].forEach(input => {
     input.disabled = false;
   });
-  setActiveQuickStart("");
+  setActiveLocationBrowse("");
   latestAnswers = null;
   latestResults = [];
   latestEntry = "default";
@@ -8110,7 +8145,6 @@ function resetForm(form) {
   setFeedbackMode("results");
   setRefinementStatus("");
   hideResultsPanel();
-  hideRefinementForm();
 }
 
 function init() {
@@ -8118,12 +8152,12 @@ function init() {
   const reset = document.getElementById("reset-button");
   const copyFeedbackButton = document.getElementById("copy-feedback");
   const feedbackRecipient = document.getElementById("feedback-recipient");
-  const petPriority = form.querySelector('input[name="priority"][value="pet_friendly"]');
+  const petPriority = form.querySelector('input[name="requirement"][value="pet_friendly"]');
   const petFollowup = document.getElementById("pet-type-followup");
-  const quickStartButtons = [...document.querySelectorAll(".quick-start-button")];
+  const locationBrowseButtons = [...document.querySelectorAll(".location-browser-button")];
   const unitTypeInputs = [...form.querySelectorAll('input[name="unit_type"]')];
-  enforceMaxSelections(form, "setup", 2);
-  enforceMaxSelections(form, "priority", 3);
+  enforceMaxSelections(form, "requirement", 2);
+  enforceMaxSelections(form, "preference", 2);
   const syncPetFollowup = () => {
     if (!petFollowup || !petPriority) return;
     petFollowup.hidden = !petPriority.checked;
@@ -8139,7 +8173,7 @@ function init() {
   });
   form.addEventListener("change", () => {
     syncPetFollowup();
-    setRefinementStatus(ui("refinementPending", activeLang()));
+    setRefinementStatus(latestEntry === "full_quiz" && latestResults.length ? ui("refinementPending", activeLang()) : "");
   });
   form.addEventListener("submit", event => {
     event.preventDefault();
@@ -8148,12 +8182,11 @@ function init() {
   });
   reset.addEventListener("click", () => resetForm(form));
   copyFeedbackButton.addEventListener("click", () => copyFeedback("feedback-status"));
-  quickStartButtons.forEach(button => {
-    button.addEventListener("click", () => runQuickStart(form, button.dataset.campus));
+  locationBrowseButtons.forEach(button => {
+    button.addEventListener("click", () => runLocationBrowse(form, button.dataset.campus));
   });
   hideResultsPanel();
-  hideRefinementForm();
-  renderBudgetOptions(form);
+  renderBudgetOptions(form, { preserve: false });
   if (feedbackRecipient && FEEDBACK_EMAIL) {
     feedbackRecipient.textContent = ui("feedbackContact", activeLang())(FEEDBACK_EMAIL);
     feedbackRecipient.hidden = false;
@@ -8169,7 +8202,7 @@ if (typeof module !== "undefined") {
   module.exports = {
     APARTMENTS,
     AVAILABILITY_PRICE_SNAPSHOT,
-    QUICK_START_ORDER,
+    LOCATION_BROWSE_LIMIT,
     UTILITY_PROFILES,
     CAMPUS_LABELS,
     SCORE,
@@ -8192,10 +8225,12 @@ if (typeof module !== "undefined") {
     scoreNewerBuilding,
     scoreParking,
     scorePetPolicy,
+    selectedHardRequirements,
     hardRequirementTier,
     campusFitTier,
     campusFitTierLabel,
     locationFitLabel,
+    locationBrowseTierLabel,
     confirmedBudgetMiss,
     budgetRankingTier,
     scoreConcession,
@@ -8220,7 +8255,7 @@ if (typeof module !== "undefined") {
     isRankableApartment,
     isTopThreeEligible,
     rankApartments,
-    rankQuickStartApartments,
+    rankLocationBrowseApartments,
     escapeHtml,
     formatAnswersForShare,
     topResultNames,

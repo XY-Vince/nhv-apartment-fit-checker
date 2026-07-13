@@ -6,7 +6,7 @@
     <meta name="description" content="MatchNHV is a New Haven apartment fit checker that matches budget, campus routine, true cost, setup, and daily priorities to 2-3 better-fit options.">
     <title>MatchNHV | New Haven Apartment Fit Checker</title>
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=20260713-budget-v11">
+    <link rel="stylesheet" href="../styles.css?v=20260713-survey-v12">
   </head>
   <body>
     <main class="app-shell">
@@ -22,26 +22,11 @@
           </p>
         </div>
         <div class="notice">
-          This is an early comparison tool, not a live listing service. Confirm rent, availability, concessions, fees, furnished status, and application policies with the property before applying.
+          This is a beta version. Rent, availability, concessions, fees, furnished status, and application policies come from public information; confirm them with the property before applying.
           <div class="info-board">
             <strong>Data notes (Last updated: 2026-07-13)</strong>
-            <span>Each unit type shows the official comparison basis actually used. Most are current units; NHV Towers and The Archive use the clearly labeled range policies shown on their cards. Recorded offers with calculable terms are included in estimated monthly cost and budget fit; exact-unit eligibility still needs confirmation. Desktop is easier for reviewing full details.</span>
+            <span>Prices use the official comparison basis shown for each unit type; calculable offers are included in estimated monthly cost. Desktop is easier for reviewing full details.</span>
           </div>
-        </div>
-      </section>
-
-      <section class="quick-start panel" aria-labelledby="quick-start-title">
-        <div class="panel-heading">
-          <h2 id="quick-start-title">Start with your main Yale area</h2>
-          <p>If your needs are still fuzzy, start with a low-friction Top 3.</p>
-        </div>
-        <div class="quick-start-grid">
-          <button type="button" class="quick-start-button" data-campus="med_school">Med School / YNHH</button>
-          <button type="button" class="quick-start-button" data-campus="seas_science">Science Hill / SEAS</button>
-          <button type="button" class="quick-start-button" data-campus="central_campus">Central Campus / Law / Humanities</button>
-          <button type="button" class="quick-start-button" data-campus="som_prospect">SOM / Prospect Hill</button>
-          <button type="button" class="quick-start-button" data-campus="downtown_station">Downtown</button>
-          <button type="button" class="quick-start-button" data-campus="balanced">Not sure yet; balanced access</button>
         </div>
       </section>
 
@@ -49,8 +34,8 @@
         <section class="panel results-panel" aria-live="polite" tabindex="-1" hidden>
           <div class="panel-heading results-heading">
             <div>
-              <h2>Top fits</h2>
-              <p id="result-summary">Choose a main Yale area first, then refine the results below.</p>
+              <h2 id="results-title">Apartments that fit your needs</h2>
+              <p id="result-summary">Submit the questionnaire to see the formal ranking.</p>
             </div>
             <button type="button" id="reset-button" class="secondary-action">Reset</button>
           </div>
@@ -89,85 +74,50 @@
           </div>
         </section>
 
-        <form id="fit-form" class="panel form-panel" hidden>
+        <form id="fit-form" class="panel form-panel">
           <div class="panel-heading">
-            <h2>Want a sharper fit?</h2>
-            <p>Answer 5 core questions; amenities, route checks, and local services are combined at the end.</p>
+            <h2>About 45 seconds, 5 short sections</h2>
+            <p>Tell us what you actually need, then see the formal ranking.</p>
           </div>
 
           <fieldset>
-            <legend>1. Which unit type are you looking for, and what's your monthly rent budget?<span class="legend-note">Budget is for the full unit. Utilities, internet, and other fees are shown separately in results.</span></legend>
-            <span class="field-label">Unit type</span>
+            <legend>1. Which unit type are you looking for?</legend>
             <div class="segmented unit-type-grid">
-              <label><input type="radio" name="unit_type" value="studio" checked><span>Studio</span></label>
-              <label><input type="radio" name="unit_type" value="1br"><span>1BR</span></label>
-              <label><input type="radio" name="unit_type" value="2br"><span>2BR</span></label>
-              <label><input type="radio" name="unit_type" value="not_sure"><span>Not sure (use 1BR)</span></label>
-            </div>
-            <span class="field-label budget-subheading">Monthly full-unit rent budget</span>
-            <div id="budget-options" class="segmented budget-grid">
-              <label><input type="radio" name="budget" value="1900" required><span>&lt; $1,900</span></label>
-              <label><input type="radio" name="budget" value="2100" required><span>$1,900-$2,100</span></label>
-              <label><input type="radio" name="budget" value="2300" required checked><span>$2,100-$2,300</span></label>
-              <label><input type="radio" name="budget" value="2500" required><span>$2,300-$2,500</span></label>
-              <label><input type="radio" name="budget" value="99999" required><span>$2,500+</span></label>
-            </div>
-            <span id="budget-range-note" class="legend-note" aria-live="polite"></span>
-          </fieldset>
-
-          <fieldset>
-            <legend>2. Which Yale area do you expect to visit most?</legend>
-            <div class="option-grid">
-              <label><input type="radio" name="campus" value="central_campus" checked><span>Central Campus / Law / Humanities</span></label>
-              <label><input type="radio" name="campus" value="med_school"><span>Med School / YNHH / School of Public Health</span></label>
-              <label><input type="radio" name="campus" value="som_prospect"><span>SOM / Divinity / Prospect Hill</span></label>
-              <label><input type="radio" name="campus" value="seas_science"><span>SEAS / Science Hill / Engineering</span></label>
-              <label><input type="radio" name="campus" value="downtown_station"><span>Downtown</span></label>
-              <label><input type="radio" name="campus" value="balanced"><span>Not sure yet; prefer balanced access</span></label>
+              <label><input type="radio" name="unit_type" value="studio" required><span>Studio</span></label>
+              <label><input type="radio" name="unit_type" value="1br" required><span>1BR</span></label>
+              <label><input type="radio" name="unit_type" value="2br" required><span>2BR</span></label>
+              <label><input type="radio" name="unit_type" value="not_sure" required><span>Not sure (use 1BR)</span></label>
             </div>
           </fieldset>
 
           <fieldset>
-            <legend>3. How much utility and hidden-cost uncertainty can you tolerate?</legend>
-            <div class="option-grid">
-              <label><input type="radio" name="utilities" value="predictable" checked><span>As predictable as possible</span></label>
-              <label><input type="radio" name="utilities" value="some_variable"><span>Some variable costs are fine</span></label>
-              <label><input type="radio" name="utilities" value="amenity_tradeoff"><span>I will pay more true cost for stronger amenities</span></label>
+            <legend>2. What is the most you would pay in monthly full-unit rent?<span class="legend-note">Choose a unit type first; the budget bands update automatically.</span></legend>
+            <div id="budget-options" class="segmented budget-grid"></div>
+            <span id="budget-range-note" class="legend-note" aria-live="polite">Choose a unit type first.</span>
+          </fieldset>
+
+          <fieldset>
+            <legend>3. Where will you go most often?</legend>
+            <div class="option-grid campus-grid">
+              <label><input type="radio" name="campus" value="central_campus" required><span>Central Campus / Law / Humanities</span></label>
+              <label><input type="radio" name="campus" value="med_school" required><span>Med School / YNHH / School of Public Health</span></label>
+              <label><input type="radio" name="campus" value="som_prospect" required><span>SOM / Divinity / Prospect Hill</span></label>
+              <label><input type="radio" name="campus" value="seas_science" required><span>SEAS / Science Hill / Engineering</span></label>
+              <label><input type="radio" name="campus" value="downtown_station" required><span>Downtown</span></label>
+              <label><input type="radio" name="campus" value="balanced" required><span>Not sure; prefer balanced access</span></label>
             </div>
           </fieldset>
 
           <fieldset>
-            <legend>4. Which unit setup details matter most? Choose up to 2.</legend>
-            <div class="option-grid">
-              <label><input type="checkbox" name="setup" value="wood_floor"><span>Wood-style floor / avoid carpet if possible</span></label>
-              <label><input type="checkbox" name="setup" value="laundry"><span>In-unit laundry</span></label>
-              <label><input type="checkbox" name="setup" value="private_space"><span>Not sharing kitchen or bathroom with roommates</span></label>
-              <label><input type="checkbox" name="setup" value="furniture_ready"><span>Less furniture hassle (rental ~$250/mo extra)</span></label>
-            </div>
-          </fieldset>
-
-          <fieldset>
-            <legend>5. Beyond budget and location, what matters most? Choose up to 3.</legend>
+            <legend>4. Which conditions are non-negotiable? Choose up to 2, or leave blank.</legend>
             <div class="option-grid priority-grid">
-              <label><input type="checkbox" name="priority" value="true_cost"><span>True monthly cost / move-in cash</span></label>
-              <label><input type="checkbox" name="priority" value="quiet_routine"><span>Street noise / quieter routine</span></label>
-              <label><input type="checkbox" name="priority" value="amenity_breadth"><span>Broader building amenities</span></label>
-              <label><input type="checkbox" name="priority" value="parking"><span>Parking / EV charging</span></label>
-              <label><input type="checkbox" name="priority" value="pet_friendly"><span>Pet-friendly policy</span></label>
-              <label><input type="checkbox" name="priority" value="application"><span>Easier application process</span></label>
+              <label><input type="checkbox" name="requirement" value="laundry"><span>In-unit laundry</span></label>
+              <label><input type="checkbox" name="requirement" value="wood_floor"><span>Avoid carpet if possible</span></label>
+              <label><input type="checkbox" name="requirement" value="private_space"><span>Private kitchen and bathroom</span></label>
+              <label><input type="checkbox" name="requirement" value="furniture_ready"><span>Less move-in setup</span></label>
+              <label><input type="checkbox" name="requirement" value="parking"><span>Parking</span></label>
+              <label><input type="checkbox" name="requirement" value="pet_friendly"><span>Pet-friendly policy</span></label>
             </div>
-            <details class="more-priorities">
-              <summary>More priorities (concessions, newer buildings, Yale Shuttle, and others)</summary>
-              <div class="option-grid priority-grid">
-                <label><input type="checkbox" name="priority" value="concession"><span>Move-in concession</span></label>
-                <label><input type="checkbox" name="priority" value="newer_building"><span>Newer building</span></label>
-                <label><input type="checkbox" name="priority" value="low_density"><span>Lower resident density</span></label>
-                <label><input type="checkbox" name="priority" value="access_late_route"><span>Building access and late-night route</span></label>
-                <label><input type="checkbox" name="priority" value="yale_shuttle"><span>Yale Shuttle access</span></label>
-                <label><input type="checkbox" name="priority" value="food_store"><span>Restaurants, groceries, and pharmacy access</span></label>
-                <label><input type="checkbox" name="priority" value="roommate"><span>Roommate or split-cost fit</span></label>
-              </div>
-            </details>
             <div id="pet-type-followup" class="conditional-followup" hidden>
               <span class="field-label">What kind of pet?</span>
               <div class="segmented conditional-options">
@@ -178,9 +128,38 @@
             </div>
           </fieldset>
 
+          <fieldset>
+            <legend>5. What else matters? Choose up to 2, or leave blank.</legend>
+            <div class="option-grid priority-grid">
+              <label><input type="checkbox" name="preference" value="true_cost"><span>More predictable total monthly cost</span></label>
+              <label><input type="checkbox" name="preference" value="utilities_predictable"><span>Clearer utility costs</span></label>
+              <label><input type="checkbox" name="preference" value="quiet_routine"><span>A quieter routine</span></label>
+              <label><input type="checkbox" name="preference" value="amenity_breadth"><span>Broader building amenities</span></label>
+              <label><input type="checkbox" name="preference" value="newer_building"><span>Newer building or finishes</span></label>
+              <label><input type="checkbox" name="preference" value="application"><span>An easier application</span></label>
+              <label><input type="checkbox" name="preference" value="concession"><span>Move-in concession</span></label>
+              <label><input type="checkbox" name="preference" value="yale_shuttle"><span>Yale Shuttle access</span></label>
+              <label><input type="checkbox" name="preference" value="food_store"><span>Restaurants and groceries nearby</span></label>
+            </div>
+          </fieldset>
+
           <p id="refinement-status" class="refinement-status" aria-live="polite"></p>
-          <button type="submit" class="primary-action">Find my best fits</button>
+          <button type="submit" class="primary-action">See apartments that fit me</button>
         </form>
+
+        <section class="location-browser panel" aria-labelledby="location-browser-title">
+          <div class="panel-heading">
+            <h2 id="location-browser-title">Not sure what you need? Browse by your main Yale area</h2>
+            <p>This view compares location only. It does not calculate a fit score or consider budget, unit type, or lifestyle preferences.</p>
+          </div>
+          <div class="location-browser-grid">
+            <button type="button" class="location-browser-button" data-campus="med_school">Med School / YNHH</button>
+            <button type="button" class="location-browser-button" data-campus="seas_science">Science Hill / SEAS</button>
+            <button type="button" class="location-browser-button" data-campus="central_campus">Central Campus / Law / Humanities</button>
+            <button type="button" class="location-browser-button" data-campus="som_prospect">SOM / Prospect Hill</button>
+            <button type="button" class="location-browser-button" data-campus="downtown_station">Downtown</button>
+          </div>
+        </section>
 
       </section>
 
@@ -209,6 +188,6 @@
       <p>© 2026 XY-Vince. Not affiliated with Yale University or any property listed.</p>
     </footer>
 
-    <script src="../app.js?v=20260713-budget-v11"></script>
+    <script src="../app.js?v=20260713-survey-v12"></script>
   </body>
 </html>

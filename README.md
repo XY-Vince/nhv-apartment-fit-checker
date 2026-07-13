@@ -1,8 +1,10 @@
 # MatchNHV
 
-MatchNHV is a static New Haven apartment fit checker. It starts with the user's
-main Yale destination, then optionally refines the Top 3 with five questions
-about unit type, budget, utilities, setup, and daily priorities.
+MatchNHV is a static New Haven apartment fit checker. Its primary entry is a
+single-page, five-section questionnaire covering unit type, budget, main Yale
+destination, non-negotiables, and secondary preferences. Formal results stay
+hidden until submit. A secondary location browser shows nearby comparison
+options without a rank or fit score.
 
 ## Public Pages
 
@@ -42,6 +44,8 @@ They do not overwrite the original official ranges or imply current inventory.
 ## Matching Guardrails
 
 - Location tier is evaluated before budget and preference detail.
+- Selected non-negotiables are evaluated before soft preferences; missing
+  evidence remains an explicit unknown rather than a false pass.
 - Budget compares only the unit type selected by the user.
 - Missing price evidence stays visible and does not count as affordability.
 - Requested unit-level features with unknown evidence can remove budget scoring

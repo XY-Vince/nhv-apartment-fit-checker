@@ -131,19 +131,22 @@ h1 {
   font-weight: 680;
 }
 
-.quick-start {
-  max-width: 1080px;
-  margin: 0 auto 18px;
+.location-browser {
+  order: 4;
+  max-width: none;
+  margin: 0;
   padding: 18px;
+  box-shadow: none;
+  background: #fbfcfd;
 }
 
-.quick-start-grid {
+.location-browser-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
 }
 
-.quick-start-button {
+.location-browser-button {
   min-height: 48px;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -157,8 +160,8 @@ h1 {
   transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
 }
 
-.quick-start-button:hover,
-.quick-start-button.is-active {
+.location-browser-button:hover,
+.location-browser-button.is-active {
   border-color: var(--brand);
   background: #e9f6f3;
   color: var(--brand-dark);
@@ -180,22 +183,20 @@ h1 {
 }
 
 .form-panel {
+  order: 1;
   padding: 18px;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 16px;
+  grid-template-columns: 1fr;
+  gap: 0;
 }
 
-.form-panel .panel-heading,
-.form-panel fieldset:first-of-type,
-.form-panel fieldset:nth-of-type(2),
-.form-panel fieldset:nth-of-type(5),
-.form-panel .refinement-status,
-.form-panel .primary-action {
-  grid-column: 1 / -1;
+.form-panel fieldset + fieldset {
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
 }
 
 .results-panel {
+  order: 2;
   min-height: 0;
   padding: 18px;
 }
@@ -281,6 +282,10 @@ legend {
 
 .option-grid {
   grid-template-columns: 1fr;
+}
+
+.campus-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .priority-grid {
@@ -930,6 +935,29 @@ button:focus-visible {
   line-height: 1.45;
 }
 
+.location-browse-results {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.location-browse-card {
+  display: grid;
+  gap: 12px;
+  align-content: space-between;
+  min-height: 158px;
+}
+
+.location-browse-card > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.location-tier {
+  color: var(--brand-dark);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
 .card-details {
   margin-top: 12px;
   border-top: 1px solid var(--line);
@@ -1130,6 +1158,7 @@ button:focus-visible {
 }
 
 .launch-actions {
+  order: 3;
   display: grid;
   grid-template-columns: minmax(0, 760px);
   justify-content: center;
@@ -1236,7 +1265,7 @@ button:focus-visible {
   .intro,
   .workspace,
   .launch-actions,
-  .quick-start-grid {
+  .location-browser-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1284,6 +1313,7 @@ button:focus-visible {
   }
 
   .segmented,
+  .campus-grid,
   .facts,
   .compact-facts,
   .detail-facts,
@@ -1291,6 +1321,7 @@ button:focus-visible {
   .cost-line-grid,
   .price-availability ul,
   .reason-grid,
+  .location-browse-results,
   .quick-insights,
   .two-col-fields {
     grid-template-columns: 1fr;
