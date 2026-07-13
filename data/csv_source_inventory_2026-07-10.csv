@@ -11,3 +11,5 @@ fee_sheet_field_tracker_marketplace_candidates_2026-07-02.csv,fee_sheet_field_le
 public_info_signals_2026-06-30.csv,public_signals,18,Public records and local-source signals,verification triggers only,yes
 reddit_public_signals_2026-06-30.csv,public_signals,30,"Reddit permalinks, paraphrases, and verification triggers","Tier 3 social signal, not hard fact",yes
 public_info_signal_tracker_template.csv,template,5,Blank tracker template for future public signals,template only,yes
+data/evidence/apartments_com_2026-07-09.csv,normalized_evidence,45,Field-level normalized evidence consumed by the app injector,app schema injection and auditable source provenance,yes
+data/evidence/zillow_2026-07-10.csv,normalized_evidence,6,Field-level normalized evidence consumed by the app injector,app schema injection and auditable source provenance,yes

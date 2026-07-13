@@ -1,19 +1,29 @@
-# Published Research Data
+# Published Data
 
-These files are the public consolidated data exports for the beta site. The dated raw snapshots stay in the local project workspace and are not part of the public app.
+## Current Phase D Files
 
-## Canonical Files
+- `availability_price_snapshot_2026-07-13.csv`
+  - public unit-type comparison snapshot used by the Phase D budget contract
+  - preserves source URL, check date, unit/floorplan trace, lease information,
+    price basis, availability scope, and unit-level feature evidence
+- `phase_c_budget_policy_2026-07-13.csv`
+  - separate human-approved policy overlay for New Haven Towers and The Archive
+  - does not replace or modify the original official ranges
 
-- `apartment_research_consolidated_2026-07-02.csv`
-  - one row per apartment, candidate, exploration direction, or general housing signal
-  - merges app seed data, Apartments.com marketplace signals, square-foot value checks, official-source reconciliation, fee-sheet follow-up, and Reddit/public-signal summaries
-  - keeps source confidence and follow-up text visible instead of turning weak evidence into hard claims
-  - excludes social-platform raw or mention-count fields from the public data package; those local files remain internal research leads and are not used for app scoring
+New Haven Towers comparison prices are official-range midpoints used as planning
+values regardless of lease term. The Archive comparison prices are official-range
+lower bounds approved as 12-month comparison values. Result cards disclose both
+policies. Estelle Studio is explicitly N/A; its 1BR and 2BR data remain eligible.
 
-- `csv_source_inventory_2026-07-02.csv`
-  - one row per raw CSV source
-  - records row count, purpose, and how each source is used in the canonical table
+## Research Files
 
-## Regenerate
+- `apartment_research_consolidated_2026-07-10.csv`: broader research table with
+  source tier and verification caveats retained
+- `csv_source_inventory_2026-07-10.csv`: inventory of the inputs used by that
+  consolidated research table
+- `availability_price_snapshot_2026-07-11.csv` and
+  `real_price_reconciliation_2026-07-11.md`: historical pre-Phase-D review files
 
-Regenerate these files from the local project workspace with `phase1_mvp_app/tools/consolidate_research_csvs.mjs`, then copy the outputs into this published repo.
+Marketplace and social-source material remains labeled by source tier. It must
+not be presented as an official property claim or promoted into scoring without
+the applicable review gate.

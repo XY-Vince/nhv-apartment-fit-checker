@@ -6,7 +6,7 @@
     <meta name="description" content="MatchNHV is a New Haven apartment fit checker that matches budget, campus routine, true cost, setup, and daily priorities to 2-3 better-fit options.">
     <title>MatchNHV | New Haven Apartment Fit Checker</title>
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=20260709-flow-copy-2">
+    <link rel="stylesheet" href="../styles.css?v=20260713-budget-v9">
   </head>
   <body>
     <main class="app-shell">
@@ -16,16 +16,16 @@
             <p class="eyebrow">New Haven / Yale apartment decision support</p>
           </div>
           <h1 id="page-title">MatchNHV</h1>
-          <p class="tagline">Start with your needs, then find out about your fits.</p>
+          <p class="tagline">Start with your needs, then see what fits.</p>
           <p class="intro-copy">
-            Answer a few practical questions. The tool will surface 2-3 better-fit options from a mainstream apartment seed pool, with reasons, trade-offs, and verification steps before you apply.
+            Answer a few practical questions to compare 2-3 commonly considered New Haven apartments, with reasons, trade-offs, and verification steps before you apply.
           </p>
         </div>
         <div class="notice">
-          The current data is a prototype seed profile. Rent, availability, concessions, fees, furnished status, and application policies must be confirmed with the property before applying.
-          <div class="market-context">
-            <strong>Market snapshot</strong>
-            <span>On 2026-07-01, 20/25 checked detail pages showed explicit move-in specials or concessions; 8/30 visible cards used a plus-fees or base-rent mode.</span>
+          This is an early comparison tool, not a live listing service. Confirm rent, availability, concessions, fees, furnished status, and application policies with the property before applying.
+          <div class="info-board">
+            <strong>Data notes (Last updated: 2026-07-13)</strong>
+            <span>Each unit type shows the official comparison basis actually used. Most are current units; NHV Towers and The Archive use the clearly labeled range policies shown on their cards. Concessions are not automatically deducted from budget. Desktop is easier for reviewing full details.</span>
           </div>
         </div>
       </section>
@@ -38,7 +38,7 @@
         <div class="quick-start-grid">
           <button type="button" class="quick-start-button" data-campus="med_school">Med School / YNHH</button>
           <button type="button" class="quick-start-button" data-campus="seas_science">Science Hill / SEAS</button>
-          <button type="button" class="quick-start-button" data-campus="central_campus">Central Campus / Law / Humanities / Arts</button>
+          <button type="button" class="quick-start-button" data-campus="central_campus">Central Campus / Law / Humanities</button>
           <button type="button" class="quick-start-button" data-campus="som_prospect">SOM / Prospect Hill</button>
           <button type="button" class="quick-start-button" data-campus="downtown_station">Downtown</button>
           <button type="button" class="quick-start-button" data-campus="balanced">Not sure yet; balanced access</button>
@@ -57,6 +57,37 @@
           <div id="results" class="results-list"></div>
         </section>
 
+        <section class="launch-actions" id="feedback-panel" aria-label="Beta feedback" hidden>
+          <div class="panel action-panel">
+            <div class="panel-heading">
+              <h2>Beta feedback</h2>
+              <p>Your feedback will be copied and a Gmail draft will be attempted. If no draft opens, use the default email link. This tool does not store anything.</p>
+            </div>
+            <p class="referral-note">If you decide to apply to a building and would like to explore a referral bonus, reply with the property name. Where a current-tenant contact is available, we can make an introduction. Current-tenant contacts are not yet available for 360 State, New Haven Towers, or City Crossing. Referral availability never affects fit scores or ranking.</p>
+            <div class="field-stack">
+              <div>
+                <label class="field-label" id="feedback-accuracy-label" for="feedback-accuracy">Does the Top 3 feel right?</label>
+                <select id="feedback-accuracy">
+                  <option value="Mostly accurate">Mostly accurate</option>
+                  <option value="One option is clearly off">One option is clearly off</option>
+                  <option value="Not close to my needs">Not close to my needs</option>
+                </select>
+              </div>
+              <div id="feedback-missing-field">
+                <label class="field-label" for="feedback-missing">Which apartment is missing?</label>
+                <input id="feedback-missing" type="text" placeholder="Example: The Union / Corsair / other">
+              </div>
+              <div>
+                <label class="field-label" for="feedback-note">One sentence on what should improve</label>
+                <textarea id="feedback-note" rows="3" placeholder="Example: I am at SOM and the results feel too downtown; parking matters more to me; the budget bands need more detail."></textarea>
+              </div>
+              <button type="button" id="email-feedback" class="primary-action">Open Gmail draft</button>
+              <p id="feedback-status" class="action-status" aria-live="polite"></p>
+              <a id="mailto-feedback" class="feedback-mailto" href="mailto:vince.xy.wang@gmail.com" hidden>Use the default email app</a>
+            </div>
+          </div>
+        </section>
+
         <form id="fit-form" class="panel form-panel" hidden>
           <div class="panel-heading">
             <h2>Want a sharper fit?</h2>
@@ -64,20 +95,29 @@
           </div>
 
           <fieldset>
-            <legend>1. What's your comfortable monthly rent budget?<span class="legend-note">Utilities, internet, and other fees are shown separately in results.</span></legend>
-            <div class="segmented budget-grid">
+            <legend>1. Which unit type are you looking for, and what's your monthly rent budget?<span class="legend-note">Budget is for the full unit. Utilities, internet, and other fees are shown separately in results.</span></legend>
+            <span class="field-label">Unit type</span>
+            <div class="segmented unit-type-grid">
+              <label><input type="radio" name="unit_type" value="studio" checked><span>Studio</span></label>
+              <label><input type="radio" name="unit_type" value="1br"><span>1BR</span></label>
+              <label><input type="radio" name="unit_type" value="2br"><span>2BR</span></label>
+              <label><input type="radio" name="unit_type" value="not_sure"><span>Not sure (use 1BR)</span></label>
+            </div>
+            <span class="field-label budget-subheading">Monthly full-unit rent budget</span>
+            <div id="budget-options" class="segmented budget-grid">
               <label><input type="radio" name="budget" value="1400"><span>&lt; $1,600 · Not covered in this version</span></label>
               <label><input type="radio" name="budget" value="1900"><span>$1,600-$1,900</span></label>
               <label><input type="radio" name="budget" value="2300" checked><span>$1,900-$2,300</span></label>
-              <label><input type="radio" name="budget" value="3000"><span>$2,300-$3,000</span></label>
-              <label><input type="radio" name="budget" value="4000"><span>$3,000+</span></label>
+              <label><input type="radio" name="budget" value="2700"><span>$2,300-$2,700</span></label>
+              <label><input type="radio" name="budget" value="3200"><span>$2,700+</span></label>
             </div>
+            <span id="budget-range-note" class="legend-note" aria-live="polite"></span>
           </fieldset>
 
           <fieldset>
             <legend>2. Which Yale area do you expect to visit most?</legend>
             <div class="option-grid">
-              <label><input type="radio" name="campus" value="central_campus" checked><span>Central Campus / Law / Humanities / Arts</span></label>
+              <label><input type="radio" name="campus" value="central_campus" checked><span>Central Campus / Law / Humanities</span></label>
               <label><input type="radio" name="campus" value="med_school"><span>Med School / YNHH / School of Public Health</span></label>
               <label><input type="radio" name="campus" value="som_prospect"><span>SOM / Divinity / Prospect Hill</span></label>
               <label><input type="radio" name="campus" value="seas_science"><span>SEAS / Science Hill / Engineering</span></label>
@@ -108,55 +148,39 @@
           <fieldset>
             <legend>5. Beyond budget and location, what matters most? Choose up to 3.</legend>
             <div class="option-grid priority-grid">
-              <label><input type="checkbox" name="priority" value="true_cost" checked><span>True monthly cost / move-in cash</span></label>
-              <label><input type="checkbox" name="priority" value="application" checked><span>Easier application process</span></label>
-              <label><input type="checkbox" name="priority" value="concession"><span>Move-in concession</span></label>
-              <label><input type="checkbox" name="priority" value="newer_building"><span>Newer building</span></label>
+              <label><input type="checkbox" name="priority" value="true_cost"><span>True monthly cost / move-in cash</span></label>
+              <label><input type="checkbox" name="priority" value="quiet_routine"><span>Street noise / quieter routine</span></label>
               <label><input type="checkbox" name="priority" value="amenity_breadth"><span>Broader building amenities</span></label>
-              <label><input type="checkbox" name="priority" value="low_density"><span>Lower resident density</span></label>
-              <label><input type="checkbox" name="priority" value="access_late_route"><span>Building access and late-night route</span></label>
               <label><input type="checkbox" name="priority" value="parking"><span>Parking / EV charging</span></label>
               <label><input type="checkbox" name="priority" value="pet_friendly"><span>Pet-friendly policy</span></label>
-              <label><input type="checkbox" name="priority" value="yale_shuttle"><span>Yale Shuttle access</span></label>
-              <label><input type="checkbox" name="priority" value="food_store"><span>Restaurants, groceries, and pharmacy access</span></label>
-              <label><input type="checkbox" name="priority" value="quiet_routine"><span>Street noise / quieter routine</span></label>
-              <label><input type="checkbox" name="priority" value="roommate"><span>Roommate or split-cost fit</span></label>
+              <label><input type="checkbox" name="priority" value="application"><span>Easier application process</span></label>
+            </div>
+            <details class="more-priorities">
+              <summary>More priorities (concessions, newer buildings, Yale Shuttle, and others)</summary>
+              <div class="option-grid priority-grid">
+                <label><input type="checkbox" name="priority" value="concession"><span>Move-in concession</span></label>
+                <label><input type="checkbox" name="priority" value="newer_building"><span>Newer building</span></label>
+                <label><input type="checkbox" name="priority" value="low_density"><span>Lower resident density</span></label>
+                <label><input type="checkbox" name="priority" value="access_late_route"><span>Building access and late-night route</span></label>
+                <label><input type="checkbox" name="priority" value="yale_shuttle"><span>Yale Shuttle access</span></label>
+                <label><input type="checkbox" name="priority" value="food_store"><span>Restaurants, groceries, and pharmacy access</span></label>
+                <label><input type="checkbox" name="priority" value="roommate"><span>Roommate or split-cost fit</span></label>
+              </div>
+            </details>
+            <div id="pet-type-followup" class="conditional-followup" hidden>
+              <span class="field-label">What kind of pet?</span>
+              <div class="segmented conditional-options">
+                <label><input type="radio" name="pet_type" value="cat"><span>Cat</span></label>
+                <label><input type="radio" name="pet_type" value="dog"><span>Dog</span></label>
+                <label><input type="radio" name="pet_type" value="other"><span>Other</span></label>
+              </div>
             </div>
           </fieldset>
 
+          <p id="refinement-status" class="refinement-status" aria-live="polite"></p>
           <button type="submit" class="primary-action">Find my best fits</button>
         </form>
 
-      </section>
-
-      <section class="launch-actions" aria-label="Beta feedback">
-        <div class="panel action-panel">
-          <div class="panel-heading">
-            <h2>Beta feedback</h2>
-            <p>Generate structured feedback, open a Gmail draft to vince.xy.wang@gmail.com, and copy the feedback text. This tool does not store anything.</p>
-          </div>
-          <p class="referral-note">If you decide to apply to a building and would like to explore a referral bonus, reply with the property name. Where a current-tenant contact is available, we can make an introduction. Current-tenant contacts are not yet available for 360 State, New Haven Towers, or City Crossing. Referral availability never affects fit scores or ranking.</p>
-          <div class="field-stack">
-            <div>
-              <label class="field-label" for="feedback-accuracy">Does the Top 3 feel right?</label>
-              <select id="feedback-accuracy">
-                <option value="Mostly accurate">Mostly accurate</option>
-                <option value="One option is clearly off">One option is clearly off</option>
-                <option value="Not close to my needs">Not close to my needs</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="feedback-missing">Which apartment is missing?</label>
-              <input id="feedback-missing" type="text" placeholder="Example: The Union / Corsair / other">
-            </div>
-            <div>
-              <label class="field-label" for="feedback-note">One sentence on what should improve</label>
-              <textarea id="feedback-note" rows="3" placeholder="Example: I am at SOM and the results feel too downtown; parking matters more to me; the budget bands need more detail."></textarea>
-            </div>
-            <button type="button" id="email-feedback" class="primary-action">Open Gmail draft</button>
-            <p id="feedback-status" class="action-status" aria-live="polite"></p>
-          </div>
-        </div>
       </section>
 
       <section class="method-note">
@@ -184,6 +208,6 @@
       <p>© 2026 XY-Vince. Not affiliated with Yale University or any property listed.</p>
     </footer>
 
-    <script src="../app.js?v=20260709-flow-copy-2"></script>
+    <script src="../app.js?v=20260713-budget-v9"></script>
   </body>
 </html>

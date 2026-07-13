@@ -1,0 +1,15 @@
+property_id,sub_building_id,floorplan_id,unit_type,comparison_price,comparison_basis,assumed_lease_months,availability_scope,budget_eligible,approved_at,note
+new-haven-towers,18_high,Studio,studio,2370,official_range_midpoint,12,planning_range,true,2026-07-13,Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed
+new-haven-towers,18_high,1 BD 1BA Standard,1br,2920,official_range_midpoint,12,planning_range,true,2026-07-13,Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed
+new-haven-towers,18_high,2 BD 1 BA,2br,4295,official_range_midpoint,12,planning_range,true,2026-07-13,Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed
+new-haven-towers,crown_court,1 BD Standard,1br,2095,official_range_midpoint,12,planning_range,true,2026-07-13,Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed
+new-haven-towers,crown_court,2 BD 2 BA,2br,3045,official_range_midpoint,12,planning_range,true,2026-07-13,Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed
+new-haven-towers,crown_towers,Studio South,studio,1970,official_range_midpoint,12,planning_range,true,2026-07-13,Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed
+new-haven-towers,crown_towers,"1 BD, South",1br,2220,official_range_midpoint,12,planning_range,true,2026-07-13,Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed
+new-haven-towers,madison,Studio - Large,studio,1770,official_range_midpoint,12,planning_range,true,2026-07-13,Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed
+new-haven-towers,madison,1 BD - Large,1br,2060,official_range_midpoint,12,planning_range,true,2026-07-13,Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed
+new-haven-towers,madison,2 BD 2 BA,2br,3045,official_range_midpoint,12,planning_range,true,2026-07-13,Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed
+the-archive,,Sx1 A,studio,2232,official_range_lower_bound_as_12_month,12,planning_range,true,2026-07-13,Use the lowest official Total Monthly Leasing Price as the 12-month comparison price; current Studio availability is not confirmed
+the-archive,,1x1 A,1br,2464,official_range_lower_bound_as_12_month,12,current_floorplan,true,2026-07-13,Use the lowest official Total Monthly Leasing Price as the 12-month comparison price
+the-archive,,2x2 Balcony A,2br,3041,official_range_lower_bound_as_12_month,12,current_floorplan,true,2026-07-13,Use the lowest official Total Monthly Leasing Price as the 12-month comparison price
+estelle,,S1,studio,,not_applicable,,not_applicable,false,2026-07-13,Studio is N/A for this pass; keep eligible 1BR and 2BR evidence unchanged

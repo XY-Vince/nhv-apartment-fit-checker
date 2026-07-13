@@ -6,7 +6,7 @@
     <meta name="description" content="MatchNHV 纽黑文公寓匹配器：根据预算、常去区域、水电网、房间配置和生活偏好，找出 2-3 个更适合你的选项。">
     <title>MatchNHV | 纽黑文公寓匹配器</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20260709-flow-copy-2">
+    <link rel="stylesheet" href="styles.css?v=20260713-budget-v9">
   </head>
   <body>
     <main class="app-shell">
@@ -23,9 +23,9 @@
         </div>
         <div class="notice">
           这是测试版，信息还在持续整理。租金、availability、优惠、各类费用、是否带家具和申请政策，都要在申请前向公寓方确认。
-          <div class="market-context">
-            <strong>市场快照</strong>
-            <span>截至 2026-07-01，抽查过的详情页里 20/25 明确写了入住优惠；30 个可见卡片里有 8 个使用额外费用或基础租金口径。</span>
+          <div class="info-board">
+            <strong>信息说明 (Last updated: 2026-07-13)</strong>
+            <span>价格会按户型展示实际采用的官网比较口径：多数来自当前房源，NHV Towers 和 The Archive 使用卡片中明确说明的区间规则；优惠不会自动抵扣预算。建议在电脑桌面端浏览器访问以获得最佳体验。</span>
           </div>
         </div>
       </section>
@@ -38,7 +38,7 @@
         <div class="quick-start-grid">
           <button type="button" class="quick-start-button" data-campus="med_school">Med School / YNHH</button>
           <button type="button" class="quick-start-button" data-campus="seas_science">Science Hill / SEAS</button>
-          <button type="button" class="quick-start-button" data-campus="central_campus">Central Campus / Law / Humanities / Arts</button>
+          <button type="button" class="quick-start-button" data-campus="central_campus">Central Campus / Law / Humanities</button>
           <button type="button" class="quick-start-button" data-campus="som_prospect">SOM / Prospect Hill</button>
           <button type="button" class="quick-start-button" data-campus="downtown_station">Downtown</button>
           <button type="button" class="quick-start-button" data-campus="balanced">还不确定，先看均衡推荐</button>
@@ -57,6 +57,37 @@
           <div id="results" class="results-list"></div>
         </section>
 
+        <section class="launch-actions" id="feedback-panel" aria-label="Beta feedback" hidden>
+          <div class="panel action-panel">
+            <div class="panel-heading">
+              <h2>测试反馈</h2>
+              <p>反馈会自动复制，并尝试打开 Gmail 草稿；如果没有进入草稿，可以改用默认邮件应用。本工具不会保存内容。</p>
+            </div>
+            <p class="referral-note">如果你决定申请某栋楼，也想了解 referral bonus，可以在反馈邮件里写上公寓名称；有现住租客可联系时，可以帮你们认识。目前 360 State、New Haven Towers 和 City Crossing 暂时没有这样的联系人。是否有 referral 不会影响匹配分和排序。</p>
+            <div class="field-stack">
+              <div>
+                <label class="field-label" id="feedback-accuracy-label" for="feedback-accuracy">前三名感觉准吗？</label>
+                <select id="feedback-accuracy">
+                  <option value="大方向准确">大方向准确</option>
+                  <option value="有一个明显不对">有一个明显不对</option>
+                  <option value="不太符合我的需求">不太符合我的需求</option>
+                </select>
+              </div>
+              <div id="feedback-missing-field">
+                <label class="field-label" for="feedback-missing">少了哪栋楼？</label>
+                <input id="feedback-missing" type="text" placeholder="例如 The Union / Corsair / 其他">
+              </div>
+              <div>
+                <label class="field-label" for="feedback-note">一句话告诉我们哪里要改</label>
+                <textarea id="feedback-note" rows="3" placeholder="例如：我是 SOM，结果太偏 Downtown；我更关心 parking；预算档位不够细。"></textarea>
+              </div>
+              <button type="button" id="email-feedback" class="primary-action">打开 Gmail 草稿</button>
+              <p id="feedback-status" class="action-status" aria-live="polite"></p>
+              <a id="mailto-feedback" class="feedback-mailto" href="mailto:vince.xy.wang@gmail.com" hidden>改用默认邮件应用</a>
+            </div>
+          </div>
+        </section>
+
         <form id="fit-form" class="panel form-panel" hidden>
           <div class="panel-heading">
             <h2>想更准一点？</h2>
@@ -64,20 +95,29 @@
           </div>
 
           <fieldset>
-            <legend>1. 你每月比较舒服的租金预算是多少？<span class="legend-note">水电网和其他费用会在结果里单独说明。</span></legend>
-            <div class="segmented budget-grid">
+            <legend>1. 你想找什么户型，每月租金预算是多少？<span class="legend-note">预算按整套计算；水电网和其他费用会在结果里单独说明。</span></legend>
+            <span class="field-label">户型</span>
+            <div class="segmented unit-type-grid">
+              <label><input type="radio" name="unit_type" value="studio" checked><span>Studio</span></label>
+              <label><input type="radio" name="unit_type" value="1br"><span>1BR</span></label>
+              <label><input type="radio" name="unit_type" value="2br"><span>2BR</span></label>
+              <label><input type="radio" name="unit_type" value="not_sure"><span>不确定（按 1BR 估算）</span></label>
+            </div>
+            <span class="field-label budget-subheading">每月整套租金预算</span>
+            <div id="budget-options" class="segmented budget-grid">
               <label><input type="radio" name="budget" value="1400"><span>&lt; $1,600 · 当前版本暂不覆盖</span></label>
               <label><input type="radio" name="budget" value="1900"><span>$1,600-$1,900</span></label>
               <label><input type="radio" name="budget" value="2300" checked><span>$1,900-$2,300</span></label>
-              <label><input type="radio" name="budget" value="3000"><span>$2,300-$3,000</span></label>
-              <label><input type="radio" name="budget" value="4000"><span>$3,000+</span></label>
+              <label><input type="radio" name="budget" value="2700"><span>$2,300-$2,700</span></label>
+              <label><input type="radio" name="budget" value="3200"><span>$2,700+</span></label>
             </div>
+            <span id="budget-range-note" class="legend-note" aria-live="polite"></span>
           </fieldset>
 
           <fieldset>
             <legend>2. 你最常去的 Yale 区域是哪里？</legend>
             <div class="option-grid">
-              <label><input type="radio" name="campus" value="central_campus" checked><span>Central Campus / Law / Humanities / Arts</span></label>
+              <label><input type="radio" name="campus" value="central_campus" checked><span>Central Campus / Law / Humanities</span></label>
               <label><input type="radio" name="campus" value="med_school"><span>Med School / YNHH / 公共卫生学院</span></label>
               <label><input type="radio" name="campus" value="som_prospect"><span>SOM / Divinity / Prospect Hill</span></label>
               <label><input type="radio" name="campus" value="seas_science"><span>SEAS / Science Hill / Engineering</span></label>
@@ -108,55 +148,39 @@
           <fieldset>
             <legend>5. 除了预算和位置，你还最在意什么？最多选 3 个。</legend>
             <div class="option-grid priority-grid">
-              <label><input type="checkbox" name="priority" value="true_cost" checked><span>每月总成本 / 入住前现金</span></label>
-              <label><input type="checkbox" name="priority" value="application" checked><span>申请流程尽量省事</span></label>
-              <label><input type="checkbox" name="priority" value="concession"><span>免租期 / 入住优惠</span></label>
-              <label><input type="checkbox" name="priority" value="newer_building"><span>新楼 / 近期建成</span></label>
+              <label><input type="checkbox" name="priority" value="true_cost"><span>每月总成本 / 入住前现金</span></label>
+              <label><input type="checkbox" name="priority" value="quiet_routine"><span>街道噪音 / 住得安静</span></label>
               <label><input type="checkbox" name="priority" value="amenity_breadth"><span>楼内设施更全</span></label>
-              <label><input type="checkbox" name="priority" value="low_density"><span>租户密度低</span></label>
-              <label><input type="checkbox" name="priority" value="access_late_route"><span>楼内门禁与晚间路线</span></label>
               <label><input type="checkbox" name="priority" value="parking"><span>停车位 / 充电</span></label>
               <label><input type="checkbox" name="priority" value="pet_friendly"><span>宠物友好</span></label>
-              <label><input type="checkbox" name="priority" value="yale_shuttle"><span>Yale Shuttle 方便</span></label>
-              <label><input type="checkbox" name="priority" value="food_store"><span>吃饭、买菜、药店方便</span></label>
-              <label><input type="checkbox" name="priority" value="quiet_routine"><span>街道噪音 / 住得安静</span></label>
-              <label><input type="checkbox" name="priority" value="roommate"><span>合租 / 分摊成本</span></label>
+              <label><input type="checkbox" name="priority" value="application"><span>申请流程尽量省事</span></label>
+            </div>
+            <details class="more-priorities">
+              <summary>更多关注点（优惠、新楼、Yale Shuttle 等）</summary>
+              <div class="option-grid priority-grid">
+                <label><input type="checkbox" name="priority" value="concession"><span>免租期 / 入住优惠</span></label>
+                <label><input type="checkbox" name="priority" value="newer_building"><span>新楼 / 近期建成</span></label>
+                <label><input type="checkbox" name="priority" value="low_density"><span>租户密度低</span></label>
+                <label><input type="checkbox" name="priority" value="access_late_route"><span>楼内门禁与晚间路线</span></label>
+                <label><input type="checkbox" name="priority" value="yale_shuttle"><span>Yale Shuttle 方便</span></label>
+                <label><input type="checkbox" name="priority" value="food_store"><span>吃饭、买菜、药店方便</span></label>
+                <label><input type="checkbox" name="priority" value="roommate"><span>合租 / 分摊成本</span></label>
+              </div>
+            </details>
+            <div id="pet-type-followup" class="conditional-followup" hidden>
+              <span class="field-label">你的宠物是？</span>
+              <div class="segmented conditional-options">
+                <label><input type="radio" name="pet_type" value="cat"><span>猫</span></label>
+                <label><input type="radio" name="pet_type" value="dog"><span>狗</span></label>
+                <label><input type="radio" name="pet_type" value="other"><span>其他</span></label>
+              </div>
             </div>
           </fieldset>
 
+          <p id="refinement-status" class="refinement-status" aria-live="polite"></p>
           <button type="submit" class="primary-action">查看匹配结果</button>
         </form>
 
-      </section>
-
-      <section class="launch-actions" aria-label="Beta feedback">
-        <div class="panel action-panel">
-          <div class="panel-heading">
-            <h2>测试反馈</h2>
-            <p>生成一段结构化反馈，打开 Gmail 草稿发到 vince.xy.wang@gmail.com；反馈文本也会自动复制。本工具不会保存内容。</p>
-          </div>
-          <p class="referral-note">如果你决定申请某栋楼，也想了解 referral bonus，可以在反馈邮件里写上公寓名称；有现住租客可联系时，可以帮你们认识。目前 360 State、New Haven Towers 和 City Crossing 暂时没有这样的联系人。是否有 referral 不会影响匹配分和排序。</p>
-          <div class="field-stack">
-            <div>
-              <label class="field-label" for="feedback-accuracy">前三名感觉准吗？</label>
-              <select id="feedback-accuracy">
-                <option value="大方向准确">大方向准确</option>
-                <option value="有一个明显不对">有一个明显不对</option>
-                <option value="不太符合我的需求">不太符合我的需求</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="feedback-missing">少了哪栋楼？</label>
-              <input id="feedback-missing" type="text" placeholder="例如 The Union / Corsair / 其他">
-            </div>
-            <div>
-              <label class="field-label" for="feedback-note">一句话告诉我们哪里要改</label>
-              <textarea id="feedback-note" rows="3" placeholder="例如：我是 SOM，结果太偏 Downtown；我更关心 parking；预算档位不够细。"></textarea>
-            </div>
-            <button type="button" id="email-feedback" class="primary-action">打开 Gmail 草稿</button>
-            <p id="feedback-status" class="action-status" aria-live="polite"></p>
-          </div>
-        </div>
       </section>
 
       <section class="method-note">
@@ -184,6 +208,6 @@
       <p>© 2026 XY-Vince. Not affiliated with Yale University or any property listed.</p>
     </footer>
 
-    <script src="app.js?v=20260709-flow-copy-2"></script>
+    <script src="app.js?v=20260713-budget-v9"></script>
   </body>
 </html>
