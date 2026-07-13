@@ -133,11 +133,27 @@ h1 {
 
 .location-browser {
   order: 4;
+  position: relative;
   max-width: none;
-  margin: 0;
+  margin: 18px 0 0;
   padding: 18px;
   box-shadow: none;
   background: #fbfcfd;
+}
+
+.location-browser::before {
+  content: "";
+  position: absolute;
+  top: -19px;
+  right: 0;
+  left: 0;
+  border-top: 1px solid var(--line);
+}
+
+.panel-heading .location-browser-hint {
+  margin-top: 5px;
+  color: var(--brand-dark);
+  font-weight: 700;
 }
 
 .location-browser-grid {
@@ -177,6 +193,11 @@ h1 {
 
 .workspace.is-location-browse .location-browser {
   order: 2;
+  margin-top: 0;
+}
+
+.workspace.is-location-browse .location-browser::before {
+  display: none;
 }
 
 .workspace.is-location-browse .results-panel {
