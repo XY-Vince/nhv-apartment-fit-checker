@@ -738,7 +738,7 @@ button:focus-visible {
 
 .cost-metrics {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
 }
 
@@ -1366,6 +1366,41 @@ button:focus-visible {
 
   .budget-basis-note strong {
     grid-row: auto;
+  }
+
+  .compact-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .compact-facts .cost-signal-fact {
+    order: 1;
+  }
+
+  .compact-facts .daily-fact {
+    order: 2;
+  }
+
+  .compact-facts .utility-fact {
+    grid-column: 1 / -1;
+    order: 3;
+  }
+
+  .cost-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px;
+  }
+
+  .cost-metrics > div {
+    padding: 7px 5px;
+  }
+
+  .cost-metrics span {
+    font-size: 0.66rem;
+  }
+
+  .cost-metrics strong {
+    flex-wrap: wrap;
+    font-size: 0.9rem;
   }
 
   .results-heading,

@@ -26,5 +26,17 @@ Later official captures continue to take precedence where they corrected an
 older value. In particular, Axis 201 keeps the reviewed official required-fee
 total of $83.39/month rather than the older $23 figure.
 
+## Yale-Affiliate Deposit Correction
+
+On 2026-07-14, the project owner reconfirmed through official property sources
+that the Yale-affiliate security-deposit amount is $250 at The Taft and Axis
+201. MatchNHV uses this audience-specific amount in its upfront estimate.
+
+## Yale-Community Bank Statement Path
+
+On 2026-07-14, the project owner reconfirmed through official property sources
+that Yale community applicants at The Taft and Axis 201 do not need a guarantor
+or co-signer. A bank statement is accepted for this application path.
+
 The exact raw marketplace exports remain under `data/internal_leads/` for
 incident provenance only and are not approved for public redistribution.
