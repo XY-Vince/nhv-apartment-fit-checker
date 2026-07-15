@@ -18,25 +18,29 @@ const LOCATION_BROWSE_LIMIT = 5;
 const BUDGET_LOCATION_SOFT_TOLERANCE = 100;
 
 const UTILITY_PROFILES = Object.freeze({
-  "360-state": { included: [], tenantPays: [], verify: ["electricity", "heating_cooling", "water_sewer", "internet"] },
-  "olive-wooster": { included: [], tenantPays: [], verify: ["electricity", "water_sewer", "internet"] },
-  "the-taft": { included: ["heat", "hot_water"], tenantPays: [], verify: ["electricity", "water_sewer", "internet"] },
-  "the-archive": { included: ["high_speed_internet"], tenantPays: [], verify: ["electricity", "water_sewer"] },
-  "estelle": { included: [], tenantPays: [], verify: ["electricity", "heating_cooling", "water_sewer", "internet"] },
-  "axis-201": { included: [], tenantPays: [], verify: ["electricity", "heating_cooling", "water_sewer", "internet"] },
-  "the-audubon": { included: [], tenantPays: [], verify: ["electricity", "heating_cooling", "water_sewer", "internet"] },
+  "360-state": { included: [], tenantPays: ["electricity", "internet"], verify: ["heating_cooling", "water_sewer"] },
+  "olive-wooster": { included: [], tenantPays: ["electricity", "internet"], verify: ["water_sewer"] },
+  "the-taft": { included: ["heat", "hot_water", "water_sewer"], tenantPays: ["electricity", "internet"], verify: [] },
+  "the-archive": { included: ["high_speed_internet"], tenantPays: ["electricity"], verify: ["water_sewer"] },
+  "estelle": { included: [], tenantPays: ["electricity", "internet"], verify: ["heating_cooling", "water_sewer"] },
+  "axis-201": { included: ["water_sewer"], tenantPays: ["electricity", "internet"], verify: ["heating_cooling"] },
+  "the-audubon": { included: [], tenantPays: ["electricity", "internet"], verify: ["heating_cooling", "water_sewer"] },
   "new-haven-towers": {
-    included: ["heat", "hot_water", "air_conditioning_most_units"],
-    tenantPays: ["electricity_lights_appliances"],
-    verify: ["internet"]
+    included: ["heat", "hot_water", "air_conditioning_most_units", "water_sewer"],
+    tenantPays: ["electricity", "internet"],
+    verify: []
   },
   "pierpont-city-crossing": {
     included: [],
-    tenantPays: [],
-    verify: ["standard_lease_utilities", "standard_lease_internet"]
+    tenantPays: ["electricity", "internet"],
+    verify: ["heating_cooling", "water_sewer"]
   },
-  "anthem-square10": { included: [], tenantPays: [], verify: ["electricity", "heating_cooling", "water_sewer", "internet"] },
-  "the-whit": { included: [], tenantPays: [], verify: ["electricity", "heating_cooling", "water_sewer", "internet"] }
+  "anthem-square10": { included: [], tenantPays: ["electricity", "internet"], verify: ["heating_cooling", "water_sewer"] },
+  "the-whit": { included: [], tenantPays: ["electricity", "internet"], verify: ["heating_cooling", "water_sewer"] },
+  "the-elm": { included: [], tenantPays: ["electricity", "internet"], verify: ["heating_cooling", "water_sewer"] },
+  "corsair": { included: [], tenantPays: ["electricity", "internet"], verify: ["heating_cooling", "water_sewer"] },
+  "east-rock-landlord": { included: [], tenantPays: ["electricity", "internet"], verify: ["heating_cooling", "water_sewer"] },
+  "hamden-large": { included: [], tenantPays: ["electricity", "internet"], verify: ["heating_cooling", "water_sewer"] }
 });
 
 const UTILITY_ITEM_LABELS = Object.freeze({
@@ -76,7 +80,7 @@ const UTILITY_DETAIL_TEXT = Object.freeze({
   },
   zh: {
     included: "已包含",
-    tenantPays: "租客另付",
+    tenantPays: "租客自付",
     verify: "待确认"
   }
 });
@@ -2255,8 +2259,8 @@ const UI_TEXT = {
       laundryMiss: "Selected unit does not show in-unit laundry",
       woodFloorVerify: "Flooring needs confirmation",
       woodFloorMiss: "Carpet may conflict with your preference",
-      privateSpaceVerify: "Private kitchen/bath needs confirmation",
-      furnitureReadyVerify: "Move-in setup needs confirmation",
+      privateSpaceVerify: "Whether the kitchen or bathroom is shared needs confirmation",
+      furnitureReadyVerify: "Furnished or furniture-rental option needs confirmation",
       campusFit: campus => `${campus} access`,
       balancedFit: "Balanced access",
       utilitiesPredictable: "Predictable utilities",
@@ -2388,8 +2392,8 @@ const UI_TEXT = {
       laundryMiss: "所选户型未显示房内洗烘",
       woodFloorVerify: "地板类型待确认",
       woodFloorMiss: "可能有地毯",
-      privateSpaceVerify: "独立厨卫待确认",
-      furnitureReadyVerify: "入住准备程度待确认",
+      privateSpaceVerify: "厨卫是否与人共用待确认",
+      furnitureReadyVerify: "家具方案待确认",
       campusFit: campus => `${campus} 方便`,
       balancedFit: "通勤均衡",
       utilitiesPredictable: "utilities 更好预估",
@@ -2529,8 +2533,8 @@ const ANSWER_VALUE_LABELS = {
     requirement: {
       laundry: "In-unit laundry",
       wood_floor: "Avoid carpet if possible",
-      private_space: "Private kitchen and bathroom",
-      furniture_ready: "Less move-in setup",
+      private_space: "Kitchen and bathroom not shared",
+      furniture_ready: "Furnished or furniture-rental option",
       parking: "Parking",
       pet_friendly: "Pet-friendly policy"
     },
@@ -2588,8 +2592,8 @@ const ANSWER_VALUE_LABELS = {
     requirement: {
       laundry: "房内洗衣机和烘干机",
       wood_floor: "尽量不铺地毯",
-      private_space: "独立厨房和卫生间",
-      furniture_ready: "入住时少折腾",
+      private_space: "厨卫不与人共用",
+      furniture_ready: "带家具或可租家具",
       parking: "停车位",
       pet_friendly: "宠物友好"
     },
@@ -3192,7 +3196,7 @@ const APARTMENTS = [
   {
     "id": "the-taft",
     "name": "The Taft",
-    "area": "Central / Chapel-College corridor · 265 College St",
+    "area": "Downtown · 265 College St",
     "price": {
       "min": 1865,
       "max": 3300,
@@ -3406,7 +3410,7 @@ const APARTMENTS = [
       }
     },
     "location": {
-      "address": "Central / Chapel-College corridor · 265 College St",
+      "address": "Downtown · 265 College St",
       "lat": null,
       "lng": null,
       "walkMinutes": {
@@ -3988,7 +3992,7 @@ const APARTMENTS = [
     "roommateFit": 4,
     "confidence": "partial",
     "confidenceLabel": "Partial confidence",
-    "dailyLabel": "Science Park / Science Hill-oriented routine",
+    "dailyLabel": "Science Park / Science Hill commute",
     "sourceLabel": "Official availability snapshot checked 2026-07-11; utilities and student policy need confirmation",
     "bestFor": [
       "主要去 SEAS / Science Hill / SOM / Prospect corridor，想避开 downtown core 的学生",
@@ -4094,7 +4098,7 @@ const APARTMENTS = [
   {
     "id": "the-audubon",
     "name": "The Audubon",
-    "area": "Audubon / Whitney-Arts corridor · 367 Orange St",
+    "area": "Audubon / Whitney-Church corridor · 367 Orange St",
     "price": {
       "min": 2250,
       "max": 4952,
@@ -4179,10 +4183,10 @@ const APARTMENTS = [
     "roommateFit": 3,
     "confidence": "partial",
     "confidenceLabel": "Partial confidence",
-    "dailyLabel": "Arts / Central Campus / Whitney-Audubon access",
+    "dailyLabel": "Arts / Central Campus / Whitney-Church access",
     "sourceLabel": "Official site refreshed 2026-06-29; estimated monthly cost needs fee breakdown",
     "bestFor": [
-      "Central Campus / Arts / Whitney-Audubon corridor 活动多，想要 balanced campus access 的学生",
+      "Central Campus / Arts / Whitney-Church corridor 活动多，想要 balanced campus access 的学生",
       "看重 building access、package、parking/garage verification 的学生",
       "预算较高，愿意在申请前核实 estimated monthly cost 的学生"
     ],
@@ -4267,7 +4271,7 @@ const APARTMENTS = [
       }
     },
     "location": {
-      "address": "Audubon / Whitney-Arts corridor · 367 Orange St",
+      "address": "Audubon / Whitney-Church corridor · 367 Orange St",
       "lat": null,
       "lng": null,
       "walkMinutes": {
@@ -5878,7 +5882,7 @@ const APARTMENT_TRANSLATIONS = {
       ]
     },
     "the-taft": {
-      area: "Central Campus / Chapel-College 走廊 · 265 College St",
+      area: "Downtown · 265 College St",
       priceLabel: "studio $1,865-$2,060；1BR $2,150-$2,440；2BR $2,950-$3,300",
       concession: "2026-08-01 或之前入住的 studio / 1BR lease 可免 2 个月租金。",
       valueSignal: "按审核过的官网快照：Studio 05O 为 $1,895 / 424 sq ft（$4.47/sqft）；1BR 05S 为 $1,999 / 697 sq ft（$2.87/sqft）。总价、租期和具体房源状态要一起比较。",
@@ -5966,7 +5970,7 @@ const APARTMENT_TRANSLATIONS = {
       flooring: "需按具体房源确认",
       furnishing: "是否带家具尚未核实",
       confidenceLabel: "部分信息已确认",
-      dailyLabel: "更适合 Science Park / Science Hill 作息",
+      dailyLabel: "更适合 Science Park / Science Hill 通勤",
       sourceLabel: "2026-07-11 查过 availability；水电网和学生政策仍需确认",
       bestFor: [
         "主要去 SEAS、Science Hill、SOM 或 Prospect 走廊，想避开市中心核心区的学生",
@@ -5986,16 +5990,16 @@ const APARTMENT_TRANSLATIONS = {
       ]
     },
     "the-audubon": {
-      area: "Audubon / Whitney-Arts 走廊 · 367 Orange St",
+      area: "Audubon / Whitney-Church 走廊 · 367 Orange St",
       priceLabel: "studio $2,250 起；1BR $2,671 起；2BR $3,691 起；3BR $4,180 起，按估算月成本展示",
       concession: "官网首页显示部分房源最高免 1.5 个月租金。",
       flooring: "不同房间可能使用不同地板",
       furnishing: "是否带家具尚未核实",
       confidenceLabel: "部分信息已确认",
-      dailyLabel: "Arts、Central Campus 和 Whitney-Audubon 走廊都方便",
+      dailyLabel: "Arts、Central Campus 和 Whitney-Church 走廊都方便",
       sourceLabel: "2026-06-29 查过官网；estimated monthly cost 需要拆费用明细",
       bestFor: [
-        "Central Campus、Arts 或 Whitney-Audubon 走廊活动多，想要通勤比较均衡的学生",
+        "Central Campus、Arts 或 Whitney-Church 走廊活动多，想要通勤比较均衡的学生",
         "看重门禁、收包裹和停车 / garage 细节的学生",
         "预算较高，并愿意在申请前核实 estimated monthly cost 的学生"
       ],
@@ -6224,7 +6228,7 @@ const APARTMENT_TRANSLATIONS = {
     },
     "the-audubon": {
       bestFor: [
-        "Students with frequent Central Campus, Arts, or Whitney-Audubon corridor routines who want balanced campus access.",
+        "Students with frequent Central Campus, Arts, or Whitney-Church corridor routines who want balanced campus access.",
         "Students who value building access, package handling, and parking/garage verification.",
         "Higher-budget students who will verify the estimated monthly cost before applying."
       ],
@@ -6376,7 +6380,11 @@ function utilityLabel(value, lang = activeLang()) {
 }
 
 function utilityProfile(apartment) {
-  return UTILITY_PROFILES[apartment?.id] || { included: [], tenantPays: [], verify: [] };
+  return UTILITY_PROFILES[apartment?.id] || {
+    included: [],
+    tenantPays: ["electricity", "internet"],
+    verify: ["heating_cooling", "water_sewer"]
+  };
 }
 
 function internetIncluded(apartment) {
@@ -6543,24 +6551,35 @@ function getSelectedValues(form, name) {
   return [...form.querySelectorAll(`input[name="${name}"]:checked`)].map(input => input.value);
 }
 
-function getFormValues(form) {
-  const data = new FormData(form);
-  const requirements = getSelectedValues(form, "requirement");
-  const preferences = getSelectedValues(form, "preference");
+function normalizeQuestionnaireAnswers({ budget, unitType, campus, requirements = [], preferences = [], petType = null }) {
   const setup = requirements.filter(value => ["wood_floor", "laundry", "private_space", "furniture_ready"].includes(value));
   const requirementPriorities = requirements.filter(value => HARD_REQUIREMENT_PRIORITIES.has(value));
-  const budgetValue = data.get("budget");
+  const wantsPredictableUtilities = preferences.includes("utilities_predictable");
   return {
-    budget: budgetValue === null ? null : Number(budgetValue),
-    unitType: data.get("unit_type") || null,
-    campus: data.get("campus"),
-    utilities: preferences.includes("utilities_predictable") ? "predictable" : null,
+    budget: budget === null ? null : Number(budget),
+    unitType: unitType || null,
+    campus,
+    // This checkbox feeds the dedicated utilities dimension and is removed
+    // from priority below so the same preference is never scored twice.
+    utilities: wantsPredictableUtilities ? "predictable" : null,
     requirements,
     preferences,
     setup,
     priority: [...preferences.filter(value => value !== "utilities_predictable"), ...requirementPriorities],
-    petType: data.get("pet_type") || null
+    petType
   };
+}
+
+function getFormValues(form) {
+  const data = new FormData(form);
+  return normalizeQuestionnaireAnswers({
+    budget: data.get("budget"),
+    unitType: data.get("unit_type"),
+    campus: data.get("campus"),
+    requirements: getSelectedValues(form, "requirement"),
+    preferences: getSelectedValues(form, "preference"),
+    petType: data.get("pet_type") || null
+  });
 }
 
 function budgetOptionDisplay(option, lang) {
@@ -8686,6 +8705,7 @@ if (typeof module !== "undefined") {
     rankLocationBrowseApartments,
     escapeHtml,
     formatAnswersForShare,
+    normalizeQuestionnaireAnswers,
     topResultNames,
     topReasons,
     entryLabel,
@@ -8701,6 +8721,7 @@ if (typeof module !== "undefined") {
     utilityProfile,
     internetIncluded,
     utilityCostItems,
+    renderUtilityDetails,
     renderMoveInChecks,
     campusLabel,
     categoryLabel,

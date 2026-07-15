@@ -6,7 +6,7 @@
     <meta name="description" content="MatchNHV 纽黑文公寓匹配器：根据预算、常去区域、水电网、房间配置和生活偏好，找出 2-3 个更适合你的选项。">
     <title>MatchNHV | 纽黑文公寓匹配器</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20260714-utility-policy-v20">
+    <link rel="stylesheet" href="styles.css?v=20260714-needs-audit-v22">
   </head>
   <body>
     <main class="app-shell">
@@ -48,7 +48,7 @@
               <h2>测试反馈</h2>
               <p>填完下面三项，再复制反馈邮件正文。</p>
             </div>
-            <p class="referral-note">想了解 referral bonus（推荐奖金），可在邮件里写上公寓名称，我会联系目前住客；目前 360 State、NHV Towers、City Crossing 暂无推荐奖金。Referral program 对打分机制无影响。</p>
+            <p class="referral-note">想了解 referral bonus（推荐奖金），可在邮件里写上公寓名称；有现住租客可联系时，可以帮你们认识。目前 360 State、NHV Towers、City Crossing 暂无推荐奖金。Referral program 对打分机制无影响。</p>
             <p id="feedback-recipient" class="feedback-recipient" hidden></p>
             <div class="field-stack">
               <div>
@@ -110,12 +110,12 @@
           </fieldset>
 
           <fieldset>
-            <legend>4. 你有哪些主要需求？最多选 2 项，可以不选。</legend>
+            <legend>4. 你有哪些主要需求？最多选 2 项。如果你现在不确定，可以先不选。</legend>
             <div class="option-grid priority-grid">
               <label><input type="checkbox" name="requirement" value="laundry"><span>房内洗衣机和烘干机</span></label>
               <label><input type="checkbox" name="requirement" value="wood_floor"><span>尽量不铺地毯</span></label>
-              <label><input type="checkbox" name="requirement" value="private_space"><span>独立厨房和卫生间</span></label>
-              <label><input type="checkbox" name="requirement" value="furniture_ready"><span>入住时少折腾</span></label>
+              <label><input type="checkbox" name="requirement" value="private_space"><span>厨卫不与人共用</span></label>
+              <label><input type="checkbox" name="requirement" value="furniture_ready"><span>带家具或可租家具</span></label>
               <label><input type="checkbox" name="requirement" value="parking"><span>停车位</span></label>
               <label><input type="checkbox" name="requirement" value="pet_friendly"><span>宠物友好</span></label>
             </div>
@@ -130,7 +130,7 @@
           </fieldset>
 
           <fieldset>
-            <legend>5. 还比较在意什么？最多选 3 项，可以不选。</legend>
+            <legend>5. 还比较在意什么？最多选 3 项。如果你现在不确定，可以先不选。</legend>
             <div class="option-grid priority-grid">
               <label><input type="checkbox" name="preference" value="true_cost"><span>每月总成本更可控</span></label>
               <label><input type="checkbox" name="preference" value="utilities_predictable"><span>水电暖费用更明确</span></label>
@@ -139,7 +139,6 @@
               <label><input type="checkbox" name="preference" value="newer_building"><span>新楼 / 装修更新</span></label>
               <label><input type="checkbox" name="preference" value="application"><span>申请流程省事</span></label>
               <label><input type="checkbox" name="preference" value="concession"><span>免租期 / 入住优惠</span></label>
-              <label><input type="checkbox" name="preference" value="yale_shuttle"><span>Yale Shuttle 方便</span></label>
               <label><input type="checkbox" name="preference" value="food_store"><span>吃饭买菜方便</span></label>
             </div>
           </fieldset>
@@ -180,7 +179,6 @@
           <span>租期和入住时间</span>
           <span>合租适配度</span>
           <span>门禁、晚间路线和周边服务</span>
-          <span>Yale Shuttle 与租户密度待核实</span>
           <span>信息可信度单独展示，不参与匹配分</span>
         </div>
       </section>
@@ -189,6 +187,6 @@
       <p>© 2026 XY-Vince. Not affiliated with Yale University or any property listed.</p>
     </footer>
 
-    <script src="app.js?v=20260714-utility-policy-v20"></script>
+    <script src="app.js?v=20260714-needs-audit-v22"></script>
   </body>
 </html>
