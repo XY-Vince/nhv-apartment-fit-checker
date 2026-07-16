@@ -6,9 +6,9 @@
     <meta name="description" content="MatchNHV 纽黑文公寓匹配器：根据预算、常去区域、水电网、房间配置和生活偏好，找出 2-3 个更适合你的选项。">
     <title>MatchNHV | 纽黑文公寓匹配器</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=20260714-needs-audit-v22">
+    <link rel="stylesheet" href="styles.css?v=20260715-field-guide-v2">
   </head>
-  <body>
+  <body class="field-guide-ui">
     <main class="app-shell">
       <section class="intro" aria-labelledby="page-title">
         <div>
@@ -34,7 +34,7 @@
         <section class="panel results-panel" aria-live="polite" tabindex="-1" hidden>
           <div class="panel-heading results-heading">
             <div>
-              <h2 id="results-title">适合你的公寓</h2>
+              <h2 id="results-title" tabindex="-1">适合你的公寓</h2>
               <p id="result-summary">提交问卷后，这里会显示正式排序。</p>
             </div>
             <button type="button" id="reset-button" class="secondary-action">重置</button>
@@ -92,7 +92,7 @@
           </fieldset>
 
           <fieldset>
-            <legend>2. 每月整套租金最多接受多少？<span class="legend-note">先选户型，预算档位会自动更新。</span></legend>
+            <legend>2. 官网租金和必选楼费每月最多接受多少？<span class="legend-note">先选户型；电费、网络、保险和你选择的停车、家具或宠物费用会另外计入总支出估算。</span></legend>
             <div id="budget-options" class="segmented budget-grid"></div>
             <span id="budget-range-note" class="legend-note" aria-live="polite">请先选择户型。</span>
           </fieldset>
@@ -105,7 +105,7 @@
               <label><input type="radio" name="campus" value="som_prospect" required><span>SOM / Divinity / Prospect Hill</span></label>
               <label><input type="radio" name="campus" value="seas_science" required><span>SEAS / Science Hill / Engineering</span></label>
               <label><input type="radio" name="campus" value="downtown_station" required><span>Downtown</span></label>
-              <label><input type="radio" name="campus" value="balanced" required><span>还不确定，想要通勤均衡</span></label>
+              <label><input type="radio" name="campus" value="balanced" required><span>还不确定，先比较主要校区通勤</span></label>
             </div>
           </fieldset>
 
@@ -187,6 +187,6 @@
       <p>© 2026 XY-Vince. Not affiliated with Yale University or any property listed.</p>
     </footer>
 
-    <script src="app.js?v=20260714-needs-audit-v22"></script>
+    <script src="app.js?v=20260715-field-guide-v2"></script>
   </body>
 </html>

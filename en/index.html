@@ -6,9 +6,9 @@
     <meta name="description" content="MatchNHV is a New Haven apartment fit checker that matches budget, campus routine, true cost, setup, and daily priorities to 2-3 better-fit options.">
     <title>MatchNHV | New Haven Apartment Fit Checker</title>
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="../styles.css?v=20260714-needs-audit-v22">
+    <link rel="stylesheet" href="../styles.css?v=20260715-field-guide-v2">
   </head>
-  <body>
+  <body class="field-guide-ui">
     <main class="app-shell">
       <section class="intro" aria-labelledby="page-title">
         <div>
@@ -34,7 +34,7 @@
         <section class="panel results-panel" aria-live="polite" tabindex="-1" hidden>
           <div class="panel-heading results-heading">
             <div>
-              <h2 id="results-title">Apartments that fit your needs</h2>
+              <h2 id="results-title" tabindex="-1">Apartments that fit your needs</h2>
               <p id="result-summary">Submit the questionnaire to see the formal ranking.</p>
             </div>
             <button type="button" id="reset-button" class="secondary-action">Reset</button>
@@ -92,7 +92,7 @@
           </fieldset>
 
           <fieldset>
-            <legend>2. What is the most you would pay in monthly full-unit rent?<span class="legend-note">Choose a unit type first; the budget bands update automatically.</span></legend>
+            <legend>2. What is the most you would pay in monthly rent plus required building fees?<span class="legend-note">Choose a unit type first. Electricity, internet, insurance, and any selected parking, furniture, or pet costs are added separately to estimated total spending.</span></legend>
             <div id="budget-options" class="segmented budget-grid"></div>
             <span id="budget-range-note" class="legend-note" aria-live="polite">Choose a unit type first.</span>
           </fieldset>
@@ -105,7 +105,7 @@
               <label><input type="radio" name="campus" value="som_prospect" required><span>SOM / Divinity / Prospect Hill</span></label>
               <label><input type="radio" name="campus" value="seas_science" required><span>SEAS / Science Hill / Engineering</span></label>
               <label><input type="radio" name="campus" value="downtown_station" required><span>Downtown</span></label>
-              <label><input type="radio" name="campus" value="balanced" required><span>Not sure; prefer balanced access</span></label>
+              <label><input type="radio" name="campus" value="balanced" required><span>Not sure; compare access across the main Yale areas</span></label>
             </div>
           </fieldset>
 
@@ -187,6 +187,6 @@
       <p>© 2026 XY-Vince. Not affiliated with Yale University or any property listed.</p>
     </footer>
 
-    <script src="../app.js?v=20260714-needs-audit-v22"></script>
+    <script src="../app.js?v=20260715-field-guide-v2"></script>
   </body>
 </html>
