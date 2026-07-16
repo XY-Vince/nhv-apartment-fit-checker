@@ -64,7 +64,7 @@ const UTILITY_ITEM_LABELS = Object.freeze({
     air_conditioning_most_units: "空调",
     electricity_lights_appliances: "电费",
     electricity: "电费",
-    heating_cooling: "冷暖气计费",
+    heating_cooling: "暖气和空调",
     water_sewer: "水费和污水费",
     internet: "网络",
     standard_lease_utilities: "普通 lease 的水电项目",
@@ -81,7 +81,7 @@ const UTILITY_DETAIL_TEXT = Object.freeze({
   zh: {
     included: "已包含",
     tenantPays: "租客自付",
-    verify: "待确认"
+    verify: "待核实"
   }
 });
 
@@ -98,6 +98,15 @@ const FEEDBACK_EMAIL = "MatchNHV@gmail.com";
 const HIGH_MOVE_IN_CASH_TOP_SHARE = 0.25;
 const STRONG_AMENITY_FEATURE_COUNT = 4;
 const HARD_REQUIREMENT_PRIORITIES = new Set(["parking", "pet_friendly"]);
+const MAIN_NEED_TIER_MIN_KNOWN = 7;
+const BALANCED_CAMPUS_KEYS = Object.freeze([
+  "central_campus",
+  "med_school",
+  "som_prospect",
+  "seas_science"
+]);
+const BALANCED_REASON_MIN_SCORE = 70;
+const CONCESSION_FRESHNESS_DAYS = 30;
 
 function formatPetPolicyTag(policy, lang) {
   const costs = [];
@@ -2072,7 +2081,7 @@ const COST_CONFIDENCE_LABELS = {
     unknown: "needs verification"
   },
   zh: {
-    advertised_rent: "展示租金",
+    advertised_rent: "当前比较价",
     verified_public: "公开信息",
     sample_lease: "sample lease",
     partial_public: "部分公开",
@@ -2134,11 +2143,11 @@ const COST_TEXT = {
   zh: {
     title: "真实成本粗算",
     trueMonthly: "估算月成本",
-    moveInCash: "入住前需准备",
+    moveInCash: "签约入住前付款",
     grossBeforeConcession: "优惠前估算",
     potentialConcession: amount => `优惠月摊估算约 ${formatMoney(amount)}；具体房源和租期资格仍需确认。`,
     monthlyIncludes: "月成本包含",
-    moveInIncludes: "入住前需准备包括",
+    moveInIncludes: "签约入住前付款包括",
     caveat: "这是估算，用来比较 hidden cost 暴露程度；申请前仍要用具体房源的 fee sheet 和 lease 条款核实。",
     excludedPrefix: "暂未计入",
     estimateSuffix: "估算"
@@ -2151,7 +2160,7 @@ const CAMPUS_LABELS = {
   som_prospect: "SOM / Prospect Hill",
   seas_science: "SEAS / Science Hill",
   downtown_station: "Downtown",
-  balanced: "Not sure / balanced"
+  balanced: "Balanced Yale-area access"
 };
 
 const CAMPUS_LABELS_ZH = {
@@ -2160,7 +2169,7 @@ const CAMPUS_LABELS_ZH = {
   som_prospect: "SOM / Prospect Hill",
   seas_science: "SEAS / Science Hill",
   downtown_station: "Downtown",
-  balanced: "不确定 / 均衡通勤"
+  balanced: "主要校区通勤均衡"
 };
 
 const UI_TEXT = {
@@ -2187,6 +2196,7 @@ const UI_TEXT = {
     noApartmentShown: "No apartment recommendation shown",
     scopeBoundary: "Scope boundary",
     baseSummary: (unitType, budget, campus, count) => `For a ${unitType} with a ${budget} budget and a ${campus} routine, start with these ${count}.`,
+    balancedSummary: (unitType, budget, count) => `For a ${unitType} with a ${budget} budget, these ${count} offer the most balanced access across four main Yale areas.`,
     budgetGapSummary: "The current mainstream apartment pool has no strong budget fit; treat these as stretch comparisons and confirm true monthly cost before applying.",
     match: "match",
     exploreDirection: "explore direction",
@@ -2227,6 +2237,8 @@ const UI_TEXT = {
     feedbackAnswers: "My answers:",
     feedbackTop: "Top 3 shown:",
     feedbackAccuracy: "Top 3 accuracy",
+    feedbackLocationTop: "Location options shown:",
+    feedbackLocationAccuracy: "Location browse usefulness",
     feedbackMissing: "What is missing",
     feedbackImprove: "What to improve",
     feedbackNote: "Note: this is beta feedback, not an application request.",
@@ -2320,6 +2332,7 @@ const UI_TEXT = {
     noApartmentShown: "暂不显示推荐",
     scopeBoundary: "当前范围",
     baseSummary: (unitType, budget, campus, count) => `你想找 ${unitType}，预算是 ${budget}，主要活动在 ${campus}；先看这 ${count} 个。`,
+    balancedSummary: (unitType, budget, count) => `你想找 ${unitType}，预算是 ${budget}；这里先比较四个主要 Yale 校区之间的通勤均衡度，选出这 ${count} 个。`,
     budgetGapSummary: "目前没有特别贴合预算的选择；下面这几栋只能当作加预算对照，申请前一定要确认每月总成本。",
     match: "匹配",
     exploreDirection: "探索方向",
@@ -2360,6 +2373,8 @@ const UI_TEXT = {
     feedbackAnswers: "我的答案：",
     feedbackTop: "显示的前三名：",
     feedbackAccuracy: "前三名准确度",
+    feedbackLocationTop: "显示的位置选项：",
+    feedbackLocationAccuracy: "地点浏览是否有用",
     feedbackMissing: "这里还漏了哪些",
     feedbackImprove: "需要改进的地方",
     feedbackNote: "注：这是测试反馈，不是申请请求。",
@@ -2388,37 +2403,37 @@ const UI_TEXT = {
     ruleTags: {
       budgetOver: amount => `高于预算上限 ${formatMoney(amount)}/月`,
       budgetNeedsConcession: "需要当前优惠后才在预算内",
-      laundryVerify: "房内洗烘待确认",
+      laundryVerify: "房内洗烘需按具体房间核实",
       laundryMiss: "所选户型未显示房内洗烘",
-      woodFloorVerify: "地板类型待确认",
+      woodFloorVerify: "地板需按具体房间核实",
       woodFloorMiss: "可能有地毯",
-      privateSpaceVerify: "厨卫是否与人共用待确认",
-      furnitureReadyVerify: "家具方案待确认",
+      privateSpaceVerify: "厨卫是否与人共用待核实",
+      furnitureReadyVerify: "家具方案待核实",
       campusFit: campus => `${campus} 方便`,
       balancedFit: "通勤均衡",
       utilitiesPredictable: "utilities 更好预估",
       newerBuilding: year => `${year} 年开业`,
-      newerBuildingVerify: "楼龄与翻新待确认",
+      newerBuildingVerify: "楼龄与翻新待核实",
       amenityStrong: "楼内设施较全",
       amenityModerate: "常用设施基本覆盖",
       amenityLimited: "楼内设施相对精简",
       densityLower: "有较低租户密度证据",
-      densityVerify: "租户密度待确认",
+      densityVerify: "租户密度待核实",
       accessRouteStrong: "门禁与晚间路线信息较全",
       accessRoutePartial: "门禁与晚间路线要确认",
       parkingAmple: "官网称 parking 充足，空位仍要确认",
       parkingAvailable: "有 parking，空位要确认",
       parkingAdjacent: "隔壁有月租 parking，非楼内；价格和空位要确认",
-      parkingNoOnsite: "没有楼内 parking，附近方案待确认",
+      parkingNoOnsite: "没有楼内 parking，附近方案待核实",
       parkingNone: "没有确认可用的 parking 方案",
-      parkingVerify: "parking 情况待确认",
+      parkingVerify: "parking 情况待核实",
       petPolicyFound: policy => formatPetPolicyTag(policy, "zh"),
-      petPolicyVerify: "宠物政策待确认",
+      petPolicyVerify: "宠物政策待核实",
       concessionStrong: discount => `估算优惠约 ${discount}%`,
       concessionNone: "当前没有可计入的优惠",
-      concessionVerify: "当前优惠待确认",
+      concessionVerify: "当前优惠待核实",
       shuttleFound: "Yale Shuttle 信息已核实",
-      shuttleVerify: "Yale Shuttle 站点与班次待确认",
+      shuttleVerify: "Yale Shuttle 站点与班次待核实",
       applicationLower: "申请流程相对省事",
       applicationVerify: "申请材料与 guarantor 要确认",
       localServices: "吃饭买菜方便",
@@ -2441,6 +2456,10 @@ const FEEDBACK_FORM_TEXT = {
     scope: {
       label: "Was this scope boundary helpful?",
       options: ["Yes, this is clear", "I still expected apartment options", "The explanation needs work"]
+    },
+    location: {
+      label: "Were these location options useful?",
+      options: ["Useful starting point", "A clear option is missing", "Not what I expected"]
     }
   },
   zh: {
@@ -2451,6 +2470,10 @@ const FEEDBACK_FORM_TEXT = {
     scope: {
       label: "这个范围判断有帮助吗？",
       options: ["有帮助，范围很清楚", "我还是希望看到公寓选项", "这段解释需要调整"]
+    },
+    location: {
+      label: "这些地点参考有帮助吗？",
+      options: ["有帮助，方向清楚", "有明显遗漏", "不太符合我的预期"]
     }
   }
 };
@@ -2604,8 +2627,8 @@ const ANSWER_VALUE_LABELS = {
       parking: "停车 / 充电 / 对开车友好"
     },
     worry: {
-      application: "申请门槛和材料",
-      true_cost: "每月总成本 / 入住前需准备",
+      application: "申请流程省事",
+      true_cost: "每月总成本更可控",
       roommate: "合租 / 分摊成本"
     },
     daily: {
@@ -2623,7 +2646,7 @@ const ANSWER_VALUE_LABELS = {
       package: "收包裹 / 前台 / 维修",
       gym_pool: "健身房 / 泳池 / 公共休息区",
       parking: "停车 / 充电 / 对开车友好",
-      newer_building: "新楼 / 近期建成",
+      newer_building: "新楼 / 装修更新",
       amenity_breadth: "楼内设施更全",
       low_density: "租户密度低",
       access_late_route: "楼内门禁与晚间路线",
@@ -2632,8 +2655,8 @@ const ANSWER_VALUE_LABELS = {
       yale_shuttle: "Yale Shuttle 方便",
       building_access: "门禁、收包裹和报修",
       late_route: "晚间路线和交通",
-      food_store: "餐馆、买菜和药店",
-      quiet_routine: "街道噪音 / 安静"
+      food_store: "吃饭买菜方便",
+      quiet_routine: "住得安静"
     }
   }
 };
@@ -6025,7 +6048,7 @@ const APARTMENT_TRANSLATIONS = {
       dailyLabel: "离校园近，4 栋楼之间略有差异",
       sourceLabel: "2026-06-29 查过官方户型页；已整理到楼栋级价格",
       bestFor: [
-        "Central Campus、Law School、Art 或医学院附近活动多，想住老牌 Downtown 公寓的学生",
+        "Central Campus 或医学院附近活动多，想住老牌 Downtown 公寓的学生",
         "希望暖气和热水包含，让水电网更可预期的学生",
         "愿意按 Madison、Crown、Crown Court 和 18 High 分楼比较价格和位置的学生"
       ],
@@ -6673,7 +6696,7 @@ function priceStatus(apartment, lang = activeLang(), answers = null) {
       return { level: "warn", label: lang === "zh" ? "没有符合硬性要求的房源" : "No unit meets the selected requirement" };
     }
     if (candidate && selection.compatibility === "unknown_feature_compatibility") {
-      return { level: "warn", label: lang === "zh" ? "价格已核对 · 配置待确认" : "Price checked · features to confirm" };
+      return { level: "warn", label: lang === "zh" ? "价格已核对 · 配置待核实" : "Price checked · features to confirm" };
     }
     if (candidate?.comparisonStatus === "not_applicable") {
       return { level: "warn", label: lang === "zh" ? "所选户型当前 N/A" : "Selected unit type is N/A" };
@@ -6843,10 +6866,26 @@ function monthlyCostLine(key, item, baseRent, answers, fallbackAmount = 0) {
   };
 }
 
+function dateAtEndOfDay(value) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) return null;
+  const date = new Date(`${value}T23:59:59.999Z`);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function concessionIsCurrent(item, asOf = new Date()) {
+  if (!item || Number.isNaN(asOf.getTime())) return false;
+  const explicitExpiry = dateAtEndOfDay(item.validThrough || item.moveInDeadline);
+  if (explicitExpiry) return asOf <= explicitExpiry;
+  const checkedDate = dateAtEndOfDay(item.checkedDate);
+  if (!checkedDate) return false;
+  return asOf.getTime() - checkedDate.getTime() <= CONCESSION_FRESHNESS_DAYS * 24 * 60 * 60 * 1000;
+}
+
 function knownConcessionEstimate(apartment, unitType = null) {
   if (apartment?.decisionSignals?.concessionAvailability === "limited_not_scored") return null;
   const item = apartment?.trueMonthlyCost?.concessionEstimate;
   if (!item || item.confidence === "unknown") return null;
+  if (!concessionIsCurrent(item)) return null;
   const hasMonthlyCredit = Number.isFinite(item.monthlyCredit) && item.monthlyCredit > 0;
   const hasFreeRent = Number.isFinite(item.monthsFree) && item.monthsFree > 0 && Number.isFinite(item.leaseMonths) && item.leaseMonths > 0;
   if (!hasMonthlyCredit && !hasFreeRent) return null;
@@ -7370,7 +7409,18 @@ function applyBudgetCeiling(costBasis, maxBudget, unitType = "studio") {
   return SCORE.MISS;
 }
 
+function balancedCampusScore(apartment) {
+  const values = BALANCED_CAMPUS_KEYS
+    .map(key => Number(apartment?.campusScores?.[key]))
+    .filter(Number.isFinite);
+  if (values.length !== BALANCED_CAMPUS_KEYS.length) return SCORE.LOW;
+  const average = values.reduce((sum, value) => sum + value, 0) / values.length;
+  const weakest = Math.min(...values);
+  return Math.round((average * 0.7 + weakest * 0.3) * 20);
+}
+
 function scoreCampus(apartment, preference) {
+  if (preference === "balanced") return balancedCampusScore(apartment);
   return (apartment.campusScores[preference] || 1) * 20;
 }
 
@@ -7395,17 +7445,6 @@ function scoreSetup(apartment, preferences, answers = {}) {
   if (!preferences.length) return null;
   const selected = preferences;
   const scores = selected.map(preference => {
-    if (apartment.setupTags.includes(preference)) return SCORE.FULL;
-    if (preference === "wood_floor") {
-      const fs = apartment.flooringStatus;
-      if (!fs || !fs.materials.length || fs.scope === null) return SCORE.MID;
-      if (fs.materials.includes("carpet") && !fs.materials.includes("wood_look") && !fs.materials.includes("hard_surface") && !fs.materials.includes("hardwood") && !fs.materials.includes("lvp") && !fs.materials.includes("lvt")) return SCORE.MISS;
-      if (fs.scope === "exact_unit" && (fs.materials.includes("wood_look") || fs.materials.includes("hard_surface") || fs.materials.includes("hardwood") || fs.materials.includes("lvp") || fs.materials.includes("lvt"))) return SCORE.FULL;
-      if (fs.scope === "floorplan" && fs.evidenceType === "official_claim") return SCORE.HIGH;
-      if (fs.scope === "building" && fs.evidenceType === "official_claim") return SCORE.MID;
-      if (fs.evidenceType === "photo_inferred") return SCORE.MID;
-      return SCORE.MID;
-    }
     if (Object.hasOwn(SETUP_TO_BUDGET_FEATURE, preference)) {
       const selection = selectBudgetCandidate(
         apartment,
@@ -7414,11 +7453,21 @@ function scoreSetup(apartment, preferences, answers = {}) {
       );
       if (selection.compatibility === "compatible") return SCORE.FULL;
       if (selection.compatibility === "incompatible") return SCORE.MISS;
-      if (selection.compatibility === "unknown_feature_compatibility") return SCORE.MID;
-      return null;
     }
-    if (preference === "furniture_ready" && apartment.setupTags.includes("private_space")) return SCORE.LOW;
-    return SCORE.MISS;
+
+    if (preference === "wood_floor") {
+      const fs = apartment.flooringStatus;
+      if (!fs || !fs.materials.length || fs.scope === null) return SCORE.MID;
+      if (fs.materials.includes("carpet") && !fs.materials.includes("wood_look") && !fs.materials.includes("hard_surface") && !fs.materials.includes("hardwood") && !fs.materials.includes("lvp") && !fs.materials.includes("lvt")) return SCORE.MISS;
+      if (fs.scope === "exact_unit" && (fs.materials.includes("wood_look") || fs.materials.includes("hard_surface") || fs.materials.includes("hardwood") || fs.materials.includes("lvp") || fs.materials.includes("lvt"))) return SCORE.FULL;
+      if (fs.scope === "floorplan" && fs.evidenceType === "official_claim") return SCORE.HIGH;
+      return SCORE.MID;
+    }
+
+    // Building-level tags can indicate that a feature exists somewhere in the
+    // property, but they do not prove that the selected unit has it.
+    if (apartment.setupTags.includes(preference)) return SCORE.MID;
+    return SCORE.MID;
   }).filter(Number.isFinite);
   if (!scores.length) return null;
   return Math.round(scores.reduce((sum, score) => sum + score, 0) / scores.length);
@@ -7515,33 +7564,46 @@ function selectedHardRequirements(answers = {}) {
   ])];
 }
 
-function hardRequirementTier(apartment, answers = {}) {
-  const selected = new Set(selectedHardRequirements(answers));
-  const tiers = [];
-
-  const setupRequirements = [...selected].filter(value => Object.hasOwn(SETUP_TO_BUDGET_FEATURE, value));
-  if (setupRequirements.length) {
+function requirementEvidenceTier(apartment, requirement, answers = {}) {
+  if (Object.hasOwn(SETUP_TO_BUDGET_FEATURE, requirement)) {
     const selection = selectBudgetCandidate(
       apartment,
-      { ...answers, setup: setupRequirements },
+      { ...answers, setup: [requirement] },
       { respectFeatures: true }
     );
-    if (selection.compatibility === "compatible") tiers.push(2);
-    else if (selection.compatibility === "incompatible") tiers.push(0);
-    else tiers.push(1);
+    if (selection.compatibility === "compatible") return 2;
+    if (selection.compatibility === "incompatible") return 0;
+    return 1;
   }
 
-  if (selected.has("pet_friendly")) {
+  if (requirement === "pet_friendly") {
     const petScore = scorePetPolicy(apartment, answers.petType || null);
-    if (!Number.isFinite(petScore)) tiers.push(1);
-    else if (petScore >= SCORE.HIGH) tiers.push(2);
-    else if (petScore <= SCORE.LOW) tiers.push(0);
-    else tiers.push(1);
+    if (!Number.isFinite(petScore)) return 1;
+    if (petScore >= SCORE.HIGH) return 2;
+    if (petScore <= SCORE.LOW) return 0;
+    return 1;
   }
 
-  if (selected.has("parking")) {
-    tiers.push(parkingRequirementTier(apartment));
-  }
+  if (requirement === "parking") return parkingRequirementTier(apartment);
+  return 1;
+}
+
+function requirementEvidenceCoverage(requirement, answers = {}) {
+  const tiers = APARTMENTS
+    .filter(isRankableApartment)
+    .map(apartment => requirementEvidenceTier(apartment, requirement, answers));
+  const known = tiers.filter(tier => tier === 0 || tier === 2).length;
+  return { known, total: tiers.length, active: known >= MAIN_NEED_TIER_MIN_KNOWN };
+}
+
+function activeHardRequirements(answers = {}) {
+  return selectedHardRequirements(answers)
+    .filter(requirement => requirementEvidenceCoverage(requirement, answers).active);
+}
+
+function hardRequirementTier(apartment, answers = {}) {
+  const tiers = activeHardRequirements(answers)
+    .map(requirement => requirementEvidenceTier(apartment, requirement, answers));
 
   if (!tiers.length) return null;
   if (tiers.includes(0)) return 0;
@@ -7576,13 +7638,32 @@ function scoreAccessAndLateRoute(apartment) {
   return SCORE.MID;
 }
 
+function preferenceEvidenceCoverage(preference) {
+  const pool = APARTMENTS.filter(isRankableApartment);
+  const known = pool.filter(apartment => {
+    if (preference === "quiet_routine") {
+      return Number.isFinite(Number(apartment.quietScore)) && Boolean(apartment.decisionSignals?.quietSource);
+    }
+    if (preference === "yale_shuttle") {
+      return Number.isFinite(Number(apartment.decisionSignals?.yaleShuttleScore)) && Boolean(apartment.decisionSignals?.yaleShuttleSource);
+    }
+    if (preference === "low_density") {
+      return Number.isFinite(Number(apartment.decisionSignals?.lowDensityScore)) && Boolean(apartment.decisionSignals?.lowDensitySource);
+    }
+    return true;
+  }).length;
+  return { known, total: pool.length, active: known >= MAIN_NEED_TIER_MIN_KNOWN };
+}
+
 function scoreLowDensity(apartment) {
+  if (!preferenceEvidenceCoverage("low_density").active) return null;
   const score = apartment.decisionSignals?.lowDensityScore;
   const source = apartment.decisionSignals?.lowDensitySource;
   return Number.isFinite(score) && source ? Math.max(SCORE.MISS, Math.min(SCORE.FULL, score * 20)) : SCORE.MID;
 }
 
 function scoreYaleShuttle(apartment) {
+  if (!preferenceEvidenceCoverage("yale_shuttle").active) return null;
   const score = apartment.decisionSignals?.yaleShuttleScore;
   const source = apartment.decisionSignals?.yaleShuttleSource;
   return Number.isFinite(score) && source ? Math.max(SCORE.MISS, Math.min(SCORE.FULL, score * 20)) : SCORE.MID;
@@ -7601,6 +7682,10 @@ function scoreTrueCostConcern(apartment, answers = {}) {
 
 function scoreSingleWorry(apartment, preference, answers = {}) {
   if (preference === "application") {
+    const yalePath = apartment.applicationPolicy?.yaleCommunityBankStatementPath;
+    if (yalePath?.value === true && yalePath.guarantorRequired === false && yalePath.coSignerRequired === false && hasRequirementEvidence(yalePath)) {
+      return SCORE.HIGH;
+    }
     if (["low", "unknown", "stale"].includes(apartment.applicationConfidence)) return SCORE.MID;
     return Math.max(20, 100 - apartment.applicationFriction * 16);
   }
@@ -7621,6 +7706,7 @@ function scoreWorry(apartment, preferences, answers = {}) {
 
 function scoreDaily(apartment, preference) {
   if (preference === "quiet_routine") {
+    if (!preferenceEvidenceCoverage("quiet_routine").active) return null;
     if (!apartment.decisionSignals?.quietSource) return SCORE.MID;
     const quiet = Number(apartment.quietScore);
     if (!Number.isFinite(quiet)) return SCORE.MID;
@@ -7664,7 +7750,9 @@ function scorePriority(apartment, priorities, answers = {}) {
 }
 
 function weightsForAnswers(answers) {
-  return (answers.priority || []).includes("quiet_routine") ? QUIET_PRIORITY_WEIGHTS : WEIGHTS;
+  const quietIsActive = (answers.priority || []).includes("quiet_routine")
+    && preferenceEvidenceCoverage("quiet_routine").active;
+  return quietIsActive ? QUIET_PRIORITY_WEIGHTS : WEIGHTS;
 }
 
 function scoreApartment(apartment, answers) {
@@ -7757,7 +7845,7 @@ function rankingCampusTier(result, answers = {}) {
 }
 
 function compareResults(a, b, answers = null) {
-  if (answers && selectedHardRequirements(answers).length) {
+  if (answers && (Number.isFinite(a.hardRequirementTier) || Number.isFinite(b.hardRequirementTier))) {
     const aNeedTier = Number.isFinite(a.hardRequirementTier) ? a.hardRequirementTier : 1;
     const bNeedTier = Number.isFinite(b.hardRequirementTier) ? b.hardRequirementTier : 1;
     const needTierDiff = bNeedTier - aNeedTier;
@@ -8014,10 +8102,7 @@ function renderOutOfScope(answers) {
 
 function topResultNames(results, lang = activeLang()) {
   if (!results.length) return ui("noTop3", lang);
-  const showScores = !latestEntry.startsWith("location_browse:");
-  return results.slice(0, 3).map((result, index) => {
-    return `${index + 1}. ${result.apartment.name}${showScores ? ` (${result.score})` : ""}`;
-  }).join("\n");
+  return results.slice(0, 3).map((result, index) => `${index + 1}. ${result.apartment.name}`).join("\n");
 }
 
 function formatAnswersForShare(answers, lang = activeLang()) {
@@ -8052,6 +8137,15 @@ function formatAnswersForShare(answers, lang = activeLang()) {
   ].join("\n");
 }
 
+function formatFeedbackAnswers(answers, entry, lang = activeLang()) {
+  if (entry.startsWith("location_browse:")) {
+    const campus = entry.split(":")[1] || answers?.campus;
+    const label = lang === "zh" ? "常去地点" : "Main Yale area";
+    return labelLine(label, campusLabel(campus, lang), lang);
+  }
+  return formatAnswersForShare(answers, lang);
+}
+
 function highMoveInCashCutoff(answers) {
   const amounts = APARTMENTS
     .filter(isRankableApartment)
@@ -8075,7 +8169,7 @@ function renderMoveInChecks(apartment, answers, costs, lang = activeLang()) {
       ? "Yale community 申请：无需 guarantor / co-signer，只需提供 bank statement"
       : "Yale community applications: no guarantor/co-signer required; only a bank statement is needed");
   } else if (!guarantor || guarantor.value === null || guarantor.confidence === "unknown") {
-    checks.push(lang === "zh" ? "guarantor / co-signer 政策待确认" : "Guarantor / co-signer policy needs confirmation");
+    checks.push(lang === "zh" ? "guarantor / co-signer 政策待核实" : "Guarantor / co-signer policy needs confirmation");
   } else if (guarantor.value === false) {
     checks.push(lang === "zh" ? "不接受 guarantor / co-signer" : "Guarantor / co-signer not accepted");
   }
@@ -8118,10 +8212,10 @@ function ruleBadges(apartment, answers, lang = activeLang()) {
     .filter(requirement => Object.hasOwn(SETUP_TO_BUDGET_FEATURE, requirement))
     .forEach(requirement => add(mainNeedWarning(apartment, requirement, answers, labels), "warn"));
 
-  const campusScore = apartment.campusScores[answers.campus] || 0;
-  if (answers.campus === "balanced" && campusScore >= 4) {
+  const campusScore = scoreCampus(apartment, answers.campus);
+  if (answers.campus === "balanced" && campusScore >= BALANCED_REASON_MIN_SCORE) {
     add(labels.balancedFit, "good");
-  } else if (answers.campus && campusScore >= 4) {
+  } else if (answers.campus && campusScore >= 80) {
     add(labels.campusFit(campusLabel(answers.campus, lang)), "good");
   }
 
@@ -8217,31 +8311,58 @@ function setFeedbackMode(mode = "results") {
   if (select) {
     select.innerHTML = text.options.map(option => `<option value="${escapeHtml(option)}">${escapeHtml(option)}</option>`).join("");
   }
-  if (missingField) missingField.hidden = mode === "scope";
+  if (missingField) missingField.hidden = mode !== "results";
+}
+
+function buildFeedbackText({
+  answers,
+  results = [],
+  entry = "default",
+  accuracy,
+  missing,
+  note,
+  lang = activeLang(),
+  hasResults = results.length > 0
+} = {}) {
+  const outcome = accuracy || ui("notSpecified", lang);
+  const missingItems = missing || ui("none", lang);
+  const improvement = note || ui("none", lang);
+  const isLocationBrowse = entry.startsWith("location_browse:");
+  const resultHeading = isLocationBrowse
+    ? ui("feedbackLocationTop", lang)
+    : (hasResults ? ui("feedbackTop", lang) : ui("feedbackScopeTop", lang));
+  const outcomeLabel = isLocationBrowse
+    ? ui("feedbackLocationAccuracy", lang)
+    : (hasResults ? ui("feedbackAccuracy", lang) : ui("feedbackScopeAccuracy", lang));
+  return [
+    ui("feedbackTitle", lang),
+    labelLine(ui("feedbackEntry", lang), entryLabel(entry, lang), lang),
+    "",
+    ui("feedbackAnswers", lang),
+    formatFeedbackAnswers(answers, entry, lang),
+    "",
+    resultHeading,
+    topResultNames(results, lang),
+    "",
+    labelLine(outcomeLabel, outcome, lang),
+    ...(hasResults && !isLocationBrowse ? [labelLine(ui("feedbackMissing", lang), missingItems, lang)] : []),
+    labelLine(ui("feedbackImprove", lang), improvement, lang),
+    "",
+    ui("feedbackNote", lang)
+  ].join("\n");
 }
 
 function feedbackText() {
   const lang = activeLang();
-  const hasResults = latestResults.length > 0;
-  const accuracy = getInputValue("feedback-accuracy") || ui("notSpecified", lang);
-  const missing = getInputValue("feedback-missing") || ui("none", lang);
-  const note = getInputValue("feedback-note") || ui("none", lang);
-  return [
-    ui("feedbackTitle", lang),
-    labelLine(ui("feedbackEntry", lang), entryLabel(latestEntry, lang), lang),
-    "",
-    ui("feedbackAnswers", lang),
-    formatAnswersForShare(latestAnswers, lang),
-    "",
-    hasResults ? ui("feedbackTop", lang) : ui("feedbackScopeTop", lang),
-    topResultNames(latestResults, lang),
-    "",
-    labelLine(hasResults ? ui("feedbackAccuracy", lang) : ui("feedbackScopeAccuracy", lang), accuracy, lang),
-    ...(hasResults ? [labelLine(ui("feedbackMissing", lang), missing, lang)] : []),
-    labelLine(ui("feedbackImprove", lang), note, lang),
-    "",
-    ui("feedbackNote", lang)
-  ].join("\n");
+  return buildFeedbackText({
+    answers: latestAnswers,
+    results: latestResults,
+    entry: latestEntry,
+    accuracy: getInputValue("feedback-accuracy"),
+    missing: getInputValue("feedback-missing"),
+    note: getInputValue("feedback-note"),
+    lang
+  });
 }
 
 function copyTextFallback(text) {
@@ -8293,6 +8414,427 @@ async function copyFeedback(statusId) {
   }
 }
 
+const FIELD_GUIDE_TEXT = Object.freeze({
+  en: {
+    needsTitle: "What you told us", needsHome: "Unit and budget", needsCampus: "Main destination",
+    needsRequirements: "Main needs", needsPreferences: "Also matters", noneSelected: "No preference selected",
+    monthlyCost: "Estimated total monthly spending", monthlyAfterSpecial: "Estimated total monthly after special", beforeSpecial: "total before special",
+    housingBudgetBasis: "Housing-cost budget basis", location: "Location", utilities: "Utilities", moveIn: "Upfront",
+    included: "included", tenantPays: "tenant-paid", verify: "needs verification", balancedLocation: "Balanced Yale-area access",
+    why: "Why it is worth a closer look", tradeoff: "Most important trade-off", officialEvidence: "Official property sources",
+    checked: "Checked", reportClosed: "+ View the full verification report and details", reportOpen: "- Close full analysis",
+    priceMath: "How the monthly cost is calculated", selectedPrice: "Selected-unit rent",
+    estimatedMonthly: "Estimated total monthly spending", moveInBreakdown: "Upfront payments", moveInTotal: "Estimated upfront total",
+    needsCheck: "Main-needs check", currentInfoSupports: "Consistent with the current evidence", noMainNeeds: "No main need was selected.",
+    scoreBreakdown: "Fit score lives here",
+    scoreNote: "The score explains differences within a location tier. It does not replace the monthly cost, exact-unit condition, or application eligibility.",
+    beforeApplying: "Questions to ask before applying", sources: "Sources", applicationPolicy: "application policy",
+    exactUnitConfiguration: "exact-unit configuration", quietness: "quietness",
+    quietUnitSpecific: "Quietness needs to be checked by floor, orientation, and exact unit.",
+    overBudget: (amount, total) => `The housing-cost basis is about ${formatMoney(amount)}/mo above your ceiling; estimated total monthly spending is ${formatMoney(total)}.`,
+    unitPriceUnavailable: unitType => `No comparable current ${unitType} price is available yet.`,
+    concessionDependency: "This option only fits the selected budget after the current concession; confirm the exact unit, lease, and move-in eligibility.",
+    weakLocation: campus => `The location fit for ${campus} is weaker than the options above it.`,
+    higherUpfront: amount => `Estimated upfront payments are relatively high at about ${formatMoney(amount)}.`,
+    utilityUncertain: "Several utility billing items still need confirmation before the total monthly cost is predictable.",
+    unknownGroupLabels: { utilities: "Utilities", exactUnit: "exact unit", feesPolicy: "fees/application", lifestyle: "living experience" },
+    unknownGroupSummary: groups => `${groups.map(group => `${group.label} ${group.count}`).join(" · ")} need verification`
+  },
+  zh: {
+    needsTitle: "你刚才说的是", needsHome: "户型与预算", needsCampus: "常去地点", needsRequirements: "主要需求",
+    needsPreferences: "比较在意", noneSelected: "暂未选择", monthlyCost: "每月总支出估算", monthlyAfterSpecial: "优惠后每月总支出估算",
+    beforeSpecial: "优惠前总支出", housingBudgetBasis: "预算比较口径", location: "位置", utilities: "水电网", moveIn: "签约入住前", included: "已包含",
+    tenantPays: "租客自付", verify: "待核实", balancedLocation: "主要校区通勤参考", why: "为什么值得先看",
+    tradeoff: "最重要的取舍", officialEvidence: "官网资料", checked: "核对", reportClosed: "＋ 查看完整核实报告与各项明细",
+    reportOpen: "－ 收起完整分析", priceMath: "每月总支出怎么得出", selectedPrice: "所选户型租金",
+    estimatedMonthly: "每月总支出估算", moveInBreakdown: "签约入住前付款", moveInTotal: "预计付款", needsCheck: "主要需求核对",
+    currentInfoSupports: "与当前资料相符", noMainNeeds: "没有选择主要需求。", scoreBreakdown: "匹配分放在这里",
+    scoreNote: "分数用于解释同一位置档位内的差异，不替代月成本、具体房间状态或申请资格。",
+    beforeApplying: "申请前最值得问清楚", sources: "资料来源", applicationPolicy: "申请政策", exactUnitConfiguration: "具体房间配置",
+    quietness: "安静度",
+    quietUnitSpecific: "安静度需按楼层、朝向和具体房间核实。",
+    overBudget: (amount, total) => `住房费口径高于预算上限约 ${formatMoney(amount)}/月；计入电费、网络和保险等项目后，每月总支出估算为 ${formatMoney(total)}。`,
+    unitPriceUnavailable: unitType => `目前还没有可比较的 ${unitType} 价格。`,
+    concessionDependency: "只有计入当前优惠后才在所选预算内；需确认具体房源、租期和入住日期是否符合条件。",
+    weakLocation: campus => `去 ${campus} 的位置匹配较弱。`,
+    higherUpfront: amount => `签约入住前预计付款较高，约 ${formatMoney(amount)}。`,
+    utilityUncertain: "还有多项水电网计费方式待核实，总支出暂时不够稳定。",
+    unknownGroupLabels: { utilities: "水电网", exactUnit: "具体房间", feesPolicy: "费用/申请", lifestyle: "居住体验" },
+    unknownGroupSummary: groups => `${groups.map(group => `${group.label} ${group.count} 项`).join(" · ")}待核实`
+  }
+});
+
+const FIELD_GUIDE_REASON_COPY = Object.freeze({
+  en: {
+    campus: (campus, score) => `${score >= 100 ? "Excellent" : "Good"} location fit for ${campus}`,
+    balanced: "More even access across the four main Yale areas",
+    budget: "the reviewed housing-cost basis stays within your budget",
+    budgetWithSpecial: "the reviewed housing-cost basis stays within budget after the current special",
+    setup: label => `the selected-unit evidence supports ${label.toLowerCase()}`,
+    parking: "a confirmed onsite or next-door monthly parking option is available",
+    pet: "the pet policy fits the pet you selected",
+    priority: {
+      true_cost: "the current fee structure is relatively easier to budget",
+      utilities_predictable: "more utility inclusions are already known",
+      amenity_breadth: "the building amenities align with your preference",
+      newer_building: "the building age or finishes align with your preference",
+      application: "Yale community applicants can use the verified bank-statement path",
+      concession: "a current move-in special is reflected in the comparison",
+      food_store: "restaurants and groceries are easier to reach",
+      quiet_routine: "the available evidence supports a quieter routine"
+    },
+    fallback: "The current price and location evidence make this worth comparing"
+  },
+  zh: {
+    campus: (campus, score) => `去 ${campus} 的位置匹配${score >= 100 ? "极佳" : "良好"}`,
+    balanced: "在四个主要 Yale 校区之间通勤更均衡",
+    budget: "官网租金和必选楼费在你的预算内",
+    budgetWithSpecial: "计入当前优惠后，官网租金和必选楼费在你的预算内",
+    setup: label => `当前具体房源资料支持“${label}”`,
+    parking: "有已确认的楼内或隔壁月租停车方案",
+    pet: "宠物政策与你选择的宠物相符",
+    priority: {
+      true_cost: "目前的费用结构相对更容易做预算",
+      utilities_predictable: "已确认的水电网包含项更多",
+      amenity_breadth: "楼内设施更符合你的偏好",
+      newer_building: "楼龄或装修更符合你的偏好",
+      application: "Yale community 可使用已核实的 bank statement 申请路径",
+      concession: "当前比较已计入住优惠",
+      food_store: "吃饭买菜更方便",
+      quiet_routine: "现有资料更支持安静需求"
+    },
+    fallback: "目前的价格和位置资料值得进一步比较"
+  }
+});
+
+const FIELD_GUIDE_PROPERTY_TRADEOFFS = Object.freeze({
+  en: {
+    "360-state": "Required building fees, insurance, and optional parking can push total monthly spending higher; water and HVAC billing still need confirmation.",
+    "olive-wooster": "The exact unit price and concession eligibility can change with availability.",
+    "the-taft": "Laundry, flooring, and unit condition need to be checked for the exact apartment.",
+    "the-archive": "Official total-monthly price ranges vary widely by unit and lease term.",
+    "estelle": "Several utility and fee details still need confirmation before total monthly spending is firm.",
+    "axis-201": "Laundry, flooring, and furniture status still need exact-unit confirmation.",
+    "the-audubon": "Ask which charges are included in the published Estimated Monthly Cost.",
+    "new-haven-towers": "The four buildings differ in price, location, parking, and amenities; compare the exact tower.",
+    "pierpont-city-crossing": "Utilities, parking, and exact-unit configuration still need confirmation.",
+    "the-whit": "The larger amenity set can come with higher utility and optional parking costs.",
+    "anthem-square10": "HVAC, water/sewer, and exact-unit configuration still need confirmation."
+  },
+  zh: {
+    "360-state": "固定楼费、保险和可选停车会推高总支出；水费和暖通计费仍待核实。",
+    "olive-wooster": "具体房源价格和优惠资格会随 availability 变化。",
+    "the-taft": "洗烘、地板和房况要按具体房间确认。",
+    "the-archive": "官网总月价区间跨度较大，具体房源和租期会明显改变价格。",
+    "estelle": "水电暖和部分费用仍待核实，总支出暂时不能完全确定。",
+    "axis-201": "洗烘、地板和家具状态仍需按具体房间确认。",
+    "the-audubon": "申请前要问清楚 Estimated Monthly Cost 具体包含哪些费用。",
+    "new-haven-towers": "四栋楼的价格、位置、停车和设施略有不同，需要按具体楼栋比较。",
+    "pierpont-city-crossing": "水电暖、停车和具体房间配置仍需确认。",
+    "the-whit": "楼内设施较多，但水电网和可选停车会增加总支出。",
+    "anthem-square10": "暖通、水费和具体房间配置仍待核实。"
+  }
+});
+
+// Map output is evidence-gated just like price and policy data. The current
+// route/origin review queue has no approved rows, so production renders no map.
+const REVIEWED_SPATIAL_REFERENCES = Object.freeze({});
+
+function fieldGuideText(key, lang = activeLang()) {
+  return (FIELD_GUIDE_TEXT[lang] || FIELD_GUIDE_TEXT.en)[key];
+}
+
+function fieldGuideSpatialReference(viewModels, answers) {
+  const reference = REVIEWED_SPATIAL_REFERENCES[answers?.campus];
+  if (!reference || reference.reviewStatus !== "approved") return null;
+  const markers = viewModels.map(viewModel => reference.properties?.[viewModel.apartment.id]);
+  if (markers.some(marker => !marker || marker.reviewStatus !== "approved")) return null;
+  return { reference, markers };
+}
+
+function fieldGuideUnknownEvidence(apartment, answers, costs, selection, lang = activeLang()) {
+  const groupedItems = new Map([
+    ["utilities", []],
+    ["exactUnit", []],
+    ["feesPolicy", []],
+    ["lifestyle", []]
+  ]);
+  const add = (value, group) => {
+    if (!value || !groupedItems.has(group)) return;
+    const items = groupedItems.get(group);
+    if (!items.includes(value)) items.push(value);
+  };
+  (utilityProfile(apartment).verify || []).forEach(item => add(utilityItemLabel(item, lang), "utilities"));
+  const labels = ui("ruleTags", lang);
+  (answers.requirements || [])
+    .filter(requirement => Object.hasOwn(SETUP_TO_BUDGET_FEATURE, requirement))
+    .forEach(requirement => {
+      if (mainNeedWarning(apartment, requirement, answers, labels)) add(answerValueLabel("requirement", requirement, lang), "exactUnit");
+    });
+  if (selection.compatibility === "unknown_feature_compatibility" && !groupedItems.get("exactUnit").length) {
+    add(fieldGuideText("exactUnitConfiguration", lang), "exactUnit");
+  }
+  costs.excluded.forEach(key => add(costItemLabel(key, lang), "feesPolicy"));
+  if (["unknown", "low", "partial_public", "stale"].includes(apartment.applicationConfidence)) {
+    add(fieldGuideText("applicationPolicy", lang), "feesPolicy");
+  }
+  if ((answers.priority || []).includes("quiet_routine") && !apartment.decisionSignals?.quietSource) {
+    add(fieldGuideText("quietness", lang), "lifestyle");
+  }
+  const labelsByGroup = fieldGuideText("unknownGroupLabels", lang);
+  const groups = [...groupedItems.entries()]
+    .filter(([, items]) => items.length)
+    .map(([key, items]) => ({ key, label: labelsByGroup[key], count: items.length, items }));
+  return { items: groups.flatMap(group => group.items), groups };
+}
+
+function fieldGuideUtilitySummary(apartment, lang = activeLang()) {
+  const text = FIELD_GUIDE_TEXT[lang] || FIELD_GUIDE_TEXT.en;
+  const profile = utilityProfile(apartment);
+  const labels = key => utilityItemLabel(key, lang);
+  const included = (profile.included || []).map(labels);
+  const tenantPays = (profile.tenantPays || []).map(labels);
+  const verify = (profile.verify || []).map(labels);
+  const compact = items => items.length <= 2
+    ? items.join(lang === "zh" ? "、" : ", ")
+    : (lang === "zh" ? `${items.slice(0, 2).join("、")}等` : `${items.slice(0, 2).join(", ")}, and more`);
+  let primary = text.verify;
+  const details = [];
+  if (included.length) {
+    primary = `${compact(included)} ${text.included}`;
+    if (tenantPays.length) details.push(`${compact(tenantPays)} ${text.tenantPays}`);
+  } else if (tenantPays.length) {
+    primary = `${compact(tenantPays)} ${text.tenantPays}`;
+  }
+  if (verify.length) details.push(`${compact(verify)} ${text.verify}`);
+  return { primary, detail: details.join(lang === "zh" ? "；" : "; ") };
+}
+
+function fieldGuideWhy(viewModel) {
+  const { apartment, result, answers, lang } = viewModel;
+  const copy = FIELD_GUIDE_REASON_COPY[lang] || FIELD_GUIDE_REASON_COPY.en;
+  const clauses = [];
+  const add = value => {
+    if (value && !clauses.includes(value)) clauses.push(value);
+  };
+  const campusScore = scoreCampus(apartment, answers.campus);
+  if (answers.campus === "balanced" && campusScore >= BALANCED_REASON_MIN_SCORE) {
+    add(copy.balanced);
+  } else if (answers.campus && campusScore >= 80) {
+    add(copy.campus(campusLabel(answers.campus, lang), campusScore));
+  }
+
+  for (const requirement of answers.requirements || []) {
+    if (requirementEvidenceTier(apartment, requirement, answers) !== 2) continue;
+    if (requirement === "parking") add(copy.parking);
+    else if (requirement === "pet_friendly") add(copy.pet);
+    else add(copy.setup(answerValueLabel("requirement", requirement, lang)));
+    break;
+  }
+
+  const supportedPreference = (answers.preferences || [])
+    .map(preference => ({
+      preference,
+      score: preference === "utilities_predictable"
+        ? scoreUtilities(apartment, "predictable")
+        : scoreSinglePriority(apartment, preference, answers)
+    }))
+    .filter(item => Number.isFinite(item.score) && item.score >= SCORE.HIGH)
+    .filter(item => item.preference !== "quiet_routine" || apartment.decisionSignals?.quietSource)
+    .sort((a, b) => b.score - a.score)[0];
+  if (supportedPreference) add(copy.priority[supportedPreference.preference]);
+
+  const comparison = budgetComparison(apartment, answers);
+  if (comparison && comparison.overage === 0) {
+    add(comparison.concessionCredit > 0 ? copy.budgetWithSpecial : copy.budget);
+  }
+
+  if (!clauses.length) add(result.score >= SCORE.HIGH ? copy.fallback : viewModel.reasons[0] || copy.fallback);
+  return sentenceEnding(clauses.slice(0, 2).join(lang === "zh" ? "；" : "; "), lang);
+}
+
+function fieldGuideTradeoff(viewModel) {
+  const { apartment, answers, costs, selection, lang } = viewModel;
+  const text = FIELD_GUIDE_TEXT[lang] || FIELD_GUIDE_TEXT.en;
+  const comparison = budgetComparison(apartment, answers);
+  if (comparison?.overage > 0) return text.overBudget(Math.ceil(comparison.overage), Math.ceil(costs.trueMonthlyMax));
+  const labels = ui("ruleTags", lang);
+  for (const requirement of answers.requirements || []) {
+    if (requirementEvidenceTier(apartment, requirement, answers) !== 0) continue;
+    const warning = Object.hasOwn(SETUP_TO_BUDGET_FEATURE, requirement)
+      ? mainNeedWarning(apartment, requirement, answers, labels)
+      : lang === "zh"
+        ? `“${answerValueLabel("requirement", requirement, lang)}”与当前资料不符`
+        : `The current evidence conflicts with ${answerValueLabel("requirement", requirement, lang).toLowerCase()}`;
+    if (warning) return sentenceEnding(warning, lang);
+  }
+  if (!comparison) return text.unitPriceUnavailable(unitTypeLabel(answers.unitType, lang));
+  if (comparison.requiresConcession) return text.concessionDependency;
+  if (answers.campus && answers.campus !== "balanced" && scoreCampus(apartment, answers.campus) <= 40) {
+    return text.weakLocation(campusLabel(answers.campus, lang));
+  }
+  if (costs.moveInMin >= highMoveInCashCutoff(answers)) return text.higherUpfront(Math.ceil(costs.moveInMin));
+  if ((answers.preferences || []).some(value => ["true_cost", "utilities_predictable"].includes(value)) && (utilityProfile(apartment).verify || []).length >= 2) {
+    return text.utilityUncertain;
+  }
+  if (selection.compatibility === "incompatible") {
+    return lang === "zh" ? "所选房型与至少一项主要需求不符。" : "The selected unit type conflicts with at least one main need.";
+  }
+  return (FIELD_GUIDE_PROPERTY_TRADEOFFS[lang] || FIELD_GUIDE_PROPERTY_TRADEOFFS.en)[apartment.id]
+    || (lang === "zh" ? "具体房源和费用仍需申请前核实。" : "Confirm the exact unit and fees before applying.");
+}
+
+function buildResultViewModel(result, index, top, answers, lang = activeLang()) {
+  const apartment = result.apartment;
+  const copy = apartmentCopy(apartment, lang);
+  const costs = calculateCosts(apartment, answers);
+  const selection = selectBudgetCandidate(apartment, answers, { respectFeatures: true });
+  const candidate = selection.candidate;
+  const evidence = apartmentEvidence(apartment);
+  const flooringDisplay = splitCardDisplay(copy.flooring, "flooring", lang);
+  const sourceDisplay = splitCardDisplay(copy.sourceLabel, "source", lang);
+  const concessionDisplay = splitCardDisplay(copy.concession, "concession", lang);
+  const footnotes = [];
+  const flooringMarker = addCardFootnote(footnotes, flooringDisplay.note);
+  const sourceMarker = addCardFootnote(footnotes, sourceDisplay.note);
+  const concessionNote = copy.concession
+    ? (CARD_FOOTNOTE_TEXT[lang] || CARD_FOOTNOTE_TEXT.en)[costs.concessionApplied ? "concessionIncluded" : "concessionExcluded"]
+    : "";
+  const concessionMarker = addCardFootnote(footnotes, concessionNote);
+  const unknownEvidence = fieldGuideUnknownEvidence(apartment, answers, costs, selection, lang);
+  return {
+    result, apartment, copy, costs, selection, candidate, answers, lang,
+    evidence: {
+      sourceUrls: [...new Set([candidate?.sourceUrl, ...evidence.urls].filter(Boolean))].slice(0, 3),
+      checkedDate: [candidate?.checkedDate, evidence.checkedDate].filter(Boolean).sort().at(-1) || null,
+      unknowns: unknownEvidence.items,
+      unknownGroups: unknownEvidence.groups
+    },
+    flooringDisplay, sourceDisplay, concessionDisplay, footnotes, flooringMarker, sourceMarker, concessionMarker,
+    priceTag: priceStatus(apartment, lang, answers), ruleBadges: ruleBadges(apartment, answers, lang),
+    reasons: topReasons(result, lang, answers), sameScoreCount: top.filter(other => other.score === result.score).length,
+    campusTier: campusFitTierLabel(apartment, answers.campus, lang), rankNumber: index + 1
+  };
+}
+
+function buildResultViewModels(top, answers, lang = activeLang()) {
+  return top.map((result, index) => buildResultViewModel(result, index, top, answers, lang));
+}
+
+function renderNeedsSummary(answers, lang = activeLang()) {
+  const text = FIELD_GUIDE_TEXT[lang] || FIELD_GUIDE_TEXT.en;
+  const requirements = (answers.requirements || []).map(value => answerValueLabel("requirement", value, lang));
+  const preferences = (answers.preferences || []).map(value => {
+    const label = answerValueLabel("priority", value, lang);
+    if (!["quiet_routine", "yale_shuttle", "low_density"].includes(value) || preferenceEvidenceCoverage(value).active) {
+      return label;
+    }
+    return lang === "zh"
+      ? `${label}（已记录；资料不足，暂不影响排序）`
+      : `${label} (recorded; not ranked until evidence coverage improves)`;
+  });
+  return `
+    <section class="needs-summary" aria-label="${escapeHtml(text.needsTitle)}">
+      <h3>${escapeHtml(text.needsTitle)}</h3>
+      <dl>
+        <div><dt>${escapeHtml(text.needsHome)}</dt><dd><span class="data">${escapeHtml(unitTypeLabel(answers.unitType, lang))}</span> · <span class="data">${escapeHtml(budgetLabel(answers.budget, answers.unitType, lang))}</span></dd></div>
+        <div><dt>${escapeHtml(text.needsCampus)}</dt><dd>${escapeHtml(campusLabel(answers.campus, lang))}</dd></div>
+        <div><dt>${escapeHtml(text.needsRequirements)}</dt><dd>${escapeHtml(requirements.join(" · ") || text.noneSelected)}</dd></div>
+        <div><dt>${escapeHtml(text.needsPreferences)}</dt><dd>${escapeHtml(preferences.join(" · ") || text.noneSelected)}</dd></div>
+      </dl>
+    </section>`;
+}
+
+function renderFieldGuideCostRows(items, lang, { credit = false } = {}) {
+  return items.map(item => {
+    const amount = Number.isFinite(item.maxAmount) && item.maxAmount !== item.amount ? formatMoneyRange(item.amount, item.maxAmount) : formatMoney(item.amount);
+    return `<div><dt>${escapeHtml(costItemLabel(item.key, lang))}</dt><dd><span class="data">${credit || item.isCredit ? "-" : ""}${escapeHtml(amount)}</span><small>${escapeHtml(costConfidenceLabel(item.confidence, lang))}</small></dd></div>`;
+  }).join("");
+}
+
+function renderFieldGuideCostReport(viewModel) {
+  const { costs, lang } = viewModel;
+  const text = FIELD_GUIDE_TEXT[lang] || FIELD_GUIDE_TEXT.en;
+  const concession = costs.concessionApplied && costs.concessionLine ? [costs.concessionLine] : [];
+  return `
+    <section><h4>${escapeHtml(text.priceMath)}</h4>
+      <dl class="field-report-list">
+        <div><dt>${escapeHtml(text.selectedPrice)}</dt><dd><span class="data">${escapeHtml(formatMoney(costs.baseRent))}</span></dd></div>
+        ${renderFieldGuideCostRows(costs.monthlyItems, lang)}${renderFieldGuideCostRows(concession, lang, { credit: true })}
+        <div class="report-total"><dt>${escapeHtml(text.estimatedMonthly)}</dt><dd><span class="data">${escapeHtml(formatMoneyRange(costs.trueMonthlyMin, costs.trueMonthlyMax))}</span></dd></div>
+      </dl>
+      <h5>${escapeHtml(text.moveInBreakdown)}</h5>
+      <dl class="field-report-list">${renderFieldGuideCostRows(costs.moveInItems, lang)}<div class="report-total"><dt>${escapeHtml(text.moveInTotal)}</dt><dd><span class="data">${escapeHtml(formatMoneyRange(costs.moveInMin, costs.moveInMax))}</span></dd></div></dl>
+    </section>`;
+}
+
+function renderFieldGuideUtilities(viewModel) {
+  const { apartment, lang } = viewModel;
+  const text = FIELD_GUIDE_TEXT[lang] || FIELD_GUIDE_TEXT.en;
+  const profile = utilityProfile(apartment);
+  const rows = [...(profile.included || []).map(item => ({ item, status: "included" })), ...(profile.tenantPays || []).map(item => ({ item, status: "tenantPays" })), ...(profile.verify || []).map(item => ({ item, status: "verify" }))];
+  const status = row => row.item === "air_conditioning_most_units" && row.status === "included"
+    ? (lang === "zh" ? "（多数房间）已包含" : "Included in most units")
+    : row.status === "included" ? text.included : row.status === "tenantPays" ? text.tenantPays : text.verify;
+  return `<section><h4>${escapeHtml(text.utilities)}</h4><dl class="field-report-list">${rows.map(row => `<div><dt>${escapeHtml(utilityItemLabel(row.item, lang))}</dt><dd class="${row.status === "verify" ? "verify-text" : ""}">${escapeHtml(status(row))}</dd></div>`).join("")}</dl></section>`;
+}
+
+function renderFieldGuideNeeds(viewModel) {
+  const { apartment, answers, lang } = viewModel;
+  const text = FIELD_GUIDE_TEXT[lang] || FIELD_GUIDE_TEXT.en;
+  const labels = ui("ruleTags", lang);
+  const rows = (answers.requirements || []).map(requirement => {
+    const warning = mainNeedWarning(apartment, requirement, answers, labels);
+    return `<div><dt>${escapeHtml(answerValueLabel("requirement", requirement, lang))}</dt><dd class="${warning ? "verify-text" : ""}">${escapeHtml(warning ? sentenceEnding(warning, lang) : text.currentInfoSupports)}</dd></div>`;
+  }).join("");
+  return `<section><h4>${escapeHtml(text.needsCheck)}</h4>${rows ? `<dl class="field-report-list">${rows}</dl>` : `<p class="report-note">${escapeHtml(text.noMainNeeds)}</p>`}</section>`;
+}
+
+function renderFieldGuideScore(viewModel) {
+  const { result, lang } = viewModel;
+  const text = FIELD_GUIDE_TEXT[lang] || FIELD_GUIDE_TEXT.en;
+  return `<section><h4>${escapeHtml(text.scoreBreakdown)}</h4><div class="score-line"><span>${escapeHtml(ui("scoreLabel", lang))}</span><strong class="data">${result.score} / 100</strong></div><dl class="field-report-list compact-score-list">${Object.entries(result.breakdown).map(([key, value]) => `<div><dt>${escapeHtml(categoryLabel(key, lang))}</dt><dd class="data">${Math.round(value)} / 100</dd></div>`).join("")}</dl><p class="report-note">${escapeHtml(text.scoreNote)}</p></section>`;
+}
+
+function sourceDomain(url) {
+  try { return new URL(url).hostname.replace(/^www\./, ""); } catch { return url; }
+}
+
+function renderFieldGuideSources(viewModel) {
+  const { evidence, lang } = viewModel;
+  const text = FIELD_GUIDE_TEXT[lang] || FIELD_GUIDE_TEXT.en;
+  if (!evidence.sourceUrls.length && !evidence.checkedDate) return "";
+  return `<footer class="report-source"><span>${escapeHtml(text.sources)}</span>${evidence.sourceUrls.map(url => `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(sourceDomain(url))}</a>`).join("")}${evidence.checkedDate ? `<span>${escapeHtml(text.checked)} <span class="data">${escapeHtml(evidence.checkedDate)}</span></span>` : ""}</footer>`;
+}
+
+function renderFieldGuideCard(viewModel) {
+  const { apartment, copy, costs, candidate, selection, result, rankNumber, campusTier, evidence, answers, lang } = viewModel;
+  const text = FIELD_GUIDE_TEXT[lang] || FIELD_GUIDE_TEXT.en;
+  const utilities = fieldGuideUtilitySummary(apartment, lang);
+  const unknownSummary = evidence.unknownGroups.length ? text.unknownGroupSummary(evidence.unknownGroups) : confidenceSummaryLabel(apartment, lang);
+  const meta = [unitTypeLabel(candidate?.unitType || selection.unitType.resolved, lang), Number.isFinite(candidate?.sqftMin) ? `${candidate.sqftMin} sqft` : "", candidate?.comparisonLeaseMonths ? `${candidate.comparisonLeaseMonths}${lang === "zh" ? " 个月" : " months"}` : "", candidate?.subBuildingId ? subBuildingLabel(candidate.subBuildingId) : ""].filter(Boolean);
+  const locationPrimary = campusTier || text.balancedLocation;
+  const locationDetail = campusLabel(answers.campus, lang);
+  const why = fieldGuideWhy(viewModel);
+  const tradeoff = fieldGuideTradeoff(viewModel);
+  const titleId = `field-guide-${apartment.id}-${rankNumber}`;
+  const grossLine = costs.concessionApplied ? `<span class="data">${escapeHtml(formatMoneyRange(costs.grossMonthlyMin, costs.grossMonthlyMax))}</span> ${escapeHtml(text.beforeSpecial)}` : "";
+  const comparison = budgetComparison(apartment, answers);
+  const budgetBasisLine = comparison
+    ? `${escapeHtml(text.housingBudgetBasis)} <span class="data">${escapeHtml(formatMoney(comparison.effectiveCost))}</span>${comparison.concessionCredit > 0 ? escapeHtml(lang === "zh" ? "（已计入当前优惠）" : " after current special") : ""}`
+    : escapeHtml(text.unitPriceUnavailable(unitTypeLabel(answers.unitType, lang)));
+  const candidateIdentity = [candidate?.trace?.unitId, candidate?.trace?.floorplanId].filter(Boolean).join(" · ");
+  const moveInItems = costs.moveInItems.map(item => costItemLabel(item.key, lang)).join(lang === "zh" ? "、" : ", ");
+  return `
+    <article class="result-card field-guide-card" aria-labelledby="${escapeHtml(titleId)}">
+      <header class="field-card-heading"><span class="result-number data">${String(rankNumber).padStart(2, "0")}</span><div class="property-heading"><p class="result-context">${escapeHtml(locationDetail)} · ${escapeHtml(locationPrimary)}</p><h3 id="${escapeHtml(titleId)}">${escapeHtml(apartment.name)}</h3><p>${escapeHtml(copy.area)}</p></div><div class="monthly-cost"><span>${escapeHtml(costs.concessionApplied ? text.monthlyAfterSpecial : text.monthlyCost)}</span><strong><span class="data">${escapeHtml(formatMoneyRange(costs.trueMonthlyMin, costs.trueMonthlyMax))}</span><small>${escapeHtml(lang === "zh" ? " / 月" : " / mo")}</small></strong><p class="budget-basis-line">${budgetBasisLine}</p><p>${[grossLine, ...meta.map(item => `<span class="data">${escapeHtml(item)}</span>`)].filter(Boolean).join(" · ")}</p></div></header>
+      <div class="comparison-strip" aria-label="${escapeHtml(lang === "zh" ? "关键比较信息" : "Key comparison information")}"><div><span class="strip-label">${escapeHtml(text.location)}</span><strong>${escapeHtml(locationPrimary)}</strong><p>${escapeHtml(locationDetail)}</p></div><div><span class="strip-label">${escapeHtml(text.utilities)}</span><strong>${escapeHtml(utilities.primary)}</strong><p class="${(utilityProfile(apartment).verify || []).length ? "verify-text" : ""}">${escapeHtml(utilities.detail)}</p></div><div><span class="strip-label">${escapeHtml(text.moveIn)}</span><strong><span class="data">${escapeHtml(formatMoneyRange(costs.moveInMin, costs.moveInMax))}</span></strong><p>${escapeHtml(moveInItems)}</p></div></div>
+      <div class="decision-lines"><div><span>${escapeHtml(text.why)}</span><p>${escapeHtml(why)}</p></div><div><span>${escapeHtml(text.tradeoff)}</span><p>${escapeHtml(tradeoff)}</p></div></div>
+      <p class="evidence-line"><span class="verified-text">${escapeHtml(text.officialEvidence)}</span>${evidence.checkedDate ? `<span>${escapeHtml(text.checked)} <span class="data">${escapeHtml(evidence.checkedDate)}</span></span>` : ""}<span class="${evidence.unknowns.length ? "verify-text" : "verified-text"}">${escapeHtml(unknownSummary)}</span></p>
+      <details class="full-report"><summary><span class="summary-closed">${escapeHtml(text.reportClosed)}</span><span class="summary-open">${escapeHtml(text.reportOpen)}</span></summary><div class="report-body">${renderFieldGuideCostReport(viewModel)}${renderFieldGuideUtilities(viewModel)}${renderFieldGuideNeeds(viewModel)}${renderFieldGuideScore(viewModel)}<section class="report-wide"><h4>${escapeHtml(text.beforeApplying)}</h4><ol class="verification-list">${renderList(copy.verify.slice(0, 4))}</ol>${candidateIdentity ? `<p class="report-note">${escapeHtml(lang === "zh" ? "价格依据" : "Price basis")}: <span class="data">${escapeHtml(candidateIdentity)}</span></p>` : ""}</section>${renderFieldGuideSources(viewModel)}</div></details>
+    </article>`;
+}
+
 function renderResults(results, answers) {
   document.querySelector(".workspace")?.classList.remove("is-location-browse");
   showResultsPanel({ showFeedback: true });
@@ -8311,7 +8853,11 @@ function renderResults(results, answers) {
   });
   const budgetCoverageGap = !hasSpecificBudgetFit;
   const topHasTie = top.some((result, index) => top.some((other, otherIndex) => otherIndex !== index && other.score === result.score));
-  let baseSummary = ui("baseSummary", lang)(unitTypeLabel(answers.unitType, lang), budgetLabel(answers.budget, answers.unitType, lang), campus, top.length);
+  const unitType = unitTypeLabel(answers.unitType, lang);
+  const budget = budgetLabel(answers.budget, answers.unitType, lang);
+  let baseSummary = answers.campus === "balanced"
+    ? ui("balancedSummary", lang)(unitType, budget, top.length)
+    : ui("baseSummary", lang)(unitType, budget, campus, top.length);
   if (topHasTie) {
     baseSummary = `${baseSummary} ${ui("fullTieSummary", lang)}`;
   }
@@ -8319,127 +8865,19 @@ function renderResults(results, answers) {
   summary.textContent = budgetCoverageGap ? `${baseSummary} ${budgetGapSummary}` : baseSummary;
   summary.classList.toggle("summary-warning", budgetCoverageGap);
 
-  list.innerHTML = top.map((result, index) => {
-    const apartment = result.apartment;
-    const copy = apartmentCopy(apartment, lang);
-    const costs = calculateCosts(apartment, answers);
-    const flooringDisplay = splitCardDisplay(copy.flooring, "flooring", lang);
-    const sourceDisplay = splitCardDisplay(copy.sourceLabel, "source", lang);
-    const concessionDisplay = splitCardDisplay(copy.concession, "concession", lang);
-    const priceAnswers = answers;
-    const priceTag = priceStatus(apartment, lang, priceAnswers);
-    const footnotes = [];
-    const flooringMarker = addCardFootnote(footnotes, flooringDisplay.note);
-    const sourceMarker = addCardFootnote(footnotes, sourceDisplay.note);
-    const concessionNote = copy.concession
-      ? (CARD_FOOTNOTE_TEXT[lang] || CARD_FOOTNOTE_TEXT.en)[costs.concessionApplied ? "concessionIncluded" : "concessionExcluded"]
-      : "";
-    const concessionMarker = addCardFootnote(footnotes, concessionNote);
-    const reasons = topReasons(result, lang, answers).map(escapeHtml);
-    const sameScoreCount = top.filter(other => other.score === result.score).length;
-    const rankLabel = apartment.isExploration
-      ? `#${index + 1} ${ui("exploreDirection", lang)}`
-      : sameScoreCount > 1
-        ? ui("sameTierMatch", lang)
-        : `#${index + 1} ${ui("match", lang)}`;
-    const bars = Object.entries(result.breakdown).map(([key, value]) => `
-      <div class="bar-row">
-        <span>${escapeHtml(categoryLabel(key, lang))}</span>
-        <div class="bar-track"><div class="bar-fill" style="width: ${Math.round(value)}%"></div></div>
-        <strong>${Math.round(value)}</strong>
-      </div>
-    `).join("");
-    const campusTier = campusFitTierLabel(apartment, answers.campus, lang);
-    const scorePill = campusTier
-      ? `<div class="score-pill quick-score">${escapeHtml(campusTier)}</div>`
-      : `<div class="score-pill">${result.score}<small>${escapeHtml(ui("scoreLabel", lang))}</small></div>`;
-    const tags = `
-      ${renderRuleBadges(apartment, answers, lang)}
-      <span class="tag ${confidenceClass(apartment)}">${escapeHtml(confidenceSummaryLabel(apartment, lang))}</span>
-      ${apartment.isExploration ? `<span class="tag low">${escapeHtml(ui("tags", lang).exploration)}</span>` : ""}
-      <span class="tag ${escapeHtml(priceTag.level)}">${escapeHtml(priceTag.label)}</span>
-    `;
-
-    return `
-      <article class="result-card">
-        <div class="card-top">
-          <div>
-            <div class="rank">${escapeHtml(rankLabel)} · ${reasons.join(" + ")}</div>
-            <h3>${escapeHtml(apartment.name)}</h3>
-            <p class="subtitle">${escapeHtml(copy.area)}</p>
-          </div>
-          ${scorePill}
-        </div>
-
-        <div class="tags card-summary-tags">${tags}</div>
-
-        <div class="facts compact-facts">
-          <div class="fact cost-signal-fact"><strong>${escapeHtml(ui("facts", lang).cost)}</strong>${renderPriceSignal(apartment, lang, priceAnswers)}</div>
-          <div class="fact utility-fact"><strong>${escapeHtml(ui("facts", lang).utilities)}</strong>${renderUtilityDetails(apartment, lang)}</div>
-          <div class="fact daily-fact"><strong>${escapeHtml(ui("facts", lang).daily)}</strong><span>${escapeHtml(copy.dailyLabel)}</span></div>
-        </div>
-        ${renderCostSummary(costs, lang)}
-        ${renderMoveInChecks(apartment, answers, costs, lang)}
-        ${renderSelectedBudgetBasis(apartment, answers, lang)}
-
-        <div class="quick-insights">
-          <div><strong>${escapeHtml(ui("quickWhy", lang))}</strong><span>${escapeHtml(copy.bestFor[0] || "")}</span></div>
-          <div><strong>${escapeHtml(ui("quickWatch", lang))}</strong><span>${escapeHtml(copy.tradeoffs[0] || "")}</span></div>
-        </div>
-
-        <details class="card-details">
-          <summary>${escapeHtml(ui("viewDetails", lang))}</summary>
-          <div class="card-details-body">
-            ${renderEvidenceLinks(apartment, lang, priceAnswers)}
-            ${confidenceBanner(apartment)}
-            <div class="facts detail-facts">
-              <div class="fact"><strong>${escapeHtml(ui("facts", lang).flooring)}</strong><span>${escapeHtml(flooringDisplay.text)}${flooringMarker}</span></div>
-              <div class="fact"><strong>${escapeHtml(ui("facts", lang).source)}</strong><span>${escapeHtml(sourceDisplay.text)}${sourceMarker}</span></div>
-            </div>
-            ${renderCostBreakdown(costs, lang, { showMetrics: false })}
-            ${copy.valueSignal || copy.concession ? `
-              <div class="card-callouts">
-                ${copy.valueSignal ? `
-                  <div class="card-callout value-callout">
-                    <strong>${escapeHtml(ui("facts", lang).value)}</strong>
-                    <span>${escapeHtml(copy.valueSignal)}</span>
-                  </div>
-                  <div class="value-caveat">${escapeHtml(VALUE_SIGNAL_CAVEATS[lang] || VALUE_SIGNAL_CAVEATS.en)}</div>
-                ` : ""}
-                ${copy.concession ? `
-                  <div class="card-callout concession-callout">
-                    <strong>${escapeHtml(ui("facts", lang).concession)}</strong>
-                    <span>${escapeHtml(concessionDisplay.text)}${concessionMarker}</span>
-                  </div>
-                ` : ""}
-              </div>
-            ` : ""}
-            ${renderCardFootnotes(footnotes)}
-            <div class="reason-grid">
-              <div class="reason-box">
-                <h4>${escapeHtml(ui("sections", lang).bestFor)}</h4>
-                <ul>${renderList(copy.bestFor.slice(0, 3))}</ul>
-              </div>
-              <div class="reason-box">
-                <h4>${escapeHtml(ui("sections", lang).tradeoffs)}</h4>
-                <ul>${renderList(copy.tradeoffs.slice(0, 3))}</ul>
-              </div>
-              <div class="reason-box">
-                <h4>${escapeHtml(ui("sections", lang).verify)}</h4>
-                <ul>${renderList(copy.verify.slice(0, 4))}</ul>
-              </div>
-            </div>
-            <div class="breakdown">${bars}</div>
-          </div>
-        </details>
-      </article>
-    `;
-  }).join("");
+  document.body.dataset.resultRenderer = "field_guide";
+  list.classList.add("field-guide-results");
+  const viewModels = buildResultViewModels(top, answers, lang);
+  // Keep the map absent until the selected anchor and every visible property
+  // marker have approved route/origin evidence.
+  fieldGuideSpatialReference(viewModels, answers);
+  list.innerHTML = `${renderNeedsSummary(answers, lang)}${viewModels.map(renderFieldGuideCard).join("")}`;
 }
 
 function renderLocationBrowse(results, campus) {
   document.querySelector(".workspace")?.classList.add("is-location-browse");
-  showResultsPanel({ showFeedback: false });
+  showResultsPanel({ showFeedback: true });
+  setFeedbackMode("location");
   const list = document.getElementById("results");
   const summary = document.getElementById("result-summary");
   const title = document.getElementById("results-title");
@@ -8448,6 +8886,8 @@ function renderLocationBrowse(results, campus) {
   if (title) title.textContent = ui("locationBrowseTitle", lang)(campusName);
   summary.textContent = ui("locationBrowseSummary", lang)(campusName, results.length);
   summary.classList.remove("summary-warning");
+  document.body.dataset.resultRenderer = "location_browse";
+  list.classList.remove("field-guide-results");
   list.classList.add("location-browse-results");
   list.innerHTML = results.map(result => {
     const apartment = result.apartment;
@@ -8505,11 +8945,6 @@ function rankLocationBrowseApartments({ campus } = {}) {
   return ranked.filter((result, index) => index < LOCATION_BROWSE_LIMIT || result.locationScore === boundaryScore);
 }
 
-function setCampusValue(form, campus) {
-  const input = form.querySelector(`input[name="campus"][value="${campus}"]`);
-  if (input) input.checked = true;
-}
-
 function setActiveLocationBrowse(campus) {
   document.querySelectorAll(".location-browser-button").forEach(button => {
     button.classList.toggle("is-active", button.dataset.campus === campus);
@@ -8533,15 +8968,21 @@ function hideResultsPanel() {
   if (feedbackPanel) feedbackPanel.hidden = true;
 }
 
-function scrollResultsIntoView() {
+function scrollResultsIntoView({ focusHeading = false } = {}) {
   const panel = document.querySelector(".results-panel");
+  const heading = document.getElementById("results-title");
   if (panel && typeof panel.scrollIntoView === "function") {
-    panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    const reduceMotion = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    panel.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  }
+  if (focusHeading && heading && typeof heading.focus === "function") {
+    const focus = () => heading.focus({ preventScroll: true });
+    if (typeof requestAnimationFrame === "function") requestAnimationFrame(focus);
+    else focus();
   }
 }
 
-function runLocationBrowse(form, campus) {
-  setCampusValue(form, campus);
+function runLocationBrowse(campus) {
   setActiveLocationBrowse(campus);
   latestAnswers = { campus, requirements: [], preferences: [], setup: [], priority: [] };
   latestEntry = `location_browse:${campus}`;
@@ -8549,7 +8990,7 @@ function runLocationBrowse(form, campus) {
   const results = rankLocationBrowseApartments({ campus });
   latestResults = results;
   renderLocationBrowse(results, campus);
-  scrollResultsIntoView();
+  scrollResultsIntoView({ focusHeading: true });
   return results;
 }
 
@@ -8620,12 +9061,12 @@ function init() {
   form.addEventListener("submit", event => {
     event.preventDefault();
     runMatch(form);
-    scrollResultsIntoView();
+    scrollResultsIntoView({ focusHeading: true });
   });
   reset.addEventListener("click", () => resetForm(form));
   copyFeedbackButton.addEventListener("click", () => copyFeedback("feedback-status"));
   locationBrowseButtons.forEach(button => {
-    button.addEventListener("click", () => runLocationBrowse(form, button.dataset.campus));
+    button.addEventListener("click", () => runLocationBrowse(button.dataset.campus));
   });
   hideResultsPanel();
   renderBudgetOptions(form, { preserve: false });
@@ -8669,6 +9110,10 @@ if (typeof module !== "undefined") {
     scoreParking,
     scorePetPolicy,
     selectedHardRequirements,
+    requirementEvidenceTier,
+    requirementEvidenceCoverage,
+    preferenceEvidenceCoverage,
+    activeHardRequirements,
     hardRequirementTier,
     campusFitTier,
     campusFitTierLabel,
@@ -8679,6 +9124,7 @@ if (typeof module !== "undefined") {
     budgetLocationPenalty,
     rankingCampusTier,
     scoreConcession,
+    concessionIsCurrent,
     knownConcessionEstimate,
     knownConcessionCredit,
     scoreAccessAndLateRoute,
@@ -8705,9 +9151,17 @@ if (typeof module !== "undefined") {
     rankLocationBrowseApartments,
     escapeHtml,
     formatAnswersForShare,
+    buildFeedbackText,
     normalizeQuestionnaireAnswers,
     topResultNames,
     topReasons,
+    buildResultViewModel,
+    buildResultViewModels,
+    fieldGuideWhy,
+    fieldGuideTradeoff,
+    renderFieldGuideCard,
+    renderNeedsSummary,
+    fieldGuideSpatialReference,
     entryLabel,
     ruleBadges,
     amenityFeatureCount,
