@@ -7441,9 +7441,29 @@ function scoreUtilities(apartment, preference) {
   return apartment.amenityTags.includes("gym_pool") || apartment.amenityTags.includes("package") ? SCORE.VERY_HIGH : SCORE.MID;
 }
 
+function scoreFlooringStatus(flooringStatus) {
+  const fs = flooringStatus;
+  if (!fs || !Array.isArray(fs.materials) || !fs.materials.length || fs.scope === null) return SCORE.MID;
+  // Building-level photos can show that a material exists somewhere in the
+  // property, but cannot prove the flooring in the selected unit.
+  if (!["exact_unit", "floorplan"].includes(fs.scope)) return SCORE.MID;
+  const hardSurfaceMaterials = ["wood_look", "hard_surface", "hardwood", "lvp", "lvt", "polished_concrete"];
+  const hasHardSurface = hardSurfaceMaterials.some(material => fs.materials.includes(material));
+  const hasCarpet = fs.materials.includes("carpet");
+  if (hasCarpet && !hasHardSurface) return SCORE.MISS;
+  if (hasCarpet && hasHardSurface) return SCORE.LOW;
+  if (fs.scope === "exact_unit" && hasHardSurface) return SCORE.FULL;
+  if (fs.scope === "floorplan" && fs.evidenceType === "official_claim" && hasHardSurface) return SCORE.HIGH;
+  return SCORE.MID;
+}
+
 function scoreSetup(apartment, preferences, answers = {}) {
   if (!preferences.length) return null;
-  const selected = preferences;
+  const selected = preferences.filter(preference => (
+    !Object.hasOwn(SETUP_TO_BUDGET_FEATURE, preference)
+    || requirementEvidenceCoverage(preference, answers).active
+  ));
+  if (!selected.length) return null;
   const scores = selected.map(preference => {
     if (Object.hasOwn(SETUP_TO_BUDGET_FEATURE, preference)) {
       const selection = selectBudgetCandidate(
@@ -7456,12 +7476,7 @@ function scoreSetup(apartment, preferences, answers = {}) {
     }
 
     if (preference === "wood_floor") {
-      const fs = apartment.flooringStatus;
-      if (!fs || !fs.materials.length || fs.scope === null) return SCORE.MID;
-      if (fs.materials.includes("carpet") && !fs.materials.includes("wood_look") && !fs.materials.includes("hard_surface") && !fs.materials.includes("hardwood") && !fs.materials.includes("lvp") && !fs.materials.includes("lvt")) return SCORE.MISS;
-      if (fs.scope === "exact_unit" && (fs.materials.includes("wood_look") || fs.materials.includes("hard_surface") || fs.materials.includes("hardwood") || fs.materials.includes("lvp") || fs.materials.includes("lvt"))) return SCORE.FULL;
-      if (fs.scope === "floorplan" && fs.evidenceType === "official_claim") return SCORE.HIGH;
-      return SCORE.MID;
+      return scoreFlooringStatus(apartment.flooringStatus);
     }
 
     // Building-level tags can indicate that a feature exists somewhere in the
@@ -8182,13 +8197,15 @@ function hasStrongAmenities(apartment) {
 }
 
 function mainNeedWarning(apartment, requirement, answers, labels) {
+  const evidenceTier = requirementEvidenceTier(apartment, requirement, answers);
+  if (evidenceTier === 2) return null;
   const score = scoreSetup(apartment, [requirement], answers);
   if (Number.isFinite(score) && score >= SCORE.HIGH) return null;
 
   const selection = Object.hasOwn(SETUP_TO_BUDGET_FEATURE, requirement)
     ? selectBudgetCandidate(apartment, { ...answers, setup: [requirement] }, { respectFeatures: true })
     : null;
-  const explicitMiss = selection?.compatibility === "incompatible" || score === SCORE.MISS;
+  const explicitMiss = evidenceTier === 0 || selection?.compatibility === "incompatible" || score === SCORE.MISS;
 
   if (requirement === "laundry") return explicitMiss ? labels.laundryMiss : labels.laundryVerify;
   if (requirement === "wood_floor") return explicitMiss ? labels.woodFloorMiss : labels.woodFloorVerify;
@@ -8625,6 +8642,7 @@ function fieldGuideWhy(viewModel) {
   }
 
   for (const requirement of answers.requirements || []) {
+    if (!activeHardRequirements(answers).includes(requirement)) continue;
     if (requirementEvidenceTier(apartment, requirement, answers) !== 2) continue;
     if (requirement === "parking") add(copy.parking);
     else if (requirement === "pet_friendly") add(copy.pet);
@@ -8723,7 +8741,15 @@ function buildResultViewModels(top, answers, lang = activeLang()) {
 
 function renderNeedsSummary(answers, lang = activeLang()) {
   const text = FIELD_GUIDE_TEXT[lang] || FIELD_GUIDE_TEXT.en;
-  const requirements = (answers.requirements || []).map(value => answerValueLabel("requirement", value, lang));
+  const requirements = (answers.requirements || []).map(value => {
+    const label = answerValueLabel("requirement", value, lang);
+    if (!Object.hasOwn(SETUP_TO_BUDGET_FEATURE, value) || requirementEvidenceCoverage(value, answers).active) {
+      return label;
+    }
+    return lang === "zh"
+      ? `${label}（已记录；资料不足，暂不影响排序）`
+      : `${label} (recorded; not ranked until evidence coverage improves)`;
+  });
   const preferences = (answers.preferences || []).map(value => {
     const label = answerValueLabel("priority", value, lang);
     if (!["quiet_routine", "yale_shuttle", "low_density"].includes(value) || preferenceEvidenceCoverage(value).active) {
@@ -9103,6 +9129,7 @@ if (typeof module !== "undefined") {
     scoreCampus,
     scoreLocation,
     scoreUtilities,
+    scoreFlooringStatus,
     scoreSetup,
     scoreAmenity,
     scoreAmenityBreadth,
