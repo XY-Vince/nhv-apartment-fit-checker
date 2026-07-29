@@ -169,28 +169,62 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": null,
         "unitType": "1br",
-        "lowestObservedPrice": 2385,
-        "standardLeasePrice": 2385,
-        "budgetLowerBound": 2385,
+        "lowestObservedPrice": 2314,
+        "standardLeasePrice": 2314,
+        "budgetLowerBound": 2314,
         "comparisonStatus": "comparable",
         "budgetEligible": true,
         "priceBasis": "calculated_total",
         "comparisonPolicy": "source_standard_lease",
         "comparisonLeaseMonths": 12,
         "availabilityScope": "current_unit",
-        "comparisonNote": "Official current standard-lease evidence",
+        "comparisonNote": "Current official base rent plus the previously reviewed $115 mandatory monthly fee; the limited special is not deducted",
         "sqftMin": 582,
         "sourceUrl": "https://www.360statestreet.com/floorplans",
-        "sourceRef": null,
-        "checkedDate": "2026-07-11",
-        "retrievedAt": "2026-07-04",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
         "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
+          "laundry": true,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.360statestreet.com/floorplans",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.360statestreet.com/floorplans",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.360statestreet.com/floorplans",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.360statestreet.com/floorplans",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": "APT 1109",
@@ -198,14 +232,14 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "availableFrom": "Available Now",
           "leaseMonths": 12,
           "rentBasis": "per_unit",
-          "baseRentMin": 2270,
-          "baseRentMax": 2270,
-          "totalCostMin": 2385,
-          "totalCostMax": 2385,
-          "sourceRef": null,
+          "baseRentMin": 2199,
+          "baseRentMax": 2199,
+          "totalCostMin": 2314,
+          "totalCostMax": 2314,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
           "sourceType": "official_page_capture",
-          "retrievedAt": "2026-07-04",
-          "checkedDate": "2026-07-11",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -215,28 +249,62 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": null,
         "unitType": "2br",
-        "lowestObservedPrice": 3628,
-        "standardLeasePrice": 3628,
-        "budgetLowerBound": 3628,
+        "lowestObservedPrice": 3413,
+        "standardLeasePrice": 3413,
+        "budgetLowerBound": 3413,
         "comparisonStatus": "comparable",
         "budgetEligible": true,
         "priceBasis": "calculated_total",
         "comparisonPolicy": "source_standard_lease",
         "comparisonLeaseMonths": 10,
         "availabilityScope": "current_unit",
-        "comparisonNote": "Official current standard-lease evidence",
+        "comparisonNote": "Current official base rent plus the previously reviewed $115 mandatory monthly fee; the limited special is not deducted",
         "sqftMin": 1012,
         "sourceUrl": "https://www.360statestreet.com/floorplans",
-        "sourceRef": null,
-        "checkedDate": "2026-07-11",
-        "retrievedAt": "2026-07-04",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
         "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
+          "laundry": true,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.360statestreet.com/floorplans",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.360statestreet.com/floorplans",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.360statestreet.com/floorplans",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.360statestreet.com/floorplans",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": "APT 2418",
@@ -244,14 +312,14 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "availableFrom": "Available Now",
           "leaseMonths": 10,
           "rentBasis": "per_unit",
-          "baseRentMin": 3513,
-          "baseRentMax": 3513,
-          "totalCostMin": 3628,
-          "totalCostMax": 3628,
-          "sourceRef": null,
+          "baseRentMin": 3298,
+          "baseRentMax": 3298,
+          "totalCostMin": 3413,
+          "totalCostMax": 3413,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
           "sourceType": "official_page_capture",
-          "retrievedAt": "2026-07-04",
-          "checkedDate": "2026-07-11",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -261,28 +329,62 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": null,
         "unitType": "studio",
-        "lowestObservedPrice": 2372,
-        "standardLeasePrice": 2372,
-        "budgetLowerBound": 2372,
+        "lowestObservedPrice": 2314,
+        "standardLeasePrice": 2314,
+        "budgetLowerBound": 2314,
         "comparisonStatus": "comparable",
         "budgetEligible": true,
         "priceBasis": "calculated_total",
         "comparisonPolicy": "source_standard_lease",
         "comparisonLeaseMonths": 11,
         "availabilityScope": "current_unit",
-        "comparisonNote": "Official current standard-lease evidence",
+        "comparisonNote": "Current official base rent plus the previously reviewed $115 mandatory monthly fee; the limited special is not deducted",
         "sqftMin": 517,
         "sourceUrl": "https://www.360statestreet.com/floorplans",
-        "sourceRef": null,
-        "checkedDate": "2026-07-11",
-        "retrievedAt": "2026-07-04",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
         "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
+          "laundry": true,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.360statestreet.com/floorplans",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.360statestreet.com/floorplans",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.360statestreet.com/floorplans",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.360statestreet.com/floorplans",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": "APT 705",
@@ -290,14 +392,14 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "availableFrom": "Available Now",
           "leaseMonths": 11,
           "rentBasis": "per_unit",
-          "baseRentMin": 2257,
-          "baseRentMax": 2257,
-          "totalCostMin": 2372,
-          "totalCostMax": 2372,
-          "sourceRef": null,
+          "baseRentMin": 2199,
+          "baseRentMax": 2199,
+          "totalCostMin": 2314,
+          "totalCostMax": 2314,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
           "sourceType": "official_page_capture",
-          "retrievedAt": "2026-07-04",
-          "checkedDate": "2026-07-11",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -309,45 +411,81 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": null,
         "unitType": "1br",
-        "lowestObservedPrice": 2376,
-        "standardLeasePrice": 2376,
-        "budgetLowerBound": 2376,
+        "lowestObservedPrice": 2322,
+        "standardLeasePrice": 2322,
+        "budgetLowerBound": 2322,
         "comparisonStatus": "comparable",
         "budgetEligible": true,
-        "priceBasis": "calculated_total",
+        "priceBasis": "official_total",
         "comparisonPolicy": "source_standard_lease",
         "comparisonLeaseMonths": 12,
-        "availabilityScope": "planning_range",
-        "comparisonNote": "Official current standard-lease evidence",
+        "availabilityScope": "current_unit",
+        "comparisonNote": "Official Total Monthly Leasing Price lower bound; it may already include the current special and is not discounted again",
         "sqftMin": 631,
         "sourceUrl": "https://oliveandwooster.com/availability",
-        "sourceRef": "docs/phase_c_evidence/olive-wooster_2026-07-12.md;data/olive_parsed_fixed.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
-          "woodFloor": null,
-          "furnitureReady": true
+          "laundry": true,
+          "privateSpace": true,
+          "woodFloor": true,
+          "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://oliveandwooster.com/amenities",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://oliveandwooster.com/availability",
+            "sourceRef": "docs/phase_c_evidence/olive-wooster_2026-07-12.md;data/olive_parsed_fixed.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://oliveandwooster.com/amenities",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://oliveandwooster.com/availability",
+            "sourceRef": "docs/phase_c_evidence/olive-wooster_2026-07-12.md;data/olive_parsed_fixed.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
-          "unitId": null,
+          "unitId": "265E",
           "floorplanId": "1bd 631 sqft",
-          "availableFrom": "2026-07-12",
+          "availableFrom": "2026-09-12",
           "leaseMonths": 12,
           "rentBasis": "per_unit",
-          "baseRentMin": 2230,
-          "baseRentMax": 2325,
-          "totalCostMin": 2376,
-          "totalCostMax": 2471,
-          "sourceRef": "docs/phase_c_evidence/olive-wooster_2026-07-12.md;data/olive_parsed_fixed.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
-          "flooringMaterials": [],
-          "furnishedStatus": "furnished"
+          "baseRentMin": 2276,
+          "baseRentMax": 2779,
+          "totalCostMin": 2322,
+          "totalCostMax": 2825,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
+          "flooringMaterials": [
+            "lvp"
+          ],
+          "furnishedStatus": "unknown"
         }
       }
     ],
@@ -355,45 +493,81 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": null,
         "unitType": "2br",
-        "lowestObservedPrice": 2562,
-        "standardLeasePrice": 2562,
-        "budgetLowerBound": 2562,
+        "lowestObservedPrice": 2926,
+        "standardLeasePrice": 2926,
+        "budgetLowerBound": 2926,
         "comparisonStatus": "comparable",
         "budgetEligible": true,
-        "priceBasis": "calculated_total",
+        "priceBasis": "official_total",
         "comparisonPolicy": "source_standard_lease",
         "comparisonLeaseMonths": 12,
-        "availabilityScope": "planning_range",
-        "comparisonNote": "Official current standard-lease evidence",
+        "availabilityScope": "current_unit",
+        "comparisonNote": "Official Total Monthly Leasing Price lower bound; the listing says pricing includes the current special, so it is not discounted again",
         "sqftMin": 967,
         "sourceUrl": "https://oliveandwooster.com/availability",
-        "sourceRef": "docs/phase_c_evidence/olive-wooster_2026-07-12.md;data/olive_parsed_fixed.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
-          "woodFloor": null,
-          "furnitureReady": true
+          "laundry": true,
+          "privateSpace": true,
+          "woodFloor": true,
+          "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://oliveandwooster.com/amenities",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://oliveandwooster.com/availability",
+            "sourceRef": "docs/phase_c_evidence/olive-wooster_2026-07-12.md;data/olive_parsed_fixed.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://oliveandwooster.com/amenities",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://oliveandwooster.com/availability",
+            "sourceRef": "docs/phase_c_evidence/olive-wooster_2026-07-12.md;data/olive_parsed_fixed.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
-          "unitId": null,
+          "unitId": "267E",
           "floorplanId": "2bd 967 sqft",
-          "availableFrom": "2026-07-12",
+          "availableFrom": "2026-09-14",
           "leaseMonths": 12,
           "rentBasis": "per_unit",
-          "baseRentMin": 2416,
-          "baseRentMax": 2983,
-          "totalCostMin": 2562,
-          "totalCostMax": 3129,
-          "sourceRef": "docs/phase_c_evidence/olive-wooster_2026-07-12.md;data/olive_parsed_fixed.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
-          "flooringMaterials": [],
-          "furnishedStatus": "furnished"
+          "baseRentMin": 2880,
+          "baseRentMax": 3744,
+          "totalCostMin": 2926,
+          "totalCostMax": 3790,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
+          "flooringMaterials": [
+            "lvp"
+          ],
+          "furnishedStatus": "unknown"
         }
       }
     ],
@@ -401,45 +575,79 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": null,
         "unitType": "studio",
-        "lowestObservedPrice": 2226,
-        "standardLeasePrice": 2226,
-        "budgetLowerBound": 2226,
-        "comparisonStatus": "comparable",
-        "budgetEligible": true,
-        "priceBasis": "calculated_total",
-        "comparisonPolicy": "source_standard_lease",
-        "comparisonLeaseMonths": 12,
-        "availabilityScope": "planning_range",
-        "comparisonNote": "Official current standard-lease evidence",
-        "sqftMin": 501,
+        "lowestObservedPrice": null,
+        "standardLeasePrice": null,
+        "budgetLowerBound": null,
+        "comparisonStatus": "no_visible_inventory",
+        "budgetEligible": false,
+        "priceBasis": "unknown",
+        "comparisonPolicy": "none",
+        "comparisonLeaseMonths": null,
+        "availabilityScope": "no_visible_inventory",
+        "comparisonNote": "No private Studio was visible in the current official listing feed; co-living is not substituted",
+        "sqftMin": null,
         "sourceUrl": "https://oliveandwooster.com/availability",
-        "sourceRef": "docs/phase_c_evidence/olive-wooster_2026-07-12.md;data/olive_parsed_fixed.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
           "laundry": null,
           "privateSpace": null,
           "woodFloor": null,
-          "furnitureReady": true
+          "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://oliveandwooster.com/availability",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://oliveandwooster.com/availability",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://oliveandwooster.com/availability",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://oliveandwooster.com/availability",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          }
         },
         "trace": {
           "unitId": null,
-          "floorplanId": "Studio 501 sqft",
-          "availableFrom": "2026-10-07",
-          "leaseMonths": 12,
+          "floorplanId": "Private Studio",
+          "availableFrom": null,
+          "leaseMonths": null,
           "rentBasis": "per_unit",
-          "baseRentMin": 2080,
-          "baseRentMax": 2080,
-          "totalCostMin": 2226,
-          "totalCostMax": 2226,
-          "sourceRef": "docs/phase_c_evidence/olive-wooster_2026-07-12.md;data/olive_parsed_fixed.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "baseRentMin": null,
+          "baseRentMax": null,
+          "totalCostMin": null,
+          "totalCostMax": null,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
-          "furnishedStatus": "furnished"
+          "furnishedStatus": "unknown"
         }
       }
     ]
@@ -449,44 +657,80 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": null,
         "unitType": "1br",
-        "lowestObservedPrice": 2528.39,
-        "standardLeasePrice": 2528.39,
-        "budgetLowerBound": 2528.39,
+        "lowestObservedPrice": 2345.39,
+        "standardLeasePrice": 2345.39,
+        "budgetLowerBound": 2345.39,
         "comparisonStatus": "comparable",
         "budgetEligible": true,
         "priceBasis": "calculated_total",
         "comparisonPolicy": "source_standard_lease",
         "comparisonLeaseMonths": 12,
         "availabilityScope": "current_unit",
-        "comparisonNote": "Official current standard-lease evidence",
+        "comparisonNote": "Current official base rent plus $83.39 mandatory monthly fees",
         "sqftMin": 681,
         "sourceUrl": "https://axis201.com/floor-plans",
-        "sourceRef": "docs/phase_c_evidence/axis-201_2026-07-12.md;data/axis_201_availability.md;data/Axis_eBrochure.pdf",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
         "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
-          "woodFloor": null,
+          "laundry": true,
+          "privateSpace": true,
+          "woodFloor": true,
           "furnitureReady": null
         },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://axis201.com/floor-plans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://axis201.com/floor-plans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://axis201.com/floor-plans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://axis201.com/floor-plans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          }
+        },
         "trace": {
-          "unitId": "0331",
+          "unitId": "0337",
           "floorplanId": null,
-          "availableFrom": "2026-07-12",
+          "availableFrom": "Available Now",
           "leaseMonths": 12,
           "rentBasis": "per_unit",
-          "baseRentMin": 2445,
-          "baseRentMax": 2445,
-          "totalCostMin": 2528.39,
-          "totalCostMax": 2528.39,
-          "sourceRef": "docs/phase_c_evidence/axis-201_2026-07-12.md;data/axis_201_availability.md;data/Axis_eBrochure.pdf",
+          "baseRentMin": 2262,
+          "baseRentMax": 2262,
+          "totalCostMin": 2345.39,
+          "totalCostMax": 2345.39,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
           "sourceType": "official_page_capture",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
-          "flooringMaterials": [],
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
+          "flooringMaterials": [
+            "lvp"
+          ],
           "furnishedStatus": "unknown"
         }
       }
@@ -504,35 +748,71 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "comparisonPolicy": "source_standard_lease",
         "comparisonLeaseMonths": 12,
         "availabilityScope": "current_unit",
-        "comparisonNote": "Official current standard-lease evidence",
+        "comparisonNote": "Current official base rent plus $83.39 mandatory monthly fees",
         "sqftMin": 967,
         "sourceUrl": "https://axis201.com/floor-plans",
-        "sourceRef": "docs/phase_c_evidence/axis-201_2026-07-12.md;data/axis_201_availability.md;data/Axis_eBrochure.pdf",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
         "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
-          "woodFloor": null,
+          "laundry": true,
+          "privateSpace": true,
+          "woodFloor": true,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://axis201.com/floor-plans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://axis201.com/floor-plans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://axis201.com/floor-plans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://axis201.com/floor-plans",
+            "sourceRef": "docs/phase_c_evidence/axis-201_2026-07-12.md;data/axis_201_availability.md;data/Axis_eBrochure.pdf",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": "0321",
           "floorplanId": null,
-          "availableFrom": "2026-07-12",
+          "availableFrom": "Available Now",
           "leaseMonths": 12,
           "rentBasis": "per_unit",
           "baseRentMin": 3191,
           "baseRentMax": 3191,
           "totalCostMin": 3274.39,
           "totalCostMax": 3274.39,
-          "sourceRef": "docs/phase_c_evidence/axis-201_2026-07-12.md;data/axis_201_availability.md;data/Axis_eBrochure.pdf",
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
           "sourceType": "official_page_capture",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
-          "flooringMaterials": [],
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
+          "flooringMaterials": [
+            "lvp"
+          ],
           "furnishedStatus": "unknown"
         }
       }
@@ -550,35 +830,71 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "comparisonPolicy": "source_standard_lease",
         "comparisonLeaseMonths": 12,
         "availabilityScope": "current_unit",
-        "comparisonNote": "Official current standard-lease evidence",
+        "comparisonNote": "Current official base rent plus $83.39 mandatory monthly fees",
         "sqftMin": 345,
         "sourceUrl": "https://axis201.com/floor-plans",
-        "sourceRef": "docs/phase_c_evidence/axis-201_2026-07-12.md;data/axis_201_availability.md;data/Axis_eBrochure.pdf",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
         "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
-          "woodFloor": null,
+          "laundry": true,
+          "privateSpace": true,
+          "woodFloor": true,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://axis201.com/floor-plans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://axis201.com/floor-plans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://axis201.com/floor-plans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://axis201.com/floor-plans",
+            "sourceRef": "docs/phase_c_evidence/axis-201_2026-07-12.md;data/axis_201_availability.md;data/Axis_eBrochure.pdf",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": "0249",
           "floorplanId": null,
-          "availableFrom": "2026-07-12",
+          "availableFrom": "Available Now",
           "leaseMonths": 12,
           "rentBasis": "per_unit",
           "baseRentMin": 1852,
           "baseRentMax": 1852,
           "totalCostMin": 1935.39,
           "totalCostMax": 1935.39,
-          "sourceRef": "docs/phase_c_evidence/axis-201_2026-07-12.md;data/axis_201_availability.md;data/Axis_eBrochure.pdf",
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
           "sourceType": "official_page_capture",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
-          "flooringMaterials": [],
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
+          "flooringMaterials": [
+            "lvp"
+          ],
           "furnishedStatus": "unknown"
         }
       }
@@ -589,44 +905,80 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": null,
         "unitType": "1br",
-        "lowestObservedPrice": 2490,
-        "standardLeasePrice": 2490,
-        "budgetLowerBound": 2490,
-        "comparisonStatus": "comparable",
-        "budgetEligible": true,
+        "lowestObservedPrice": 2625,
+        "standardLeasePrice": null,
+        "budgetLowerBound": null,
+        "comparisonStatus": "no_visible_inventory",
+        "budgetEligible": false,
         "priceBasis": "calculated_total",
-        "comparisonPolicy": "source_standard_lease",
-        "comparisonLeaseMonths": 12,
-        "availabilityScope": "planning_range",
-        "comparisonNote": "Official current standard-lease evidence",
-        "sqftMin": 677,
+        "comparisonPolicy": "none",
+        "comparisonLeaseMonths": null,
+        "availabilityScope": "future_unit_outside_90_days",
+        "comparisonNote": "The current standard 10-month 1BR starts 2026-11-01, just outside the 90-day comparison window",
+        "sqftMin": 741,
         "sourceUrl": "https://www.scullycompany.com/apartments/new-england/new-haven-county/new-haven/the-whit/",
-        "sourceRef": "docs/phase_c_evidence/the-whit_2026-07-12.md;data/whit_parsed.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
-          "woodFloor": null,
+          "laundry": true,
+          "privateSpace": true,
+          "woodFloor": true,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://www.scullycompany.com/apartments/new-england/new-haven-county/new-haven/the-whit/",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://www.scullycompany.com/apartments/new-england/new-haven-county/new-haven/the-whit/",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://www.scullycompany.com/apartments/new-england/new-haven-county/new-haven/the-whit/",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://www.scullycompany.com/apartments/new-england/new-haven-county/new-haven/the-whit/",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          }
         },
         "trace": {
           "unitId": null,
-          "floorplanId": "1-Bedroom 1-Bathroom / 677 sqft",
-          "availableFrom": "2026-08-03",
-          "leaseMonths": 12,
+          "floorplanId": "Standard 1BR 741 sqft",
+          "availableFrom": "2026-11-01",
+          "leaseMonths": 10,
           "rentBasis": "per_unit",
-          "baseRentMin": 2475,
-          "baseRentMax": 2475,
-          "totalCostMin": 2490,
-          "totalCostMax": 2490,
-          "sourceRef": "docs/phase_c_evidence/the-whit_2026-07-12.md;data/whit_parsed.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
-          "flooringMaterials": [],
+          "baseRentMin": 2610,
+          "baseRentMax": 2610,
+          "totalCostMin": 2625,
+          "totalCostMax": 2625,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
+          "flooringMaterials": [
+            "hard_surface"
+          ],
           "furnishedStatus": "unknown"
         }
       }
@@ -635,44 +987,80 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": null,
         "unitType": "2br",
-        "lowestObservedPrice": 3415,
-        "standardLeasePrice": 3415,
-        "budgetLowerBound": 3415,
-        "comparisonStatus": "comparable",
-        "budgetEligible": true,
-        "priceBasis": "calculated_total",
-        "comparisonPolicy": "source_standard_lease",
-        "comparisonLeaseMonths": 11,
-        "availabilityScope": "planning_range",
-        "comparisonNote": "Official current standard-lease evidence",
-        "sqftMin": 1114,
+        "lowestObservedPrice": null,
+        "standardLeasePrice": null,
+        "budgetLowerBound": null,
+        "comparisonStatus": "nonstandard_lease_only",
+        "budgetEligible": false,
+        "priceBasis": "unknown",
+        "comparisonPolicy": "none",
+        "comparisonLeaseMonths": null,
+        "availabilityScope": "current_floorplan",
+        "comparisonNote": "Current visible 2BR inventory uses 14-, 15-, or 17-month terms; no 10/11/12-month basis is used",
+        "sqftMin": null,
         "sourceUrl": "https://www.scullycompany.com/apartments/new-england/new-haven-county/new-haven/the-whit/",
-        "sourceRef": "docs/phase_c_evidence/the-whit_2026-07-12.md;data/whit_parsed.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
-          "woodFloor": null,
+          "laundry": true,
+          "privateSpace": true,
+          "woodFloor": true,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://www.scullycompany.com/apartments/new-england/new-haven-county/new-haven/the-whit/",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://www.scullycompany.com/apartments/new-england/new-haven-county/new-haven/the-whit/",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://www.scullycompany.com/apartments/new-england/new-haven-county/new-haven/the-whit/",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://www.scullycompany.com/apartments/new-england/new-haven-county/new-haven/the-whit/",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          }
         },
         "trace": {
           "unitId": null,
-          "floorplanId": "2-Bedroom 2-Bathroom / 1114 sqft",
-          "availableFrom": "2026-05-11",
-          "leaseMonths": 11,
+          "floorplanId": "2BR current inventory",
+          "availableFrom": null,
+          "leaseMonths": null,
           "rentBasis": "per_unit",
-          "baseRentMin": 3400,
-          "baseRentMax": 3400,
-          "totalCostMin": 3415,
-          "totalCostMax": 3415,
-          "sourceRef": "docs/phase_c_evidence/the-whit_2026-07-12.md;data/whit_parsed.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
-          "flooringMaterials": [],
+          "baseRentMin": null,
+          "baseRentMax": null,
+          "totalCostMin": null,
+          "totalCostMax": null,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
+          "flooringMaterials": [
+            "hard_surface"
+          ],
           "furnishedStatus": "unknown"
         }
       }
@@ -681,44 +1069,80 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": null,
         "unitType": "studio",
-        "lowestObservedPrice": 2321,
-        "standardLeasePrice": 2321,
-        "budgetLowerBound": 2321,
-        "comparisonStatus": "comparable",
-        "budgetEligible": true,
+        "lowestObservedPrice": 2155,
+        "standardLeasePrice": null,
+        "budgetLowerBound": null,
+        "comparisonStatus": "nonstandard_lease_only",
+        "budgetEligible": false,
         "priceBasis": "calculated_total",
-        "comparisonPolicy": "source_standard_lease",
-        "comparisonLeaseMonths": 11,
-        "availabilityScope": "planning_range",
-        "comparisonNote": "Official current standard-lease evidence",
-        "sqftMin": 591,
+        "comparisonPolicy": "none",
+        "comparisonLeaseMonths": null,
+        "availabilityScope": "current_unit",
+        "comparisonNote": "The current standard Studio sample is on an 18-month term; a very limited Studio loft is not used as the building-wide basis",
+        "sqftMin": 508,
         "sourceUrl": "https://www.scullycompany.com/apartments/new-england/new-haven-county/new-haven/the-whit/",
-        "sourceRef": "docs/phase_c_evidence/the-whit_2026-07-12.md;data/whit_parsed.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
-          "woodFloor": null,
+          "laundry": true,
+          "privateSpace": true,
+          "woodFloor": true,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://www.scullycompany.com/apartments/new-england/new-haven-county/new-haven/the-whit/",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://www.scullycompany.com/apartments/new-england/new-haven-county/new-haven/the-whit/",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://www.scullycompany.com/apartments/new-england/new-haven-county/new-haven/the-whit/",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://www.scullycompany.com/apartments/new-england/new-haven-county/new-haven/the-whit/",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          }
         },
         "trace": {
           "unitId": null,
-          "floorplanId": "Studio / 591 sqft",
-          "availableFrom": "2026-06-28",
-          "leaseMonths": 11,
+          "floorplanId": "Standard Studio 508 sqft",
+          "availableFrom": "Available Now",
+          "leaseMonths": 18,
           "rentBasis": "per_unit",
-          "baseRentMin": 2306,
-          "baseRentMax": 2306,
-          "totalCostMin": 2321,
-          "totalCostMax": 2321,
-          "sourceRef": "docs/phase_c_evidence/the-whit_2026-07-12.md;data/whit_parsed.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
-          "flooringMaterials": [],
+          "baseRentMin": 2140,
+          "baseRentMax": 2140,
+          "totalCostMin": 2155,
+          "totalCostMax": 2155,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
+          "flooringMaterials": [
+            "hard_surface"
+          ],
           "furnishedStatus": "unknown"
         }
       }
@@ -738,35 +1162,71 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "comparisonPolicy": "source_standard_lease",
         "comparisonLeaseMonths": 12,
         "availabilityScope": "current_unit",
-        "comparisonNote": "Official current standard-lease evidence",
+        "comparisonNote": "Current property-supplied total monthly price",
         "sqftMin": 697,
         "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/taft-apartments/default.aspx",
-        "sourceRef": "docs/phase_c_evidence/the-taft_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
           "laundry": null,
           "privateSpace": true,
-          "woodFloor": null,
+          "woodFloor": true,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/taft-apartments/default.aspx",
+            "sourceRef": "docs/phase_c_evidence/the-taft_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/taft-apartments/default.aspx",
+            "sourceRef": "docs/phase_c_evidence/the-taft_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/taft-apartments/default.aspx",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/taft-apartments/default.aspx",
+            "sourceRef": "docs/phase_c_evidence/the-taft_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": "05S",
           "floorplanId": "1-Bedroom, 1-Bath",
-          "availableFrom": "2026-07-12",
+          "availableFrom": "Available Now",
           "leaseMonths": 12,
           "rentBasis": "per_unit",
           "baseRentMin": null,
           "baseRentMax": null,
           "totalCostMin": 1999,
           "totalCostMax": 1999,
-          "sourceRef": "docs/phase_c_evidence/the-taft_2026-07-12.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
-          "flooringMaterials": [],
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
+          "flooringMaterials": [
+            "hardwood"
+          ],
           "furnishedStatus": "unknown"
         }
       }
@@ -784,19 +1244,53 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "comparisonPolicy": "source_standard_lease",
         "comparisonLeaseMonths": 12,
         "availabilityScope": "current_unit",
-        "comparisonNote": "Official current standard-lease evidence",
+        "comparisonNote": "Current property-supplied total monthly price",
         "sqftMin": 1200,
         "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/taft-apartments/default.aspx",
-        "sourceRef": "docs/phase_c_evidence/the-taft_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
           "laundry": null,
           "privateSpace": true,
-          "woodFloor": null,
+          "woodFloor": true,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/taft-apartments/default.aspx",
+            "sourceRef": "docs/phase_c_evidence/the-taft_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/taft-apartments/default.aspx",
+            "sourceRef": "docs/phase_c_evidence/the-taft_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/taft-apartments/default.aspx",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/taft-apartments/default.aspx",
+            "sourceRef": "docs/phase_c_evidence/the-taft_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": "01A",
@@ -808,11 +1302,13 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "baseRentMax": null,
           "totalCostMin": 2950,
           "totalCostMax": 2950,
-          "sourceRef": "docs/phase_c_evidence/the-taft_2026-07-12.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
-          "flooringMaterials": [],
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
+          "flooringMaterials": [
+            "hardwood"
+          ],
           "furnishedStatus": "unknown"
         }
       }
@@ -821,44 +1317,80 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": null,
         "unitType": "studio",
-        "lowestObservedPrice": 1895,
-        "standardLeasePrice": 1895,
-        "budgetLowerBound": 1895,
+        "lowestObservedPrice": 1850,
+        "standardLeasePrice": 1850,
+        "budgetLowerBound": 1850,
         "comparisonStatus": "comparable",
         "budgetEligible": true,
         "priceBasis": "official_total",
         "comparisonPolicy": "source_standard_lease",
         "comparisonLeaseMonths": 12,
         "availabilityScope": "current_unit",
-        "comparisonNote": "Official current standard-lease evidence",
+        "comparisonNote": "Current property-supplied total monthly price",
         "sqftMin": 424,
         "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/taft-apartments/default.aspx",
-        "sourceRef": "docs/phase_c_evidence/the-taft_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
           "laundry": null,
           "privateSpace": true,
-          "woodFloor": null,
+          "woodFloor": true,
           "furnitureReady": null
         },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/taft-apartments/default.aspx",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/taft-apartments/default.aspx",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/taft-apartments/default.aspx",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/taft-apartments/default.aspx",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          }
+        },
         "trace": {
-          "unitId": "05O",
+          "unitId": "08M",
           "floorplanId": "Studio",
-          "availableFrom": "2026-07-12",
+          "availableFrom": "Available Now",
           "leaseMonths": 12,
           "rentBasis": "per_unit",
           "baseRentMin": null,
           "baseRentMax": null,
-          "totalCostMin": 1895,
-          "totalCostMax": 1895,
-          "sourceRef": "docs/phase_c_evidence/the-taft_2026-07-12.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
-          "flooringMaterials": [],
+          "totalCostMin": 1850,
+          "totalCostMax": 1850,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
+          "flooringMaterials": [
+            "hardwood"
+          ],
           "furnishedStatus": "unknown"
         }
       }
@@ -881,16 +1413,50 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "comparisonNote": "Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed",
         "sqftMin": null,
         "sourceUrl": "https://newhaventowers.com/floorplans/",
-        "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
+          "laundry": true,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/wp-content/uploads/2021/02/18High_Floorplans_1Bedrooms_All-1-1.pdf",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": null,
@@ -902,10 +1468,10 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "baseRentMax": 3095,
           "totalCostMin": null,
           "totalCostMax": null,
-          "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -925,16 +1491,50 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "comparisonNote": "Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed",
         "sqftMin": null,
         "sourceUrl": "https://newhaventowers.com/floorplans/",
-        "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
           "laundry": null,
-          "privateSpace": null,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": null,
@@ -946,10 +1546,10 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "baseRentMax": 2195,
           "totalCostMin": null,
           "totalCostMax": null,
-          "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -969,16 +1569,50 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "comparisonNote": "Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed",
         "sqftMin": null,
         "sourceUrl": "https://newhaventowers.com/floorplans/",
-        "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
           "laundry": null,
-          "privateSpace": null,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": null,
@@ -990,10 +1624,10 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "baseRentMax": 2295,
           "totalCostMin": null,
           "totalCostMax": null,
-          "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -1013,16 +1647,50 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "comparisonNote": "Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed",
         "sqftMin": null,
         "sourceUrl": "https://newhaventowers.com/floorplans/",
-        "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
           "laundry": null,
-          "privateSpace": null,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": null,
@@ -1034,10 +1702,10 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "baseRentMax": 2145,
           "totalCostMin": null,
           "totalCostMax": null,
-          "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -1059,16 +1727,50 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "comparisonNote": "Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed",
         "sqftMin": null,
         "sourceUrl": "https://newhaventowers.com/floorplans/",
-        "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
+          "laundry": true,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/wp-content/uploads/2021/02/18High_Floorplans_2Bedrooms-1-1-2-1-2.pdf",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": null,
@@ -1080,10 +1782,10 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "baseRentMax": 4495,
           "totalCostMin": null,
           "totalCostMax": null,
-          "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -1103,16 +1805,50 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "comparisonNote": "Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed",
         "sqftMin": null,
         "sourceUrl": "https://newhaventowers.com/floorplans/",
-        "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
           "laundry": null,
-          "privateSpace": null,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": null,
@@ -1124,10 +1860,10 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "baseRentMax": 3195,
           "totalCostMin": null,
           "totalCostMax": null,
-          "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -1147,16 +1883,50 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "comparisonNote": "Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed",
         "sqftMin": null,
         "sourceUrl": "https://newhaventowers.com/floorplans/",
-        "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
           "laundry": null,
-          "privateSpace": null,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": null,
@@ -1168,10 +1938,10 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "baseRentMax": 3195,
           "totalCostMin": null,
           "totalCostMax": null,
-          "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -1193,16 +1963,50 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "comparisonNote": "Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed",
         "sqftMin": null,
         "sourceUrl": "https://newhaventowers.com/floorplans/",
-        "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
+          "laundry": true,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/wp-content/uploads/2021/02/18High_Floorplans_Studio-3-4.pdf",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": null,
@@ -1214,10 +2018,10 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "baseRentMax": 2495,
           "totalCostMin": null,
           "totalCostMax": null,
-          "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -1237,16 +2041,50 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "comparisonNote": "Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed",
         "sqftMin": null,
         "sourceUrl": "https://newhaventowers.com/floorplans/",
-        "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
           "laundry": null,
-          "privateSpace": null,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": null,
@@ -1258,10 +2096,10 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "baseRentMax": 2045,
           "totalCostMin": null,
           "totalCostMax": null,
-          "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -1281,16 +2119,50 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "comparisonNote": "Use the midpoint of the official floorplan rent range regardless of lease term; recurring fees remain unconfirmed",
         "sqftMin": null,
         "sourceUrl": "https://newhaventowers.com/floorplans/",
-        "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
           "laundry": null,
-          "privateSpace": null,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://newhaventowers.com/floorplans/",
+            "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": null,
@@ -1302,10 +2174,10 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "baseRentMax": 1845,
           "totalCostMin": null,
           "totalCostMax": null,
-          "sourceRef": "docs/phase_c_evidence/new-haven-towers_2026-07-12.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -1317,9 +2189,9 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": null,
         "unitType": "1br",
-        "lowestObservedPrice": 2464,
-        "standardLeasePrice": 2464,
-        "budgetLowerBound": 2464,
+        "lowestObservedPrice": 2430,
+        "standardLeasePrice": 2430,
+        "budgetLowerBound": 2430,
         "comparisonStatus": "policy_comparable",
         "budgetEligible": true,
         "priceBasis": "official_total",
@@ -1329,16 +2201,50 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "comparisonNote": "Use the lowest official Total Monthly Leasing Price as the 12-month comparison price",
         "sqftMin": 503,
         "sourceUrl": "https://entrata.thearchiveapts.com/new-haven/the-archive/conventional/",
-        "sourceRef": "docs/phase_c_evidence/the-archive_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
+          "laundry": true,
+          "privateSpace": true,
           "woodFloor": null,
-          "furnitureReady": null
+          "furnitureReady": false
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://www.thearchiveapts.com/images/Archive-Sample-Lease.pdf",
+            "sourceRef": "Sample lease page 19, Terms and Conditions, Unit Details",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://entrata.thearchiveapts.com/new-haven/the-archive/conventional/",
+            "sourceRef": "docs/phase_c_evidence/the-archive_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://entrata.thearchiveapts.com/new-haven/the-archive/conventional/",
+            "sourceRef": "docs/phase_c_evidence/the-archive_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://thearchiveapts.com/faq",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": null,
@@ -1348,14 +2254,14 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "rentBasis": "per_unit",
           "baseRentMin": null,
           "baseRentMax": null,
-          "totalCostMin": 2464,
-          "totalCostMax": 5117,
-          "sourceRef": "docs/phase_c_evidence/the-archive_2026-07-12.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "totalCostMin": 2430,
+          "totalCostMax": null,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
-          "furnishedStatus": "unknown"
+          "furnishedStatus": "unfurnished"
         }
       }
     ],
@@ -1363,9 +2269,9 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": null,
         "unitType": "2br",
-        "lowestObservedPrice": 3041,
-        "standardLeasePrice": 3041,
-        "budgetLowerBound": 3041,
+        "lowestObservedPrice": 3071,
+        "standardLeasePrice": 3071,
+        "budgetLowerBound": 3071,
         "comparisonStatus": "policy_comparable",
         "budgetEligible": true,
         "priceBasis": "official_total",
@@ -1375,16 +2281,50 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "comparisonNote": "Use the lowest official Total Monthly Leasing Price as the 12-month comparison price",
         "sqftMin": 631,
         "sourceUrl": "https://entrata.thearchiveapts.com/new-haven/the-archive/conventional/",
-        "sourceRef": "docs/phase_c_evidence/the-archive_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
+          "laundry": true,
+          "privateSpace": true,
           "woodFloor": null,
-          "furnitureReady": null
+          "furnitureReady": false
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://www.thearchiveapts.com/images/Archive-Sample-Lease.pdf",
+            "sourceRef": "Sample lease page 19, Terms and Conditions, Unit Details",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://entrata.thearchiveapts.com/new-haven/the-archive/conventional/",
+            "sourceRef": "docs/phase_c_evidence/the-archive_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://entrata.thearchiveapts.com/new-haven/the-archive/conventional/",
+            "sourceRef": "docs/phase_c_evidence/the-archive_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://thearchiveapts.com/faq",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": null,
@@ -1394,14 +2334,14 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "rentBasis": "per_unit",
           "baseRentMin": null,
           "baseRentMax": null,
-          "totalCostMin": 3041,
-          "totalCostMax": 5248,
-          "sourceRef": "docs/phase_c_evidence/the-archive_2026-07-12.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "totalCostMin": 3071,
+          "totalCostMax": null,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
-          "furnishedStatus": "unknown"
+          "furnishedStatus": "unfurnished"
         }
       }
     ],
@@ -1421,16 +2361,50 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "comparisonNote": "Use the lowest official Total Monthly Leasing Price as the 12-month comparison price; current Studio availability is not confirmed",
         "sqftMin": 387,
         "sourceUrl": "https://entrata.thearchiveapts.com/new-haven/the-archive/conventional/",
-        "sourceRef": "docs/phase_c_evidence/the-archive_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
+          "laundry": true,
+          "privateSpace": true,
           "woodFloor": null,
-          "furnitureReady": null
+          "furnitureReady": false
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://www.thearchiveapts.com/images/Archive-Sample-Lease.pdf",
+            "sourceRef": "Sample lease page 19, Terms and Conditions, Unit Details",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://entrata.thearchiveapts.com/new-haven/the-archive/conventional/",
+            "sourceRef": "docs/phase_c_evidence/the-archive_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://entrata.thearchiveapts.com/new-haven/the-archive/conventional/",
+            "sourceRef": "docs/phase_c_evidence/the-archive_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://thearchiveapts.com/faq",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": null,
@@ -1442,12 +2416,12 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "baseRentMax": null,
           "totalCostMin": 2232,
           "totalCostMax": 2282,
-          "sourceRef": "docs/phase_c_evidence/the-archive_2026-07-12.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
-          "furnishedStatus": "unknown"
+          "furnishedStatus": "unfurnished"
         }
       }
     ]
@@ -1475,10 +2449,44 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
+          "laundry": true,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.anthemsquare10.com/",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.anthemsquare10.com/floorplans/a1",
+            "sourceRef": "docs/phase_c_evidence/anthem-square10_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.anthemsquare10.com/floorplans/a1",
+            "sourceRef": "docs/phase_c_evidence/anthem-square10_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.anthemsquare10.com/floorplans/a1",
+            "sourceRef": "docs/phase_c_evidence/anthem-square10_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": "634",
@@ -1521,10 +2529,44 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
+          "laundry": true,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.anthemsquare10.com/",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.anthemsquare10.com/floorplans/b2",
+            "sourceRef": "docs/phase_c_evidence/anthem-square10_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.anthemsquare10.com/floorplans/b2",
+            "sourceRef": "docs/phase_c_evidence/anthem-square10_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.anthemsquare10.com/floorplans/b2",
+            "sourceRef": "docs/phase_c_evidence/anthem-square10_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": "707",
@@ -1567,10 +2609,44 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
+          "laundry": true,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.anthemsquare10.com/",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.anthemsquare10.com/floorplans/s1",
+            "sourceRef": "docs/phase_c_evidence/anthem-square10_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.anthemsquare10.com/floorplans/s1",
+            "sourceRef": "docs/phase_c_evidence/anthem-square10_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.anthemsquare10.com/floorplans/s1",
+            "sourceRef": "docs/phase_c_evidence/anthem-square10_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": "313",
@@ -1597,28 +2673,62 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": "367 Orange",
         "unitType": "1br",
-        "lowestObservedPrice": 2685,
-        "standardLeasePrice": 2685,
-        "budgetLowerBound": 2685,
+        "lowestObservedPrice": 2752,
+        "standardLeasePrice": 2752,
+        "budgetLowerBound": 2752,
         "comparisonStatus": "comparable",
         "budgetEligible": true,
         "priceBasis": "calculated_total",
         "comparisonPolicy": "source_standard_lease",
         "comparisonLeaseMonths": 12,
         "availabilityScope": "current_unit",
-        "comparisonNote": "Official current standard-lease evidence",
+        "comparisonNote": "Current official 12-month cost estimate",
         "sqftMin": 670,
-        "sourceUrl": "https://www.theaudubonapts.com/rentestimate/1-bed%2f1-bath-a3.1-367-orange",
-        "sourceRef": "docs/phase_c_evidence/the-audubon_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
+        "sourceUrl": "https://www.theaudubonapts.com/floorplans",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
         "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
           "laundry": null,
-          "privateSpace": null,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.theaudubonapts.com/rentestimate/1-bed%2f1-bath-a3.1-367-orange",
+            "sourceRef": "docs/phase_c_evidence/the-audubon_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.theaudubonapts.com/rentestimate/1-bed%2f1-bath-a3.1-367-orange",
+            "sourceRef": "docs/phase_c_evidence/the-audubon_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.theaudubonapts.com/rentestimate/1-bed%2f1-bath-a3.1-367-orange",
+            "sourceRef": "docs/phase_c_evidence/the-audubon_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.theaudubonapts.com/rentestimate/1-bed%2f1-bath-a3.1-367-orange",
+            "sourceRef": "docs/phase_c_evidence/the-audubon_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": "518",
@@ -1626,14 +2736,14 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "availableFrom": "2026-10-05",
           "leaseMonths": 12,
           "rentBasis": "per_unit",
-          "baseRentMin": 2588,
-          "baseRentMax": 2588,
-          "totalCostMin": 2685,
-          "totalCostMax": 2685,
-          "sourceRef": "docs/phase_c_evidence/the-audubon_2026-07-12.md",
+          "baseRentMin": 2581,
+          "baseRentMax": 2581,
+          "totalCostMin": 2752,
+          "totalCostMax": 2752,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
           "sourceType": "official_page_capture",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -1643,43 +2753,77 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": "29 Audubon Street",
         "unitType": "2br",
-        "lowestObservedPrice": 3927,
-        "standardLeasePrice": 3927,
-        "budgetLowerBound": 3927,
+        "lowestObservedPrice": 3676,
+        "standardLeasePrice": 3676,
+        "budgetLowerBound": 3676,
         "comparisonStatus": "comparable",
         "budgetEligible": true,
         "priceBasis": "calculated_total",
         "comparisonPolicy": "source_standard_lease",
         "comparisonLeaseMonths": 12,
         "availabilityScope": "current_unit",
-        "comparisonNote": "Official current standard-lease evidence",
-        "sqftMin": 1220,
-        "sourceUrl": "https://www.theaudubonapts.com/rentestimate/2-bed%2f2-bath-den-f1_1---29-audubon-street",
-        "sourceRef": "docs/phase_c_evidence/the-audubon_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
+        "comparisonNote": "Current official 12-month cost estimate",
+        "sqftMin": 1110,
+        "sourceUrl": "https://www.theaudubonapts.com/floorplans",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
         "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
           "laundry": null,
-          "privateSpace": null,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
         },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.theaudubonapts.com/floorplans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://www.theaudubonapts.com/floorplans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.theaudubonapts.com/floorplans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.theaudubonapts.com/floorplans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          }
+        },
         "trace": {
-          "unitId": "102",
-          "floorplanId": "2 Bed/2 Bath Den-F1_1",
-          "availableFrom": "2026-07-13",
+          "unitId": "403",
+          "floorplanId": "2 Bed/2 Bath-B5",
+          "availableFrom": "2026-10-07",
           "leaseMonths": 12,
           "rentBasis": "per_unit",
-          "baseRentMin": 3830,
-          "baseRentMax": 3830,
-          "totalCostMin": 3927,
-          "totalCostMax": 3927,
-          "sourceRef": "docs/phase_c_evidence/the-audubon_2026-07-12.md",
+          "baseRentMin": 3579,
+          "baseRentMax": 3579,
+          "totalCostMin": 3676,
+          "totalCostMax": 3676,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
           "sourceType": "official_page_capture",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -1689,43 +2833,77 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": null,
         "unitType": "studio",
-        "lowestObservedPrice": 2532,
-        "standardLeasePrice": 2532,
-        "budgetLowerBound": 2532,
+        "lowestObservedPrice": 2564,
+        "standardLeasePrice": 2564,
+        "budgetLowerBound": 2564,
         "comparisonStatus": "comparable",
         "budgetEligible": true,
         "priceBasis": "calculated_total",
         "comparisonPolicy": "source_standard_lease",
         "comparisonLeaseMonths": 12,
         "availabilityScope": "current_unit",
-        "comparisonNote": "Official current standard-lease evidence",
+        "comparisonNote": "Current official 12-month cost estimate",
         "sqftMin": 575,
-        "sourceUrl": "https://www.theaudubonapts.com/rentestimate/studio-s1.1",
-        "sourceRef": "docs/phase_c_evidence/the-audubon_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
+        "sourceUrl": "https://www.theaudubonapts.com/floorplans",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
         "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
           "laundry": null,
-          "privateSpace": null,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.theaudubonapts.com/rentestimate/studio-s1.1",
+            "sourceRef": "docs/phase_c_evidence/the-audubon_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.theaudubonapts.com/rentestimate/studio-s1.1",
+            "sourceRef": "docs/phase_c_evidence/the-audubon_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.theaudubonapts.com/rentestimate/studio-s1.1",
+            "sourceRef": "docs/phase_c_evidence/the-audubon_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.theaudubonapts.com/rentestimate/studio-s1.1",
+            "sourceRef": "docs/phase_c_evidence/the-audubon_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": "220",
           "floorplanId": "Studio-S1.1",
-          "availableFrom": "2026-07-13",
+          "availableFrom": "2026-08-25",
           "leaseMonths": 12,
           "rentBasis": "per_unit",
-          "baseRentMin": 2440,
-          "baseRentMax": 2440,
-          "totalCostMin": 2532,
-          "totalCostMax": 2532,
-          "sourceRef": "docs/phase_c_evidence/the-audubon_2026-07-12.md",
+          "baseRentMin": 2472,
+          "baseRentMax": 2472,
+          "totalCostMin": 2564,
+          "totalCostMax": 2564,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
           "sourceType": "official_page_capture",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -1752,9 +2930,43 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "rentBasis": "per_unit",
         "features": {
           "laundry": null,
-          "privateSpace": null,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://www.theaudubonapts.com/floorplans",
+            "sourceRef": "docs/phase_c_evidence/the-audubon_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://www.theaudubonapts.com/floorplans",
+            "sourceRef": "docs/phase_c_evidence/the-audubon_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://www.theaudubonapts.com/floorplans",
+            "sourceRef": "docs/phase_c_evidence/the-audubon_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://www.theaudubonapts.com/floorplans",
+            "sourceRef": "docs/phase_c_evidence/the-audubon_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": null,
@@ -1781,43 +2993,77 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": null,
         "unitType": "1br",
-        "lowestObservedPrice": 2754,
-        "standardLeasePrice": 2754,
-        "budgetLowerBound": 2754,
+        "lowestObservedPrice": 2179,
+        "standardLeasePrice": 2179,
+        "budgetLowerBound": 2179,
         "comparisonStatus": "comparable",
         "budgetEligible": true,
         "priceBasis": "official_total",
         "comparisonPolicy": "source_standard_lease",
         "comparisonLeaseMonths": 12,
         "availabilityScope": "current_unit",
-        "comparisonNote": "Official current standard-lease evidence",
-        "sqftMin": 774,
+        "comparisonNote": "Current property-supplied total monthly price lower bound",
+        "sqftMin": 695,
         "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/pierpont-at-city-crossing/default.aspx",
-        "sourceRef": "docs/phase_c_evidence/pierpont-city-crossing_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
+          "laundry": true,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
         },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/pierpont-at-city-crossing/default.aspx",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/pierpont-at-city-crossing/default.aspx",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/pierpont-at-city-crossing/default.aspx",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/pierpont-at-city-crossing/default.aspx",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          }
+        },
         "trace": {
-          "unitId": "629",
-          "floorplanId": "A5",
-          "availableFrom": "2026-07-12",
+          "unitId": "103",
+          "floorplanId": "1BR 695 sqft",
+          "availableFrom": "2026-08-03",
           "leaseMonths": 12,
           "rentBasis": "per_unit",
           "baseRentMin": null,
           "baseRentMax": null,
-          "totalCostMin": 2754,
-          "totalCostMax": 4408,
-          "sourceRef": "docs/phase_c_evidence/pierpont-city-crossing_2026-07-12.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "totalCostMin": 2179,
+          "totalCostMax": 2932,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -1827,43 +3073,77 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": null,
         "unitType": "2br",
-        "lowestObservedPrice": 3615,
-        "standardLeasePrice": 3615,
-        "budgetLowerBound": 3615,
+        "lowestObservedPrice": 3572,
+        "standardLeasePrice": 3572,
+        "budgetLowerBound": 3572,
         "comparisonStatus": "comparable",
         "budgetEligible": true,
         "priceBasis": "official_total",
         "comparisonPolicy": "source_standard_lease",
         "comparisonLeaseMonths": 12,
         "availabilityScope": "current_unit",
-        "comparisonNote": "Official current standard-lease evidence",
-        "sqftMin": 1039,
+        "comparisonNote": "Current property-supplied total monthly price lower bound",
+        "sqftMin": 1077,
         "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/pierpont-at-city-crossing/default.aspx",
-        "sourceRef": "docs/phase_c_evidence/pierpont-city-crossing_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
+          "laundry": true,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
         },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/pierpont-at-city-crossing/default.aspx",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/pierpont-at-city-crossing/default.aspx",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/pierpont-at-city-crossing/default.aspx",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/pierpont-at-city-crossing/default.aspx",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          }
+        },
         "trace": {
-          "unitId": "305",
-          "floorplanId": "B1",
-          "availableFrom": "2026-07-12",
+          "unitId": "508",
+          "floorplanId": "2BR 1077 sqft",
+          "availableFrom": "Available Now",
           "leaseMonths": 12,
           "rentBasis": "per_unit",
           "baseRentMin": null,
           "baseRentMax": null,
-          "totalCostMin": 3615,
-          "totalCostMax": 6869,
-          "sourceRef": "docs/phase_c_evidence/pierpont-city-crossing_2026-07-12.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "totalCostMin": 3572,
+          "totalCostMax": 6789,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -1873,44 +3153,82 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": null,
         "unitType": "studio",
-        "lowestObservedPrice": 2280,
-        "standardLeasePrice": 2280,
-        "budgetLowerBound": 2280,
+        "lowestObservedPrice": 2248,
+        "standardLeasePrice": 2248,
+        "budgetLowerBound": 2248,
         "comparisonStatus": "comparable",
         "budgetEligible": true,
         "priceBasis": "official_total",
         "comparisonPolicy": "source_standard_lease",
         "comparisonLeaseMonths": 12,
         "availabilityScope": "current_unit",
-        "comparisonNote": "Official current standard-lease evidence",
+        "comparisonNote": "Current property-supplied total monthly price lower bound",
         "sqftMin": 537,
         "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/pierpont-at-city-crossing/default.aspx",
-        "sourceRef": "docs/phase_c_evidence/pierpont-city-crossing_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
-        "sourceType": "official_paste",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
+        "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
-          "laundry": null,
-          "privateSpace": null,
-          "woodFloor": null,
+          "laundry": true,
+          "privateSpace": true,
+          "woodFloor": false,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/pierpont-at-city-crossing/default.aspx",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "building",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/pierpont-at-city-crossing/default.aspx",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://rms-companies.com/property/pierpont-at-city-crossing/",
+            "sourceRef": null,
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://www.rentcafe.com/apartments/ct/new-haven/pierpont-at-city-crossing/default.aspx",
+            "sourceRef": "docs/phase_c_evidence/pierpont-city-crossing_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": "525",
           "floorplanId": "JR1",
-          "availableFrom": "2026-07-12",
+          "availableFrom": "Available Now",
           "leaseMonths": 12,
           "rentBasis": "per_unit",
           "baseRentMin": null,
           "baseRentMax": null,
-          "totalCostMin": 2280,
-          "totalCostMax": 7846,
-          "sourceRef": "docs/phase_c_evidence/pierpont-city-crossing_2026-07-12.md",
-          "sourceType": "official_paste",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
-          "flooringMaterials": [],
+          "totalCostMin": 2248,
+          "totalCostMax": 7736,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+          "sourceType": "official_page_capture",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
+          "flooringMaterials": [
+            "lvp",
+            "carpet",
+            "tile"
+          ],
           "furnishedStatus": "unknown"
         }
       }
@@ -1921,43 +3239,77 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
       {
         "subBuildingId": null,
         "unitType": "1br",
-        "lowestObservedPrice": 2835,
-        "standardLeasePrice": 2835,
-        "budgetLowerBound": 2835,
+        "lowestObservedPrice": 2870,
+        "standardLeasePrice": 2870,
+        "budgetLowerBound": 2870,
         "comparisonStatus": "comparable",
         "budgetEligible": true,
         "priceBasis": "calculated_total",
         "comparisonPolicy": "source_standard_lease",
         "comparisonLeaseMonths": 12,
         "availabilityScope": "current_unit",
-        "comparisonNote": "Official current standard-lease evidence",
+        "comparisonNote": "Current official $2,830 base rent plus the previously reviewed $40 mandatory monthly fee",
         "sqftMin": null,
-        "sourceUrl": "https://estellenewhaven.securecafe.com/onlineleasing/estelle-new-haven/rentaloptions.aspx?UnitID=48066972&FloorPlanID=6409675&myOlePropertyid=2326474&MoveInDate=7/13/2026",
-        "sourceRef": "docs/phase_c_evidence/estelle_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
+        "sourceUrl": "https://estellenewhaven.securecafe.com/onlineleasing/estelle-new-haven/floorplans",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
         "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
           "laundry": null,
-          "privateSpace": null,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
+        },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://estellenewhaven.securecafe.com/onlineleasing/estelle-new-haven/rentaloptions.aspx?UnitID=48066972&FloorPlanID=6409675&myOlePropertyid=2326474&MoveInDate=7/13/2026",
+            "sourceRef": "docs/phase_c_evidence/estelle_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "unit",
+            "sourceUrl": "https://estellenewhaven.securecafe.com/onlineleasing/estelle-new-haven/rentaloptions.aspx?UnitID=48066972&FloorPlanID=6409675&myOlePropertyid=2326474&MoveInDate=7/13/2026",
+            "sourceRef": "docs/phase_c_evidence/estelle_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://estellenewhaven.securecafe.com/onlineleasing/estelle-new-haven/rentaloptions.aspx?UnitID=48066972&FloorPlanID=6409675&myOlePropertyid=2326474&MoveInDate=7/13/2026",
+            "sourceRef": "docs/phase_c_evidence/estelle_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "unit",
+            "sourceUrl": "https://estellenewhaven.securecafe.com/onlineleasing/estelle-new-haven/rentaloptions.aspx?UnitID=48066972&FloorPlanID=6409675&myOlePropertyid=2326474&MoveInDate=7/13/2026",
+            "sourceRef": "docs/phase_c_evidence/estelle_2026-07-12.md",
+            "checkedDate": "2026-07-27",
+            "reviewedAt": "2026-07-27"
+          }
         },
         "trace": {
           "unitId": "506",
           "floorplanId": "A3",
-          "availableFrom": "2026-07-13",
+          "availableFrom": "Available Now",
           "leaseMonths": 12,
           "rentBasis": "per_unit",
-          "baseRentMin": 2795,
-          "baseRentMax": 2795,
-          "totalCostMin": 2835,
-          "totalCostMax": 2835,
-          "sourceRef": "docs/phase_c_evidence/estelle_2026-07-12.md",
+          "baseRentMin": 2830,
+          "baseRentMax": 2830,
+          "totalCostMin": 2870,
+          "totalCostMax": 2870,
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
           "sourceType": "official_page_capture",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -1975,35 +3327,69 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "priceBasis": "calculated_total",
         "comparisonPolicy": "source_standard_lease",
         "comparisonLeaseMonths": 12,
-        "availabilityScope": "current_unit",
-        "comparisonNote": "Official current standard-lease evidence",
+        "availabilityScope": "current_floorplan",
+        "comparisonNote": "Current official $3,870 base rent plus the previously reviewed $40 mandatory monthly fee",
         "sqftMin": null,
-        "sourceUrl": "https://estellenewhaven.securecafe.com/onlineleasing/estelle-new-haven/rentaloptions.aspx?UnitID=48066927&FloorPlanID=6409679&myOlePropertyid=2326474&MoveInDate=7/13/2026",
-        "sourceRef": "docs/phase_c_evidence/estelle_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
+        "sourceUrl": "https://estellenewhaven.securecafe.com/onlineleasing/estelle-new-haven/floorplans",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
         "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
           "laundry": null,
-          "privateSpace": null,
+          "privateSpace": true,
           "woodFloor": null,
           "furnitureReady": null
         },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://estellenewhaven.securecafe.com/onlineleasing/estelle-new-haven/floorplans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "confirmed",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://estellenewhaven.securecafe.com/onlineleasing/estelle-new-haven/floorplans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://estellenewhaven.securecafe.com/onlineleasing/estelle-new-haven/floorplans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://estellenewhaven.securecafe.com/onlineleasing/estelle-new-haven/floorplans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          }
+        },
         "trace": {
-          "unitId": "209",
+          "unitId": null,
           "floorplanId": "B3",
-          "availableFrom": "2026-07-13",
+          "availableFrom": "Available Now",
           "leaseMonths": 12,
           "rentBasis": "per_unit",
           "baseRentMin": 3870,
           "baseRentMax": 3870,
           "totalCostMin": 3910,
           "totalCostMax": 3910,
-          "sourceRef": "docs/phase_c_evidence/estelle_2026-07-12.md",
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
           "sourceType": "official_page_capture",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -2021,13 +3407,13 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
         "priceBasis": "unknown",
         "comparisonPolicy": "not_applicable",
         "comparisonLeaseMonths": null,
-        "availabilityScope": "not_applicable",
-        "comparisonNote": "Studio is N/A for this pass; keep eligible 1BR and 2BR evidence unchanged",
+        "availabilityScope": "inquire_only",
+        "comparisonNote": "Studio S1 and S2 remain inquire-only in the current official feed",
         "sqftMin": null,
         "sourceUrl": "https://estellenewhaven.securecafe.com/onlineleasing/estelle-new-haven/floorplans",
-        "sourceRef": "docs/phase_c_evidence/estelle_2026-07-12.md",
-        "checkedDate": "2026-07-12",
-        "retrievedAt": "2026-07-12",
+        "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+        "checkedDate": "2026-07-29",
+        "retrievedAt": "2026-07-29",
         "sourceType": "official_page_capture",
         "rentBasis": "per_unit",
         "features": {
@@ -2036,9 +3422,43 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "woodFloor": null,
           "furnitureReady": null
         },
+        "featureEvidence": {
+          "in_unit_laundry": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://estellenewhaven.securecafe.com/onlineleasing/estelle-new-haven/floorplans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "private_kitchen_bath": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://estellenewhaven.securecafe.com/onlineleasing/estelle-new-haven/floorplans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "flooring_materials": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://estellenewhaven.securecafe.com/onlineleasing/estelle-new-haven/floorplans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          },
+          "furnished_status": {
+            "evidenceStatus": "not_found",
+            "recordScope": "floorplan",
+            "sourceUrl": "https://estellenewhaven.securecafe.com/onlineleasing/estelle-new-haven/floorplans",
+            "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
+            "checkedDate": "2026-07-29",
+            "reviewedAt": "2026-07-29"
+          }
+        },
         "trace": {
           "unitId": null,
-          "floorplanId": "S1",
+          "floorplanId": "S1/S2",
           "availableFrom": null,
           "leaseMonths": null,
           "rentBasis": "per_unit",
@@ -2046,10 +3466,10 @@ const AVAILABILITY_PRICE_SNAPSHOT = Object.freeze({
           "baseRentMax": null,
           "totalCostMin": null,
           "totalCostMax": null,
-          "sourceRef": "docs/phase_c_evidence/estelle_2026-07-12.md",
+          "sourceRef": "reviews/price_refresh_evidence_2026-07-29.md",
           "sourceType": "official_page_capture",
-          "retrievedAt": "2026-07-12",
-          "checkedDate": "2026-07-12",
+          "retrievedAt": "2026-07-29",
+          "checkedDate": "2026-07-29",
           "flooringMaterials": [],
           "furnishedStatus": "unknown"
         }
@@ -2287,7 +3707,7 @@ const UI_TEXT = {
       accessRoutePartial: "Verify access and late-night route",
       parkingAmple: "Official page says ample; verify current space",
       parkingAvailable: "Parking listed; verify current space",
-      parkingAdjacent: "Monthly parking next door; not onsite; verify rate and space",
+      parkingAdjacent: "Crown Street Garage next door: $165/mo, not onsite; verify space",
       parkingNoOnsite: "No onsite parking; verify nearby options",
       parkingNone: "No practical parking option confirmed",
       parkingVerify: "Parking needs verification",
@@ -2423,7 +3843,7 @@ const UI_TEXT = {
       accessRoutePartial: "门禁与晚间路线要确认",
       parkingAmple: "官网称 parking 充足，空位仍要确认",
       parkingAvailable: "有 parking，空位要确认",
-      parkingAdjacent: "隔壁有月租 parking，非楼内；价格和空位要确认",
+      parkingAdjacent: "隔壁 Crown Street Garage $165/月，非楼内；空位需确认",
       parkingNoOnsite: "没有楼内 parking，附近方案待核实",
       parkingNone: "没有确认可用的 parking 方案",
       parkingVerify: "parking 情况待核实",
@@ -3247,7 +4667,14 @@ const APARTMENTS = [
         "confidence": "planning_assumption",
         "appliesWhenSetup": "furniture_ready"
       },
-      "parkingEstimate": null,
+      "parkingEstimate": {
+        "amount": 165,
+        "confidence": "verified_public",
+        "appliesWhenPriority": "parking",
+        "sourceUrl": "https://parknewhaven.com/parking/crown-street-garage/",
+        "sourceRef": "https://parknewhaven.com/monthly-parking/; https://parknewhaven.com/faq/",
+        "checkedDate": "2026-07-27"
+      },
       "concessionEstimate": {
         "monthsFree": 2,
         "leaseMonths": 12,
@@ -3319,11 +4746,12 @@ const APARTMENTS = [
         "walkMinutes": 1,
         "monthlyParking": true,
         "availability": "verify",
-        "priceStatus": "market_rate_user_reported",
+        "eligibility": "verify",
+        "priceStatus": "official_current",
         "confidence": "verified_public",
-        "sourceUrl": null,
-        "sourceRef": "user_feedback_2026-07-14",
-        "checkedDate": "2026-07-14"
+        "sourceUrl": "https://parknewhaven.com/parking/crown-street-garage/",
+        "sourceRef": "https://parknewhaven.com/monthly-parking/; https://parknewhaven.com/faq/",
+        "checkedDate": "2026-07-27"
       },
       "petPolicy": {
         "allowed": true,
@@ -3363,12 +4791,12 @@ const APARTMENTS = [
     ],
     "tradeoffs": [
       "当前 2 个月免租只适用于 Studio / 1BR；具体房源和入住日期仍要确认",
-      "recurring Trash + Amenities 已见 $55/mo；楼内没有住户停车位，隔壁有月租 parking，完整 fee sheet 和 insurance 仍缺",
+      "recurring Trash + Amenities 已见 $55/mo；楼内没有住户停车位，隔壁 Crown Street Garage 为 $165/月、24/7，实时空位和对附近住户的资格仍需确认",
       "不是 newer glass-tower profile，unit condition、laundry、flooring 要看 exact unit"
     ],
     "verify": [
       "full fee sheet and whether skip-deposit offer has conditions",
-      "electricity, internet, laundry, pet, and renter's insurance costs; nearby garage options if you have a car",
+      "electricity, internet, laundry, pet, and renter's insurance costs; Crown Street Garage availability and monthly-customer eligibility if you have a car",
       "whether CORT / corporate furnished option works for normal student leases",
       "bank statement format for Yale community applicants and remote application policy"
     ],
@@ -4532,12 +5960,14 @@ const APARTMENTS = [
   },
   {
     "id": "pierpont-city-crossing",
-    "name": "Pierpont at City Crossing",
-    "area": "Downtown Crossing / station-med edge",
+    "name": "City Crossing",
+    "complexId": "city-crossing",
+    "priceBasisSubBuildingId": "pierpont-city-crossing",
+    "area": "Med School / Downtown south · 5 buildings",
     "price": {
       "min": 2218,
       "max": 3613,
-      "label": "$2,218+ Jr Studio; $2,486+ 1BR; $3,613+ 2BR"
+      "label": "Current Pierpont basis: $2,218+ Jr Studio; $2,486+ 1BR; $3,613+ 2BR"
     },
     "trueMonthlyCost": {
       "advertisedRent": 2218,
@@ -4613,25 +6043,25 @@ const APARTMENTS = [
       "late_route"
     ],
     "quietScore": 75,
-    "flooring": "Photos suggest luxury wood plank vinyl in living areas, carpet in bedrooms; verify exact unit",
-    "furnishing": "Furnished status has not been verified for standard leases",
+    "flooring": "Pierpont basis: wood-plank vinyl living areas, carpeted bedrooms, and porcelain-tile bathrooms; other City Crossing buildings differ",
+    "furnishing": "Standard-lease furnishing is not yet verified across all five buildings; select short-term furnished units are a separate product",
     "applicationFriction": 4,
     "roommateFit": 3,
     "confidence": "partial",
     "confidenceLabel": "Partial confidence",
-    "dailyLabel": "Station / Med / downtown crossing routine",
-    "sourceLabel": "RMS and official RentCafe pages checked 2026-07-12",
+    "dailyLabel": "Med School / Downtown south routine across five nearby buildings",
+    "sourceLabel": "RMS complex identity and features checked 2026-07-27; current price basis is Pierpont",
     "bestFor": [
-      "主要去医学院、Union Station 或 Downtown 南侧，想住 Pierpont 的学生",
-      "想比较 Jr Studio、1BR 和 2BR，并愿意按具体房源确认价格和入住日期的学生"
+      "主要去医学院、YNHH 或 Downtown 南侧，想一起比较五栋相邻新楼的学生",
+      "愿意先用 Pierpont 的已审核价格作参考，再按 Mason、Aura、Maddox、Pierpont 和 Parkside 分楼核实的学生"
     ],
     "tradeoffs": [
       "位置在 Downtown 南侧；去 Central Campus、SOM 或 Science Hill 不如市中心核心区方便",
-      "部分费用、水电网、parking 和标准 lease 政策仍需确认"
+      "当前预算和费用计算只采用 Pierpont；其他四栋不能借用 Pierpont 的价格、水电网或房间配置"
     ],
     "verify": [
-      "the exact unit, price, and move-in date",
-      "the full fee sheet, utilities, parking, and renter's insurance",
+      "which City Crossing building and exact unit you are comparing",
+      "that building's price, full fee sheet, utilities, parking, and renter's insurance",
       "student guarantor/co-signer and remote signing policy"
     ],
     "priceAvailabilityConfidence": "partial_public",
@@ -4643,8 +6073,9 @@ const APARTMENTS = [
         "carpet",
         "tile"
       ],
-      "scope": "building",
-      "evidenceType": "photo_inferred",
+      "scope": "sub_building",
+      "subBuildingId": "pierpont-city-crossing",
+      "evidenceType": "official_text",
       "confidence": "verified_public",
       "sourceUrl": null,
       "sourceRef": "VERIFICATION_LOG.md#restored-fields",
@@ -4708,7 +6139,7 @@ const APARTMENTS = [
       }
     },
     "location": {
-      "address": "Downtown Crossing / station-med edge",
+      "address": "Med School / Downtown south · five-building complex",
       "lat": null,
       "lng": null,
       "walkMinutes": {
@@ -4722,7 +6153,34 @@ const APARTMENTS = [
       "walkCheckedDate": null
     },
     "floorplans": [],
-    "concession": "Official site shows 1 month free on select units and lease terms; confirm eligibility."
+    "subBuildings": [
+      {
+        "id": "the-mason-city-crossing",
+        "name": "The Mason at City Crossing",
+        "address": "188 Lafayette Street"
+      },
+      {
+        "id": "aura-city-crossing",
+        "name": "Aura at City Crossing",
+        "address": "2 Washington Avenue"
+      },
+      {
+        "id": "maddox-city-crossing",
+        "name": "The Maddox at City Crossing",
+        "address": "240 Congress Avenue"
+      },
+      {
+        "id": "pierpont-city-crossing",
+        "name": "Pierpont at City Crossing",
+        "address": "9 Tower Lane"
+      },
+      {
+        "id": "parkside-city-crossing",
+        "name": "Parkside at City Crossing",
+        "address": "22 Gold Street"
+      }
+    ],
+    "concession": "City Crossing currently advertises 1 month free on select units and lease terms; confirm the eligible building, unit, and move-in date."
   },
   {
     "id": "the-whit",
@@ -5849,6 +7307,109 @@ const APARTMENTS = [
   }
 ];
 
+const PRICE_REFRESH_METADATA = Object.freeze({
+  "360-state": {
+    signal: "limited_not_scored",
+    summary: {
+      en: "Checked 2026-07-29: the official page shows up to 2 months free on select homes. This limited offer is shown but not used in budget scoring.",
+      zh: "2026-07-29 核对：官网显示部分房源最高免 2 个月；该优惠范围有限，只展示，不计入预算。"
+    },
+    estimate: { monthsFree: 2, leaseMonths: 12, eligibleUnits: null, confidence: "conditional_offer", sourceUrl: "https://www.360statestreet.com/floorplans", checkedDate: "2026-07-29" }
+  },
+  "olive-wooster": {
+    signal: "included_in_current_price",
+    summary: {
+      en: "Checked 2026-07-29: up to 3.5 months free on select apartments. Current listing ranges may already include the special, so it is not deducted twice.",
+      zh: "2026-07-29 核对：部分房源最高免 3.5 个月；当前房源区间可能已含优惠，不会重复折算。"
+    },
+    estimate: { monthsFree: 3.5, leaseMonths: 12, eligibleUnits: null, confidence: "conditional_offer", sourceUrl: "https://oliveandwooster.com/availability", checkedDate: "2026-07-29" }
+  },
+  "axis-201": {
+    signal: "conditional_current",
+    summary: {
+      en: "Checked 2026-07-29: up to 2 months free on qualifying leases; exact-unit eligibility still needs confirmation.",
+      zh: "2026-07-29 核对：符合条件的 lease 最高免 2 个月；具体房源资格仍需确认。"
+    },
+    estimate: { monthsFree: 2, leaseMonths: 12, eligibleUnits: null, confidence: "conditional_offer", sourceUrl: "https://axis201.com/floor-plans", checkedDate: "2026-07-29" }
+  },
+  "the-whit": {
+    signal: "no_budget_candidate_not_scored",
+    summary: {
+      en: "Checked 2026-07-29: the official site advertises 2 months free, but the current standard-term comparison sample is insufficient, so it is not prorated.",
+      zh: "2026-07-29 核对：官网显示免 2 个月；当前标准租期样本不足，因此暂不折算。"
+    },
+    estimate: { monthsFree: 2, leaseMonths: 12, eligibleUnits: null, confidence: "conditional_offer", sourceUrl: "https://www.scullycompany.com/apartments/new-england/new-haven-county/new-haven/the-whit/", checkedDate: "2026-07-29" }
+  },
+  "the-taft": {
+    signal: "conditional_current",
+    summary: {
+      en: "Checked 2026-07-29: 2 months free for Studio/1BR leases with move-in on or before 2026-08-01.",
+      zh: "2026-07-29 核对：Studio / 1BR 在 2026-08-01 或之前入住可免 2 个月。"
+    },
+    estimate: { monthsFree: 2, leaseMonths: 12, eligibleUnits: null, eligibleUnitTypes: ["studio", "1br"], moveInDeadline: "2026-08-01", validThrough: "2026-08-01", confidence: "conditional_offer", sourceUrl: "https://www.rentcafe.com/apartments/ct/new-haven/taft-apartments/default.aspx", checkedDate: "2026-07-29" }
+  },
+  "new-haven-towers": {
+    signal: "not_currently_verified",
+    summary: {
+      en: "No current move-in special was confirmed on the official floorplan page on 2026-07-29.",
+      zh: "2026-07-29 查看官网户型页时，没有确认到当前有效的入住优惠。"
+    },
+    estimate: { monthsFree: 2, leaseMonths: 12, eligibleUnits: null, confidence: "stale", sourceUrl: null, sourceRef: "VERIFICATION_LOG.md#restored-fields", checkedDate: "2026-07-13" }
+  },
+  "the-archive": {
+    signal: "current_candidates_not_eligible",
+    summary: {
+      en: "Checked 2026-07-29: up to 2 months free is advertised for immediate move-ins; the comparison units shown here do not confirm that eligibility, so no credit is applied.",
+      zh: "2026-07-29 核对：官网对 immediate move-in 显示最高免 2 个月；当前比较房源未确认符合条件，因此不折算。"
+    },
+    estimate: { monthsFree: 2, leaseMonths: 12, eligibleUnits: false, confidence: "conditional_offer", sourceUrl: "https://entrata.thearchiveapts.com/new-haven/the-archive/conventional/", checkedDate: "2026-07-29" }
+  },
+  "anthem-square10": {
+    signal: "terms_conflict_not_scored",
+    summary: {
+      en: "Checked 2026-07-29: the official page presents conflicting lease and offer terms, so the special is not used in cost or ranking.",
+      zh: "2026-07-29 核对：官网当前展示的 lease 和优惠条件互相不一致，因此不计入成本或排序。"
+    },
+    estimate: { monthsFree: null, leaseMonths: 12, eligibleUnits: null, confidence: "unknown", sourceUrl: "https://www.anthemsquare10.com/floorplans", checkedDate: "2026-07-29" }
+  },
+  "the-audubon": {
+    signal: "conditional_current",
+    summary: {
+      en: "Checked 2026-07-29: up to 1.5 months free on select homes; exact-unit eligibility still needs confirmation.",
+      zh: "2026-07-29 核对：部分房源最高免 1.5 个月；具体房源资格仍需确认。"
+    },
+    estimate: { monthsFree: 1.5, leaseMonths: 12, eligibleUnits: null, confidence: "conditional_offer", sourceUrl: "https://www.theaudubonapts.com/floorplans", checkedDate: "2026-07-29" }
+  },
+  "pierpont-city-crossing": {
+    signal: "conditional_current",
+    summary: {
+      en: "Checked 2026-07-29: 1 month free on select City Crossing units and lease terms; exact-building and exact-unit eligibility still needs confirmation.",
+      zh: "2026-07-29 核对：City Crossing 部分楼栋、房源和 lease 免 1 个月；具体资格仍需确认。"
+    },
+    estimate: { monthsFree: 1, leaseMonths: 12, eligibleUnits: null, confidence: "conditional_offer", sourceUrl: "https://www.rentcafe.com/apartments/ct/new-haven/pierpont-at-city-crossing/default.aspx", checkedDate: "2026-07-29" }
+  },
+  "estelle": {
+    signal: "conditional_current",
+    summary: {
+      en: "Checked 2026-07-29: 2 months free on a 12-month lease; Studio is inquire-only and exact-unit eligibility still needs confirmation.",
+      zh: "2026-07-29 核对：12 个月 lease 免 2 个月；Studio 仍需询价，具体房源资格需确认。"
+    },
+    estimate: { monthsFree: 2, leaseMonths: 12, eligibleUnits: null, eligibleUnitTypes: ["1br", "2br"], confidence: "conditional_offer", sourceUrl: "https://estellenewhaven.securecafe.com/onlineleasing/estelle-new-haven/floorplans", checkedDate: "2026-07-29" }
+  }
+});
+
+for (const apartment of APARTMENTS) {
+  const refresh = PRICE_REFRESH_METADATA[apartment.id];
+  if (!refresh) continue;
+  apartment.concession = refresh.summary.en;
+  apartment.trueMonthlyCost.concessionEstimate = { monthlyCredit: null, moveInDeadline: null, validThrough: null, ...refresh.estimate };
+  apartment.decisionSignals = {
+    ...(apartment.decisionSignals || {}),
+    concessionAvailability: refresh.signal,
+    concessionSummary: refresh.summary
+  };
+}
+
 const APARTMENT_TRANSLATIONS = {
   zh: {
     "360-state": {
@@ -5921,12 +7482,12 @@ const APARTMENT_TRANSLATIONS = {
       ],
       tradeoffs: [
         "当前 2 个月免租只适用于 Studio / 1BR；具体房源和入住日期仍要确认",
-        "已看到垃圾处理和配套费合计 $55/月；楼内没有住户停车位，隔壁有月租 parking，价格和空位仍需确认",
+        "已看到垃圾处理和配套费合计 $55/月；楼内没有住户停车位，隔壁 Crown Street Garage 为 $165/月、24/7，实时空位和月租资格仍需确认",
         "不是新玻璃楼类型，具体房源状态、洗衣和地板都要看房确认"
       ],
       verify: [
         "完整费用表以及免押金方案是否有条件",
-        "电费、网络、洗衣、宠物和租客保险成本；如果有车，还要另查附近车库",
+        "电费、网络、洗衣、宠物和租客保险成本；如果有车，确认 Crown Street Garage 的实时空位和月租资格",
         "CORT 或企业家具选项是否适用于普通学生租约",
         "Yale community 申请需要的 bank statement 格式，以及远程申请流程"
       ]
@@ -6065,25 +7626,25 @@ const APARTMENT_TRANSLATIONS = {
       ]
     },
     "pierpont-city-crossing": {
-      area: "Downtown Crossing / 车站-医学院边缘",
-      priceLabel: "Jr Studio $2,218 起；1BR $2,486 起；2BR $3,613 起",
-      concession: "官网显示部分房间和 lease 免 1 个月租金；需确认资格。",
-      flooring: "客厅为木纹 LVP、卧室为地毯；具体房间可能不同",
-      furnishing: "是否带家具尚未核实",
+      area: "医学院 / Downtown 南侧 · 5 栋楼",
+      priceLabel: "当前以 Pierpont 为预算基准：Jr Studio $2,218 起；1BR $2,486 起；2BR $3,613 起",
+      concession: "City Crossing 官网显示部分房间和 lease 免 1 个月租金；需按楼栋、房间和入住日期确认。",
+      flooring: "当前 Pierpont 基准：客厅木纹 LVP、卧室地毯、卫生间瓷砖；另外 4 栋楼需分开核实",
+      furnishing: "五栋楼的普通长租家具状态尚未完整核实；有限的带家具短租是另一类产品",
       confidenceLabel: "部分信息已确认",
-      dailyLabel: "Union Station、医学院和 Downtown 南侧通勤",
-      sourceLabel: "2026-07-12 查过 RMS 和官方 RentCafe 页面",
+      dailyLabel: "医学院、YNHH 和 Downtown 南侧通勤；五栋楼彼此相邻",
+      sourceLabel: "2026-07-27 核对 RMS 的五栋楼资料；当前价格基准仅为 Pierpont",
       bestFor: [
-        "主要去医学院、Union Station 或 Downtown 南侧，想住 Pierpont 的学生",
-        "想比较 Jr Studio、1BR 和 2BR，并愿意按具体房源确认价格和入住日期的学生"
+        "主要去医学院、YNHH 或 Downtown 南侧，想一起比较五栋相邻新楼的学生",
+        "愿意先用 Pierpont 的已审核价格作参考，再按 Mason、Aura、Maddox、Pierpont 和 Parkside 分楼核实的学生"
       ],
       tradeoffs: [
         "位置在 Downtown 南侧；去 Central Campus、SOM 或 Science Hill 不如市中心核心区方便",
-        "部分费用、水电网、parking 和标准 lease 政策仍需确认"
+        "当前预算和费用计算只采用 Pierpont；另外四栋不能借用 Pierpont 的价格、水电网或房间配置"
       ],
       verify: [
-        "具体房源、价格和入住日期",
-        "完整费用表、水电网、parking 和租客保险",
+        "你比较的是 City Crossing 哪栋楼和哪个具体房源",
+        "该楼的价格、完整费用表、水电网、parking 和租客保险",
         "学生担保人、共同签署和远程签约政策"
       ]
     },
@@ -6185,12 +7746,12 @@ const APARTMENT_TRANSLATIONS = {
       ],
       tradeoffs: [
         "The current two-month concession applies only to Studio and 1BR leases; confirm the exact unit and move-in deadline.",
-        "Trash plus amenity charges are visible at $55/month. The Taft has no onsite resident parking, but monthly parking is available next door; confirm the rate and current space.",
+        "Trash plus amenity charges are visible at $55/month. The Taft has no onsite resident parking; Crown Street Garage next door is $165/month and open 24/7, but live space and customer eligibility still need confirmation.",
         "This is not a new glass-tower profile; exact unit condition, laundry, and flooring need unit-level confirmation."
       ],
       verify: [
         "Full fee sheet and whether the skip-deposit offer has conditions.",
-        "Electricity, internet, laundry, pet, and renter's insurance costs; nearby garage options if you have a car.",
+        "Electricity, internet, laundry, pet, and renter's insurance costs; Crown Street Garage availability and monthly-customer eligibility if you have a car.",
         "Whether CORT or corporate furnished options work for ordinary student leases.",
         "Bank statement format for Yale community applicants and the remote application process."
       ]
@@ -6287,16 +7848,16 @@ const APARTMENT_TRANSLATIONS = {
     },
     "pierpont-city-crossing": {
       bestFor: [
-        "Students mainly going to Med School, Union Station, or the south side of downtown who want to live at Pierpont.",
-        "Students comparing Jr Studio, 1BR, and 2BR options who will confirm the exact unit, price, and move-in date."
+        "Students mainly going to Med School, YNHH, or downtown south who want to compare five neighboring new buildings.",
+        "Students willing to use reviewed Pierpont pricing as a temporary reference, then verify Mason, Aura, Maddox, Pierpont, and Parkside separately."
       ],
       tradeoffs: [
         "This is on the south side of downtown; Central Campus, SOM, and Science Hill are less convenient than from the downtown core.",
-        "Some fees, utilities, parking, and standard lease policies still need confirmation."
+        "The current budget and fee calculation uses Pierpont only; the other four buildings cannot borrow Pierpont's price, utilities, or unit configuration."
       ],
       verify: [
-        "The exact unit, price, and move-in date.",
-        "The full fee sheet, utilities, parking, and renter's insurance.",
+        "Which City Crossing building and exact unit you are comparing.",
+        "That building's price, full fee sheet, utilities, parking, and renter's insurance.",
         "Student guarantor/co-signer and remote signing policy."
       ]
     },
@@ -6690,7 +8251,7 @@ function currentRentBasis(apartment) {
 
 function priceStatus(apartment, lang = activeLang(), answers = null) {
   if (answers) {
-    const selection = selectBudgetCandidate(apartment, answers, { respectFeatures: true });
+    const selection = selectBudgetCandidate(apartment, rankingFeatureAnswers(answers), { respectFeatures: true });
     const candidate = selection.candidate;
     if (!candidate && selection.compatibility === "incompatible") {
       return { level: "warn", label: lang === "zh" ? "没有符合硬性要求的房源" : "No unit meets the selected requirement" };
@@ -6723,7 +8284,7 @@ function priceStatus(apartment, lang = activeLang(), answers = null) {
 
 function priceSignalText(apartment, lang = activeLang(), answers = null) {
   if (answers) {
-    const selection = selectBudgetCandidate(apartment, answers, { respectFeatures: true });
+    const selection = selectBudgetCandidate(apartment, rankingFeatureAnswers(answers), { respectFeatures: true });
     const candidate = selection.candidate;
     const label = unitTypeLabel(selection.unitType.resolved, lang);
     if (!candidate && selection.compatibility === "incompatible") {
@@ -6742,6 +8303,11 @@ function priceSignalText(apartment, lang = activeLang(), answers = null) {
           : (lang === "zh" ? "官网标准租期" : "official standard term");
       return `${label} ${formatMoney(candidate.standardLeasePrice)} / ${lang === "zh" ? "月" : "mo"} · ${policy}`;
     }
+  }
+  const reviewedRows = quickPriceSignalRows(apartment, lang);
+  if (reviewedRows.length) {
+    const joined = reviewedRows.map(row => `${row.label} ${row.value}`).join(lang === "zh" ? "；" : "; ");
+    return `${lang === "zh" ? "当前可比" : "Current comparable"}: ${joined}`;
   }
   const availability = apartment.price?.availability;
   if (!availability) return apartment.price?.label || "";
@@ -6882,9 +8448,17 @@ function concessionIsCurrent(item, asOf = new Date()) {
 }
 
 function knownConcessionEstimate(apartment, unitType = null) {
-  if (apartment?.decisionSignals?.concessionAvailability === "limited_not_scored") return null;
+  const signal = apartment?.decisionSignals?.concessionAvailability;
+  if ([
+    "limited_not_scored",
+    "not_currently_verified",
+    "terms_conflict_not_scored",
+    "current_candidates_not_eligible",
+    "no_budget_candidate_not_scored"
+  ].includes(signal)) return null;
   const item = apartment?.trueMonthlyCost?.concessionEstimate;
   if (!item || item.confidence === "unknown") return null;
+  if (item.eligibleUnits === false) return null;
   if (!concessionIsCurrent(item)) return null;
   const hasMonthlyCredit = Number.isFinite(item.monthlyCredit) && item.monthlyCredit > 0;
   const hasFreeRent = Number.isFinite(item.monthsFree) && item.monthsFree > 0 && Number.isFinite(item.leaseMonths) && item.leaseMonths > 0;
@@ -6896,8 +8470,14 @@ function knownConcessionEstimate(apartment, unitType = null) {
 function knownConcessionCredit(apartment, baseRent, unitType = null) {
   const item = knownConcessionEstimate(apartment, unitType);
   if (!item) return 0;
+  if (apartment?.decisionSignals?.concessionAvailability === "included_in_current_price") return 0;
   if (Number.isFinite(item.monthlyCredit) && item.monthlyCredit > 0) return item.monthlyCredit;
   return baseRent * (item.monthsFree / item.leaseMonths);
+}
+
+function currentConcessionSummary(apartment, lang = activeLang()) {
+  const summary = apartment?.decisionSignals?.concessionSummary;
+  return summary?.[lang] || summary?.en || apartment?.concession || "";
 }
 
 function concessionLabel(item, lang = activeLang()) {
@@ -6953,8 +8533,9 @@ function calculateCosts(apartment, answers = {}, options = {}) {
   const monthlyProfile = apartment.trueMonthlyCost || {};
   const moveInProfile = apartment.moveInCash || {};
   const selectedCandidate = AVAILABILITY_PRICE_SNAPSHOT[apartment.id]
-    ? selectBudgetCandidate(apartment, answers, { respectFeatures: true }).candidate
+    ? selectBudgetCandidate(apartment, rankingFeatureAnswers(answers), { respectFeatures: true }).candidate
     : null;
+  const hasPriceSnapshot = Boolean(AVAILABILITY_PRICE_SNAPSHOT[apartment.id]);
   const advertisedRent = advertisedRentForAnswers(apartment, answers, selectedCandidate);
   const selectedBasis = selectedCandidate?.budgetEligible && Number.isFinite(selectedCandidate.standardLeasePrice)
     ? {
@@ -6964,7 +8545,20 @@ function calculateCosts(apartment, answers = {}, options = {}) {
         candidate: selectedCandidate
       }
     : null;
-  const currentBasis = selectedBasis || currentRentBasis(apartment);
+  const planningPrice = [
+    selectedCandidate?.trace?.totalCostMin,
+    selectedCandidate?.lowestObservedPrice,
+    selectedCandidate?.trace?.baseRentMin
+  ].find(Number.isFinite);
+  const planningBasis = !selectedBasis && Number.isFinite(planningPrice)
+    ? {
+        rent: planningPrice,
+        rentMax: Number.isFinite(selectedCandidate?.trace?.totalCostMax) ? selectedCandidate.trace.totalCostMax : planningPrice,
+        includesRequiredFees: ["official_total", "calculated_total"].includes(selectedCandidate?.priceBasis),
+        candidate: selectedCandidate
+      }
+    : null;
+  const currentBasis = selectedBasis || planningBasis || (hasPriceSnapshot ? null : currentRentBasis(apartment));
   const baseRent = currentBasis?.rent || advertisedRent;
   const baseRentMax = currentBasis?.rentMax || baseRent;
 
@@ -7044,6 +8638,8 @@ function calculateCosts(apartment, answers = {}, options = {}) {
     advertisedRent,
     baseRent,
     selectedBudgetCandidateUsed: Boolean(selectedBasis),
+    pricePlanningOnly: Boolean(planningBasis),
+    priceUnavailable: hasPriceSnapshot && !selectedBasis && !planningBasis,
     currentAvailabilityUsed: Boolean(currentBasis),
     grossMonthly: grossMonthlyMin,
     grossMonthlyMin,
@@ -7238,8 +8834,15 @@ function subBuildingLabel(value = "") {
     .join(" ");
 }
 
+function selectedBudgetSubBuildingLabel(apartment, candidate) {
+  const subBuildingId = candidate?.subBuildingId || apartment?.priceBasisSubBuildingId;
+  if (!subBuildingId) return "";
+  const reviewedSubBuilding = apartment?.subBuildings?.find(item => item.id === subBuildingId);
+  return reviewedSubBuilding?.name || subBuildingLabel(subBuildingId);
+}
+
 function renderSelectedBudgetBasis(apartment, answers, lang = activeLang()) {
-  const selection = selectBudgetCandidate(apartment, answers, { respectFeatures: true });
+  const selection = selectBudgetCandidate(apartment, rankingFeatureAnswers(answers), { respectFeatures: true });
   const candidate = selection.candidate;
   const unitLabel = unitTypeLabel(selection.unitType.resolved, lang);
   if (!candidate && selection.compatibility === "incompatible") {
@@ -7266,7 +8869,7 @@ function renderSelectedBudgetBasis(apartment, answers, lang = activeLang()) {
   const concession = knownConcessionEstimate(apartment, candidate.unitType);
 
   const identity = [
-    candidate.subBuildingId ? subBuildingLabel(candidate.subBuildingId) : "",
+    selectedBudgetSubBuildingLabel(apartment, candidate),
     candidate.trace?.unitId || candidate.trace?.floorplanId || ""
   ].filter(Boolean).join(" · ");
   const details = [
@@ -7318,7 +8921,7 @@ function budgetComparison(apartment, answers = {}) {
   const ceilingValue = Number(answers.budget);
   if (!Number.isFinite(ceilingValue)) return null;
   const unitType = budgetUnitTypeSelection(answers).resolved;
-  const selection = selectBudgetCandidate(apartment, answers, { respectFeatures: true });
+  const selection = selectBudgetCandidate(apartment, rankingFeatureAnswers(answers), { respectFeatures: true });
   const candidate = selection.candidate;
   if (!candidate || !candidate.budgetEligible || !["comparable", "policy_comparable"].includes(candidate.comparisonStatus)) return null;
   const grossCost = Number(candidate.standardLeasePrice);
@@ -7356,7 +8959,11 @@ function scoreBudget(apartment, budgetOrAnswers) {
 
   const propertySnapshot = AVAILABILITY_PRICE_SNAPSHOT[apartment.id];
   const selection = propertySnapshot
-    ? selectBudgetCandidate(apartment, budgetOrAnswers, { respectFeatures: typeof budgetOrAnswers === "object" })
+    ? selectBudgetCandidate(
+        apartment,
+        typeof budgetOrAnswers === "object" ? rankingFeatureAnswers(budgetOrAnswers) : budgetOrAnswers,
+        { respectFeatures: typeof budgetOrAnswers === "object" }
+      )
     : null;
   const availability = propertySnapshot ? selection.candidate : apartment.price?.availability;
 
@@ -7579,6 +9186,15 @@ function selectedHardRequirements(answers = {}) {
   ])];
 }
 
+function rankingFeatureAnswers(answers = {}) {
+  const setup = answers.setup || [];
+  const eligibleSetup = setup.filter(value => (
+    !Object.hasOwn(SETUP_TO_BUDGET_FEATURE, value)
+    || requirementEvidenceCoverage(value, answers).active
+  ));
+  return eligibleSetup.length === setup.length ? answers : { ...answers, setup: eligibleSetup };
+}
+
 function requirementEvidenceTier(apartment, requirement, answers = {}) {
   if (Object.hasOwn(SETUP_TO_BUDGET_FEATURE, requirement)) {
     const selection = selectBudgetCandidate(
@@ -7686,7 +9302,9 @@ function scoreYaleShuttle(apartment) {
 
 function scoreTrueCostConcern(apartment, answers = {}) {
   const predictability = UTILITY_PREDICTABILITY_SCORE[apartment.utilities] || SCORE.LOW;
-  const trueMonthly = calculateCosts(apartment, answers).trueMonthly;
+  const costs = calculateCosts(apartment, answers);
+  if (costs.priceUnavailable) return null;
+  const trueMonthly = costs.trueMonthly;
   const unitType = budgetUnitTypeSelection(answers).resolved;
   const price = Number.isFinite(Number(answers.budget))
     ? applyBudgetCeiling(trueMonthly, Number(answers.budget), unitType)
@@ -8020,7 +9638,7 @@ function evidenceLinkLabel(url, lang) {
 function renderEvidenceLinks(apartment, lang = activeLang(), answers = null) {
   const evidence = apartmentEvidence(apartment);
   const candidate = answers
-    ? selectBudgetCandidate(apartment, answers, { respectFeatures: true }).candidate
+    ? selectBudgetCandidate(apartment, rankingFeatureAnswers(answers), { respectFeatures: true }).candidate
     : null;
   const urls = [...new Set([candidate?.sourceUrl, ...evidence.urls].filter(Boolean))].slice(0, 3);
   const checkedDate = [candidate?.checkedDate, evidence.checkedDate].filter(Boolean).sort().at(-1) || null;
@@ -8164,7 +9782,9 @@ function formatFeedbackAnswers(answers, entry, lang = activeLang()) {
 function highMoveInCashCutoff(answers) {
   const amounts = APARTMENTS
     .filter(isRankableApartment)
-    .map(apartment => calculateCosts(apartment, answers).moveInMin)
+    .map(apartment => calculateCosts(apartment, answers))
+    .filter(costs => !costs.priceUnavailable)
+    .map(costs => costs.moveInMin)
     .filter(Number.isFinite)
     .sort((a, b) => b - a);
   if (!amounts.length) return Infinity;
@@ -8299,7 +9919,8 @@ function ruleBadges(apartment, answers, lang = activeLang()) {
   });
 
   if (answers.utilities === "predictable" && apartment.utilities === "predictable") add(labels.utilitiesPredictable, "good");
-  if ((answers.priority || []).includes("true_cost") && calculateCosts(apartment, answers).moveInMin >= highMoveInCashCutoff(answers)) {
+  const costs = calculateCosts(apartment, answers);
+  if ((answers.priority || []).includes("true_cost") && !costs.priceUnavailable && costs.moveInMin >= highMoveInCashCutoff(answers)) {
     add(labels.moveInHigh, "warn");
   }
 
@@ -8431,6 +10052,10 @@ async function copyFeedback(statusId) {
   }
 }
 
+function zhDestination(campus) {
+  return `${/^[A-Za-z]/.test(campus) ? " " : ""}${campus}`;
+}
+
 const FIELD_GUIDE_TEXT = Object.freeze({
   en: {
     needsTitle: "What you told us", needsHome: "Unit and budget", needsCampus: "Main destination",
@@ -8473,7 +10098,7 @@ const FIELD_GUIDE_TEXT = Object.freeze({
     overBudget: (amount, total) => `住房费口径高于预算上限约 ${formatMoney(amount)}/月；计入电费、网络和保险等项目后，每月总支出估算为 ${formatMoney(total)}。`,
     unitPriceUnavailable: unitType => `目前还没有可比较的 ${unitType} 价格。`,
     concessionDependency: "只有计入当前优惠后才在所选预算内；需确认具体房源、租期和入住日期是否符合条件。",
-    weakLocation: campus => `去 ${campus} 的位置匹配较弱。`,
+    weakLocation: campus => `前往${zhDestination(campus)}，位置匹配较弱。`,
     higherUpfront: amount => `签约入住前预计付款较高，约 ${formatMoney(amount)}。`,
     utilityUncertain: "还有多项水电网计费方式待核实，总支出暂时不够稳定。",
     unknownGroupLabels: { utilities: "水电网", exactUnit: "具体房间", feesPolicy: "费用/申请", lifestyle: "居住体验" },
@@ -8503,7 +10128,7 @@ const FIELD_GUIDE_REASON_COPY = Object.freeze({
     fallback: "The current price and location evidence make this worth comparing"
   },
   zh: {
-    campus: (campus, score) => `去 ${campus} 的位置匹配${score >= 100 ? "极佳" : "良好"}`,
+    campus: (campus, score) => `前往${zhDestination(campus)}，位置匹配${score >= 100 ? "极佳" : "良好"}`,
     balanced: "在四个主要 Yale 校区之间通勤更均衡",
     budget: "官网租金和必选楼费在你的预算内",
     budgetWithSpecial: "计入当前优惠后，官网租金和必选楼费在你的预算内",
@@ -8706,7 +10331,7 @@ function buildResultViewModel(result, index, top, answers, lang = activeLang()) 
   const apartment = result.apartment;
   const copy = apartmentCopy(apartment, lang);
   const costs = calculateCosts(apartment, answers);
-  const selection = selectBudgetCandidate(apartment, answers, { respectFeatures: true });
+  const selection = selectBudgetCandidate(apartment, rankingFeatureAnswers(answers), { respectFeatures: true });
   const candidate = selection.candidate;
   const evidence = apartmentEvidence(apartment);
   const flooringDisplay = splitCardDisplay(copy.flooring, "flooring", lang);
@@ -8779,8 +10404,12 @@ function renderFieldGuideCostRows(items, lang, { credit = false } = {}) {
 }
 
 function renderFieldGuideCostReport(viewModel) {
-  const { costs, lang } = viewModel;
+  const { apartment, costs, lang } = viewModel;
   const text = FIELD_GUIDE_TEXT[lang] || FIELD_GUIDE_TEXT.en;
+  const concessionSummary = currentConcessionSummary(apartment, lang);
+  if (costs.priceUnavailable) {
+    return `<section><h4>${escapeHtml(text.priceMath)}</h4><p class="report-note verify-text">${escapeHtml(lang === "zh" ? "当前没有符合比较口径的价格，月成本和预付款暂不展示。" : "No current price meets the comparison contract, so monthly cost and upfront estimates are not shown.")}</p>${concessionSummary ? `<p class="report-note">${escapeHtml(concessionSummary)}</p>` : ""}</section>`;
+  }
   const concession = costs.concessionApplied && costs.concessionLine ? [costs.concessionLine] : [];
   return `
     <section><h4>${escapeHtml(text.priceMath)}</h4>
@@ -8791,6 +10420,7 @@ function renderFieldGuideCostReport(viewModel) {
       </dl>
       <h5>${escapeHtml(text.moveInBreakdown)}</h5>
       <dl class="field-report-list">${renderFieldGuideCostRows(costs.moveInItems, lang)}<div class="report-total"><dt>${escapeHtml(text.moveInTotal)}</dt><dd><span class="data">${escapeHtml(formatMoneyRange(costs.moveInMin, costs.moveInMax))}</span></dd></div></dl>
+      ${concessionSummary ? `<p class="report-note">${escapeHtml(concessionSummary)}</p>` : ""}
     </section>`;
 }
 
@@ -8838,7 +10468,8 @@ function renderFieldGuideCard(viewModel) {
   const text = FIELD_GUIDE_TEXT[lang] || FIELD_GUIDE_TEXT.en;
   const utilities = fieldGuideUtilitySummary(apartment, lang);
   const unknownSummary = evidence.unknownGroups.length ? text.unknownGroupSummary(evidence.unknownGroups) : confidenceSummaryLabel(apartment, lang);
-  const meta = [unitTypeLabel(candidate?.unitType || selection.unitType.resolved, lang), Number.isFinite(candidate?.sqftMin) ? `${candidate.sqftMin} sqft` : "", candidate?.comparisonLeaseMonths ? `${candidate.comparisonLeaseMonths}${lang === "zh" ? " 个月" : " months"}` : "", candidate?.subBuildingId ? subBuildingLabel(candidate.subBuildingId) : ""].filter(Boolean);
+  const budgetSubBuilding = selectedBudgetSubBuildingLabel(apartment, candidate);
+  const meta = [unitTypeLabel(candidate?.unitType || selection.unitType.resolved, lang), Number.isFinite(candidate?.sqftMin) ? `${candidate.sqftMin} sqft` : "", candidate?.comparisonLeaseMonths ? `${candidate.comparisonLeaseMonths}${lang === "zh" ? " 个月" : " months"}` : "", budgetSubBuilding].filter(Boolean);
   const locationPrimary = campusTier || text.balancedLocation;
   const locationDetail = campusLabel(answers.campus, lang);
   const why = fieldGuideWhy(viewModel);
@@ -8848,13 +10479,24 @@ function renderFieldGuideCard(viewModel) {
   const comparison = budgetComparison(apartment, answers);
   const budgetBasisLine = comparison
     ? `${escapeHtml(text.housingBudgetBasis)} <span class="data">${escapeHtml(formatMoney(comparison.effectiveCost))}</span>${comparison.concessionCredit > 0 ? escapeHtml(lang === "zh" ? "（已计入当前优惠）" : " after current special") : ""}`
-    : escapeHtml(text.unitPriceUnavailable(unitTypeLabel(answers.unitType, lang)));
-  const candidateIdentity = [candidate?.trace?.unitId, candidate?.trace?.floorplanId].filter(Boolean).join(" · ");
+    : `${escapeHtml(text.housingBudgetBasis)} · ${escapeHtml(text.unitPriceUnavailable(unitTypeLabel(answers.unitType, lang)))}`;
+  const candidateIdentity = [budgetSubBuilding, candidate?.trace?.unitId, candidate?.trace?.floorplanId].filter(Boolean).join(" · ");
   const moveInItems = costs.moveInItems.map(item => costItemLabel(item.key, lang)).join(lang === "zh" ? "、" : ", ");
+  const monthlyLabel = costs.priceUnavailable
+    ? (lang === "zh" ? "当前标准价格" : "Current standard price")
+    : costs.pricePlanningOnly
+      ? (lang === "zh" ? "非标准租期参考" : "Nonstandard-term reference")
+      : costs.concessionApplied ? text.monthlyAfterSpecial : text.monthlyCost;
+  const monthlyValue = costs.priceUnavailable
+    ? `<strong class="verify-text">${escapeHtml(lang === "zh" ? "待核实" : "To verify")}</strong>`
+    : `<strong><span class="data">${escapeHtml(formatMoneyRange(costs.trueMonthlyMin, costs.trueMonthlyMax))}</span><small>${escapeHtml(lang === "zh" ? " / 月" : " / mo")}</small></strong>`;
+  const moveInValue = costs.priceUnavailable
+    ? `<strong class="verify-text">${escapeHtml(lang === "zh" ? "金额待核实" : "Amount to verify")}</strong>`
+    : `<strong><span class="data">${escapeHtml(formatMoneyRange(costs.moveInMin, costs.moveInMax))}</span></strong>`;
   return `
     <article class="result-card field-guide-card" aria-labelledby="${escapeHtml(titleId)}">
-      <header class="field-card-heading"><span class="result-number data">${String(rankNumber).padStart(2, "0")}</span><div class="property-heading"><p class="result-context">${escapeHtml(locationDetail)} · ${escapeHtml(locationPrimary)}</p><h3 id="${escapeHtml(titleId)}">${escapeHtml(apartment.name)}</h3><p>${escapeHtml(copy.area)}</p></div><div class="monthly-cost"><span>${escapeHtml(costs.concessionApplied ? text.monthlyAfterSpecial : text.monthlyCost)}</span><strong><span class="data">${escapeHtml(formatMoneyRange(costs.trueMonthlyMin, costs.trueMonthlyMax))}</span><small>${escapeHtml(lang === "zh" ? " / 月" : " / mo")}</small></strong><p class="budget-basis-line">${budgetBasisLine}</p><p>${[grossLine, ...meta.map(item => `<span class="data">${escapeHtml(item)}</span>`)].filter(Boolean).join(" · ")}</p></div></header>
-      <div class="comparison-strip" aria-label="${escapeHtml(lang === "zh" ? "关键比较信息" : "Key comparison information")}"><div><span class="strip-label">${escapeHtml(text.location)}</span><strong>${escapeHtml(locationPrimary)}</strong><p>${escapeHtml(locationDetail)}</p></div><div><span class="strip-label">${escapeHtml(text.utilities)}</span><strong>${escapeHtml(utilities.primary)}</strong><p class="${(utilityProfile(apartment).verify || []).length ? "verify-text" : ""}">${escapeHtml(utilities.detail)}</p></div><div><span class="strip-label">${escapeHtml(text.moveIn)}</span><strong><span class="data">${escapeHtml(formatMoneyRange(costs.moveInMin, costs.moveInMax))}</span></strong><p>${escapeHtml(moveInItems)}</p></div></div>
+      <header class="field-card-heading"><span class="result-number data">${String(rankNumber).padStart(2, "0")}</span><div class="property-heading"><p class="result-context">${escapeHtml(locationDetail)} · ${escapeHtml(locationPrimary)}</p><h3 id="${escapeHtml(titleId)}">${escapeHtml(apartment.name)}</h3><p>${escapeHtml(copy.area)}</p></div><div class="monthly-cost"><span>${escapeHtml(monthlyLabel)}</span>${monthlyValue}<p class="budget-basis-line">${budgetBasisLine}</p><p>${[grossLine, ...meta.map(item => `<span class="data">${escapeHtml(item)}</span>`)].filter(Boolean).join(" · ")}</p></div></header>
+      <div class="comparison-strip" aria-label="${escapeHtml(lang === "zh" ? "关键比较信息" : "Key comparison information")}"><div><span class="strip-label">${escapeHtml(text.location)}</span><strong>${escapeHtml(locationPrimary)}</strong><p>${escapeHtml(locationDetail)}</p></div><div><span class="strip-label">${escapeHtml(text.utilities)}</span><strong>${escapeHtml(utilities.primary)}</strong><p class="${(utilityProfile(apartment).verify || []).length ? "verify-text" : ""}">${escapeHtml(utilities.detail)}</p></div><div><span class="strip-label">${escapeHtml(text.moveIn)}</span>${moveInValue}<p>${escapeHtml(costs.priceUnavailable ? (lang === "zh" ? "当前价格不足，不能可靠估算" : "Current price evidence is insufficient") : moveInItems)}</p></div></div>
       <div class="decision-lines"><div><span>${escapeHtml(text.why)}</span><p>${escapeHtml(why)}</p></div><div><span>${escapeHtml(text.tradeoff)}</span><p>${escapeHtml(tradeoff)}</p></div></div>
       <p class="evidence-line"><span class="verified-text">${escapeHtml(text.officialEvidence)}</span>${evidence.checkedDate ? `<span>${escapeHtml(text.checked)} <span class="data">${escapeHtml(evidence.checkedDate)}</span></span>` : ""}<span class="${evidence.unknowns.length ? "verify-text" : "verified-text"}">${escapeHtml(unknownSummary)}</span></p>
       <details class="full-report"><summary><span class="summary-closed">${escapeHtml(text.reportClosed)}</span><span class="summary-open">${escapeHtml(text.reportOpen)}</span></summary><div class="report-body">${renderFieldGuideCostReport(viewModel)}${renderFieldGuideUtilities(viewModel)}${renderFieldGuideNeeds(viewModel)}${renderFieldGuideScore(viewModel)}<section class="report-wide"><h4>${escapeHtml(text.beforeApplying)}</h4><ol class="verification-list">${renderList(copy.verify.slice(0, 4))}</ol>${candidateIdentity ? `<p class="report-note">${escapeHtml(lang === "zh" ? "价格依据" : "Price basis")}: <span class="data">${escapeHtml(candidateIdentity)}</span></p>` : ""}</section>${renderFieldGuideSources(viewModel)}</div></details>

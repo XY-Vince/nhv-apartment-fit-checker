@@ -159,3 +159,41 @@ simulation run:
 
 Evidence-dependent preference coverage is currently quiet `0/11`, Yale Shuttle
 `0/11`, and low tenant density `0/11`; all three ranking weights remain off.
+
+# Official Price Refresh Release Gate - 2026-07-29
+
+The active snapshot is now `availability_price_snapshot_2026-07-29.csv` with
+Studio `8/10`, 1BR `10/11`, and 2BR `10/11` eligible-property coverage. The Whit
+is kept in the recommendation pool but receives no budget score where its
+current official inventory does not provide a standard 10/11/12-month basis.
+
+The refresh restored official building- or floorplan-scoped feature evidence
+for Axis 201, The Whit, The Taft Studio, Audubon B5, Pierpont, and Estelle B3.
+Current runtime feature evidence contains `77` confirmed and `87` unresolved
+fields; `24` old candidate-scoped facts were reset because the selected unit or
+floorplan changed.
+
+The current full simulation covers `1,920` single-factor scenarios, `15`
+personas, `6` canonical paths, `11,640` bilingual card checks, and `3,880`
+bilingual needs-summary checks. It reports:
+
+- Top 1 over budget: `58/1,920` (`3.0%`), always with a visible overage.
+- Top 3 over budget: `397/5,760` (`6.9%`).
+- Top 3 dependent on a current concession: `635/5,760` (`11.0%`).
+- Top 3 without a comparable budget basis: `154/5,760` (`2.7%`).
+- Top 1 with a conflict in an active evidence-backed need: `0/840`.
+- Cards with an identical visible trade-off across the same result set: `0`.
+
+Targeted browser QA was repeated on 2026-07-29 in Chinese desktop, Chinese
+390px mobile, and the English entry point. Formal results remained hidden until
+submit; location-only browsing did not change the checked questionnaire campus;
+the submitted heading received focus; result cards had no horizontal overflow;
+native details expanded correctly; and `?renderer=legacy` loaded the single
+current renderer with no legacy nodes. The browser console contained no warning
+or error. Screenshots and the detailed findings are stored under
+`reviews/browser_qa_2026-07-29/` and
+`reviews/full_simulation_pass_2026-07-29.md`.
+
+The active snapshot now has a release-time freshness gate. It must be refreshed
+within 14 days; individual concessions can expire sooner under their stated
+deadline or existing 30-day fallback rule.
