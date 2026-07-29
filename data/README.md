@@ -33,8 +33,9 @@ New Haven Towers comparison prices are official-range midpoints used as planning
 values regardless of lease term. The Archive comparison prices are official-range
 lower bounds approved as 12-month comparison values. Result cards disclose both
 policies. Estelle Studio is explicitly N/A; its 1BR and 2BR data remain eligible.
-The Whit stays visible but receives no budget score where the current official
-inventory does not provide a standard-term comparison row. Each public unit type
+The Whit now has official standard-term Studio and 1BR comparison rows. Its 2BR
+card keeps the current 15-month planning reference visible but receives no budget
+score because no 10/11/12-month row is currently available. Each public unit type
 must retain at least 8 eligible properties before budget ranking remains active.
 
 ## Internal Leads
