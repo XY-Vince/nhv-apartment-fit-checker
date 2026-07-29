@@ -10075,6 +10075,8 @@ const FIELD_GUIDE_TEXT = Object.freeze({
     quietUnitSpecific: "Quietness needs to be checked by floor, orientation, and exact unit.",
     overBudget: (amount, total) => `The housing-cost basis is about ${formatMoney(amount)}/mo above your ceiling; estimated total monthly spending is ${formatMoney(total)}.`,
     unitPriceUnavailable: unitType => `No comparable current ${unitType} price is available yet.`,
+    budgetNotRanked: unitType => `No comparable current ${unitType} price is available, so the budget dimension did not affect this ranking.`,
+    nonstandardPriceNotRanked: unitType => `Only a nonstandard-term ${unitType} price is currently visible; it is shown as a reference and did not affect the budget ranking.`,
     concessionDependency: "This option only fits the selected budget after the current concession; confirm the exact unit, lease, and move-in eligibility.",
     weakLocation: campus => `The location fit for ${campus} is weaker than the options above it.`,
     higherUpfront: amount => `Estimated upfront payments are relatively high at about ${formatMoney(amount)}.`,
@@ -10097,6 +10099,8 @@ const FIELD_GUIDE_TEXT = Object.freeze({
     quietUnitSpecific: "安静度需按楼层、朝向和具体房间核实。",
     overBudget: (amount, total) => `住房费口径高于预算上限约 ${formatMoney(amount)}/月；计入电费、网络和保险等项目后，每月总支出估算为 ${formatMoney(total)}。`,
     unitPriceUnavailable: unitType => `目前还没有可比较的 ${unitType} 价格。`,
+    budgetNotRanked: unitType => `目前还没有可比较的 ${unitType} 价格，因此预算未参与本条排序。`,
+    nonstandardPriceNotRanked: unitType => `当前只有非标准租期的 ${unitType} 价格参考，预算未参与本条排序。`,
     concessionDependency: "只有计入当前优惠后才在所选预算内；需确认具体房源、租期和入住日期是否符合条件。",
     weakLocation: campus => `前往${zhDestination(campus)}，位置匹配较弱。`,
     higherUpfront: amount => `签约入住前预计付款较高，约 ${formatMoney(amount)}。`,
@@ -10311,7 +10315,10 @@ function fieldGuideTradeoff(viewModel) {
         : `The current evidence conflicts with ${answerValueLabel("requirement", requirement, lang).toLowerCase()}`;
     if (warning) return sentenceEnding(warning, lang);
   }
-  if (!comparison) return text.unitPriceUnavailable(unitTypeLabel(answers.unitType, lang));
+  if (!comparison) {
+    const unitLabel = unitTypeLabel(answers.unitType, lang);
+    return costs.pricePlanningOnly ? text.nonstandardPriceNotRanked(unitLabel) : text.budgetNotRanked(unitLabel);
+  }
   if (comparison.requiresConcession) return text.concessionDependency;
   if (answers.campus && answers.campus !== "balanced" && scoreCampus(apartment, answers.campus) <= 40) {
     return text.weakLocation(campusLabel(answers.campus, lang));
@@ -10479,7 +10486,7 @@ function renderFieldGuideCard(viewModel) {
   const comparison = budgetComparison(apartment, answers);
   const budgetBasisLine = comparison
     ? `${escapeHtml(text.housingBudgetBasis)} <span class="data">${escapeHtml(formatMoney(comparison.effectiveCost))}</span>${comparison.concessionCredit > 0 ? escapeHtml(lang === "zh" ? "（已计入当前优惠）" : " after current special") : ""}`
-    : `${escapeHtml(text.housingBudgetBasis)} · ${escapeHtml(text.unitPriceUnavailable(unitTypeLabel(answers.unitType, lang)))}`;
+    : `${escapeHtml(text.housingBudgetBasis)} · ${escapeHtml(text.budgetNotRanked(unitTypeLabel(answers.unitType, lang)))}`;
   const candidateIdentity = [budgetSubBuilding, candidate?.trace?.unitId, candidate?.trace?.floorplanId].filter(Boolean).join(" · ");
   const moveInItems = costs.moveInItems.map(item => costItemLabel(item.key, lang)).join(lang === "zh" ? "、" : ", ");
   const monthlyLabel = costs.priceUnavailable
@@ -10495,7 +10502,7 @@ function renderFieldGuideCard(viewModel) {
     : `<strong><span class="data">${escapeHtml(formatMoneyRange(costs.moveInMin, costs.moveInMax))}</span></strong>`;
   return `
     <article class="result-card field-guide-card" aria-labelledby="${escapeHtml(titleId)}">
-      <header class="field-card-heading"><span class="result-number data">${String(rankNumber).padStart(2, "0")}</span><div class="property-heading"><p class="result-context">${escapeHtml(locationDetail)} · ${escapeHtml(locationPrimary)}</p><h3 id="${escapeHtml(titleId)}">${escapeHtml(apartment.name)}</h3><p>${escapeHtml(copy.area)}</p></div><div class="monthly-cost"><span>${escapeHtml(monthlyLabel)}</span>${monthlyValue}<p class="budget-basis-line">${budgetBasisLine}</p><p>${[grossLine, ...meta.map(item => `<span class="data">${escapeHtml(item)}</span>`)].filter(Boolean).join(" · ")}</p></div></header>
+      <header class="field-card-heading"><span class="result-number data">${String(rankNumber).padStart(2, "0")}</span><div class="property-heading"><p class="result-context">${escapeHtml(locationDetail)} · ${escapeHtml(locationPrimary)}</p><h3 id="${escapeHtml(titleId)}">${escapeHtml(apartment.name)}</h3><p>${escapeHtml(copy.area)}</p></div><div class="monthly-cost"><span>${escapeHtml(monthlyLabel)}</span>${monthlyValue}<p class="budget-basis-line${comparison ? "" : " verify-text"}">${budgetBasisLine}</p><p>${[grossLine, ...meta.map(item => `<span class="data">${escapeHtml(item)}</span>`)].filter(Boolean).join(" · ")}</p></div></header>
       <div class="comparison-strip" aria-label="${escapeHtml(lang === "zh" ? "关键比较信息" : "Key comparison information")}"><div><span class="strip-label">${escapeHtml(text.location)}</span><strong>${escapeHtml(locationPrimary)}</strong><p>${escapeHtml(locationDetail)}</p></div><div><span class="strip-label">${escapeHtml(text.utilities)}</span><strong>${escapeHtml(utilities.primary)}</strong><p class="${(utilityProfile(apartment).verify || []).length ? "verify-text" : ""}">${escapeHtml(utilities.detail)}</p></div><div><span class="strip-label">${escapeHtml(text.moveIn)}</span>${moveInValue}<p>${escapeHtml(costs.priceUnavailable ? (lang === "zh" ? "当前价格不足，不能可靠估算" : "Current price evidence is insufficient") : moveInItems)}</p></div></div>
       <div class="decision-lines"><div><span>${escapeHtml(text.why)}</span><p>${escapeHtml(why)}</p></div><div><span>${escapeHtml(text.tradeoff)}</span><p>${escapeHtml(tradeoff)}</p></div></div>
       <p class="evidence-line"><span class="verified-text">${escapeHtml(text.officialEvidence)}</span>${evidence.checkedDate ? `<span>${escapeHtml(text.checked)} <span class="data">${escapeHtml(evidence.checkedDate)}</span></span>` : ""}<span class="${evidence.unknowns.length ? "verify-text" : "verified-text"}">${escapeHtml(unknownSummary)}</span></p>

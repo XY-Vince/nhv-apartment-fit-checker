@@ -102,6 +102,17 @@ Central Campus true-cost, Science Hill, Downtown high-amenity, a Med School
 location-first boundary with a small visible budget overage, and the out-of-
 scope low-budget roommate path.
 
+## Budget-Neutral Price Explanation - 2026-07-29
+
+- A property may remain rankable when its location or reviewed features fit the
+  user but no current standard-term price can be used for budget scoring.
+- The collapsed card now states that the budget dimension did not affect that
+  result instead of only saying that a comparable price is unavailable.
+- When a nonstandard-term price is shown as planning context, the main trade-off
+  identifies it as a reference rather than a budget-ranked price.
+- The bilingual renderer regression locks both explanations using The Whit's
+  current Studio evidence state; the change does not alter scores or ordering.
+
 ## Browser Checks
 
 Targeted release check completed on 2026-07-16 against the latest local source
